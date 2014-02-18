@@ -7,33 +7,33 @@ import net.sf.taverna.t2.activities.stilts.InputTypeBean;
 import net.sf.taverna.t2.workbench.ui.actions.activity.ActivityConfigurationAction;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationDialog;
 
-import net.sf.taverna.t2.activities.stilts.TcopyActivity;
+import net.sf.taverna.t2.activities.stilts.TCopyActivity;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
 
 @SuppressWarnings("serial")
 public class TCopyConfigureAction
 		extends
-		ActivityConfigurationAction<TcopyActivity, InputTypeBean> {
+		ActivityConfigurationAction<TCopyActivity, InputTypeBean> {
 
-	public TCopyConfigureAction(TcopyActivity activity, Frame owner) {
+	public TCopyConfigureAction(TCopyActivity activity, Frame owner) {
 		super(activity);
 	}
 
-        protected TcopyActivity getActivity() {
-            return (TcopyActivity)activity;
+        protected TCopyActivity getActivity() {
+            return (TCopyActivity)activity;
         }
 
 	@SuppressWarnings("unchecked")
 	public void actionPerformed(ActionEvent e) {
-		ActivityConfigurationDialog<TcopyActivity, InputTypeBean> currentDialog = ActivityConfigurationAction
+		ActivityConfigurationDialog<TCopyActivity, InputTypeBean> currentDialog = ActivityConfigurationAction
 				.getDialog(getActivity());
 		if (currentDialog != null) {
 			currentDialog.toFront();
 			return;
 		}
-		ActivityConfigurationPanel<TcopyActivity, InputTypeBean> panel = new InputTypeConfigurationPanel(getActivity());
+		ActivityConfigurationPanel<TCopyActivity, InputTypeBean> panel = new InputTypeConfigurationPanel(getActivity());
                 
-		ActivityConfigurationDialog<TcopyActivity, InputTypeBean> dialog = new ActivityConfigurationDialog<TcopyActivity, InputTypeBean>(
+		ActivityConfigurationDialog<TCopyActivity, InputTypeBean> dialog = new ActivityConfigurationDialog<TCopyActivity, InputTypeBean>(
 				getActivity(), panel);
 
 		ActivityConfigurationAction.setDialog(getActivity(), dialog);

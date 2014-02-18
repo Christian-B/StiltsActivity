@@ -6,15 +6,15 @@ import javax.swing.Action;
 import javax.swing.JLabel;
 import net.sf.taverna.t2.activities.stilts.InputTypeBean;
 
-import net.sf.taverna.t2.activities.stilts.TcopyActivity;
+import net.sf.taverna.t2.activities.stilts.TCopyActivity;
 import net.sf.taverna.t2.activities.stilts.ui.config.TCopyConfigureAction;
 
 @SuppressWarnings("serial")
 public class TCopyContextualView extends AbstractStiltsContextualView {
-    private final TcopyActivity activity;
+    private final TCopyActivity activity;
     private JLabel description = new JLabel("ads");
 
-    public TCopyContextualView(TcopyActivity activity) {
+    public TCopyContextualView(TCopyActivity activity) {
         super();
         this.activity = activity;
         initView();

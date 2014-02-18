@@ -10,7 +10,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class TcopyActivity extends InputTypeActivity<InputTypeBean>
+public class TCopyActivity extends InputTypeActivity<InputTypeBean>
 		implements AsynchronousActivity<InputTypeBean>,  Activity<InputTypeBean>{
 
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {

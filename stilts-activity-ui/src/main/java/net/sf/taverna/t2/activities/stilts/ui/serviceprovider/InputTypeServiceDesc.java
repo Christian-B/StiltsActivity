@@ -12,7 +12,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 import net.sf.taverna.t2.activities.stilts.OutputTypeActivity;
 import net.sf.taverna.t2.activities.stilts.InputTypeBean;
 import net.sf.taverna.t2.activities.stilts.InputTypeInterface;
-import net.sf.taverna.t2.activities.stilts.TcopyActivity;
+import net.sf.taverna.t2.activities.stilts.TCopyActivity;
 
 public class InputTypeServiceDesc extends ServiceDescription<InputTypeBean> 
         implements InputTypeInterface{
@@ -29,7 +29,7 @@ public class InputTypeServiceDesc extends ServiceDescription<InputTypeBean>
       */
     @Override
     public Class<? extends Activity<InputTypeBean>> getActivityClass() {
-        return TcopyActivity.class;
+        return TCopyActivity.class;
     }
 
     /**

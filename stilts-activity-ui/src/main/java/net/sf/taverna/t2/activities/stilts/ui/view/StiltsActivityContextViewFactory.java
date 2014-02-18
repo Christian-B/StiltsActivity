@@ -7,16 +7,16 @@ import net.sf.taverna.t2.workbench.ui.views.contextualviews.ContextualView;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ContextualViewFactory;
 
 import net.sf.taverna.t2.activities.stilts.OutputTypeActivity;
-import net.sf.taverna.t2.activities.stilts.TcopyActivity;
+import net.sf.taverna.t2.activities.stilts.TCopyActivity;
 
 public class StiltsActivityContextViewFactory implements
-		ContextualViewFactory<TcopyActivity> {
+		ContextualViewFactory<TCopyActivity> {
 
 	public boolean canHandle(Object selection) {
 		return selection instanceof OutputTypeActivity;
 	}
 
-	public List<ContextualView> getViews(TcopyActivity selection) {
+	public List<ContextualView> getViews(TCopyActivity selection) {
 		return Arrays.<ContextualView>asList(new TCopyContextualView(selection));
 	}
 

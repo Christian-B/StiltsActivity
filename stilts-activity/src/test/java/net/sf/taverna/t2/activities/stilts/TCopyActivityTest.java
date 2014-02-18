@@ -18,11 +18,11 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class StiltsActivityTest {
+public class TCopyActivityTest {
 
     private InputTypeBean configBean;
 
-    private OutputTypeActivity activity = new TcopyActivity();
+    private OutputTypeActivity activity = new TCopyActivity();
 
     @Before
     public void makeConfigBean() throws Exception {
