@@ -1,0 +1,22 @@
+# ignore project files #
+.classpath
+.project
+.settings/
+*.~java
+*~
+*.bak
+*.patch
+
+# ignore target files #
+target/
+bin/
+build/
+dist/
+apidoc/
+
+# ignore log files #
+*/TEST*.xml
+*.log
+/logs/*
+*/logs/*
+
