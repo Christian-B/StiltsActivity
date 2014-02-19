@@ -44,45 +44,18 @@ public class InputTypeActivity<InputType extends InputTypeBean> extends OutputTy
     }
 	
     private String getInputFilePath(final Map<String, T2Reference> inputs, 
-            InvocationContext context, ReferenceService referenceService) throws IOException{
-       String input = (String) referenceService.renderIdentifier
-                        (inputs.get(INPUT_PARAMETER_NAME), String.class, context); 
-       String type = configBean.getTypeOfInput();
-       int length = type.length();
-       if (type.equals(StiltsConfigurationConstants.FILE_PATH_TYPE)){
-            return input;
-       }
-       return MyUtils.writeStringAsTmpFile(input).getAbsolutePath();
+            final AsynchronousActivityCallback callback) {
+        String input = this.getStringParameter(inputs, callback, INPUT_PARAMETER_NAME, REQUIRED_PARAMETER ); 
+        String type = configBean.getTypeOfInput();
+        return this.getInputFilePath(callback, type, input);
     }
-    
-    protected boolean missingParameter(final Map<String, T2Reference> inputs,  final AsynchronousActivityCallback callback) {
-        if (super.missingParameter(callback)){
-            return true;
-        }
-        InvocationContext context = callback.getContext();
-        ReferenceService referenceService = context.getReferenceService();
-        String input = (String) referenceService.renderIdentifier
-                        (inputs.get(INPUT_PARAMETER_NAME), String.class, context); 
-        if (input == null){
-            callback.fail("Error missing " + INPUT_PARAMETER_NAME + " parameter.");
-            return true;
-        }
-        if (input.isEmpty()){
-            callback.fail("Error empty " + INPUT_PARAMETER_NAME + " parameter.");
-            return true;
-        }
-        return false;
-    }
-    
+        
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         List<String> parameters = super.prepareParameters(inputs, callback, outputFile);
         InvocationContext context = callback.getContext();
         ReferenceService referenceService = context.getReferenceService();
-        String inputPath;
-        try {
-            inputPath = getInputFilePath(inputs, context, referenceService);
-        } catch (IOException ex) {
-            callback.fail("Error preparing input", ex);
+        String inputPath = getInputFilePath(inputs, callback);
+        if (inputPath == null){
             return null;
         }
         parameters.add("ifmt="+ configBean.getFormatOfInput());

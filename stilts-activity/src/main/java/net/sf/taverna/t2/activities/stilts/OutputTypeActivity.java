@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static net.sf.taverna.t2.activities.stilts.InputTypeActivity.INPUT_PARAMETER_NAME;
 
 import net.sf.taverna.t2.invocation.InvocationContext;
 import net.sf.taverna.t2.reference.ReferenceService;
@@ -40,6 +43,8 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
     static final String SUCCESS_MESSAGE = "Stilts Success!";
     static final String STILTS_PARAMETER_NAME = "Stilts Parameters";
     static final String ERROR_PARAMETER_NAME = "Stilts Errors";
+    static final boolean REQUIRED_PARAMETER = true;
+    static final boolean OPTIONAL_PARAMETER = true;
 	
     protected OutputType configBean;
 
@@ -74,13 +79,61 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
         }        
     }
     
+    protected final String getInputFilePath(final AsynchronousActivityCallback callback,
+            String type, String input) {
+       if (type == null){
+            callback.fail("Unexpected type null.");
+            return null;           
+       }
+       if (type.isEmpty()){
+            callback.fail("Unexpected empty type.");
+            return null;           
+       }
+       if (input == null){
+            callback.fail("Unexpected input null.");
+            return null;           
+       }
+       if (input.isEmpty()){
+            callback.fail("Unexpected empoty input.");
+            return null;           
+       }
+       if (type.equals(StiltsConfigurationConstants.FILE_PATH_TYPE)){
+            return input;
+       }
+        try {
+            return MyUtils.writeStringAsTmpFile(input).getAbsolutePath();
+        } catch (IOException ex) {
+            callback.fail("Error writing input to tempFile.", ex);
+            return null;           
+        }
+    }
+  
+    protected final String getStringParameter(final Map<String, T2Reference> inputs, 
+            final AsynchronousActivityCallback callback, String parameterName, boolean required){
+        InvocationContext context = callback.getContext();
+        ReferenceService referenceService = context.getReferenceService();
+        T2Reference reference = inputs.get(parameterName);
+        if (reference == null){
+            callback.fail("Unconnected Parameter \"" +  parameterName + "\"");
+            return null;
+        }
+        String input = (String) referenceService.renderIdentifier
+                (reference, String.class, context); 
+        if (required){
+            if (input == null){
+                callback.fail("Missing Parameter \"" +  parameterName + "\"");
+                return null;
+            }
+            if (input.isEmpty()){
+                callback.fail("Empty Parameter \"" +  parameterName + "\"");
+                return null;
+            }            
+        }
+        return input;
+    }
+               
     //===
 
-    protected boolean missingParameter(AsynchronousActivityCallback callback) {
-        //No parameters here
-        return false;
-    }
-            
     private File createOutputFile(final AsynchronousActivityCallback callback) {
         try {
             return File.createTempFile("Stilts", ".txt");
@@ -170,11 +223,7 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
         // from thread pool and return asynchronously
         callback.requestRun(new Runnable() {
 			
-            public void run() {
-                if (missingParameter(callback)){
-                    return;
-                }
-                
+            public void run() {                
                 File outputFile = createOutputFile(callback);
                 if (outputFile == null){
                     return;
