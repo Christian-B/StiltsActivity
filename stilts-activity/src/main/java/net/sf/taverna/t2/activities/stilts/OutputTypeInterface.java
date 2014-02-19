@@ -1,12 +1,10 @@
 package net.sf.taverna.t2.activities.stilts;
 
-import java.io.Serializable;
-
 /**
  * Stilts activity configuration bean.
  * 
  */
-public interface OutputTypeInterface extends Serializable {
+public interface OutputTypeInterface  {
      /**
      * @return the formatOfOutput
      */
