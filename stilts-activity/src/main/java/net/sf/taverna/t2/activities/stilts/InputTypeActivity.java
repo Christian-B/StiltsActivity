@@ -55,6 +55,25 @@ public class InputTypeActivity<InputType extends InputTypeBean> extends OutputTy
        return MyUtils.writeStringAsTmpFile(input).getAbsolutePath();
     }
     
+    protected boolean missingParameter(final Map<String, T2Reference> inputs,  final AsynchronousActivityCallback callback) {
+        if (super.missingParameter(callback)){
+            return true;
+        }
+        InvocationContext context = callback.getContext();
+        ReferenceService referenceService = context.getReferenceService();
+        String input = (String) referenceService.renderIdentifier
+                        (inputs.get(INPUT_PARAMETER_NAME), String.class, context); 
+        if (input == null){
+            callback.fail("Error missing " + INPUT_PARAMETER_NAME + " parameter.");
+            return true;
+        }
+        if (input.isEmpty()){
+            callback.fail("Error empty " + INPUT_PARAMETER_NAME + " parameter.");
+            return true;
+        }
+        return false;
+    }
+    
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         List<String> parameters = super.prepareParameters(inputs, callback, outputFile);
         InvocationContext context = callback.getContext();

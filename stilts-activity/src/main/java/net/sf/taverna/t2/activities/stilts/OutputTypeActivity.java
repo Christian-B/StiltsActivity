@@ -76,6 +76,11 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
     
     //===
 
+    protected boolean missingParameter(AsynchronousActivityCallback callback) {
+        //No parameters here
+        return false;
+    }
+            
     private File createOutputFile(final AsynchronousActivityCallback callback) {
         try {
             return File.createTempFile("Stilts", ".txt");
@@ -166,6 +171,10 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
         callback.requestRun(new Runnable() {
 			
             public void run() {
+                if (missingParameter(callback)){
+                    return;
+                }
+                
                 File outputFile = createOutputFile(callback);
                 if (outputFile == null){
                     return;
@@ -184,7 +193,7 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
                 }
                 addResults(callback, outputs, outputFile);
             }
-            
+
           });
     }	
     
