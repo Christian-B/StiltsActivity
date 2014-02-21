@@ -31,7 +31,12 @@ public class Tester
             
         runnerThread.start();
         rerouter.listen();
-                       
+               
+        System.out.println("Slits run: " + rerouter.getRunStatus());
+        System.out.println("ERROR:");
+        System.out.println(rerouter.getSavedErr());
+        System.out.println("OUT:");
+        System.out.println(rerouter.getSavedOut());
         long now = System.currentTimeMillis();
         System.out.println("Time taken: " + (now-past) + " ms");
     }

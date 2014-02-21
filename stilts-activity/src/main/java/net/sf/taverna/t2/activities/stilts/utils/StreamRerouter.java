@@ -26,6 +26,7 @@ public class StreamRerouter
     private final PrintStream originalSystemErr;
     private final InputStream originalSystemIn;
     private boolean running = true;
+    private RunStatus runStatus = RunStatus.RUNNING;
     
     public StreamRerouter() throws IOException {
         PipedInputStream receiveOutPipe = new PipedInputStream(10);
@@ -48,7 +49,8 @@ public class StreamRerouter
         System.setIn(testInput);
     }
  
-    public void reset() {
+    public void reset(RunStatus newStatus) {
+        runStatus = newStatus;
         running = false;            
         try {
             checkOut();
@@ -117,5 +119,12 @@ public class StreamRerouter
             System.setErr(originalSystemErr);
             System.setIn(originalSystemIn);
         }
+    }
+
+    /**
+     * @return the runStatus
+     */
+    public RunStatus getRunStatus() {
+        return runStatus;
     }
 }
