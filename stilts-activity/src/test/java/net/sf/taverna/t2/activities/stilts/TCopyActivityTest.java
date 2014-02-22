@@ -22,7 +22,7 @@ public class TCopyActivityTest {
 
     private InputTypeBean configBean;
 
-    private OutputTypeActivity activity = new TCopyActivity();
+    private AbstractStilsActivity activity = new TCopyActivity();
 
     private static String CSV_STRING = "id,name,number" + System.lineSeparator() +
             "1,John,1234" + System.lineSeparator() +
@@ -56,7 +56,7 @@ public class TCopyActivityTest {
         inputs.put(InputTypeActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.tst");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(OutputTypeActivity.RESULT_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
@@ -64,7 +64,7 @@ public class TCopyActivityTest {
 
         assertEquals("Unexpected outputs", 1, outputs.size());
         //assertEquals("simple", outputs.get("simpleOutput"));
-        String result = outputs.get(OutputTypeActivity.RESULT_PARAMETER_NAME).toString();
+        String result = outputs.get(AbstractStilsActivity.RESULT_PARAMETER_NAME).toString();
         System.out.println(result);
         assertEquals("Unexpected outputs", CSV_STRING, result);
     }
@@ -78,14 +78,14 @@ public class TCopyActivityTest {
         inputs.put(InputTypeActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.tst");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(OutputTypeActivity.RESULT_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
                 activity, inputs, expectedOutputTypes);
 
         assertEquals("Unexpected outputs", 1, outputs.size());
-        String result = outputs.get(OutputTypeActivity.RESULT_PARAMETER_NAME).toString();
+        String result = outputs.get(AbstractStilsActivity.RESULT_PARAMETER_NAME).toString();
         System.out.println(result);
         assertEquals("Unexpected outputs", CSV_STRING, result);
     }
@@ -99,7 +99,7 @@ public class TCopyActivityTest {
         inputs.put(InputTypeActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.csv");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(OutputTypeActivity.RESULT_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
@@ -107,9 +107,9 @@ public class TCopyActivityTest {
 
         assertEquals("Unexpected outputs", 1, outputs.size());
         //assertEquals("simple", outputs.get("simpleOutput"));
-        String result = outputs.get(OutputTypeActivity.RESULT_PARAMETER_NAME).toString();
+        String result = outputs.get(AbstractStilsActivity.RESULT_PARAMETER_NAME).toString();
         System.out.println(result);
-        assertEquals("Unexpected outputs", OutputTypeActivity.FAILED_MESSAGE, result);
+        assertEquals("Unexpected outputs", AbstractStilsActivity.FAILED_MESSAGE, result);
     }
 
     @Test
@@ -135,10 +135,10 @@ public class TCopyActivityTest {
         expectedInputs.add(InputTypeActivity.INPUT_PARAMETER_NAME);
 
         Set<String> expectedOutputs = new HashSet<String>();
-        expectedOutputs.add(OutputTypeActivity.RESULT_PARAMETER_NAME);
+        expectedOutputs.add(AbstractStilsActivity.RESULT_PARAMETER_NAME);
         if (configBean.isDebugMode()){
-            expectedOutputs.add(OutputTypeActivity.ERROR_PARAMETER_NAME);
-            expectedOutputs.add(OutputTypeActivity.STILTS_PARAMETER_NAME);
+            expectedOutputs.add(AbstractStilsActivity.ERROR_PARAMETER_NAME);
+            expectedOutputs.add(AbstractStilsActivity.STILTS_PARAMETER_NAME);
         } 
         activity.configure(configBean);
 

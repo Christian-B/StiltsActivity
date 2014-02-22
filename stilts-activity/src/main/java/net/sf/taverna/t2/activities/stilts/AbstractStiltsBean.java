@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Stilts activity configuration bean.
  * 
  */
-public class OutputTypeBean implements OutputTypeInterface, Serializable {
+public class AbstractStiltsBean implements AbstractStiltsInterface, Serializable {
     private String formatOfOutput;
     private String typeOfOutput;
     private boolean debugMode = true;

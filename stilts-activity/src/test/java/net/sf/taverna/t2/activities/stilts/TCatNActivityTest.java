@@ -70,7 +70,7 @@ public class TCatNActivityTest {
                 "22,Jack,456");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(OutputTypeActivity.RESULT_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
@@ -79,9 +79,9 @@ public class TCatNActivityTest {
         System.out.println("Run done");
         assertEquals("Unexpected outputs", 1, outputs.size());
         //assertEquals("simple", outputs.get("simpleOutput"));
-        String result = outputs.get(OutputTypeActivity.RESULT_PARAMETER_NAME).toString();
+        String result = outputs.get(AbstractStilsActivity.RESULT_PARAMETER_NAME).toString();
         System.out.println(result);
-        //assertEquals("Unexpected outputs", OutputTypeActivity.SUCCESS_MESSAGE, result);
+        //assertEquals("Unexpected outputs", AbstractStilsActivity.SUCCESS_MESSAGE, result);
     }
 
     @Test
@@ -113,10 +113,10 @@ public class TCatNActivityTest {
         expectedInputs.add(InputsTypeActivity.INPUT_PARAMETER_NAME+2);
 
         Set<String> expectedOutputs = new HashSet<String>();
-        expectedOutputs.add(OutputTypeActivity.RESULT_PARAMETER_NAME);
+        expectedOutputs.add(AbstractStilsActivity.RESULT_PARAMETER_NAME);
         if (configBean.isDebugMode()){
-            expectedOutputs.add(OutputTypeActivity.ERROR_PARAMETER_NAME);
-            expectedOutputs.add(OutputTypeActivity.STILTS_PARAMETER_NAME);
+            expectedOutputs.add(AbstractStilsActivity.ERROR_PARAMETER_NAME);
+            expectedOutputs.add(AbstractStilsActivity.STILTS_PARAMETER_NAME);
         } 
         activity.configure(configBean);
 

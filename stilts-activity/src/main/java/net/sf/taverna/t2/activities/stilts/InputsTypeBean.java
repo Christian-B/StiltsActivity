@@ -7,7 +7,7 @@ import java.util.List;
  * Stilts activity configuration bean.
  * 
  */
-public class InputsTypeBean extends OutputTypeBean 
+public class InputsTypeBean extends AbstractStiltsBean 
         implements InputsTypeInterface, Serializable {
     private int numberOfInputs;
     private List<String> formatOfInputs;

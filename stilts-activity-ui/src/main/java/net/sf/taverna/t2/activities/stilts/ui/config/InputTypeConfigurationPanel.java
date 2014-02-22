@@ -6,15 +6,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import net.sf.taverna.t2.activities.stilts.InputTypeActivity;
 import net.sf.taverna.t2.activities.stilts.InputTypeBean;
-import net.sf.taverna.t2.activities.stilts.OutputTypeActivity;
-import net.sf.taverna.t2.activities.stilts.OutputTypeBean;
+import net.sf.taverna.t2.activities.stilts.AbstractStilsActivity;
+import net.sf.taverna.t2.activities.stilts.AbstractStiltsBean;
 
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
 
 @SuppressWarnings("serial")
 public class InputTypeConfigurationPanel <InputActivityType extends InputTypeActivity, InputType extends InputTypeBean>  extends
-        OutputTypeConfigurationPanel<InputActivityType, InputType> {
+        AbstractStiltsConfigurationPanel<InputActivityType, InputType> {
 
     private final InputTypeActivity activity;
     private InputType configBean;

@@ -7,15 +7,15 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import net.sf.taverna.t2.activities.stilts.InputTypeBean;
-import net.sf.taverna.t2.activities.stilts.OutputTypeBean;
+import net.sf.taverna.t2.activities.stilts.AbstractStiltsBean;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.OutputTypeActivity;
+import net.sf.taverna.t2.activities.stilts.AbstractStilsActivity;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 
 @SuppressWarnings("serial")
-public class OutputTypeConfigurationPanel<StiltsActivityType extends OutputTypeActivity, OutputType extends OutputTypeBean>  extends
+public class AbstractStiltsConfigurationPanel<StiltsActivityType extends AbstractStilsActivity, OutputType extends AbstractStiltsBean>  extends
         ActivityConfigurationPanel<StiltsActivityType, OutputType> {
 
     private final StiltsActivityType activity;
@@ -29,7 +29,7 @@ public class OutputTypeConfigurationPanel<StiltsActivityType extends OutputTypeA
     private static final String OUTPUT_TYPE_LABEL = "Output Type";
     private static final String DEBUG_LABEL = "Debug mode";
             
-    public OutputTypeConfigurationPanel(StiltsActivityType activity) {
+    public AbstractStiltsConfigurationPanel(StiltsActivityType activity) {
         this.activity = activity;
         configBean = (OutputType)activity.getConfiguration();
         initGui();
@@ -118,10 +118,10 @@ public class OutputTypeConfigurationPanel<StiltsActivityType extends OutputTypeA
       */
     @Override
      public void noteConfiguration() {
-        noteConfiguration(new OutputTypeBean());
+        noteConfiguration(new AbstractStiltsBean());
      }
      
-     protected void noteConfiguration(OutputTypeBean newBean) {
+     protected void noteConfiguration(AbstractStiltsBean newBean) {
         configBean = (OutputType)newBean;    	
         configBean.setFormatOfOutput(outputFormatSelector.getSelectedItem().toString());
         configBean.setTypeOfOutput(outputTypeSelector.getSelectedItem().toString());

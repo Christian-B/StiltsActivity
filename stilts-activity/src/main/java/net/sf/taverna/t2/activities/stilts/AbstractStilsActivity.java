@@ -27,7 +27,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
+public class AbstractStilsActivity<OutputType extends AbstractStiltsBean> extends
 		AbstractAsynchronousActivity<OutputType>
 		implements AsynchronousActivity<OutputType> 
 {
@@ -245,7 +245,7 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
         try {
             runnerThread.join();
         } catch (InterruptedException ex) {
-            Logger.getLogger(OutputTypeActivity.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AbstractStilsActivity.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         System.out.println("Slits run: " + rerouter.getRunStatus());

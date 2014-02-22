@@ -9,7 +9,7 @@ import javax.swing.Icon;
 import net.sf.taverna.t2.servicedescriptions.ServiceDescription;
 import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 
-import net.sf.taverna.t2.activities.stilts.OutputTypeActivity;
+import net.sf.taverna.t2.activities.stilts.AbstractStilsActivity;
 import net.sf.taverna.t2.activities.stilts.InputTypeBean;
 import net.sf.taverna.t2.activities.stilts.InputTypeInterface;
 import net.sf.taverna.t2.activities.stilts.TCopyActivity;
