@@ -1,28 +1,31 @@
 package net.sf.taverna.t2.activities.stilts;
 
-import net.sf.taverna.t2.activities.stilts.utils.NoExitSecurityManager;
+import java.io.BufferedReader;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import net.sf.taverna.t2.activities.stilts.utils.MyUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static net.sf.taverna.t2.activities.stilts.InputTypeActivity.INPUT_PARAMETER_NAME;
+import net.sf.taverna.t2.activities.stilts.utils.RunStatus;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsRunner;
+import net.sf.taverna.t2.activities.stilts.utils.StreamRerouter;
 
 import net.sf.taverna.t2.invocation.InvocationContext;
 import net.sf.taverna.t2.reference.ReferenceService;
 import net.sf.taverna.t2.reference.T2Reference;
+import net.sf.taverna.t2.workflowmodel.OutputPort;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AbstractAsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
-import uk.ac.starlink.ttools.Stilts;
 
 public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
 		AbstractAsynchronousActivity<OutputType>
@@ -40,12 +43,15 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
      * operation, like done for WSDL services.
      */
     static final String RESULT_PARAMETER_NAME = "Output";
-    static final String SUCCESS_MESSAGE = "Stilts Success!";
     static final String STILTS_PARAMETER_NAME = "Stilts Parameters";
     static final String ERROR_PARAMETER_NAME = "Stilts Errors";
+    
+    //These booleans are used in methods call to flag if the parameter must be present
     static final boolean REQUIRED_PARAMETER = true;
     static final boolean OPTIONAL_PARAMETER = true;
-	
+    public static final String FAILED_MESSAGE = "Run failed! check " + ERROR_PARAMETER_NAME + " for details.";
+    
+    
     protected OutputType configBean;
 
     protected void configurePorts() {
@@ -61,14 +67,48 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
             addOutput(STILTS_PARAMETER_NAME, 1);
             addOutput(ERROR_PARAMETER_NAME, 0);
         }
-
-    }
+     }
 	
-    private String prepareOutput(File outputFile) throws IOException{
-       if (configBean.getTypeOfOutput().equals(StiltsConfigurationConstants.FILE_PATH_TYPE)){
+    private String readFile(final AsynchronousActivityCallback callback, File file) {
+        FileReader fileReader;
+        try {
+            fileReader = new FileReader (file);
+        } catch (FileNotFoundException ex) {
+            callback.fail("Error Opening " + file.getAbsolutePath(), ex);
+            return null;           
+        }
+        BufferedReader reader = new BufferedReader(fileReader);
+        String  line;
+        try {
+            line = reader.readLine();
+        } catch (IOException ex) {
+            callback.fail("Error reading " + file.getAbsolutePath(), ex);
+            return null;                       
+        }
+        if (line == null){
+            callback.fail("Empty output file " + file.getAbsolutePath());
+            return null;                                   
+        }
+        StringBuilder  stringBuilder = new StringBuilder();
+        String ls = System.getProperty("line.separator");
+        while(line != null ) {
+            stringBuilder.append( line );
+            stringBuilder.append( ls );
+            try {
+                line = reader.readLine();
+            } catch (IOException ex) {
+                callback.fail("Error reading " + file.getAbsolutePath(), ex);
+                return null;                       
+            }
+        }
+        return stringBuilder.toString();
+    }   
+
+    private String prepareOutput(final AsynchronousActivityCallback callback, File outputFile) {
+        if (configBean.getTypeOfOutput().equals(StiltsConfigurationConstants.FILE_PATH_TYPE)){
             return outputFile.getAbsolutePath();
-       }
-       return MyUtils.readFileAsString(outputFile.getAbsolutePath());
+        }
+        return readFile(callback, outputFile);
     }
     
     private void close(ByteArrayOutputStream errorStream){
@@ -131,7 +171,32 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
         }
         return input;
     }
-               
+             
+    private boolean writeStringParameter(final AsynchronousActivityCallback callback, 
+            Map<String, T2Reference> outputs, String value, String parameterName){
+        boolean validPort = false;
+        for (OutputPort port:this.getOutputPorts()){
+            if (port.getName().equals(parameterName)){
+                validPort = true;
+            }
+        }
+        if (!validPort){
+            callback.fail("Unconnected Parameter \"" +  parameterName + "\"");
+            return false;
+        }
+        InvocationContext context = callback.getContext();
+        ReferenceService referenceService = context.getReferenceService();
+        T2Reference errorRef = referenceService.register(value, 0, true, context);
+        outputs.put(parameterName, errorRef);                        
+        return true;
+    }
+    
+    private void toSystemOut(String[] parameters){
+        for (int i = 0; i< parameters.length; i++){
+            System.out.println(parameters[i]);
+        }
+    }
+    
     //===
 
     private File createOutputFile(final AsynchronousActivityCallback callback) {
@@ -162,57 +227,62 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
     }
 
     private boolean doRun(final AsynchronousActivityCallback callback, String[] parameters, Map<String, T2Reference> outputs) {
-        InvocationContext context = callback.getContext();
-        ReferenceService referenceService = context.getReferenceService();
-        System.setProperty("votable.strict", "false");
-
-        ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
-        SecurityException scurityException = null;
+        toSystemOut(parameters);
         
-        SecurityManager securityBackup = System.getSecurityManager();
-        System.setSecurityManager(new NoExitSecurityManager());
-                 
-        PrintStream oldError = System.err;
-        System.setErr(new PrintStream(errorStream));
-                
-        try{
-            Stilts.main(parameters);
-        }catch(SecurityException ex){
-            scurityException = ex;
-        } finally{
-            System.setSecurityManager(securityBackup);
-            System.setErr(oldError);
-        }
-        if (!errorStream.toString().isEmpty()){
-            System.err.println(errorStream.toString());
-        }
-
-        T2Reference errorRef = referenceService.register(errorStream.toString(), 0, true, context);
-        outputs.put(ERROR_PARAMETER_NAME, errorRef);                        
-        if (scurityException != null && ! configBean.isDebugMode()){
-            callback.fail("Error running Stilts " + errorStream.toString());
-            close(errorStream);
+        StreamRerouter rerouter;
+        try {
+            rerouter = new StreamRerouter();
+        } catch (IOException ex) {
+            callback.fail("Error rerouting system streams  ", ex);
             return false;
+        }       
+        Thread rerouterThread = new Thread(rerouter);
+        rerouterThread.start();
+        
+        StiltsRunner runner = new StiltsRunner(rerouter, parameters);
+        Thread runnerThread = new Thread(runner);
+        runnerThread.start();
+        try {
+            runnerThread.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(OutputTypeActivity.class.getName()).log(Level.SEVERE, null, ex);
         }
-        close(errorStream);
+        
+        System.out.println("Slits run: " + rerouter.getRunStatus());
+        System.out.println("ERROR:");
+        System.out.println(rerouter.getSavedErr());
+//        System.out.println("OUT:");
+//        System.out.println(rerouter.getSavedOut());
+ 
+        if (rerouter.getRunStatus() != RunStatus.SUCCESS){
+            if (configBean.isDebugMode()){
+                writeStringParameter(callback, outputs, rerouter.getSavedErr(), ERROR_PARAMETER_NAME);
+                return false;
+            } else {
+                callback.fail("Error running Stilts " + rerouter.getSavedErr());
+                return false;
+            }
+        }
+        System.out.println("Run done");
         return true;
     }
 
-    protected void addResults(final AsynchronousActivityCallback callback, Map<String, T2Reference> outputs, File outputFile) {
-        InvocationContext context = callback.getContext();
-        ReferenceService referenceService = context.getReferenceService();
-        
-        String outputValue;
-        try {
-            outputValue = prepareOutput(outputFile);
-        } catch (IOException ex) {
-            callback.fail("Error preparing output", ex);
-            return;
+    protected void addResults(final AsynchronousActivityCallback callback, 
+            Map<String, T2Reference> outputs, File outputFile, boolean runSuccessfull) {
+        if (runSuccessfull){
+            String outputValue = prepareOutput(callback, outputFile);
+            if (outputValue == null){
+                return;
+            }
+            writeStringParameter(callback, outputs, outputValue, RESULT_PARAMETER_NAME);						
+            callback.receiveResult(outputs, new int[0]);
+        } else if (configBean.isDebugMode()){
+            //We still need to put something in output
+            writeStringParameter(callback, outputs, FAILED_MESSAGE, RESULT_PARAMETER_NAME);						            
+            //We still pass the result as the service is not failing
+            callback.receiveResult(outputs, new int[0]);
         }
-        T2Reference simpleRef = referenceService.register(outputValue, 0, true, context);
-        outputs.put(RESULT_PARAMETER_NAME, simpleRef);
-						
-        callback.receiveResult(outputs, new int[0]);
+        //else do nothing as callback fail already called.
     }
 
     @SuppressWarnings("unchecked")
@@ -233,14 +303,16 @@ public class OutputTypeActivity<OutputType extends OutputTypeBean> extends
                     return;
                 }           
                 String[] parameters = parameterList.toArray(new String[0]);
+                
                 Map<String, T2Reference> outputs = prepareOutputs(callback, parameters);
                 if (outputs == null){ //Currently never happens but for completeness and consitency
                     return;
                 }
-                if (!doRun(callback, parameters, outputs)){
-                    return;
-                }
-                addResults(callback, outputs, outputFile);
+                
+                boolean runSuccessfull = doRun(callback, parameters, outputs);
+
+                addResults(callback, outputs, outputFile, runSuccessfull);
+
             }
 
           });

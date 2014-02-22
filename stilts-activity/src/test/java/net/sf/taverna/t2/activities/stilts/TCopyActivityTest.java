@@ -24,9 +24,14 @@ public class TCopyActivityTest {
 
     private OutputTypeActivity activity = new TCopyActivity();
 
+    private static String CSV_STRING = "id,name,number" + System.lineSeparator() +
+            "1,John,1234" + System.lineSeparator() +
+            "2,Christian,4567" + System.lineSeparator();
+
     @Before
     public void makeConfigBean() throws Exception {
         configBean = new InputTypeBean();
+        configBean.setDebugMode(false);
         configBean.setFormatOfOutput("csv");
         configBean.setFormatOfInput("tst");
         configBean.setTypeOfInput(StiltsConfigurationConstants.FILE_PATH_TYPE);
@@ -44,6 +49,7 @@ public class TCopyActivityTest {
 
     @Test
     public void executeAsynch() throws Exception {
+        configBean.setDebugMode(false);
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
@@ -60,7 +66,50 @@ public class TCopyActivityTest {
         //assertEquals("simple", outputs.get("simpleOutput"));
         String result = outputs.get(OutputTypeActivity.RESULT_PARAMETER_NAME).toString();
         System.out.println(result);
-        //assertEquals("Unexpected outputs", OutputTypeActivity.SUCCESS_MESSAGE, result);
+        assertEquals("Unexpected outputs", CSV_STRING, result);
+    }
+
+    @Test
+    public void executeAsynchWithDebug() throws Exception {
+        configBean.setDebugMode(true);
+        activity.configure(configBean);
+
+        Map<String, Object> inputs = new HashMap<String, Object>();
+        inputs.put(InputTypeActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.tst");
+
+        Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
+        expectedOutputTypes.put(OutputTypeActivity.RESULT_PARAMETER_NAME, String.class);
+        //expectedOutputTypes.put("moreOutputs", String.class);
+
+        Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
+                activity, inputs, expectedOutputTypes);
+
+        assertEquals("Unexpected outputs", 1, outputs.size());
+        String result = outputs.get(OutputTypeActivity.RESULT_PARAMETER_NAME).toString();
+        System.out.println(result);
+        assertEquals("Unexpected outputs", CSV_STRING, result);
+    }
+
+    @Test
+    public void executeAsynchError() throws Exception {
+        configBean.setDebugMode(true);
+        activity.configure(configBean);
+
+        Map<String, Object> inputs = new HashMap<String, Object>();
+        inputs.put(InputTypeActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.csv");
+
+        Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
+        expectedOutputTypes.put(OutputTypeActivity.RESULT_PARAMETER_NAME, String.class);
+        //expectedOutputTypes.put("moreOutputs", String.class);
+
+        Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
+                activity, inputs, expectedOutputTypes);
+
+        assertEquals("Unexpected outputs", 1, outputs.size());
+        //assertEquals("simple", outputs.get("simpleOutput"));
+        String result = outputs.get(OutputTypeActivity.RESULT_PARAMETER_NAME).toString();
+        System.out.println(result);
+        assertEquals("Unexpected outputs", OutputTypeActivity.FAILED_MESSAGE, result);
     }
 
     @Test
@@ -68,21 +117,16 @@ public class TCopyActivityTest {
         assertEquals("Unexpected inputs", 0, activity.getInputPorts().size());
         assertEquals("Unexpected outputs", 0, activity.getOutputPorts().size());
 
+        configBean.setDebugMode(false);
         activity.configure(configBean);
         assertEquals("Unexpected inputs", 1, activity.getInputPorts().size());
-        if (configBean.isDebugMode()){
-            assertEquals("Unexpected outputs", 3, activity.getOutputPorts().size());            
-        } else {
-            assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
-        }
+        assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
+
+        configBean.setDebugMode(true);
         activity.configure(configBean);
         // Should not change on reconfigure
         assertEquals("Unexpected inputs", 1, activity.getInputPorts().size());
-        if (configBean.isDebugMode()){
-            assertEquals("Unexpected outputs", 3, activity.getOutputPorts().size());            
-        } else {
-            assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
-        }
+        assertEquals("Unexpected outputs", 3, activity.getOutputPorts().size());            
     }
 
     @Test
