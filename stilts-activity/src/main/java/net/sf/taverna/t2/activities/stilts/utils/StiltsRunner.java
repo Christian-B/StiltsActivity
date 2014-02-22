@@ -18,15 +18,22 @@ public class StiltsRunner implements Runnable
         
     @Override
     public void run() {
+        System.out.println("security was " + System.getSecurityManager());
+        System.setProperty("votable.strict", "false");
         SecurityManager securityBackup = System.getSecurityManager();
         try {
             System.setSecurityManager(new NoExitSecurityManager());
+        System.out.println("main start");
             Stilts.main(parameters);
+        System.out.println("main out");
             consumer.reset(RunStatus.SUCCESS);
-        } catch (Exception ex){
+        System.out.println("success");
+       } catch (Exception ex){
             consumer.reset(RunStatus.FAILED);
-        } finally {
+       } finally {
             System.setSecurityManager(securityBackup);
-        }
+            System.out.println("security reset " + System.getSecurityManager());
+       }
+       System.out.println("Strinlts runner run ending");
     }
 }

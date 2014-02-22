@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.sf.taverna.t2.activities.stilts.utils;
 
 import java.io.BufferedReader;
@@ -15,63 +9,81 @@ import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.io.StringBufferInputStream;
 
-public class StreamRerouter  
+public class StreamRerouter implements Runnable
 {
-    private final BufferedReader outReader;
+//    private final BufferedReader outReader;
     private final BufferedReader errReader;
-    private final StringBuilder outRecord;
+//    private final StringBuilder outRecord;
     private final StringBuilder errRecord;
     
-    private final PrintStream originalSystemOut;
+//    private final PrintStream originalSystemOut;
     private final PrintStream originalSystemErr;
     private final InputStream originalSystemIn;
-    private boolean running = true;
     private RunStatus runStatus = RunStatus.RUNNING;
     
     public StreamRerouter() throws IOException {
-        PipedInputStream receiveOutPipe = new PipedInputStream(10);
-        PipedOutputStream redirectOutPipe = new PipedOutputStream(receiveOutPipe);
-        originalSystemOut = System.out;
-        System.setOut(new PrintStream(redirectOutPipe));
-        outRecord = new StringBuilder();
-        outReader = new BufferedReader( new InputStreamReader( receiveOutPipe ));
+//        PipedInputStream receiveOutPipe = new PipedInputStream(10);
+//        PipedOutputStream redirectOutPipe = new PipedOutputStream(receiveOutPipe);
+//        originalSystemOut = System.out;
+//        System.setOut(new PrintStream(redirectOutPipe));
+//        outRecord = new StringBuilder();
+//        outReader = new BufferedReader( new InputStreamReader( receiveOutPipe ));
 
+        System.out.println(System.err);
         PipedInputStream receiveErrPipe = new PipedInputStream(10);
         PipedOutputStream redirectErrPipe = new PipedOutputStream(receiveErrPipe);
         originalSystemErr = System.err;
         System.setErr(new PrintStream(redirectErrPipe));
         errRecord = new StringBuilder();
         errReader = new BufferedReader( new InputStreamReader( receiveErrPipe ));
+        System.out.println(System.err);
 
         originalSystemIn = System.in;
         InputStream testInput;
         testInput = new StringBufferInputStream("");
         System.setIn(testInput);
     }
- 
-    public void reset(RunStatus newStatus) {
-        runStatus = newStatus;
-        running = false;            
+
+/*    private void closeOut(){
+        System.setOut(originalSystemOut);
         try {
             checkOut();
         } catch (Exception ex) {
             //ignore
         } finally {
-            System.setOut(originalSystemOut);
+        }        
+        try {
+            outReader.close();
+        } catch (Exception ex) {
+            //ignore
         }
+    }
+ */   
+    private void closeErr(){
+        System.setErr(originalSystemErr);
         try {
             checkErr();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             //ignore
         } finally {
-            System.setErr(originalSystemErr);
+        }        
+        try {
+            errReader.close();
+        } catch (Exception ex) {
+            //ignore
         }
+    }
+
+    public void reset(RunStatus newStatus) {
+        runStatus = newStatus;
+//        closeOut();
+        closeErr();
         System.setIn(originalSystemIn);
     }
   
-    public String getSavedOut(){
-        return outRecord.toString();
-    }
+//    public String getSavedOut(){
+//        return outRecord.toString();
+//    }
     
     public String getSavedErr(){
         return errRecord.toString();
@@ -86,39 +98,37 @@ public class StreamRerouter
         }
     }
     
-    private void checkOut() throws IOException{
-        while (outReader.ready()){        
+/*    private void checkOut() throws IOException{
+        System.out.println("waiting");
+/*        while (outReader.ready()){        
             String temp=outReader.readLine();
             outRecord.append(temp);
             outRecord.append(System.lineSeparator());
             originalSystemOut.println("out: " + temp);
         }
     }
-
+*/
     private void checkIn() throws IOException{
         if (originalSystemIn.available() > 0){
             System.setIn(originalSystemIn);
-        }
+       }
     }
 
-    public void listen()
-    {
-        try
-        {
-            while(running){
+    @Override
+    public void run(){
+        try {
+            while(runStatus == RunStatus.RUNNING){
                 checkIn();
-                checkOut();
+ //               checkOut();
                 checkErr();
                 Thread.sleep(100);
             }
         }
         catch (Exception e){
-           //do nothing
-        } finally {
-            System.setOut(originalSystemOut);
-            System.setErr(originalSystemErr);
-            System.setIn(originalSystemIn);
-        }
+           reset(RunStatus.ERROR);
+        }       
+        System.out.println("Rerouter run ending");
+        System.out.println(System.err);
     }
 
     /**
