@@ -8,10 +8,18 @@ import java.security.Permission;
  * @since    19 May 2011
  */
 public class NoExitSecurityManager extends SecurityManager {
-	@Override
-    public void checkPermission(Permission perm)
-    {
-      /* Allow everything else. */
+    
+    private final SecurityManager previousManager;
+    
+    public NoExitSecurityManager(){
+        previousManager = System.getSecurityManager();
+    }
+    
+    @Override
+    public void checkPermission(Permission perm) {
+        if (previousManager != null){
+            previousManager.checkPermission(perm);
+        }
     }
 
     @Override
@@ -20,8 +28,8 @@ public class NoExitSecurityManager extends SecurityManager {
       /* Don't allow exit with any status code 1 . */
       //status == 0: no error
       //status != 0: error 
-    if(status == 1)
-      throw new SecurityException("Service exited with " + status);
+        if(status != 0){
+            throw new SecurityException("Service exited with " + status);
+        }
     }
-
 }
