@@ -2,7 +2,7 @@ package net.sf.taverna.t2.activities.stilts.ui.config;
 
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
-import net.sf.taverna.t2.activities.stilts.InputTypeBean;
+import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 
 import net.sf.taverna.t2.workbench.ui.actions.activity.ActivityConfigurationAction;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationDialog;
@@ -13,7 +13,7 @@ import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityCon
 @SuppressWarnings("serial")
 public class TCopyConfigureAction
 		extends
-		ActivityConfigurationAction<TCopyActivity, InputTypeBean> {
+		ActivityConfigurationAction<TCopyActivity, SingleInputBean> {
 
 	public TCopyConfigureAction(TCopyActivity activity, Frame owner) {
 		super(activity);
@@ -25,15 +25,15 @@ public class TCopyConfigureAction
 
 	@SuppressWarnings("unchecked")
 	public void actionPerformed(ActionEvent e) {
-		ActivityConfigurationDialog<TCopyActivity, InputTypeBean> currentDialog = ActivityConfigurationAction
+		ActivityConfigurationDialog<TCopyActivity, SingleInputBean> currentDialog = ActivityConfigurationAction
 				.getDialog(getActivity());
 		if (currentDialog != null) {
 			currentDialog.toFront();
 			return;
 		}
-		ActivityConfigurationPanel<TCopyActivity, InputTypeBean> panel = new InputTypeConfigurationPanel(getActivity());
+		ActivityConfigurationPanel<TCopyActivity, SingleInputBean> panel = new InputTypeConfigurationPanel(getActivity());
                 
-		ActivityConfigurationDialog<TCopyActivity, InputTypeBean> dialog = new ActivityConfigurationDialog<TCopyActivity, InputTypeBean>(
+		ActivityConfigurationDialog<TCopyActivity, SingleInputBean> dialog = new ActivityConfigurationDialog<TCopyActivity, SingleInputBean>(
 				getActivity(), panel);
 
 		ActivityConfigurationAction.setDialog(getActivity(), dialog);

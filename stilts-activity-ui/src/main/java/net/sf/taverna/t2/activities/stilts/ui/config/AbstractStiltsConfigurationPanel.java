@@ -6,7 +6,7 @@ import javax.swing.JComboBox;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import net.sf.taverna.t2.activities.stilts.InputTypeBean;
+import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.AbstractStiltsBean;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;

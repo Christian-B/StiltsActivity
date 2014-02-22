@@ -4,8 +4,8 @@ import javax.swing.JComboBox;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import net.sf.taverna.t2.activities.stilts.InputTypeActivity;
-import net.sf.taverna.t2.activities.stilts.InputTypeBean;
+import net.sf.taverna.t2.activities.stilts.SingleInputActivity;
+import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.AbstractStilsActivity;
 import net.sf.taverna.t2.activities.stilts.AbstractStiltsBean;
 
@@ -13,10 +13,10 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
 
 @SuppressWarnings("serial")
-public class InputTypeConfigurationPanel <InputActivityType extends InputTypeActivity, InputType extends InputTypeBean>  extends
+public class InputTypeConfigurationPanel <InputActivityType extends SingleInputActivity, InputType extends SingleInputBean>  extends
         AbstractStiltsConfigurationPanel<InputActivityType, InputType> {
 
-    private final InputTypeActivity activity;
+    private final SingleInputActivity activity;
     private InputType configBean;
 	
     private JComboBox inputFormatSelector;
@@ -110,11 +110,11 @@ public class InputTypeConfigurationPanel <InputActivityType extends InputTypeAct
       */
     @Override
     public void noteConfiguration() {
-        noteConfiguration(new InputTypeBean());
+        noteConfiguration(new SingleInputBean());
     }
 
     protected void noteConfiguration(InputType bean) {
-        configBean = (InputType) new InputTypeBean();
+        configBean = (InputType) new SingleInputBean();
     	super.noteConfiguration(configBean);
         configBean.setFormatOfInput(inputFormatSelector.getSelectedItem().toString());
         configBean.setTypeOfInput(inputTypeSelector.getSelectedItem().toString());        

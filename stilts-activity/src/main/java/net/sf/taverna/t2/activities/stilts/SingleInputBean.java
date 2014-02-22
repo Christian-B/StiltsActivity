@@ -6,8 +6,8 @@ import java.io.Serializable;
  * Stilts activity configuration bean.
  * 
  */
-public class InputTypeBean extends AbstractStiltsBean 
-        implements InputTypeInterface, Serializable {
+public class SingleInputBean extends AbstractStiltsBean 
+        implements SingleInputInterface, Serializable {
     private String formatOfInput;
     private String typeOfInput;
       

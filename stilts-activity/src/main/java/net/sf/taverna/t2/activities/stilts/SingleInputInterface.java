@@ -4,7 +4,7 @@ package net.sf.taverna.t2.activities.stilts;
  * Stilts activity configuration bean.
  * 
  */
-public interface InputTypeInterface extends AbstractStiltsInterface {
+public interface SingleInputInterface extends AbstractStiltsInterface {
        
    /**
      * @return the formatOfInput

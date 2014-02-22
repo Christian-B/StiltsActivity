@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import static net.sf.taverna.t2.activities.stilts.InputTypeActivity.INPUT_PARAMETER_NAME;
+import static net.sf.taverna.t2.activities.stilts.SingleInputActivity.INPUT_PARAMETER_NAME;
 
 import net.sf.taverna.t2.invocation.InvocationContext;
 import net.sf.taverna.t2.reference.ReferenceService;

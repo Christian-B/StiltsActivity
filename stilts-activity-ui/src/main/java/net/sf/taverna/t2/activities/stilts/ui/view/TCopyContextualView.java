@@ -4,7 +4,7 @@ import java.awt.Frame;
 
 import javax.swing.Action;
 import javax.swing.JLabel;
-import net.sf.taverna.t2.activities.stilts.InputTypeBean;
+import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 
 import net.sf.taverna.t2.activities.stilts.TCopyActivity;
 import net.sf.taverna.t2.activities.stilts.ui.config.TCopyConfigureAction;
@@ -22,7 +22,7 @@ public class TCopyContextualView extends AbstractStiltsContextualView {
 
     @Override
     public String getViewTitle() {
-        InputTypeBean configuration = activity.getConfiguration();
+        SingleInputBean configuration = activity.getConfiguration();
         return "Copy from format " + configuration.getFormatOfInput() + " to " + configuration.getFormatOfInput();
     }
 
@@ -31,7 +31,7 @@ public class TCopyContextualView extends AbstractStiltsContextualView {
       */
     @Override
     public void refreshView() {
-        InputTypeBean configuration = activity.getConfiguration();
+        SingleInputBean configuration = activity.getConfiguration();
         description.setText("Copy from format " + configuration.getFormatOfInput() 
                 + " to " + configuration.getFormatOfInput());
     }

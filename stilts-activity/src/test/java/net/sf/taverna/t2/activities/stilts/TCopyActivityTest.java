@@ -20,7 +20,7 @@ import org.junit.Test;
 
 public class TCopyActivityTest {
 
-    private InputTypeBean configBean;
+    private SingleInputBean configBean;
 
     private AbstractStilsActivity activity = new TCopyActivity();
 
@@ -30,7 +30,7 @@ public class TCopyActivityTest {
 
     @Before
     public void makeConfigBean() throws Exception {
-        configBean = new InputTypeBean();
+        configBean = new SingleInputBean();
         configBean.setDebugMode(false);
         configBean.setFormatOfOutput("csv");
         configBean.setFormatOfInput("tst");
@@ -41,7 +41,7 @@ public class TCopyActivityTest {
     @Test(expected = ActivityConfigurationException.class)
     @Ignore
     public void invalidConfiguration() throws ActivityConfigurationException {
-        InputTypeBean invalidBean = new InputTypeBean();
+        SingleInputBean invalidBean = new SingleInputBean();
         invalidBean.setFormatOfInput("invalidExample");
         // Should throw ActivityConfigurationException
         activity.configure(invalidBean);
@@ -53,7 +53,7 @@ public class TCopyActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(InputTypeActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.tst");
+        inputs.put(SingleInputActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.tst");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
         expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
@@ -75,7 +75,7 @@ public class TCopyActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(InputTypeActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.tst");
+        inputs.put(SingleInputActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.tst");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
         expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
@@ -96,7 +96,7 @@ public class TCopyActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(InputTypeActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.csv");
+        inputs.put(SingleInputActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.csv");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
         expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
@@ -132,7 +132,7 @@ public class TCopyActivityTest {
     @Test
     public void configureActivity() throws Exception {
         Set<String> expectedInputs = new HashSet<String>();
-        expectedInputs.add(InputTypeActivity.INPUT_PARAMETER_NAME);
+        expectedInputs.add(SingleInputActivity.INPUT_PARAMETER_NAME);
 
         Set<String> expectedOutputs = new HashSet<String>();
         expectedOutputs.add(AbstractStilsActivity.RESULT_PARAMETER_NAME);

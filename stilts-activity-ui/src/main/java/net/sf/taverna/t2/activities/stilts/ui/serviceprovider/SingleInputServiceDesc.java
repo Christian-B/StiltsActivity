@@ -10,12 +10,12 @@ import net.sf.taverna.t2.servicedescriptions.ServiceDescription;
 import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 
 import net.sf.taverna.t2.activities.stilts.AbstractStilsActivity;
-import net.sf.taverna.t2.activities.stilts.InputTypeBean;
-import net.sf.taverna.t2.activities.stilts.InputTypeInterface;
+import net.sf.taverna.t2.activities.stilts.SingleInputBean;
+import net.sf.taverna.t2.activities.stilts.SingleInputInterface;
 import net.sf.taverna.t2.activities.stilts.TCopyActivity;
 
-public class InputTypeServiceDesc extends ServiceDescription<InputTypeBean> 
-        implements InputTypeInterface{
+public class SingleInputServiceDesc extends ServiceDescription<SingleInputBean> 
+        implements SingleInputInterface{
 
     private String formatOfInput;
     private String formatOfOutput;
@@ -28,7 +28,7 @@ public class InputTypeServiceDesc extends ServiceDescription<InputTypeBean>
       * for this description 
       */
     @Override
-    public Class<? extends Activity<InputTypeBean>> getActivityClass() {
+    public Class<? extends Activity<SingleInputBean>> getActivityClass() {
         return TCopyActivity.class;
     }
 
@@ -39,8 +39,8 @@ public class InputTypeServiceDesc extends ServiceDescription<InputTypeBean>
       * 
       */
     @Override
-    public InputTypeBean getActivityConfiguration() {
-        InputTypeBean bean = new InputTypeBean();
+    public SingleInputBean getActivityConfiguration() {
+        SingleInputBean bean = new SingleInputBean();
         bean.setFormatOfInput(getFormatOfInput());
         bean.setFormatOfOutput(getFormatOfOutput());
         bean.setTypeOfInput(getTypeOfInput());

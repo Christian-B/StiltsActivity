@@ -15,8 +15,8 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class InputTypeActivity<InputType extends InputTypeBean> extends AbstractStilsActivity<InputTypeBean>
-		implements AsynchronousActivity<InputTypeBean>,  Activity<InputTypeBean>{
+public class SingleInputActivity<InputType extends SingleInputBean> extends AbstractStilsActivity<SingleInputBean>
+		implements AsynchronousActivity<SingleInputBean>,  Activity<SingleInputBean>{
 
     /*
      * Best practice: Keep port names as constants to avoid misspelling. This
@@ -26,7 +26,7 @@ public class InputTypeActivity<InputType extends InputTypeBean> extends Abstract
     static final String INPUT_PARAMETER_NAME = "Input";
 	
     @Override
-    public void configure(InputTypeBean configBean)
+    public void configure(SingleInputBean configBean)
             throws ActivityConfigurationException {
 
         // Store for getConfiguration(), but you could also make
@@ -65,7 +65,7 @@ public class InputTypeActivity<InputType extends InputTypeBean> extends Abstract
     }
 
     @Override
-    public InputTypeBean getConfiguration() {
+    public SingleInputBean getConfiguration() {
         return this.configBean;
     }
 
