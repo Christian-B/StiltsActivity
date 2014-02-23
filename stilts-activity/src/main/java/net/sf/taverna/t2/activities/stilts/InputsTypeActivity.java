@@ -29,7 +29,8 @@ public class InputsTypeActivity<InputsType extends InputsTypeBean> extends Abstr
     @Override
     public void configure(InputsTypeBean configBean)
             throws ActivityConfigurationException {
-
+        super.configure(configBean);
+        
         // Store for getConfiguration(), but you could also make
         // getConfiguration() return a new bean from other sources
         this.configBean = configBean;

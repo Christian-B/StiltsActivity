@@ -32,11 +32,6 @@ public class AbstractStilsActivity<OutputType extends AbstractStiltsBean> extend
 		implements AsynchronousActivity<OutputType> 
 {
 
-    @Override
-    public void configure(OutputType configBean)
-            throws ActivityConfigurationException {
-    }
-    
     /*
      * Best practice: Keep port names as constants to avoid misspelling. This
      * would not apply if port names are looked up dynamically from the servic
@@ -54,6 +49,25 @@ public class AbstractStilsActivity<OutputType extends AbstractStiltsBean> extend
     
     protected OutputType configBean;
 
+    @Override
+    public void configure(OutputType configBean) throws ActivityConfigurationException {
+        this.configBean = configBean;
+        if (!StiltsConfigurationConstants.VALID_OUTPUT_FORMATS_LIST.contains(
+                configBean.getFormatOfOutput())) {
+            throw new ActivityConfigurationException(
+                    "Output format \"" + configBean.getFormatOfOutput() + 
+                    "\" not valid. Must be one of " + 
+                    StiltsConfigurationConstants.VALID_OUTPUT_FORMATS_LIST);
+        }
+        if (!StiltsConfigurationConstants.VALID_OUTPUT_TYPE_LIST.contains(
+                configBean.getTypeOfOutput())) {
+            throw new ActivityConfigurationException(
+                    "Output format \"" + configBean.getTypeOfOutput() + 
+                    "\" not valid. Must be one of " + 
+                    StiltsConfigurationConstants.VALID_OUTPUT_TYPE_LIST);
+        }
+    }
+    
     protected void configurePorts() {
         // In case we are being reconfigured - remove existing ports first
         // to avoid duplicates

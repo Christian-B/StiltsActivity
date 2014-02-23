@@ -24,7 +24,7 @@ public class TCatNActivityTest {
 
     private InputsTypeBean configBean;
 
-    private TCatNActivity activity = new TCatNActivity();
+    private final TCatNActivity activity = new TCatNActivity();
 
     @Before
     public void makeConfigBean() throws Exception {
@@ -96,9 +96,10 @@ public class TCatNActivityTest {
         } else {
             assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
         }
+        configBean.setNumberOfInputs(4);
         activity.configure(configBean);
         // Should not change on reconfigure
-        assertEquals("Unexpected inputs", 2, activity.getInputPorts().size());
+        assertEquals("Unexpected inputs", 4, activity.getInputPorts().size());
         if (configBean.isDebugMode()){
             assertEquals("Unexpected outputs", 3, activity.getOutputPorts().size());            
         } else {

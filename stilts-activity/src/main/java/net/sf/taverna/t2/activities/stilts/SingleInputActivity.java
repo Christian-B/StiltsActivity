@@ -29,6 +29,7 @@ public class SingleInputActivity<InputType extends SingleInputBean> extends Abst
     public void configure(SingleInputBean configBean)
             throws ActivityConfigurationException {
 
+        super.configure(configBean);
         // Store for getConfiguration(), but you could also make
         // getConfiguration() return a new bean from other sources
         this.configBean = configBean;

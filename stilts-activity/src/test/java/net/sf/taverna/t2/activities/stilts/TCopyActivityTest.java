@@ -22,9 +22,9 @@ public class TCopyActivityTest {
 
     private SingleInputBean configBean;
 
-    private AbstractStilsActivity activity = new TCopyActivity();
+    private final AbstractStilsActivity activity = new TCopyActivity();
 
-    private static String CSV_STRING = "id,name,number" + System.lineSeparator() +
+    private static final String CSV_STRING = "id,name,number" + System.lineSeparator() +
             "1,John,1234" + System.lineSeparator() +
             "2,Christian,4567" + System.lineSeparator();
 
@@ -39,10 +39,9 @@ public class TCopyActivityTest {
     }
 
     @Test(expected = ActivityConfigurationException.class)
-    @Ignore
     public void invalidConfiguration() throws ActivityConfigurationException {
         SingleInputBean invalidBean = new SingleInputBean();
-        invalidBean.setFormatOfInput("invalidExample");
+        invalidBean.setFormatOfOutput("invalidExample");
         // Should throw ActivityConfigurationException
         activity.configure(invalidBean);
     }
