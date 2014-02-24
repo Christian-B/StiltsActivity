@@ -34,6 +34,21 @@ public class SingleInputActivity<InputType extends SingleInputBean> extends Abst
         // getConfiguration() return a new bean from other sources
         this.configBean = configBean;
 
+        if (!StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST.contains(
+                configBean.getFormatOfInput())) {
+            throw new ActivityConfigurationException(
+                    "Output format \"" + configBean.getFormatOfInput() + 
+                    "\" not valid. Must be one of " + 
+                    StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST);
+        }
+        if (!StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST.contains(
+                configBean.getTypeOfInput())) {
+            throw new ActivityConfigurationException(
+                    "Output format \"" + configBean.getTypeOfInput() + 
+                    "\" not valid. Must be one of " + 
+                    StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST);
+        }
+
         // REQUIRED: (Re)create inputPath/output ports depending on configuration
         configurePorts();
     }
