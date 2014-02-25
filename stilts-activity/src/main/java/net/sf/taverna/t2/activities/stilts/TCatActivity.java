@@ -10,12 +10,11 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class TCatNActivity extends MultipleFormatsActivity<MultipleFormatsBean>
-		implements AsynchronousActivity<MultipleFormatsBean>,  Activity<MultipleFormatsBean>{
+public class TCatActivity extends SingleFormatMultipleInputsActivity<SingleFormatMultipleInputsBean>{
 
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         ArrayList<String> parameters = new ArrayList<String>();
-        parameters.add("tcatn");
+        parameters.add("tcat");
         parameters.addAll(super.prepareParameters(inputs, callback, outputFile));
         return parameters;
     }

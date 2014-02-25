@@ -76,7 +76,8 @@ public class MultipleInputsTypeActivity<MultipleInputs extends MultipleInputsBea
     
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         List<String> parameters = super.prepareParameters(inputs, callback, outputFile);
-         for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
+        parameters.add("nin=" + getConfiguration().getNumberOfInputs());
+        for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
             String inputPath = getInputFilePath(inputs, callback, inputsNumber);
             if (inputPath == null){
                 return null;
