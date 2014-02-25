@@ -33,19 +33,12 @@ public class MultipleFormatsActivity<InputsType extends MultipleFormatsBean>
                     "Number of inputs should be at least two. Found: " + 
                     configBean.getNumberOfInputs());
         }
-        List<String> formats = configBean.getFormatOfInputs();
+        List<String> formats = configBean.getFormatsOfInputs();
         if (formats.size() != configBean.getNumberOfInputs()) {
             throw new ActivityConfigurationException(
                     "List of formats of inputs should be of length: " + 
                     configBean.getNumberOfInputs() +
                     ". Provided list is of size: " + formats.size() );
-        }
-        List<String> types = configBean.getTypeOfInputs();
-        if (types.size() != configBean.getNumberOfInputs()) {
-            throw new ActivityConfigurationException(
-                    "List of types of inputs should be of length: " + 
-                    configBean.getNumberOfInputs() +
-                    ". Provided list is of size: " + types.size() );
         }
         for (int i = 0; i< configBean.getNumberOfInputs(); i++){
             if (!StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST.contains(
@@ -54,13 +47,6 @@ public class MultipleFormatsActivity<InputsType extends MultipleFormatsBean>
                         "Output format \"" + formats.get(i) + 
                         "\" not valid. Must be one of " + 
                         StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST);
-            }
-            if (!StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST.contains(
-                    types.get(i))) {
-                throw new ActivityConfigurationException(
-                        "Output format \"" + types.get(i) + 
-                        "\" not valid. Must be one of " + 
-                        StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST);
             }
         }
         // Store for getConfiguration(), but you could also make
@@ -75,27 +61,10 @@ public class MultipleFormatsActivity<InputsType extends MultipleFormatsBean>
         super.configurePorts();
     }
 	
-   private String getInputFilePath(final Map<String, T2Reference> inputs, 
-            final AsynchronousActivityCallback callback, int inputsNumber) {
-        InvocationContext context = callback.getContext();
-        ReferenceService referenceService = context.getReferenceService();
-        String input = getStringParameter(inputs, callback, INPUT_PARAMETER_NAME + inputsNumber, REQUIRED_PARAMETER ); 
-        if (input == null) {
-            return null;
-        }
-        String type = configBean.getTypeOfInputs().get(inputsNumber -1);
-        return this.getInputFilePath(null, type, input);
-    }
-    
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         List<String> parameters = super.prepareParameters(inputs, callback, outputFile);
          for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
-            String inputPath = getInputFilePath(inputs, callback, inputsNumber);
-            if (inputPath == null){
-                return null;
-            }
-            parameters.add("ifmt" + inputsNumber + "="+ configBean.getFormatOfInputs().get(inputsNumber -1));
-            parameters.add("in" + inputsNumber + "=" + inputPath);
+            parameters.add("ifmt" + inputsNumber + "="+ configBean.getFormatsOfInputs().get(inputsNumber -1));
         }
         return parameters;
     }

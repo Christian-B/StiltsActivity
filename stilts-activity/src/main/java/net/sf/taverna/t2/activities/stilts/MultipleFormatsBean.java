@@ -9,16 +9,16 @@ import java.util.List;
  */
 public class MultipleFormatsBean extends MultipleInputsBean 
         implements MultipleFormatsInterface, Serializable {
-    private List<String> formatOfInputs;
+    private List<String> formatsOfInputs;
 
     @Override
-    public List<String> getFormatOfInputs() {
-        return formatOfInputs;
+    public List<String> getFormatsOfInputs() {
+        return formatsOfInputs;
     }
 
     @Override
-    public void setFormatOfInputs(List<String> formatOfInput) {
-        this.formatOfInputs = formatOfInput;
+    public void setFormatsOfInputs(List<String> formatsOfInput) {
+        this.formatsOfInputs = formatsOfInput;
     }
       
 }

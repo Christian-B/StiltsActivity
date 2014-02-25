@@ -10,7 +10,7 @@ import java.util.List;
 public class MultipleInputsBean extends AbstractStiltsBean 
         implements MultipleInputsnterface, Serializable {
     private int numberOfInputs;
-    private List<String> typeOfInputs;
+    private List<String> typesOfInputs;
 
     @Override
     public int getNumberOfInputs() {
@@ -23,13 +23,13 @@ public class MultipleInputsBean extends AbstractStiltsBean
     }
 
     @Override
-    public List<String> getTypeOfInputs() {
-        return typeOfInputs;
+    public List<String> getTypesOfInputs() {
+        return typesOfInputs;
     }
 
     @Override
-    public void setTypeOfInputs(List<String> typeOfInput) {
-        this.typeOfInputs = typeOfInput;
+    public void setTypesOfInputs(List<String> typesOfInput) {
+        this.typesOfInputs = typesOfInput;
     }
       
 }

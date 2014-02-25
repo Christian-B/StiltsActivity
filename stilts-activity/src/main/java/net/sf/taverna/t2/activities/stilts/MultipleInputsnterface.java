@@ -22,11 +22,11 @@ public interface MultipleInputsnterface extends AbstractStiltsInterface {
     /**
      * @return the typeOfInputs
      */
-    public List<String> getTypeOfInputs();
+    public List<String> getTypesOfInputs();
 
     /**
-     * @param typeOfInputs the typeOfInputs to set
+     * @param typesOfInputs the typeOfInputs to set
      */
-    public void setTypeOfInputs(List<String> typeOfInputs);
+    public void setTypesOfInputs(List<String> typesOfInputs);
       
 }

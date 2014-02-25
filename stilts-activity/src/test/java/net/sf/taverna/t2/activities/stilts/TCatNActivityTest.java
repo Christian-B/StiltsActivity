@@ -31,14 +31,14 @@ public class TCatNActivityTest {
         configBean = new MultipleFormatsBean();
         configBean.setNumberOfInputs(2);
         configBean.setFormatOfOutput("ascii");
-        ArrayList<String> formatOfInputs = new ArrayList<String>();
-        formatOfInputs.add("tst");
-        formatOfInputs.add("csv");
-        configBean.setFormatOfInputs(formatOfInputs);
-        ArrayList<String> typeOfInputs = new ArrayList<String>();
-        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
-        typeOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
-        configBean.setTypeOfInputs(typeOfInputs);
+        ArrayList<String> formatsOfInputs = new ArrayList<String>();
+        formatsOfInputs.add("tst");
+        formatsOfInputs.add("csv");
+        configBean.setFormatsOfInputs(formatsOfInputs);
+        ArrayList<String> typesOfInputs = new ArrayList<String>();
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typesOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
+        configBean.setTypesOfInputs(typesOfInputs);
         configBean.setTypeOfOutput(StiltsConfigurationConstants.STRING_TYPE);
     }
 
@@ -87,18 +87,18 @@ public class TCatNActivityTest {
         } else {
             assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
         }
-        ArrayList<String> formatOfInputs = new ArrayList<String>();
-        formatOfInputs.add("tst");
-        formatOfInputs.add("csv");
-        formatOfInputs.add("csv");
-        formatOfInputs.add("csv");
-        configBean.setFormatOfInputs(formatOfInputs);
-        ArrayList<String> typeOfInputs = new ArrayList<String>();
-        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
-        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
-        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
-        typeOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
-        configBean.setTypeOfInputs(typeOfInputs);
+        ArrayList<String> formatsOfInputs = new ArrayList<String>();
+        formatsOfInputs.add("tst");
+        formatsOfInputs.add("csv");
+        formatsOfInputs.add("csv");
+        formatsOfInputs.add("csv");
+        configBean.setFormatsOfInputs(formatsOfInputs);
+        ArrayList<String> typesOfInputs = new ArrayList<String>();
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typesOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
+        configBean.setTypesOfInputs(typesOfInputs);
         configBean.setNumberOfInputs(4);
         activity.configure(configBean);
         // Should not change on reconfigure
@@ -112,17 +112,17 @@ public class TCatNActivityTest {
 
     @Test(expected = ActivityConfigurationException.class)
     public void reConfiguredActivityLengthError() throws Exception {
-        ArrayList<String> formatOfInputs = new ArrayList<String>();
-        formatOfInputs.add("tst");
-        formatOfInputs.add("csv");
-        formatOfInputs.add("csv");
-        formatOfInputs.add("csv");
-        configBean.setFormatOfInputs(formatOfInputs);
-        ArrayList<String> typeOfInputs = new ArrayList<String>();
-        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
-        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
-        typeOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
-        configBean.setTypeOfInputs(typeOfInputs);
+        ArrayList<String> formatsOfInputs = new ArrayList<String>();
+        formatsOfInputs.add("tst");
+        formatsOfInputs.add("csv");
+        formatsOfInputs.add("csv");
+        formatsOfInputs.add("csv");
+        configBean.setFormatsOfInputs(formatsOfInputs);
+        ArrayList<String> typesOfInputs = new ArrayList<String>();
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typesOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
+        configBean.setTypesOfInputs(typesOfInputs);
         configBean.setNumberOfInputs(4);
         activity.configure(configBean);
         // Should not change on reconfigure
@@ -136,14 +136,14 @@ public class TCatNActivityTest {
 
     @Test(expected = ActivityConfigurationException.class)
     public void reConfiguredActivityTypeError() throws Exception {
-        ArrayList<String> formatOfInputs = new ArrayList<String>();
-        formatOfInputs.add("tst");
-        formatOfInputs.add("opps");
-        configBean.setFormatOfInputs(formatOfInputs);
-        ArrayList<String> typeOfInputs = new ArrayList<String>();
-        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
-        typeOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
-        configBean.setTypeOfInputs(typeOfInputs);
+        ArrayList<String> formatsOfInputs = new ArrayList<String>();
+        formatsOfInputs.add("tst");
+        formatsOfInputs.add("opps");
+        configBean.setFormatsOfInputs(formatsOfInputs);
+        ArrayList<String> typesOfInputs = new ArrayList<String>();
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typesOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
+        configBean.setTypesOfInputs(typesOfInputs);
         configBean.setNumberOfInputs(2);
         activity.configure(configBean);
         // Should not change on reconfigure

@@ -12,11 +12,11 @@ public interface MultipleFormatsInterface extends MultipleInputsnterface {
     /**
      * @return the formatOfInputs
      */
-    public List<String> getFormatOfInputs();
+    public List<String> getFormatsOfInputs();
 
     /**
-     * @param formatOfInputs the formatOfInpust to set
+     * @param formatsOfInputs the formatOfInpust to set
      */
-    public void setFormatOfInputs(List<String> formatOfInputs);
+    public void setFormatsOfInputs(List<String> formatsOfInputs);
       
 }

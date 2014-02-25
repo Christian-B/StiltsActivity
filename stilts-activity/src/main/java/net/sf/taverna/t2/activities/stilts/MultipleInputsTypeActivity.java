@@ -31,7 +31,7 @@ public class MultipleInputsTypeActivity<MultipleInputs extends MultipleInputsBea
                     "Number of inputs should be at least two. Found: " + 
                     configBean.getNumberOfInputs());
         }
-        List<String> types = configBean.getTypeOfInputs();
+        List<String> types = configBean.getTypesOfInputs();
         if (types.size() != configBean.getNumberOfInputs()) {
             throw new ActivityConfigurationException(
                     "List of types of inputs should be of length: " + 
@@ -70,7 +70,7 @@ public class MultipleInputsTypeActivity<MultipleInputs extends MultipleInputsBea
         if (input == null) {
             return null;
         }
-        String type = configBean.getTypeOfInputs().get(inputsNumber -1);
+        String type = configBean.getTypesOfInputs().get(inputsNumber -1);
         return this.getInputFilePath(null, type, input);
     }
     

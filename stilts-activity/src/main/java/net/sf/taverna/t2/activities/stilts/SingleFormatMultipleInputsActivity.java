@@ -45,28 +45,9 @@ public class SingleFormatMultipleInputsActivity<InputsType extends SingleFormatM
         super.configurePorts();
     }
 	
-   private String getInputFilePath(final Map<String, T2Reference> inputs, 
-            final AsynchronousActivityCallback callback, int inputsNumber) {
-        InvocationContext context = callback.getContext();
-        ReferenceService referenceService = context.getReferenceService();
-        String input = getStringParameter(inputs, callback, INPUT_PARAMETER_NAME + inputsNumber, REQUIRED_PARAMETER ); 
-        if (input == null) {
-            return null;
-        }
-        String type = configBean.getTypeOfInputs().get(inputsNumber -1);
-        return this.getInputFilePath(null, type, input);
-    }
-    
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         List<String> parameters = super.prepareParameters(inputs, callback, outputFile);
         parameters.add("ifmt="+ configBean.getFormatOfInputs());
-        for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
-            String inputPath = getInputFilePath(inputs, callback, inputsNumber);
-            if (inputPath == null){
-                return null;
-            }
-            parameters.add("in" + inputsNumber + "=" + inputPath);
-        }
         return parameters;
     }
 
