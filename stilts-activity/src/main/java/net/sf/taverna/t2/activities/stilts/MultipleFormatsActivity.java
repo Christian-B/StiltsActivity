@@ -13,7 +13,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class InputsTypeActivity<InputsType extends InputsTypeBean> 
+public class MultipleFormatsActivity<InputsType extends MultipleFormatsBean> 
         extends MultipleInputsTypeActivity<InputsType>{
 
     /*

@@ -10,8 +10,8 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class TCatNActivity extends InputsTypeActivity<InputsTypeBean>
-		implements AsynchronousActivity<InputsTypeBean>,  Activity<InputsTypeBean>{
+public class TCatNActivity extends MultipleFormatsActivity<MultipleFormatsBean>
+		implements AsynchronousActivity<MultipleFormatsBean>,  Activity<MultipleFormatsBean>{
 
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         ArrayList<String> parameters = new ArrayList<String>();

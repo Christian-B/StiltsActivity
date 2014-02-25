@@ -22,13 +22,13 @@ import org.junit.Test;
 
 public class TCatNActivityTest {
 
-    private InputsTypeBean configBean;
+    private MultipleFormatsBean configBean;
 
     private final TCatNActivity activity = new TCatNActivity();
 
     @Before
     public void makeConfigBean() throws Exception {
-        configBean = new InputsTypeBean();
+        configBean = new MultipleFormatsBean();
         configBean.setNumberOfInputs(2);
         configBean.setFormatOfOutput("ascii");
         ArrayList<String> formatOfInputs = new ArrayList<String>();
@@ -54,8 +54,8 @@ public class TCatNActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(InputsTypeActivity.INPUT_PARAMETER_NAME+1, "C:\\temp\\test.tst");
-        inputs.put(InputsTypeActivity.INPUT_PARAMETER_NAME+2, 
+        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+1, "C:\\temp\\test.tst");
+        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+2, 
                 "id,name,number\n" +
                 "45,Peter,1433\n" +
                 "22,Jack,456");
@@ -159,8 +159,8 @@ public class TCatNActivityTest {
     @Test
     public void configureActivity() throws Exception {
         Set<String> expectedInputs = new HashSet<String>();
-        expectedInputs.add(InputsTypeActivity.INPUT_PARAMETER_NAME+1);
-        expectedInputs.add(InputsTypeActivity.INPUT_PARAMETER_NAME+2);
+        expectedInputs.add(MultipleFormatsActivity.INPUT_PARAMETER_NAME+1);
+        expectedInputs.add(MultipleFormatsActivity.INPUT_PARAMETER_NAME+2);
 
         Set<String> expectedOutputs = new HashSet<String>();
         expectedOutputs.add(AbstractStilsActivity.RESULT_PARAMETER_NAME);

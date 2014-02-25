@@ -7,8 +7,8 @@ import java.util.List;
  * Stilts activity configuration bean.
  * 
  */
-public class InputsTypeBean extends MultipleInputsBean 
-        implements InputsTypeInterface, Serializable {
+public class MultipleFormatsBean extends MultipleInputsBean 
+        implements MultipleFormatsInterface, Serializable {
     private List<String> formatOfInputs;
 
     @Override
