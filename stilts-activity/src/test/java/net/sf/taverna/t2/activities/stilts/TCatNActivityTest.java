@@ -48,15 +48,6 @@ public class TCatNActivityTest {
         System.err.println("Error stream ok");
     }
     
-    @Test(expected = ActivityConfigurationException.class)
-    @Ignore
-    public void invalidConfiguration() throws ActivityConfigurationException {
-        InputsTypeBean invalidBean = new InputsTypeBean();
-        invalidBean.setFormatOfOutput("invalidExample");
-        // Should throw ActivityConfigurationException
-        activity.configure(invalidBean);
-    }
-
     @Test
     public void executeAsynch() throws Exception {
         System.out.println("Running TCat");
@@ -96,6 +87,18 @@ public class TCatNActivityTest {
         } else {
             assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
         }
+        ArrayList<String> formatOfInputs = new ArrayList<String>();
+        formatOfInputs.add("tst");
+        formatOfInputs.add("csv");
+        formatOfInputs.add("csv");
+        formatOfInputs.add("csv");
+        configBean.setFormatOfInputs(formatOfInputs);
+        ArrayList<String> typeOfInputs = new ArrayList<String>();
+        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typeOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
+        configBean.setTypeOfInputs(typeOfInputs);
         configBean.setNumberOfInputs(4);
         activity.configure(configBean);
         // Should not change on reconfigure
@@ -106,6 +109,52 @@ public class TCatNActivityTest {
             assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
         }
     }
+
+    @Test(expected = ActivityConfigurationException.class)
+    public void reConfiguredActivityLengthError() throws Exception {
+        ArrayList<String> formatOfInputs = new ArrayList<String>();
+        formatOfInputs.add("tst");
+        formatOfInputs.add("csv");
+        formatOfInputs.add("csv");
+        formatOfInputs.add("csv");
+        configBean.setFormatOfInputs(formatOfInputs);
+        ArrayList<String> typeOfInputs = new ArrayList<String>();
+        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typeOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
+        configBean.setTypeOfInputs(typeOfInputs);
+        configBean.setNumberOfInputs(4);
+        activity.configure(configBean);
+        // Should not change on reconfigure
+        assertEquals("Unexpected inputs", 4, activity.getInputPorts().size());
+        if (configBean.isDebugMode()){
+            assertEquals("Unexpected outputs", 3, activity.getOutputPorts().size());            
+        } else {
+            assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
+        }
+    }
+
+    @Test(expected = ActivityConfigurationException.class)
+    public void reConfiguredActivityTypeError() throws Exception {
+        ArrayList<String> formatOfInputs = new ArrayList<String>();
+        formatOfInputs.add("tst");
+        formatOfInputs.add("opps");
+        configBean.setFormatOfInputs(formatOfInputs);
+        ArrayList<String> typeOfInputs = new ArrayList<String>();
+        typeOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typeOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
+        configBean.setTypeOfInputs(typeOfInputs);
+        configBean.setNumberOfInputs(2);
+        activity.configure(configBean);
+        // Should not change on reconfigure
+        assertEquals("Unexpected inputs", 4, activity.getInputPorts().size());
+        if (configBean.isDebugMode()){
+            assertEquals("Unexpected outputs", 3, activity.getOutputPorts().size());            
+        } else {
+            assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
+        }
+    }
+
 
     @Test
     public void configureActivity() throws Exception {

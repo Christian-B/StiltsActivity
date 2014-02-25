@@ -31,6 +31,41 @@ public class InputsTypeActivity<InputsType extends InputsTypeBean> extends Abstr
             throws ActivityConfigurationException {
         super.configure(configBean);
         
+        if (configBean.getNumberOfInputs() < 2) {
+            throw new ActivityConfigurationException(
+                    "Number of inputs should be at least two. Found: " + 
+                    configBean.getNumberOfInputs());
+        }
+        List<String> formats = configBean.getFormatOfInputs();
+        if (formats.size() != configBean.getNumberOfInputs()) {
+            throw new ActivityConfigurationException(
+                    "List of formats of inputs should be of length: " + 
+                    configBean.getNumberOfInputs() +
+                    ". Provided list is of size: " + formats.size() );
+        }
+        List<String> types = configBean.getTypeOfInputs();
+        if (types.size() != configBean.getNumberOfInputs()) {
+            throw new ActivityConfigurationException(
+                    "List of types of inputs should be of length: " + 
+                    configBean.getNumberOfInputs() +
+                    ". Provided list is of size: " + types.size() );
+        }
+        for (int i = 0; i< configBean.getNumberOfInputs(); i++){
+            if (!StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST.contains(
+                    formats.get(i))) {
+                throw new ActivityConfigurationException(
+                        "Output format \"" + formats.get(i) + 
+                        "\" not valid. Must be one of " + 
+                        StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST);
+            }
+            if (!StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST.contains(
+                    types.get(i))) {
+                throw new ActivityConfigurationException(
+                        "Output format \"" + types.get(i) + 
+                        "\" not valid. Must be one of " + 
+                        StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST);
+            }
+        }
         // Store for getConfiguration(), but you could also make
         // getConfiguration() return a new bean from other sources
         this.configBean = configBean;
