@@ -29,7 +29,6 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCa
 
 public class AbstractStilsActivity<OutputType extends AbstractStiltsBean> extends
 		AbstractAsynchronousActivity<OutputType>
-		implements AsynchronousActivity<OutputType> 
 {
 
     /*

@@ -8,13 +8,11 @@ import java.util.Map;
 import net.sf.taverna.t2.invocation.InvocationContext;
 import net.sf.taverna.t2.reference.ReferenceService;
 import net.sf.taverna.t2.reference.T2Reference;
-import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
-import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class InputsTypeActivity<InputsType extends InputsTypeBean> 
-        extends MultipleInputsTypeActivity<InputsType>{
+public class MultipleInputsTypeActivity<MultipleInputs extends MultipleInputsBean> 
+        extends AbstractStilsActivity<MultipleInputs>{
 
     /*
      * Best practice: Keep port names as constants to avoid misspelling. This
@@ -24,7 +22,7 @@ public class InputsTypeActivity<InputsType extends InputsTypeBean>
     static final String INPUT_PARAMETER_NAME = "Input";
 	
     @Override
-    public void configure(InputsType configBean)
+    public void configure(MultipleInputs configBean)
             throws ActivityConfigurationException {
         super.configure(configBean);
         
@@ -32,13 +30,6 @@ public class InputsTypeActivity<InputsType extends InputsTypeBean>
             throw new ActivityConfigurationException(
                     "Number of inputs should be at least two. Found: " + 
                     configBean.getNumberOfInputs());
-        }
-        List<String> formats = configBean.getFormatOfInputs();
-        if (formats.size() != configBean.getNumberOfInputs()) {
-            throw new ActivityConfigurationException(
-                    "List of formats of inputs should be of length: " + 
-                    configBean.getNumberOfInputs() +
-                    ". Provided list is of size: " + formats.size() );
         }
         List<String> types = configBean.getTypeOfInputs();
         if (types.size() != configBean.getNumberOfInputs()) {
@@ -48,13 +39,6 @@ public class InputsTypeActivity<InputsType extends InputsTypeBean>
                     ". Provided list is of size: " + types.size() );
         }
         for (int i = 0; i< configBean.getNumberOfInputs(); i++){
-            if (!StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST.contains(
-                    formats.get(i))) {
-                throw new ActivityConfigurationException(
-                        "Output format \"" + formats.get(i) + 
-                        "\" not valid. Must be one of " + 
-                        StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST);
-            }
             if (!StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST.contains(
                     types.get(i))) {
                 throw new ActivityConfigurationException(
@@ -73,6 +57,9 @@ public class InputsTypeActivity<InputsType extends InputsTypeBean>
 
     protected void configurePorts() {
         super.configurePorts();
+        for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
+            addInput(INPUT_PARAMETER_NAME + inputsNumber, 0, true, null, String.class);
+        }
     }
 	
    private String getInputFilePath(final Map<String, T2Reference> inputs, 
@@ -94,14 +81,13 @@ public class InputsTypeActivity<InputsType extends InputsTypeBean>
             if (inputPath == null){
                 return null;
             }
-            parameters.add("ifmt" + inputsNumber + "="+ configBean.getFormatOfInputs().get(inputsNumber -1));
             parameters.add("in" + inputsNumber + "=" + inputPath);
         }
         return parameters;
     }
 
     @Override
-    public InputsType getConfiguration() {
+    public MultipleInputs getConfiguration() {
         return this.configBean;
     }
 
