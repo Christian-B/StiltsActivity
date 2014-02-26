@@ -13,7 +13,7 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
 
 @SuppressWarnings("serial")
-public class InputTypeConfigurationPanel <InputActivityType extends SingleInputActivity, InputType extends SingleInputBean>  extends
+public class SingleInputConfigurationPanel <InputActivityType extends SingleInputActivity, InputType extends SingleInputBean>  extends
         AbstractStiltsConfigurationPanel<InputActivityType, InputType> {
 
     private final SingleInputActivity activity;
@@ -25,7 +25,7 @@ public class InputTypeConfigurationPanel <InputActivityType extends SingleInputA
     private static final String INPUT_FORMAT_LABEL = "Input Format";
     private static final String INPUT_TYPE_LABEL = "Input Type";
             
-    public InputTypeConfigurationPanel(InputActivityType activity) {
+    public SingleInputConfigurationPanel(InputActivityType activity) {
         super(activity);
         this.activity = activity;
         configBean = (InputType)activity.getConfiguration();

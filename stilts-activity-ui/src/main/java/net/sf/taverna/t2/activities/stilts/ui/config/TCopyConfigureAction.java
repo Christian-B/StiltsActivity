@@ -31,7 +31,7 @@ public class TCopyConfigureAction
 			currentDialog.toFront();
 			return;
 		}
-		ActivityConfigurationPanel<TCopyActivity, SingleInputBean> panel = new InputTypeConfigurationPanel(getActivity());
+		ActivityConfigurationPanel<TCopyActivity, SingleInputBean> panel = new SingleInputConfigurationPanel(getActivity());
                 
 		ActivityConfigurationDialog<TCopyActivity, SingleInputBean> dialog = new ActivityConfigurationDialog<TCopyActivity, SingleInputBean>(
 				getActivity(), panel);
