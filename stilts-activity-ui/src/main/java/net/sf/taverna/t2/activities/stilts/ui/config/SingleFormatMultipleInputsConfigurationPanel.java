@@ -4,27 +4,24 @@ import javax.swing.JComboBox;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import net.sf.taverna.t2.activities.stilts.SingleFormatMultipleInputsActivity;
+import net.sf.taverna.t2.activities.stilts.SingleFormatMultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.SingleInputActivity;
 import net.sf.taverna.t2.activities.stilts.SingleInputBean;
-import net.sf.taverna.t2.activities.stilts.AbstractStilsActivity;
-import net.sf.taverna.t2.activities.stilts.AbstractStiltsBean;
 
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
-import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
 
 @SuppressWarnings("serial")
-public class SingleInputConfigurationPanel <InputActivityType extends SingleInputActivity, InputType extends SingleInputBean>  extends
-        AbstractStiltsConfigurationPanel<InputActivityType, InputType> {
-
-    private InputType configBean;
+public class SingleFormatMultipleInputsConfigurationPanel 
+        <InputActivityType extends SingleFormatMultipleInputsActivity, 
+        InputType extends SingleFormatMultipleInputsBean>  extends
+        MultipleInputsConfigurationPanel<InputActivityType, InputType> {
 	
-    private JComboBox inputFormatSelector;
-    private JComboBox inputTypeSelector;
+    private JComboBox inputsFormatSelector;
             
     private static final String INPUT_FORMAT_LABEL = "Input Format";
-    private static final String INPUT_TYPE_LABEL = "Input Type";
             
-    public SingleInputConfigurationPanel(InputActivityType activity) {
+    public SingleFormatMultipleInputsConfigurationPanel(InputActivityType activity) {
         super(activity);
         configBean = (InputType)activity.getConfiguration();
         initGui();
@@ -35,15 +32,9 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
   
         JLabel labelInputFormatType = new JLabel(INPUT_FORMAT_LABEL + ": ");
         add(labelInputFormatType);
-        inputFormatSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_FORMATS_ARRAY);
-        add(inputFormatSelector);
-        labelInputFormatType.setLabelFor(inputFormatSelector);
-
-        JLabel labelInputType = new JLabel(INPUT_TYPE_LABEL + ": ");
-        add(labelInputType);
-        inputTypeSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_TYPE_ARRAY);
-        add(inputTypeSelector);
-        labelInputType.setLabelFor(inputTypeSelector);
+        inputsFormatSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_FORMATS_ARRAY);
+        add(inputsFormatSelector);
+        labelInputFormatType.setLabelFor(inputsFormatSelector);
 
         // Populate fields from activity configuration bean
         refreshConfiguration();
@@ -57,21 +48,14 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
         if (!super.checkValues()){
             return false;
         }
-        if (!StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST.contains(inputFormatSelector.getSelectedItem())){
-            String message = inputFormatSelector.getSelectedItem() + 
+        if (!StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST.contains(inputsFormatSelector.getSelectedItem())){
+            String message = inputsFormatSelector.getSelectedItem() + 
                     " Used for " + INPUT_FORMAT_LABEL + 
                     " Is not a valid Input format. Valid formats are: " + StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST;
             JOptionPane.showMessageDialog(this, "test", "Illegal format", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if (!StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST.contains(inputTypeSelector.getSelectedItem())){
-            String message = inputTypeSelector.getSelectedItem() + 
-                    " Used for " + INPUT_TYPE_LABEL + 
-                    " Is not a valid input type. Valid types are: " + StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST;
-            JOptionPane.showMessageDialog(this, "test", "Illegal type ", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-         // All valid, return true
+        // All valid, return true
         return true;
     }
 
@@ -93,10 +77,7 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
         if (super.isConfigurationChanged()){
             return true;
         }
-        if (!configBean.getFormatOfInput().equals(inputFormatSelector.getSelectedItem())){
-            return true;
-        }
-        if (!configBean.getTypeOfInput().equals(inputTypeSelector.getSelectedItem())){
+        if (!configBean.getFormatOfInputs().equals(inputsFormatSelector.getSelectedItem())){
             return true;
         }
         return false;
@@ -108,14 +89,12 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
       */
     @Override
     public void noteConfiguration() {
-        noteConfiguration(new SingleInputBean());
+        noteConfiguration(new SingleFormatMultipleInputsBean());
     }
 
     protected void noteConfiguration(InputType bean) {
-        configBean = (InputType) new SingleInputBean();
     	super.noteConfiguration(configBean);
-        configBean.setFormatOfInput(inputFormatSelector.getSelectedItem().toString());
-        configBean.setTypeOfInput(inputTypeSelector.getSelectedItem().toString());        
+        configBean.setFormatOfInputs(inputsFormatSelector.getSelectedItem().toString());
     }
 
     /**
@@ -127,7 +106,6 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
         super.refreshConfiguration();
         configBean = (InputType)activity.getConfiguration();
         
-        inputFormatSelector.setSelectedItem(configBean.getFormatOfInput());
-        inputTypeSelector.setSelectedItem(configBean.getTypeOfInput());
+        inputsFormatSelector.setSelectedItem(configBean.getFormatOfInputs());
     }
 }

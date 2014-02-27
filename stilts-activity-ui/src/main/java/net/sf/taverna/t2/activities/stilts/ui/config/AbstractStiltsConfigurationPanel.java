@@ -18,8 +18,8 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 public class AbstractStiltsConfigurationPanel<StiltsActivityType extends AbstractStilsActivity, OutputType extends AbstractStiltsBean>  extends
         ActivityConfigurationPanel<StiltsActivityType, OutputType> {
 
-    private final StiltsActivityType activity;
-    private OutputType configBean;
+    protected final StiltsActivityType activity;
+    protected OutputType configBean;
 	
     private JComboBox outputFormatSelector;
     private JComboBox outputTypeSelector;
