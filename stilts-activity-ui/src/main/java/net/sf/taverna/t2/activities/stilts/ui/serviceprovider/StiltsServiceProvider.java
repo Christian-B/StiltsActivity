@@ -21,7 +21,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
 
         List<ServiceDescription> results = new ArrayList<ServiceDescription>();
 
-        SingleInputServiceDesc service = new SingleInputServiceDesc();
+        TCopyServiceDesc service = new TCopyServiceDesc();
         // Populate the service description bean
         service.setFormatOfInput("csv");
 	service.setFormatOfOutput("tst");

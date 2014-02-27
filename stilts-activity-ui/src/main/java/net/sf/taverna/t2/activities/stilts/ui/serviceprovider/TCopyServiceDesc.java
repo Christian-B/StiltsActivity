@@ -14,7 +14,7 @@ import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.SingleInputInterface;
 import net.sf.taverna.t2.activities.stilts.TCopyActivity;
 
-public class SingleInputServiceDesc extends ServiceDescription<SingleInputBean> 
+public class TCopyServiceDesc extends ServiceDescription<SingleInputBean> 
         implements SingleInputInterface{
 
     private String formatOfInput;
