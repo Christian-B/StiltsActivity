@@ -56,9 +56,6 @@ public class AbstractStiltsConfigurationPanel<StiltsActivityType extends Abstrac
         debugSelector = new JCheckBox();
         add(debugSelector);
         labelDebug.setLabelFor(debugSelector);
-
-        // Populate fields from activity configuration bean
-        refreshConfiguration();
     }
 
     /**

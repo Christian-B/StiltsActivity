@@ -11,18 +11,20 @@ import net.sf.taverna.t2.activities.stilts.TCatActivity;
 import net.sf.taverna.t2.activities.stilts.TCopyActivity;
 
 public class StiltsActivityContextViewFactory implements
-            ContextualViewFactory<TCopyActivity> {
+            ContextualViewFactory<AbstractStilsActivity> {
 
     public boolean canHandle(Object selection) {
         return selection instanceof AbstractStilsActivity;
     }
 
-    public List<ContextualView> getViews(TCopyActivity selection) {
-        return Arrays.<ContextualView>asList(new TCopyContextualView(selection));
-    }
-
-    public List<ContextualView> getViews(TCatActivity selection) {
-        return Arrays.<ContextualView>asList(new TCatContextualView(selection));
+    public List<ContextualView> getViews(AbstractStilsActivity activity) {
+        if (activity instanceof TCatActivity){
+            return Arrays.<ContextualView>asList(new TCatContextualView((TCatActivity)activity));
+        }
+        if (activity instanceof TCopyActivity){
+            return Arrays.<ContextualView>asList(new TCopyContextualView((TCopyActivity)activity));
+        }
+        return null;
     }
  	
 }

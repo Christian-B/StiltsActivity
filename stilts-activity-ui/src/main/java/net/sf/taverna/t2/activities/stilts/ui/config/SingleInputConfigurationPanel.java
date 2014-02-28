@@ -44,9 +44,6 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
         inputTypeSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_TYPE_ARRAY);
         add(inputTypeSelector);
         labelInputType.setLabelFor(inputTypeSelector);
-
-        // Populate fields from activity configuration bean
-        refreshConfiguration();
     }
 
     /**

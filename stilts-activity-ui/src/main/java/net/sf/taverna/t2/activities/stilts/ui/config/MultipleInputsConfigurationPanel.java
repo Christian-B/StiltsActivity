@@ -49,8 +49,6 @@ public class MultipleInputsConfigurationPanel <InputActivityType extends Multipl
             labelInputType.setLabelFor(inputTypeSelector);
             inputsTypesSelectors.add(inputTypeSelector);
         }
-        // Populate fields from activity configuration bean
-        refreshConfiguration();
     }
 
     /**

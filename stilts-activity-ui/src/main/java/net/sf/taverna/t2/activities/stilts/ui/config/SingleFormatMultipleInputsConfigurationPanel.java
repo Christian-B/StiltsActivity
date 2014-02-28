@@ -35,9 +35,6 @@ public class SingleFormatMultipleInputsConfigurationPanel
         inputsFormatSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_FORMATS_ARRAY);
         add(inputsFormatSelector);
         labelInputFormatType.setLabelFor(inputsFormatSelector);
-
-        // Populate fields from activity configuration bean
-        refreshConfiguration();
     }
 
     /**
