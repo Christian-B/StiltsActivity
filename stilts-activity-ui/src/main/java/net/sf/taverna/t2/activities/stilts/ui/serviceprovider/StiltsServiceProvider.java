@@ -21,17 +21,31 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
 
         List<ServiceDescription> results = new ArrayList<ServiceDescription>();
 
-        TCopyServiceDesc service = new TCopyServiceDesc();
+        TCopyServiceDesc tcopyService = new TCopyServiceDesc();
         // Populate the service description bean
-        service.setFormatOfInput("csv");
-	service.setFormatOfOutput("tst");
-        service.setTypeOfInput(StiltsConfigurationConstants.FILE_PATH_TYPE);
-	service.setTypeOfOutput(StiltsConfigurationConstants.STRING_TYPE);
-        service.setDebugMode(true);
-
+        tcopyService.setFormatOfInput("csv");
+	tcopyService.setFormatOfOutput("tst");
+        tcopyService.setTypeOfInput(StiltsConfigurationConstants.FILE_PATH_TYPE);
+	tcopyService.setTypeOfOutput(StiltsConfigurationConstants.STRING_TYPE);
+        tcopyService.setDebugMode(true);
 	// Optional: set description
-	service.setDescription("Stilt example ");
-	results.add(service);
+	tcopyService.setDescription("TCopy");
+	results.add(tcopyService);
+
+        TCatServiceDesc tcatService = new TCatServiceDesc();
+        // Populate the service description bean
+        tcatService.setFormatOfInputs("csv");
+        tcatService.setFormatOfOutput("tst");
+        tcatService.setNumberOfInputs(2);
+        ArrayList<String> typesOfInputs = new ArrayList<String>();
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        tcatService.setTypesOfInputs(typesOfInputs);
+	tcatService.setTypeOfOutput(StiltsConfigurationConstants.STRING_TYPE);
+        tcatService.setDebugMode(true);
+	// Optional: set description
+	tcatService.setDescription("TCat");
+	results.add(tcatService);
 
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time

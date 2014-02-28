@@ -1,35 +1,34 @@
 package net.sf.taverna.t2.activities.stilts.ui.serviceprovider;
 
-import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.Icon;
+import net.sf.taverna.t2.activities.stilts.SingleFormatMultipleInputsBean;
 
 import net.sf.taverna.t2.servicedescriptions.ServiceDescription;
 import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 
-import net.sf.taverna.t2.activities.stilts.AbstractStilsActivity;
-import net.sf.taverna.t2.activities.stilts.SingleInputBean;
-import net.sf.taverna.t2.activities.stilts.SingleInputInterface;
-import net.sf.taverna.t2.activities.stilts.TCopyActivity;
+import net.sf.taverna.t2.activities.stilts.SingleFormatMultipleInputsInterface;
+import net.sf.taverna.t2.activities.stilts.TCatActivity;
 
-public class TCopyServiceDesc extends ServiceDescription<SingleInputBean> 
-        implements SingleInputInterface{
+public class TCatServiceDesc extends ServiceDescription<SingleFormatMultipleInputsBean> 
+        implements SingleFormatMultipleInputsInterface{
 
-    private String formatOfInput;
+    private String formatOfInputs;
     private String formatOfOutput;
-    private String typeOfInput;
+    private List<String> typesOfInputs;
     private String typeOfOutput;
     private boolean debugMode;
+    private int numberOfInputs;
     
     /**
       * The subclass of Activity which should be instantiated when adding a service
       * for this description 
       */
     @Override
-    public Class<? extends Activity<SingleInputBean>> getActivityClass() {
-        return TCopyActivity.class;
+    public Class<? extends Activity<SingleFormatMultipleInputsBean>> getActivityClass() {
+        return TCatActivity.class;
     }
 
     /**
@@ -39,12 +38,13 @@ public class TCopyServiceDesc extends ServiceDescription<SingleInputBean>
       * 
       */
     @Override
-    public SingleInputBean getActivityConfiguration() {
-        SingleInputBean bean = new SingleInputBean();
-        bean.setFormatOfInput(getFormatOfInput());
+    public SingleFormatMultipleInputsBean getActivityConfiguration() {
+        SingleFormatMultipleInputsBean bean = new SingleFormatMultipleInputsBean();
+        bean.setFormatOfInputs(getFormatOfInputs());
         bean.setFormatOfOutput(getFormatOfOutput());
-        bean.setTypeOfInput(getTypeOfInput());
+        bean.setTypesOfInputs(getTypesOfInputs());
         bean.setTypeOfOutput(getTypeOfOutput());
+        bean.setNumberOfInputs(getNumberOfInputs());
         return bean;
     }
 
@@ -63,7 +63,7 @@ public class TCopyServiceDesc extends ServiceDescription<SingleInputBean>
       */
     @Override
     public String getName() {
-        return "TCopy Tool";
+        return "TCat tool";
     }
 
     /**
@@ -72,7 +72,7 @@ public class TCopyServiceDesc extends ServiceDescription<SingleInputBean>
     @Override
     public List<String> getPath() {
         // For deeper paths you may return several strings
-        return Arrays.asList("Stilts Tools", "TCopy");
+        return Arrays.asList("Stilts Tools","TCat");
     }
 
     /**
@@ -87,22 +87,25 @@ public class TCopyServiceDesc extends ServiceDescription<SingleInputBean>
     }
 
      /**
-     * @return the formatOfInput
+     * @return the formatOfInputs
      */
-    public String getFormatOfInput() {
-        return formatOfInput;
+    @Override
+    public String getFormatOfInputs() {
+        return formatOfInputs;
     }
 
     /**
-     * @param formatOfInput the formatOfInput to set
+     * @param formatOfInputs the format Of Inputs to set
      */
-    public void setFormatOfInput(String formatOfInput) {
-        this.formatOfInput = formatOfInput;
+    @Override
+    public void setFormatOfInputs(String formatOfInputs) {
+        this.formatOfInputs = formatOfInputs;
     }
 
     /**
      * @return the formatOfOutput
      */
+    @Override
     public String getFormatOfOutput() {
         return formatOfOutput;
     }
@@ -110,27 +113,31 @@ public class TCopyServiceDesc extends ServiceDescription<SingleInputBean>
     /**
      * @param formatOfOutput the formatOfOutput to set
      */
+    @Override
     public void setFormatOfOutput(String formatOfOutput) {
         this.formatOfOutput = formatOfOutput;
     }
 
     /**
-     * @return the typeOfInput
+     * @return the typesOfInputs
      */
-    public String getTypeOfInput() {
-        return typeOfInput;
+    @Override
+    public List<String> getTypesOfInputs() {
+        return typesOfInputs;
     }
 
     /**
-     * @param typeOfInput the typeOfInput to set
+     * @param typesOfInputs the typeOfInput to set
      */
-    public void setTypeOfInput(String typeOfInput) {
-        this.typeOfInput = typeOfInput;
+    @Override
+    public void setTypesOfInputs(List<String> typesOfInputs) {
+        this.typesOfInputs = typesOfInputs;
     }
 
     /**
      * @return the typeOfOutput
      */
+    @Override
     public String getTypeOfOutput() {
         return typeOfOutput;
     }
@@ -138,6 +145,7 @@ public class TCopyServiceDesc extends ServiceDescription<SingleInputBean>
     /**
      * @param typeOfOutput the typeOfOutput to set
      */
+    @Override
     public void setTypeOfOutput(String typeOfOutput) {
         this.typeOfOutput = typeOfOutput;
     }
@@ -145,6 +153,7 @@ public class TCopyServiceDesc extends ServiceDescription<SingleInputBean>
     /**
      * @return the debugMode
      */
+    @Override
     public boolean isDebugMode() {
         return debugMode;
     }
@@ -152,10 +161,19 @@ public class TCopyServiceDesc extends ServiceDescription<SingleInputBean>
     /**
      * @param debugMode the debugMode to set
      */
+    @Override
     public void setDebugMode(boolean debugMode) {
         this.debugMode = debugMode;
     }
 
-	
+    @Override
+    public int getNumberOfInputs() {
+        return numberOfInputs;
+    }
+
+    @Override
+    public void setNumberOfInputs(int numberOfInputs) {
+        this.numberOfInputs = numberOfInputs;
+    }
 
 }
