@@ -32,12 +32,9 @@ public class TCatConfigureAction extends
             currentDialog.toFront();
             return;
         }
-        System.out.println("creating");
         AbstractStiltsConfigurationPanel<TCatActivity, SingleInputBean> panel = 
                 new SingleFormatMultipleInputsConfigurationPanel(getActivity());
-        System.out.println("created");
         panel.refreshConfiguration();
-        System.out.println("refresh");
         
         ActivityConfigurationDialog<TCatActivity, SingleInputBean> dialog = 
                 new ActivityConfigurationDialog<TCatActivity, SingleInputBean>(
