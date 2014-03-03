@@ -29,14 +29,12 @@ public class StreamRerouter implements Runnable
 //        outRecord = new StringBuilder();
 //        outReader = new BufferedReader( new InputStreamReader( receiveOutPipe ));
 
-        System.out.println(System.err);
         PipedInputStream receiveErrPipe = new PipedInputStream(10);
         PipedOutputStream redirectErrPipe = new PipedOutputStream(receiveErrPipe);
         originalSystemErr = System.err;
         System.setErr(new PrintStream(redirectErrPipe));
         errRecord = new StringBuilder();
         errReader = new BufferedReader( new InputStreamReader( receiveErrPipe ));
-        System.out.println(System.err);
 
         originalSystemIn = System.in;
         InputStream testInput;
@@ -127,8 +125,6 @@ public class StreamRerouter implements Runnable
         catch (Exception e){
            reset(RunStatus.ERROR);
         }       
-        System.out.println("Rerouter run ending");
-        System.out.println(System.err);
     }
 
     /**
