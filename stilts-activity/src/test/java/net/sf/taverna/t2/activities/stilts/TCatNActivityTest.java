@@ -72,7 +72,9 @@ public class TCatNActivityTest {
         //assertEquals("simple", outputs.get("simpleOutput"));
         String result = outputs.get(AbstractStilsActivity.RESULT_PARAMETER_NAME).toString();
         System.out.println(result);
-        //assertEquals("Unexpected outputs", AbstractStilsActivity.SUCCESS_MESSAGE, result);
+        assertTrue("Wrong output : Header line missing. ", result.contains("# id name      number"));
+        assertTrue("Wrong output : Christian line missing. ", result.contains("Christian"));
+        assertTrue("Wrong output : Peter line missing. ", result.contains("Peter"));
     }
 
     @Test

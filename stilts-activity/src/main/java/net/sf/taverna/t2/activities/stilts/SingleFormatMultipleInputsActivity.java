@@ -51,6 +51,13 @@ public class SingleFormatMultipleInputsActivity<BoundedBean extends SingleFormat
         if (parameters == null){  // super.prepareParameters failed
             return null; //callback.fail(.. aready called
         }
+        for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
+            String inputPath = getInputFilePath(inputs, callback, inputsNumber);
+            if (inputPath == null){
+                return null;
+            }
+            parameters.add("in=" + inputPath);
+        }
         parameters.add("ifmt="+ configBean.getFormatOfInputs());
         return parameters;
     }

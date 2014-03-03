@@ -62,7 +62,7 @@ public class MultipleInputsTypeActivity<BoundedBean extends MultipleInputsBean>
         }
     }
 	
-   private String getInputFilePath(final Map<String, T2Reference> inputs, 
+   protected String getInputFilePath(final Map<String, T2Reference> inputs, 
             final AsynchronousActivityCallback callback, int inputsNumber) {
         InvocationContext context = callback.getContext();
         ReferenceService referenceService = context.getReferenceService();
@@ -74,22 +74,17 @@ public class MultipleInputsTypeActivity<BoundedBean extends MultipleInputsBean>
         return this.getInputFilePath(callback, type, input);
     }
     
+    /* Parameters must be dded by super classes as
+    TCat uses in, in 
+    TCatN uses in1, in2 and nin
     @Override
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         List<String> parameters = super.prepareParameters(inputs, callback, outputFile);
         if (parameters == null){  // super.prepareParameters failed
             return null; //callback.fail(.. aready called
         }
-        parameters.add("nin=" + getConfiguration().getNumberOfInputs());
-        for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
-            String inputPath = getInputFilePath(inputs, callback, inputsNumber);
-            if (inputPath == null){
-                return null;
-            }
-            parameters.add("in" + inputsNumber + "=" + inputPath);
-        }
         return parameters;
-    }
+    }*/
 
     @Override
     public BoundedBean getConfiguration() {

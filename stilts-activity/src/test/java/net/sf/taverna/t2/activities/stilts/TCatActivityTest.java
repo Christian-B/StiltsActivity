@@ -51,7 +51,7 @@ public class TCatActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+1, "src/test/resources/test.tst");
+        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+1, "src/test/resources/test.csv");
         inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+2, 
                 "id,name,number\n" +
                 "45,Peter,1433\n" +
@@ -69,7 +69,9 @@ public class TCatActivityTest {
         //assertEquals("simple", outputs.get("simpleOutput"));
         String result = outputs.get(AbstractStilsActivity.RESULT_PARAMETER_NAME).toString();
         System.out.println(result);
-        //assertEquals("Unexpected outputs", AbstractStilsActivity.SUCCESS_MESSAGE, result);
+        assertTrue("Wrong output : Header line missing. ", result.contains("id,name,number"));
+        assertTrue("Wrong output : Christian line missing. ", result.contains("Christian"));
+        assertTrue("Wrong output : Peter line missing. ", result.contains("Peter"));
     }
 
     @Test

@@ -67,7 +67,13 @@ public class MultipleFormatsActivity<BoundedBean extends MultipleFormatsBean>
         if (parameters == null){  // super.prepareParameters failed
             return null; //callback.fail(.. aready called
         }
+        parameters.add("nin=" + getConfiguration().getNumberOfInputs());
         for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
+            String inputPath = getInputFilePath(inputs, callback, inputsNumber);
+            if (inputPath == null){
+                return null;
+            }
+            parameters.add("in" + inputsNumber + "=" + inputPath);
             parameters.add("ifmt" + inputsNumber + "="+ configBean.getFormatsOfInputs().get(inputsNumber -1));
         }
         return parameters;
