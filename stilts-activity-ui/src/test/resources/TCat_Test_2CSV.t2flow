@@ -1,0 +1,73 @@
+<workflow xmlns="http://taverna.sf.net/2008/xml/t2flow" version="1" producedBy="taverna-2.1-SNAPSHOT"><dataflow id="e0b13e00-1430-47af-992c-863925aa35d1" role="top"><name>Workflow1</name><inputPorts><port><name>File1</name><depth>0</depth><granularDepth>0</granularDepth><annotations><annotation_chain encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.ExampleValue">
+        <text>../stilts-activity/src/test/resources/test.tst</text>
+      </annotationBean>
+      <date>2014-03-03 15:34:23.360 GMT</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain><annotation_chain encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.ExampleValue">
+        <text>src/test/resources/test.tst</text>
+      </annotationBean>
+      <date>2014-03-03 15:33:40.758 GMT</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain><annotation_chain encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.ExampleValue">
+        <text>../stilts-activity/src/test/resources/test.csv</text>
+      </annotationBean>
+      <date>2014-03-03 15:37:00.997 GMT</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain></annotations></port><port><name>File2</name><depth>0</depth><granularDepth>0</granularDepth><annotations><annotation_chain encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.ExampleValue">
+        <text>../stilts-activity/src/test/resources/test2.csv</text>
+      </annotationBean>
+      <date>2014-03-03 15:37:15.138 GMT</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain><annotation_chain encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.ExampleValue">
+        <text>../stilts-activity/src/test/resources/test2.tst</text>
+      </annotationBean>
+      <date>2014-03-03 15:34:32.267 GMT</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain></annotations></port></inputPorts><outputPorts><port><name>result</name><annotations /></port><port><name>Errors</name><annotations /></port><port><name>Parameters</name><annotations /></port></outputPorts><processors><processor><name>TCat_tool</name><inputPorts><port><name>Input1</name><depth>0</depth></port><port><name>Input2</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output</name><depth>0</depth><granularDepth>0</granularDepth></port><port><name>Stilts Errors</name><depth>0</depth><granularDepth>0</granularDepth></port><port><name>Stilts Parameters</name><depth>1</depth><granularDepth>1</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.TCatActivity</class><inputMap><map from="Input2" to="Input2" /><map from="Input1" to="Input1" /></inputMap><outputMap><map from="Stilts Parameters" to="Stilts Parameters" /><map from="Stilts Errors" to="Stilts Errors" /><map from="Output" to="Output" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.SingleFormatMultipleInputsBean xmlns="">
+  <formatOfInputs>csv</formatOfInputs>
+  <numberOfInputs>2</numberOfInputs>
+  <typesOfInputs>
+    <string>filePath</string>
+    <string>filePath</string>
+  </typesOfInputs>
+  <formatOfOutput>tst</formatOfOutput>
+  <typeOfOutput>String</typeOfOutput>
+  <debugMode>true</debugMode>
+</net.sf.taverna.t2.activities.stilts.SingleFormatMultipleInputsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input1" depth="0" /><port name="Input2" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor></processors><conditions /><datalinks><datalink><sink type="processor"><processor>TCat_tool</processor><port>Input1</port></sink><source type="dataflow"><port>File1</port></source></datalink><datalink><sink type="processor"><processor>TCat_tool</processor><port>Input2</port></sink><source type="dataflow"><port>File2</port></source></datalink><datalink><sink type="dataflow"><port>result</port></sink><source type="processor"><processor>TCat_tool</processor><port>Output</port></source></datalink><datalink><sink type="dataflow"><port>Errors</port></sink><source type="processor"><processor>TCat_tool</processor><port>Stilts Errors</port></source></datalink><datalink><sink type="dataflow"><port>Parameters</port></sink><source type="processor"><processor>TCat_tool</processor><port>Stilts Parameters</port></source></datalink></datalinks><annotations /></dataflow></workflow>
