@@ -13,8 +13,9 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
 
 @SuppressWarnings("serial")
-public class SingleInputConfigurationPanel <InputActivityType extends SingleInputActivity, BoundedBean extends SingleInputBean>  extends
-        AbstractStiltsConfigurationPanel<InputActivityType, BoundedBean> {
+public class SingleInputConfigurationPanel <BoundedActivity extends SingleInputActivity, 
+        BoundedBean extends SingleInputBean>  extends
+        AbstractStiltsConfigurationPanel<BoundedActivity, BoundedBean> {
 
     private JComboBox inputFormatSelector;
     private JComboBox inputTypeSelector;
@@ -22,7 +23,7 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
     private static final String INPUT_FORMAT_LABEL = "Input Format";
     private static final String INPUT_TYPE_LABEL = "Input Type";
             
-    public SingleInputConfigurationPanel(InputActivityType activity) {
+    public SingleInputConfigurationPanel(BoundedActivity activity) {
         super(activity);
         initGui();
     }

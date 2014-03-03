@@ -18,9 +18,9 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 
 @SuppressWarnings("serial")
 public class MultipleInputsConfigurationPanel 
-        <InputActivityType extends MultipleInputsTypeActivity, 
+        <BoundedActivity extends MultipleInputsTypeActivity, 
         BoundedBean extends MultipleInputsBean>  extends
-        AbstractStiltsConfigurationPanel<InputActivityType, BoundedBean> 
+        AbstractStiltsConfigurationPanel<BoundedActivity, BoundedBean> 
         implements DocumentListener{
 
     private JTextField numberOfInputsField;
@@ -30,7 +30,7 @@ public class MultipleInputsConfigurationPanel
     private static final String NUMBER_OF_INPUTS = "Number of input tables";
     private static final String INPUT_TYPE_LABEL = "Input Type";
             
-    public MultipleInputsConfigurationPanel(InputActivityType activity) {
+    public MultipleInputsConfigurationPanel(BoundedActivity activity) {
         super(activity);
         initGui();
     }

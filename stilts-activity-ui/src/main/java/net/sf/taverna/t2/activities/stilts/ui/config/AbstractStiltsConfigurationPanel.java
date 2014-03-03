@@ -15,10 +15,11 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 
 @SuppressWarnings("serial")
-public class AbstractStiltsConfigurationPanel<StiltsActivityType extends AbstractStilsActivity, BoundedBean extends AbstractStiltsBean>  extends
-        ActivityConfigurationPanel<StiltsActivityType, BoundedBean> {
+public class AbstractStiltsConfigurationPanel<BoundedActivity extends AbstractStilsActivity, 
+        BoundedBean extends AbstractStiltsBean>  extends
+        ActivityConfigurationPanel<BoundedActivity, BoundedBean> {
 
-    protected final StiltsActivityType activity;
+    protected final BoundedActivity activity;
     protected BoundedBean configBean;
 	
     private JComboBox outputFormatSelector;
@@ -29,7 +30,7 @@ public class AbstractStiltsConfigurationPanel<StiltsActivityType extends Abstrac
     private static final String OUTPUT_TYPE_LABEL = "Output Type";
     private static final String DEBUG_LABEL = "Debug mode";
             
-    public AbstractStiltsConfigurationPanel(StiltsActivityType activity) {
+    public AbstractStiltsConfigurationPanel(BoundedActivity activity) {
         this.activity = activity;
         configBean = (BoundedBean)activity.getConfiguration();
         initGui();

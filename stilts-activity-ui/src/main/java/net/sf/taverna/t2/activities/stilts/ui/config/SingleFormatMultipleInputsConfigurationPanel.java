@@ -13,15 +13,15 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 
 @SuppressWarnings("serial")
 public class SingleFormatMultipleInputsConfigurationPanel 
-        <InputActivityType extends SingleFormatMultipleInputsActivity, 
+        <BoundedActivity extends SingleFormatMultipleInputsActivity, 
         BoundedBean extends SingleFormatMultipleInputsBean>  extends
-        MultipleInputsConfigurationPanel<InputActivityType, BoundedBean> {
+        MultipleInputsConfigurationPanel<BoundedActivity, BoundedBean> {
 	
     private JComboBox inputsFormatSelector;
             
     private static final String INPUT_FORMAT_LABEL = "Input Format";
             
-    public SingleFormatMultipleInputsConfigurationPanel(InputActivityType activity) {
+    public SingleFormatMultipleInputsConfigurationPanel(BoundedActivity activity) {
         super(activity);
         initGui();
     }
