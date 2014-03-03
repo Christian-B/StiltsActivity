@@ -66,8 +66,12 @@ public class SingleInputActivity<BoundedBean extends SingleInputBean> extends Ab
         return this.getInputFilePath(callback, type, input);
     }
         
+    @Override
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         List<String> parameters = super.prepareParameters(inputs, callback, outputFile);
+        if (parameters == null){  // super.prepareParameters failed
+            return null; //callback.fail(.. aready called
+        }
         InvocationContext context = callback.getContext();
         ReferenceService referenceService = context.getReferenceService();
         String inputPath = getInputFilePath(inputs, callback);

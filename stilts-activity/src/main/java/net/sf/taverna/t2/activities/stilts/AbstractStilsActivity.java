@@ -150,9 +150,15 @@ public class AbstractStilsActivity<BoundedBean extends AbstractStiltsBean> exten
             return null;           
        }
        if (type.equals(StiltsConfigurationConstants.FILE_PATH_TYPE)){
-            return input;
+           File test = new File(input);
+           if (test.exists()){
+               return test.getAbsolutePath();
+           } else {
+               callback.fail("Unable to locate file at " + test.getAbsolutePath());
+               return null;
+           }
        }
-        try {
+       try {
             return MyUtils.writeStringAsTmpFile(input).getAbsolutePath();
         } catch (IOException ex) {
             callback.fail("Error writing input to tempFile.", ex);
@@ -311,7 +317,7 @@ public class AbstractStilsActivity<BoundedBean extends AbstractStiltsBean> exten
                     return;
                 }
                 List<String> parameterList = prepareParameters(inputs, callback, outputFile);
-                if (parameterList == null){
+                if (parameterList == null){           
                     return;
                 }           
                 String[] parameters = parameterList.toArray(new String[0]);

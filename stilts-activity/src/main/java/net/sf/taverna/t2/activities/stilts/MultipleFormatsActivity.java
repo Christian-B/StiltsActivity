@@ -61,9 +61,13 @@ public class MultipleFormatsActivity<BoundedBean extends MultipleFormatsBean>
         super.configurePorts();
     }
 	
+    @Override
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         List<String> parameters = super.prepareParameters(inputs, callback, outputFile);
-         for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
+        if (parameters == null){  // super.prepareParameters failed
+            return null; //callback.fail(.. aready called
+        }
+        for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
             parameters.add("ifmt" + inputsNumber + "="+ configBean.getFormatsOfInputs().get(inputsNumber -1));
         }
         return parameters;

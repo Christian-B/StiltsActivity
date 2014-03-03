@@ -45,8 +45,12 @@ public class SingleFormatMultipleInputsActivity<BoundedBean extends SingleFormat
         super.configurePorts();
     }
 	
+    @Override
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         List<String> parameters = super.prepareParameters(inputs, callback, outputFile);
+        if (parameters == null){  // super.prepareParameters failed
+            return null; //callback.fail(.. aready called
+        }
         parameters.add("ifmt="+ configBean.getFormatOfInputs());
         return parameters;
     }

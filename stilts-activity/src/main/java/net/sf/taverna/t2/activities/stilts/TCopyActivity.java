@@ -13,10 +13,15 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCa
 public class TCopyActivity extends SingleInputActivity<SingleInputBean>
 		implements AsynchronousActivity<SingleInputBean>,  Activity<SingleInputBean>{
 
+    @Override
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile) {
         ArrayList<String> parameters = new ArrayList<String>();
         parameters.add("tcopy");
-        parameters.addAll(super.prepareParameters(inputs, callback, outputFile));
+        List<String> newParameters = super.prepareParameters(inputs, callback, outputFile);
+        if (newParameters == null){  // super.prepareParameters failed
+            return null; //callback.fail(.. aready called
+        }
+        parameters.addAll(newParameters);
         return parameters;
     }
 
