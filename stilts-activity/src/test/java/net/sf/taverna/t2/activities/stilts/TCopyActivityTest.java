@@ -48,6 +48,7 @@ public class TCopyActivityTest {
 
     @Test
     public void executeAsynch() throws Exception {
+        System.out.println("executeAsynch");
         configBean.setDebugMode(false);
         activity.configure(configBean);
 
@@ -70,6 +71,7 @@ public class TCopyActivityTest {
 
     @Test
     public void executeAsynchWithDebug() throws Exception {
+        System.out.println("executeAsynchWithDebug");
         configBean.setDebugMode(true);
         activity.configure(configBean);
 
@@ -78,19 +80,24 @@ public class TCopyActivityTest {
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
         expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(AbstractStilsActivity.ERROR_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(AbstractStilsActivity.STILTS_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
                 activity, inputs, expectedOutputTypes);
 
-        assertEquals("Unexpected outputs", 1, outputs.size());
+        assertEquals("Unexpected outputs", 3, outputs.size());
         String result = outputs.get(AbstractStilsActivity.RESULT_PARAMETER_NAME).toString();
         System.out.println(result);
         assertEquals("Unexpected outputs", CSV_STRING, result);
+        String error = outputs.get(AbstractStilsActivity.ERROR_PARAMETER_NAME).toString();
+        assertEquals("Unexpected Error", "", error);
     }
 
     @Test
     public void executeAsynchError() throws Exception {
+        System.out.println("executeAsynchError");
         configBean.setDebugMode(true);
         activity.configure(configBean);
 

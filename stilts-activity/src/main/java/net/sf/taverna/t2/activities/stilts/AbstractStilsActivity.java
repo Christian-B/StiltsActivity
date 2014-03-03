@@ -206,7 +206,7 @@ public class AbstractStilsActivity<BoundedBean extends AbstractStiltsBean> exten
         ReferenceService referenceService = context.getReferenceService();
         T2Reference errorRef = referenceService.register(value, 0, true, context);
         outputs.put(parameterName, errorRef);                        
-        return true;
+         return true;
     }
     
     private void toSystemOut(String[] parameters){
@@ -269,12 +269,12 @@ public class AbstractStilsActivity<BoundedBean extends AbstractStiltsBean> exten
         System.out.println("Slits run: " + rerouter.getRunStatus());
         System.out.println("ERROR:");
         System.out.println(rerouter.getSavedErr());
-//        System.out.println("OUT:");
-//        System.out.println(rerouter.getSavedOut());
  
+        if (configBean.isDebugMode()){
+            writeStringParameter(callback, outputs, rerouter.getSavedErr(), ERROR_PARAMETER_NAME);
+        }
         if (rerouter.getRunStatus() != RunStatus.SUCCESS){
             if (configBean.isDebugMode()){
-                writeStringParameter(callback, outputs, rerouter.getSavedErr(), ERROR_PARAMETER_NAME);
                 return false;
             } else {
                 callback.fail("Error running Stilts " + rerouter.getSavedErr());
