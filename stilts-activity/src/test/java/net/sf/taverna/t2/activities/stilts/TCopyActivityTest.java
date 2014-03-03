@@ -52,7 +52,7 @@ public class TCopyActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(SingleInputActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.tst");
+        inputs.put(SingleInputActivity.INPUT_PARAMETER_NAME, "src/test/resources/test.tst");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
         expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
@@ -74,7 +74,7 @@ public class TCopyActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(SingleInputActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.tst");
+        inputs.put(SingleInputActivity.INPUT_PARAMETER_NAME, "src/test/resources/test.tst");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
         expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
@@ -95,7 +95,7 @@ public class TCopyActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(SingleInputActivity.INPUT_PARAMETER_NAME, "C:\\temp\\test.csv");
+        inputs.put(SingleInputActivity.INPUT_PARAMETER_NAME, "src/test/resources/test.csv");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
         expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);

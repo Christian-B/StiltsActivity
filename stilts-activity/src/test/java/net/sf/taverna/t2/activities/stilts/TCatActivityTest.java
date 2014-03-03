@@ -51,7 +51,7 @@ public class TCatActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+1, "C:\\temp\\test.tst");
+        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+1, "src/test/resources/test.tst");
         inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+2, 
                 "id,name,number\n" +
                 "45,Peter,1433\n" +

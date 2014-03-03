@@ -54,11 +54,50 @@ public class TCatNActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+1, "C:\\temp\\test.tst");
+        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+1, "src/test/resources/test.tst");
         inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+2, 
                 "id,name,number\n" +
                 "45,Peter,1433\n" +
                 "22,Jack,456");
+
+        Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
+        expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
+        //expectedOutputTypes.put("moreOutputs", String.class);
+
+        Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
+                activity, inputs, expectedOutputTypes);
+                
+        System.out.println("Run done");
+        assertEquals("Unexpected outputs", 1, outputs.size());
+        //assertEquals("simple", outputs.get("simpleOutput"));
+        String result = outputs.get(AbstractStilsActivity.RESULT_PARAMETER_NAME).toString();
+        System.out.println(result);
+        //assertEquals("Unexpected outputs", AbstractStilsActivity.SUCCESS_MESSAGE, result);
+    }
+
+    @Test
+    public void executeAsynch2() throws Exception {
+        System.out.println("Running TCat 3 inputs");
+        ArrayList<String> formatsOfInputs = new ArrayList<String>();
+        formatsOfInputs.add("tst");
+        formatsOfInputs.add("csv");
+        formatsOfInputs.add("csv");
+        configBean.setFormatsOfInputs(formatsOfInputs);
+        ArrayList<String> typesOfInputs = new ArrayList<String>();
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        typesOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
+        typesOfInputs.add(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        configBean.setTypesOfInputs(typesOfInputs);
+        configBean.setNumberOfInputs(3);
+        activity.configure(configBean);
+
+        Map<String, Object> inputs = new HashMap<String, Object>();
+        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+1, "src/test/resources/test.tst");
+        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+2, 
+                "id,name,number\n" +
+                "45,Peter,1433\n" +
+                "22,Jack,456");
+        inputs.put(MultipleFormatsActivity.INPUT_PARAMETER_NAME+3, "src/test/resources/test2.csv");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
         expectedOutputTypes.put(AbstractStilsActivity.RESULT_PARAMETER_NAME, String.class);
