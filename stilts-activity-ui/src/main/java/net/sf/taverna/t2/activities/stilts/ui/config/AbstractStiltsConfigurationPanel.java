@@ -15,11 +15,11 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 
 @SuppressWarnings("serial")
-public class AbstractStiltsConfigurationPanel<StiltsActivityType extends AbstractStilsActivity, OutputType extends AbstractStiltsBean>  extends
-        ActivityConfigurationPanel<StiltsActivityType, OutputType> {
+public class AbstractStiltsConfigurationPanel<StiltsActivityType extends AbstractStilsActivity, BoundedBean extends AbstractStiltsBean>  extends
+        ActivityConfigurationPanel<StiltsActivityType, BoundedBean> {
 
     protected final StiltsActivityType activity;
-    protected OutputType configBean;
+    protected BoundedBean configBean;
 	
     private JComboBox outputFormatSelector;
     private JComboBox outputTypeSelector;
@@ -31,7 +31,7 @@ public class AbstractStiltsConfigurationPanel<StiltsActivityType extends Abstrac
             
     public AbstractStiltsConfigurationPanel(StiltsActivityType activity) {
         this.activity = activity;
-        configBean = (OutputType)activity.getConfiguration();
+        configBean = (BoundedBean)activity.getConfiguration();
         initGui();
     }
 
@@ -86,7 +86,7 @@ public class AbstractStiltsConfigurationPanel<StiltsActivityType extends Abstrac
       * noteConfiguration() was called.
       */
     @Override
-    public OutputType getConfiguration() {
+    public BoundedBean getConfiguration() {
         // Should already have been made by noteConfiguration()
         return configBean;
     }
@@ -119,7 +119,7 @@ public class AbstractStiltsConfigurationPanel<StiltsActivityType extends Abstrac
      }
      
      protected void noteConfiguration(AbstractStiltsBean newBean) {
-        configBean = (OutputType)newBean;    	
+        configBean = (BoundedBean)newBean;    	
         configBean.setFormatOfOutput(outputFormatSelector.getSelectedItem().toString());
         configBean.setTypeOfOutput(outputTypeSelector.getSelectedItem().toString());
         configBean.setDebugMode(debugSelector.isSelected());
@@ -132,7 +132,7 @@ public class AbstractStiltsConfigurationPanel<StiltsActivityType extends Abstrac
       */
     @Override
     public void refreshConfiguration() {
-        configBean = (OutputType)activity.getConfiguration();
+        configBean = (BoundedBean)activity.getConfiguration();
 		
         outputFormatSelector.setSelectedItem(configBean.getFormatOfOutput());
         outputTypeSelector.setSelectedItem(configBean.getTypeOfOutput());

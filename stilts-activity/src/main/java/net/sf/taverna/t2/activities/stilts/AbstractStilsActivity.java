@@ -24,11 +24,10 @@ import net.sf.taverna.t2.reference.T2Reference;
 import net.sf.taverna.t2.workflowmodel.OutputPort;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AbstractAsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
-import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class AbstractStilsActivity<OutputType extends AbstractStiltsBean> extends
-		AbstractAsynchronousActivity<OutputType>
+public class AbstractStilsActivity<BoundedBean extends AbstractStiltsBean> extends
+		AbstractAsynchronousActivity<BoundedBean>
 {
 
     /*
@@ -46,10 +45,10 @@ public class AbstractStilsActivity<OutputType extends AbstractStiltsBean> extend
     public static final String FAILED_MESSAGE = "Run failed! check " + ERROR_PARAMETER_NAME + " for details.";
     
     
-    protected OutputType configBean;
+    protected BoundedBean configBean;
 
     @Override
-    public void configure(OutputType configBean) throws ActivityConfigurationException {
+    public void configure(BoundedBean configBean) throws ActivityConfigurationException {
         this.configBean = configBean;
         if (!StiltsConfigurationConstants.VALID_OUTPUT_FORMATS_LIST.contains(
                 configBean.getFormatOfOutput())) {
@@ -332,7 +331,7 @@ public class AbstractStilsActivity<OutputType extends AbstractStiltsBean> extend
     }	
     
     @Override
-    public OutputType getConfiguration() {
+    public BoundedBean getConfiguration() {
         return this.configBean;
     }
 

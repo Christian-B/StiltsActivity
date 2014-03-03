@@ -15,7 +15,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class SingleInputActivity<InputType extends SingleInputBean> extends AbstractStilsActivity<SingleInputBean>
+public class SingleInputActivity<BoundedBean extends SingleInputBean> extends AbstractStilsActivity<SingleInputBean>
 		implements AsynchronousActivity<SingleInputBean>,  Activity<SingleInputBean>{
 
     /*

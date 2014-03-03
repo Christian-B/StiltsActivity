@@ -11,8 +11,8 @@ import net.sf.taverna.t2.reference.T2Reference;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class MultipleInputsTypeActivity<MultipleInputs extends MultipleInputsBean> 
-        extends AbstractStilsActivity<MultipleInputs>{
+public class MultipleInputsTypeActivity<BoundedBean extends MultipleInputsBean> 
+        extends AbstractStilsActivity<BoundedBean>{
 
     /*
      * Best practice: Keep port names as constants to avoid misspelling. This
@@ -22,7 +22,7 @@ public class MultipleInputsTypeActivity<MultipleInputs extends MultipleInputsBea
     static final String INPUT_PARAMETER_NAME = "Input";
 	
     @Override
-    public void configure(MultipleInputs configBean)
+    public void configure(BoundedBean configBean)
             throws ActivityConfigurationException {
         super.configure(configBean);
         
@@ -88,7 +88,7 @@ public class MultipleInputsTypeActivity<MultipleInputs extends MultipleInputsBea
     }
 
     @Override
-    public MultipleInputs getConfiguration() {
+    public BoundedBean getConfiguration() {
         return this.configBean;
     }
 

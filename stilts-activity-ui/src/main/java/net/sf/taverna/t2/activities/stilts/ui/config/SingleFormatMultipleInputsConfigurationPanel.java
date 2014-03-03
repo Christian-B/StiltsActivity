@@ -14,8 +14,8 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 @SuppressWarnings("serial")
 public class SingleFormatMultipleInputsConfigurationPanel 
         <InputActivityType extends SingleFormatMultipleInputsActivity, 
-        InputType extends SingleFormatMultipleInputsBean>  extends
-        MultipleInputsConfigurationPanel<InputActivityType, InputType> {
+        BoundedBean extends SingleFormatMultipleInputsBean>  extends
+        MultipleInputsConfigurationPanel<InputActivityType, BoundedBean> {
 	
     private JComboBox inputsFormatSelector;
             
@@ -90,7 +90,7 @@ public class SingleFormatMultipleInputsConfigurationPanel
     @Override
     public void refreshConfiguration() {
         super.refreshConfiguration();
-        configBean = (InputType)activity.getConfiguration();
+        configBean = (BoundedBean)activity.getConfiguration();
         
         inputsFormatSelector.setSelectedItem(configBean.getFormatOfInputs());
     }
