@@ -16,8 +16,6 @@ import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityCon
 public class SingleInputConfigurationPanel <InputActivityType extends SingleInputActivity, InputType extends SingleInputBean>  extends
         AbstractStiltsConfigurationPanel<InputActivityType, InputType> {
 
-    private InputType configBean;
-	
     private JComboBox inputFormatSelector;
     private JComboBox inputTypeSelector;
             
@@ -26,7 +24,6 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
             
     public SingleInputConfigurationPanel(InputActivityType activity) {
         super(activity);
-        configBean = (InputType)activity.getConfiguration();
         initGui();
     }
 
@@ -73,16 +70,6 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
     }
 
     /**
-      * Return configuration bean generated from user interface last time
-      * noteConfiguration() was called.
-      */
-    @Override
-    public InputType getConfiguration() {
-        // Should already have been made by noteConfiguration()
-        return configBean;
-    }
-
-    /**
       * Check if the user has changed the configuration from the original
       */
     @Override
@@ -109,8 +96,7 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
     }
 
     protected void noteConfiguration(InputType bean) {
-        configBean = (InputType) new SingleInputBean();
-    	super.noteConfiguration(configBean);
+    	super.noteConfiguration(bean);
         configBean.setFormatOfInput(inputFormatSelector.getSelectedItem().toString());
         configBean.setTypeOfInput(inputTypeSelector.getSelectedItem().toString());        
     }
@@ -122,8 +108,6 @@ public class SingleInputConfigurationPanel <InputActivityType extends SingleInpu
     @Override
     public void refreshConfiguration() {
         super.refreshConfiguration();
-        configBean = (InputType)activity.getConfiguration();
-        
         inputFormatSelector.setSelectedItem(configBean.getFormatOfInput());
         inputTypeSelector.setSelectedItem(configBean.getTypeOfInput());
     }

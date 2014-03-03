@@ -23,7 +23,6 @@ public class SingleFormatMultipleInputsConfigurationPanel
             
     public SingleFormatMultipleInputsConfigurationPanel(InputActivityType activity) {
         super(activity);
-        configBean = (InputType)activity.getConfiguration();
         initGui();
     }
 
@@ -57,16 +56,6 @@ public class SingleFormatMultipleInputsConfigurationPanel
     }
 
     /**
-      * Return configuration bean generated from user interface last time
-      * noteConfiguration() was called.
-      */
-    @Override
-    public InputType getConfiguration() {
-        // Should already have been made by noteConfiguration()
-        return configBean;
-    }
-
-    /**
       * Check if the user has changed the configuration from the original
       */
     @Override
@@ -89,7 +78,7 @@ public class SingleFormatMultipleInputsConfigurationPanel
         noteConfiguration(new SingleFormatMultipleInputsBean());
     }
 
-    protected void noteConfiguration(InputType bean) {
+   protected void noteConfiguration(SingleFormatMultipleInputsBean bean) {
     	super.noteConfiguration(configBean);
         configBean.setFormatOfInputs(inputsFormatSelector.getSelectedItem().toString());
     }

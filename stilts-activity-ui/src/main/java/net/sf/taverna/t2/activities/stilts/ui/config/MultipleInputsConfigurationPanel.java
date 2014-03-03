@@ -1,5 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.ui.config;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -7,6 +8,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.MultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.MultipleInputsTypeActivity;
@@ -14,10 +17,14 @@ import net.sf.taverna.t2.activities.stilts.MultipleInputsTypeActivity;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 
 @SuppressWarnings("serial")
-public class MultipleInputsConfigurationPanel <InputActivityType extends MultipleInputsTypeActivity, InputType extends MultipleInputsBean>  extends
-        AbstractStiltsConfigurationPanel<InputActivityType, InputType> {
+public class MultipleInputsConfigurationPanel 
+        <InputActivityType extends MultipleInputsTypeActivity, 
+        InputType extends MultipleInputsBean>  extends
+        AbstractStiltsConfigurationPanel<InputActivityType, InputType> 
+        implements DocumentListener{
 
     private JTextField numberOfInputsField;
+    private int numberOfInputs;
     private List<JComboBox> inputsTypesSelectors;
             
     private static final String NUMBER_OF_INPUTS = "Number of input tables";
@@ -33,15 +40,18 @@ public class MultipleInputsConfigurationPanel <InputActivityType extends Multipl
   
         JLabel labelNumberOfInputs = new JLabel(NUMBER_OF_INPUTS  + ": ");
         add(labelNumberOfInputs);
-        numberOfInputsField = new JTextField(configBean.getNumberOfInputs());
+        numberOfInputs = configBean.getNumberOfInputs();
+        numberOfInputsField = new JTextField(numberOfInputs+"");
+        numberOfInputsField.getDocument().addDocumentListener(this);
         add(numberOfInputsField);
         labelNumberOfInputs.setLabelFor(numberOfInputsField);
-
+        
         JLabel setFirstLabel = new JLabel("Warning set the number of inputs first.");
         add(setFirstLabel);
-
+        add(new JLabel(""));
+        
         inputsTypesSelectors = new ArrayList<JComboBox>();
-        for (int i = 1; i<= configBean.getNumberOfInputs(); i++){
+        for (int i = 1; i<= numberOfInputs; i++){
             JLabel labelInputType = new JLabel(INPUT_TYPE_LABEL + " (table "+ i + "): ");
             add(labelInputType);
             JComboBox inputTypeSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_TYPE_ARRAY);
@@ -78,10 +88,10 @@ public class MultipleInputsConfigurationPanel <InputActivityType extends Multipl
             JOptionPane.showMessageDialog(this, "test", "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
             return false;                        
         }
-        for (int i = 1; i<= configBean.getNumberOfInputs(); i++){
+        for (int i = 0; i< configBean.getNumberOfInputs(); i++){
             if (!StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST.contains(inputsTypesSelectors.get(i).getSelectedItem())){
                 String message = inputsTypesSelectors.get(i).getSelectedItem() + 
-                        " Used for " + INPUT_TYPE_LABEL + i +  
+                        " Used for " + INPUT_TYPE_LABEL + (i+1) +  
                         " Is not a valid input type. Valid types are: " + StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST;
                 JOptionPane.showMessageDialog(this, "test", "Illegal type ", JOptionPane.ERROR_MESSAGE);
                 return false;
@@ -92,16 +102,6 @@ public class MultipleInputsConfigurationPanel <InputActivityType extends Multipl
     }
 
     /**
-      * Return configuration bean generated from user interface last time
-      * noteConfiguration() was called.
-      */
-    @Override
-    public InputType getConfiguration() {
-        // Should already have been made by noteConfiguration()
-        return configBean;
-    }
-
-    /**
       * Check if the user has changed the configuration from the original
       */
     @Override
@@ -109,11 +109,11 @@ public class MultipleInputsConfigurationPanel <InputActivityType extends Multipl
         if (super.isConfigurationChanged()){
             return true;
         }
-        if (!(configBean.getNumberOfInputs() + "").equals(this.numberOfInputsField.getText())){
-            initGui();
-            return true;
+        if (configBean.getNumberOfInputs() != numberOfInputs){
+           initGui();
+           return true;
         }
-        for (int i = 0; i < configBean.getNumberOfInputs(); i++){
+        for (int i = 0; i < numberOfInputs; i++){
             String beanType = configBean.getTypesOfInputs().get(i);
             Object configType = inputsTypesSelectors.get(i).getSelectedItem();
             if (!beanType.equals(configType)){
@@ -129,19 +129,17 @@ public class MultipleInputsConfigurationPanel <InputActivityType extends Multipl
       */
     @Override
     public void noteConfiguration() {
-        noteConfiguration(new SingleInputBean());
+        noteConfiguration(new MultipleInputsBean());
     }
 
-    protected void noteConfiguration(InputType bean) {
-    	super.noteConfiguration(configBean);
-        String numberOfInputsString = numberOfInputsField.getText();
-        try{
-            int numberOfInputs = Integer.parseInt(numberOfInputsString);
-            configBean.setNumberOfInputs(numberOfInputs);
-        } catch (NumberFormatException ex){
+    protected void noteConfiguration(MultipleInputsBean bean) {
+    	super.noteConfiguration(bean);
+        configBean.setNumberOfInputs(numberOfInputs);
+        ArrayList<String> types = new ArrayList<String>(0);
+        for (int i = 0; i < numberOfInputs; i++){
+            types.add(inputsTypesSelectors.get(i).getSelectedItem().toString());
         }
-       //         .setFormatOfInput(inputFormatSelector.getSelectedItem().toString());
-        //configBean.setTypeOfInput(inputTypeSelector.getSelectedItem().toString());        
+        configBean.setTypesOfInputs(types);
     }
 
     /**
@@ -151,10 +149,42 @@ public class MultipleInputsConfigurationPanel <InputActivityType extends Multipl
     @Override
     public void refreshConfiguration() {
         super.refreshConfiguration();
-        configBean = (InputType)activity.getConfiguration();
-        numberOfInputsField.setText(configBean.getNumberOfInputs()+"");
-        for (int i = 0; i < configBean.getNumberOfInputs(); i++){
+        numberOfInputs = configBean.getNumberOfInputs();
+        numberOfInputsField.setText(numberOfInputs+"");
+        for (int i = 0; i < numberOfInputs; i++){
             inputsTypesSelectors.get(i).setSelectedItem(configBean.getTypesOfInputs().get(i));
         }
     }
+    
+    private void checkNumberOfInputsChanged() {
+        if (numberOfInputsField.getText().isEmpty()){
+           return;
+        }
+        int newNumberOfInputs = Integer.parseInt(numberOfInputsField.getText());
+        if (numberOfInputs != newNumberOfInputs){
+            numberOfInputs = newNumberOfInputs;
+            configBean.setNumberOfInputs(numberOfInputs);
+            updateIndividualInputFields();
+            initGui();
+            this.revalidate();
+        }
+    }
+
+    private void updateIndividualInputFields() {
+        for (int i = configBean.getTypesOfInputs().size(); i < numberOfInputs; i++){
+            configBean.getTypesOfInputs().add(configBean.getTypesOfInputs().get(0));
+       }
+    }
+
+    public void changedUpdate(DocumentEvent de) {
+        checkNumberOfInputsChanged();
+    }
+    public void insertUpdate(DocumentEvent de) {
+        checkNumberOfInputsChanged();
+    }
+
+    public void removeUpdate(DocumentEvent de) {
+        checkNumberOfInputsChanged();
+    }
+
 }
