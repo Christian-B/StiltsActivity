@@ -30,9 +30,9 @@ public class SingleFormatMultipleInputsConfigurationPanel
         super.initGui();
   
         JLabel labelInputFormatType = new JLabel(INPUT_FORMAT_LABEL + ": ");
-        add(labelInputFormatType);
+        inputPanel.add(labelInputFormatType);
         inputsFormatSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_FORMATS_ARRAY);
-        add(inputsFormatSelector);
+        inputPanel.add(inputsFormatSelector);
         labelInputFormatType.setLabelFor(inputsFormatSelector);
     }
 

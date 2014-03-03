@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.sf.taverna.t2.activities.stilts.SingleInputBean;
@@ -39,23 +40,23 @@ public class MultipleInputsConfigurationPanel
         super.initGui();
   
         JLabel labelNumberOfInputs = new JLabel(NUMBER_OF_INPUTS  + ": ");
-        add(labelNumberOfInputs);
+        inputPanel.add(labelNumberOfInputs);
         numberOfInputs = configBean.getNumberOfInputs();
         numberOfInputsField = new JTextField(numberOfInputs+"");
         numberOfInputsField.getDocument().addDocumentListener(this);
-        add(numberOfInputsField);
+        inputPanel.add(numberOfInputsField);
         labelNumberOfInputs.setLabelFor(numberOfInputsField);
         
         JLabel setFirstLabel = new JLabel("Warning set the number of inputs first.");
-        add(setFirstLabel);
-        add(new JLabel(""));
+        inputPanel.add(setFirstLabel);
+        inputPanel.add(new JLabel(""));
         
         inputsTypesSelectors = new ArrayList<JComboBox>();
         for (int i = 1; i<= numberOfInputs; i++){
             JLabel labelInputType = new JLabel(INPUT_TYPE_LABEL + " (table "+ i + "): ");
-            add(labelInputType);
+            inputPanel.add(labelInputType);
             JComboBox inputTypeSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_TYPE_ARRAY);
-            add(inputTypeSelector);
+            inputPanel.add(inputTypeSelector);
             labelInputType.setLabelFor(inputTypeSelector);
             inputsTypesSelectors.add(inputTypeSelector);
         }
@@ -110,7 +111,6 @@ public class MultipleInputsConfigurationPanel
             return true;
         }
         if (configBean.getNumberOfInputs() != numberOfInputs){
-           initGui();
            return true;
         }
         for (int i = 0; i < numberOfInputs; i++){
@@ -167,6 +167,7 @@ public class MultipleInputsConfigurationPanel
             updateIndividualInputFields();
             initGui();
             this.revalidate();
+            SwingUtilities.getWindowAncestor(this).pack();
         }
     }
 

@@ -1,18 +1,20 @@
 package net.sf.taverna.t2.activities.stilts.ui.config;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import net.sf.taverna.t2.activities.stilts.SingleInputBean;
+import javax.swing.JPanel;
 import net.sf.taverna.t2.activities.stilts.AbstractStiltsBean;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.AbstractStilsActivity;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
-import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 
 @SuppressWarnings("serial")
 public class AbstractStiltsConfigurationPanel<BoundedActivity extends AbstractStilsActivity, 
@@ -22,6 +24,10 @@ public class AbstractStiltsConfigurationPanel<BoundedActivity extends AbstractSt
     protected final BoundedActivity activity;
     protected BoundedBean configBean;
 	
+    protected final JPanel inputPanel;
+    protected final JPanel outputPanel;
+    protected final JPanel miscellaneousPanel;
+
     private JComboBox outputFormatSelector;
     private JComboBox outputTypeSelector;
     private JCheckBox debugSelector;
@@ -33,29 +39,48 @@ public class AbstractStiltsConfigurationPanel<BoundedActivity extends AbstractSt
     public AbstractStiltsConfigurationPanel(BoundedActivity activity) {
         this.activity = activity;
         configBean = (BoundedBean)activity.getConfiguration();
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        inputPanel = new JPanel(new GridLayout(0, 2));
+        inputPanel.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createTitledBorder("Inputs"),
+                        BorderFactory.createEmptyBorder(5,5,5,5)));
+        add(inputPanel, c);
+        outputPanel = new JPanel(new GridLayout(0, 2));
+        outputPanel.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createTitledBorder("Outputs"),
+                        BorderFactory.createEmptyBorder(5,5,5,5)));
+        c.gridy = 1;
+        add(outputPanel, c);
+        miscellaneousPanel = new JPanel(new GridLayout(0, 2));
+        c.gridy = 2;
+        add(miscellaneousPanel, c);
         initGui();
     }
 
     protected void initGui() {
-        removeAll();
-        setLayout(new GridLayout(0, 2));
+        inputPanel.removeAll();
+        outputPanel.removeAll();
+        miscellaneousPanel.removeAll();
 
         JLabel labelOutputFormat = new JLabel(OUTPUT_FORMAT_LABEL + ": ");
-        add(labelOutputFormat);
+        outputPanel.add(labelOutputFormat);
         outputFormatSelector = new JComboBox(StiltsConfigurationConstants.VALID_OUTPUT_FORMATS_ARRAY);
-        add(outputFormatSelector);
+        outputPanel.add(outputFormatSelector);
         labelOutputFormat.setLabelFor(outputFormatSelector);
 
         JLabel labelOutputType = new JLabel(OUTPUT_TYPE_LABEL + ": ");
-        add(labelOutputType);
+        outputPanel.add(labelOutputType);
         outputTypeSelector = new JComboBox(StiltsConfigurationConstants.VALID_OUTPUT_TYPE_ARRAY);
-        add(outputTypeSelector);
+        outputPanel.add(outputTypeSelector);
         labelOutputType.setLabelFor(outputTypeSelector);
 
         JLabel labelDebug = new JLabel(DEBUG_LABEL + ": ");
-        add(labelDebug);
+        miscellaneousPanel.add(labelDebug);
         debugSelector = new JCheckBox();
-        add(debugSelector);
+        miscellaneousPanel.add(debugSelector);
         labelDebug.setLabelFor(debugSelector);
     }
 
