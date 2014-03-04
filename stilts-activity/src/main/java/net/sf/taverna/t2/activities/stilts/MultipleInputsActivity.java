@@ -11,7 +11,7 @@ import net.sf.taverna.t2.reference.T2Reference;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class MultipleInputsTypeActivity<BoundedBean extends MultipleInputsBean> 
+public class MultipleInputsActivity<BoundedBean extends MultipleInputsBean> 
         extends AbstractStilsActivity<BoundedBean>{
 
     /*

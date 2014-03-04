@@ -12,7 +12,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
 public class SingleFormatMultipleInputsActivity<BoundedBean extends SingleFormatMultipleInputsBean> 
-        extends MultipleInputsTypeActivity<BoundedBean>{
+        extends MultipleInputsActivity<BoundedBean>{
 
     /*
      * Best practice: Keep port names as constants to avoid misspelling. This
