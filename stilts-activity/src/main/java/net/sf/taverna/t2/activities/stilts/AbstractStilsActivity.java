@@ -48,7 +48,17 @@ public class AbstractStilsActivity<BoundedBean extends AbstractStiltsBean> exten
     protected BoundedBean configBean;
 
     @Override
-    public void configure(BoundedBean configBean) throws ActivityConfigurationException {
+    public final void configure(BoundedBean configBean) throws ActivityConfigurationException {
+        checkBean(configBean);
+       // Store for getConfiguration(), but you could also make
+        // getConfiguration() return a new bean from other sources
+        this.configBean = configBean;
+
+        // REQUIRED: (Re)create inputPath/output ports depending on configuration
+        configurePorts();
+    }
+    
+    protected void checkBean(BoundedBean configBean) throws ActivityConfigurationException {
         this.configBean = configBean;
         if (!StiltsConfigurationConstants.VALID_OUTPUT_FORMATS_LIST.contains(
                 configBean.getFormatOfOutput())) {
@@ -65,7 +75,7 @@ public class AbstractStilsActivity<BoundedBean extends AbstractStiltsBean> exten
                     StiltsConfigurationConstants.VALID_OUTPUT_TYPE_LIST);
         }
     }
-    
+
     protected void configurePorts() {
         // In case we are being reconfigured - remove existing ports first
         // to avoid duplicates

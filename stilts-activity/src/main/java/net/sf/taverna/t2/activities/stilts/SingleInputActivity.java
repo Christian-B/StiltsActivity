@@ -26,14 +26,9 @@ public class SingleInputActivity<BoundedBean extends SingleInputBean> extends Ab
     static final String INPUT_PARAMETER_NAME = "Input";
 	
     @Override
-    public void configure(SingleInputBean configBean)
+    protected void checkBean(SingleInputBean configBean)
             throws ActivityConfigurationException {
-
-        super.configure(configBean);
-        // Store for getConfiguration(), but you could also make
-        // getConfiguration() return a new bean from other sources
-        this.configBean = configBean;
-
+        super.checkBean(configBean);
         if (!StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST.contains(
                 configBean.getFormatOfInput())) {
             throw new ActivityConfigurationException(
@@ -48,9 +43,6 @@ public class SingleInputActivity<BoundedBean extends SingleInputBean> extends Ab
                     "\" not valid. Must be one of " + 
                     StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST);
         }
-
-        // REQUIRED: (Re)create inputPath/output ports depending on configuration
-        configurePorts();
     }
 
     protected void configurePorts() {

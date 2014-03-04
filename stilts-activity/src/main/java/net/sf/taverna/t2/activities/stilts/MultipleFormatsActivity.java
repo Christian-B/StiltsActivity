@@ -24,9 +24,9 @@ public class MultipleFormatsActivity<BoundedBean extends MultipleFormatsBean>
     static final String INPUT_PARAMETER_NAME = "Input";
 	
     @Override
-    public void configure(BoundedBean configBean)
+    protected void checkBean(BoundedBean configBean)
             throws ActivityConfigurationException {
-        super.configure(configBean);
+        super.checkBean(configBean);
         
         if (configBean.getNumberOfInputs() < 2) {
             throw new ActivityConfigurationException(
@@ -49,12 +49,6 @@ public class MultipleFormatsActivity<BoundedBean extends MultipleFormatsBean>
                         StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST);
             }
         }
-        // Store for getConfiguration(), but you could also make
-        // getConfiguration() return a new bean from other sources
-        this.configBean = configBean;
-
-        // REQUIRED: (Re)create inputPath/output ports depending on configuration
-        configurePorts();
     }
 
     protected void configurePorts() {
