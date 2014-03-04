@@ -7,7 +7,7 @@ import java.util.List;
  * Stilts activity configuration bean.
  * 
  */
-public interface MultipleInputsnterface extends AbstractStiltsInterface {
+public interface MultipleInputsInterface extends AbstractStiltsInterface {
 
     /**
      * @return the numberOfInputs

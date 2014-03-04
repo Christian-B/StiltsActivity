@@ -8,7 +8,7 @@ import java.util.List;
  * 
  */
 public class MultipleInputsBean extends AbstractStiltsBean 
-        implements MultipleInputsnterface, Serializable {
+        implements MultipleInputsInterface, Serializable {
     private int numberOfInputs;
     private List<String> typesOfInputs;
 

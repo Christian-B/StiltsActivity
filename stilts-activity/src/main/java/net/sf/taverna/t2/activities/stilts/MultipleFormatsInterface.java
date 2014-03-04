@@ -7,7 +7,7 @@ import java.util.List;
  * Stilts activity configuration bean.
  * 
  */
-public interface MultipleFormatsInterface extends MultipleInputsnterface {
+public interface MultipleFormatsInterface extends MultipleInputsInterface {
 
     /**
      * @return the formatOfInputs
