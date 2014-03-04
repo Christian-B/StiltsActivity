@@ -31,6 +31,7 @@ public class SingleFormatMultipleInputsConfigurationPanel
         JLabel labelInputFormatType = new JLabel(INPUT_FORMAT_LABEL + ": ");
         inputPanel.add(labelInputFormatType);
         inputsFormatSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_FORMATS_ARRAY);
+        inputsFormatSelector.setSelectedItem(configBean.getFormatOfInputs());
         inputPanel.add(inputsFormatSelector);
         labelInputFormatType.setLabelFor(inputsFormatSelector);
     }
@@ -88,9 +89,7 @@ public class SingleFormatMultipleInputsConfigurationPanel
       */
     @Override
     public void refreshConfiguration() {
-        super.refreshConfiguration();
-        configBean = (BoundedBean)activity.getConfiguration();
-        
+        super.refreshConfiguration();        
         inputsFormatSelector.setSelectedItem(configBean.getFormatOfInputs());
     }
 }
