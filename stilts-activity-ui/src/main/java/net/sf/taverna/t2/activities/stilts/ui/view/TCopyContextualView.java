@@ -3,7 +3,9 @@ package net.sf.taverna.t2.activities.stilts.ui.view;
 import java.awt.Frame;
 
 import javax.swing.Action;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 
 import net.sf.taverna.t2.activities.stilts.TCopyActivity;
@@ -21,6 +23,14 @@ public class TCopyContextualView extends AbstractStiltsContextualView {
     }
 
     @Override
+    public JComponent getMainFrame() {
+        JPanel jPanel = new JPanel();
+        jPanel.add(description);
+        refreshView();
+        return jPanel;
+    }
+
+    @Override
     public String getViewTitle() {
         SingleInputBean configuration = activity.getConfiguration();
         return "Copy from format " + configuration.getFormatOfInput() + " to " + configuration.getFormatOfInput();
@@ -32,8 +42,8 @@ public class TCopyContextualView extends AbstractStiltsContextualView {
     @Override
     public void refreshView() {
         SingleInputBean configuration = activity.getConfiguration();
-        description.setText("Copy from format " + configuration.getFormatOfInput() 
-                + " to " + configuration.getFormatOfInput());
+//        description.setText("Copy from format " + configuration.getFormatOfInput() 
+//                + " to " + configuration.getFormatOfInput());
     }
 
     @Override

@@ -32,9 +32,9 @@ public class AbstractStiltsConfigurationPanel<BoundedActivity extends AbstractSt
     private JComboBox outputTypeSelector;
     private JCheckBox debugSelector;
             
-    private static final String OUTPUT_FORMAT_LABEL = "Output Format";
-    private static final String OUTPUT_TYPE_LABEL = "Output Type";
-    private static final String DEBUG_LABEL = "Debug mode";
+    public static final String OUTPUT_FORMAT_LABEL = "Output Format";
+    public static final String OUTPUT_TYPE_LABEL = "Output Type";
+    public static final String DEBUG_LABEL = "Debug mode";
             
     public AbstractStiltsConfigurationPanel(BoundedActivity activity) {
         this.activity = activity;

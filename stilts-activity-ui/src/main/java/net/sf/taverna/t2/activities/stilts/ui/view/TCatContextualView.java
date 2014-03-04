@@ -3,24 +3,28 @@ package net.sf.taverna.t2.activities.stilts.ui.view;
 import java.awt.Frame;
 
 import javax.swing.Action;
-import javax.swing.JLabel;
+import javax.swing.JComponent;
 import net.sf.taverna.t2.activities.stilts.SingleFormatMultipleInputsBean;
-import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.TCatActivity;
 
-import net.sf.taverna.t2.activities.stilts.TCopyActivity;
 import net.sf.taverna.t2.activities.stilts.ui.config.TCatConfigureAction;
-import net.sf.taverna.t2.activities.stilts.ui.config.TCopyConfigureAction;
 
 @SuppressWarnings("serial")
 public class TCatContextualView extends AbstractStiltsContextualView {
     private final TCatActivity activity;
-    private JLabel description = new JLabel("ads");
+    private StiltsBeanPanel mainFrame;
 
     public TCatContextualView(TCatActivity activity) {
         super();
         this.activity = activity;
         initView();
+    }
+
+    @Override
+    public JComponent getMainFrame() {
+        SingleFormatMultipleInputsBean bean = activity.getConfiguration();
+        mainFrame = StiltsBeanPanelFactory.getMainFrame(bean);
+        return mainFrame;
     }
 
     @Override
@@ -35,8 +39,7 @@ public class TCatContextualView extends AbstractStiltsContextualView {
     @Override
     public void refreshView() {
         SingleFormatMultipleInputsBean configuration = activity.getConfiguration();
-        description.setText("Copy from format " + configuration.getFormatOfInputs() 
-                + " to " + configuration.getFormatOfOutput());
+        StiltsBeanPanelFactory.refreshView(configuration, mainFrame);
     }
 
     @Override

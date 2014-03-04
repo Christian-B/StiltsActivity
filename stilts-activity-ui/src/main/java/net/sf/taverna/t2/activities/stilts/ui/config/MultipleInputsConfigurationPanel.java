@@ -28,8 +28,8 @@ public class MultipleInputsConfigurationPanel
     private int numberOfInputs;
     private List<JComboBox> inputsTypesSelectors;
             
-    private static final String NUMBER_OF_INPUTS = "Number of input tables";
-    private static final String INPUT_TYPE_LABEL = "Input Type";
+    public static final String NUMBER_OF_INPUTS = "Number of input tables";
+    public static final String INPUT_TYPE_LABEL = "Input Type";
             
     public MultipleInputsConfigurationPanel(BoundedActivity activity) {
         super(activity);

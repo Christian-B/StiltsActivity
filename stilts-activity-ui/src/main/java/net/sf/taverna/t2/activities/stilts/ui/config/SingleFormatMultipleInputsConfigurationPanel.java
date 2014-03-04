@@ -19,7 +19,7 @@ public class SingleFormatMultipleInputsConfigurationPanel
 	
     private JComboBox inputsFormatSelector;
             
-    private static final String INPUT_FORMAT_LABEL = "Input Format";
+   public static final String INPUT_FORMAT_LABEL = "Input Format";
             
     public SingleFormatMultipleInputsConfigurationPanel(BoundedActivity activity) {
         super(activity);
