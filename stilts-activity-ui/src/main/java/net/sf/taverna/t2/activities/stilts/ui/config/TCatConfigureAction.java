@@ -9,9 +9,6 @@ import net.sf.taverna.t2.activities.stilts.TCatActivity;
 import net.sf.taverna.t2.workbench.ui.actions.activity.ActivityConfigurationAction;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationDialog;
 
-import net.sf.taverna.t2.activities.stilts.TCopyActivity;
-import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
-
 @SuppressWarnings("serial")
 public class TCatConfigureAction extends
 		ActivityConfigurationAction<TCatActivity, SingleFormatMultipleInputsBean> {
