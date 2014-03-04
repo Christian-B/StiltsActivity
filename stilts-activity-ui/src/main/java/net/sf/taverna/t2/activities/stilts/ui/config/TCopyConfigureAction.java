@@ -33,7 +33,6 @@ public class TCopyConfigureAction
 		}
 		AbstractStiltsConfigurationPanel<TCopyActivity, SingleInputBean> panel 
                         = new SingleInputConfigurationPanel(getActivity());
-                panel.refreshConfiguration();
                 
 		ActivityConfigurationDialog<TCopyActivity, SingleInputBean> dialog = new ActivityConfigurationDialog<TCopyActivity, SingleInputBean>(
 				getActivity(), panel);

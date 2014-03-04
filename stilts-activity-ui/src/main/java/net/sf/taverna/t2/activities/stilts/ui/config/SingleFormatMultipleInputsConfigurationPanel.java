@@ -23,7 +23,6 @@ public class SingleFormatMultipleInputsConfigurationPanel
             
     public SingleFormatMultipleInputsConfigurationPanel(BoundedActivity activity) {
         super(activity);
-        initGui();
     }
 
     protected void initGui() {

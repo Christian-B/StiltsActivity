@@ -34,7 +34,6 @@ public class TCatConfigureAction extends
         }
         AbstractStiltsConfigurationPanel<TCatActivity, SingleInputBean> panel = 
                 new SingleFormatMultipleInputsConfigurationPanel(getActivity());
-        panel.refreshConfiguration();
         
         ActivityConfigurationDialog<TCatActivity, SingleInputBean> dialog = 
                 new ActivityConfigurationDialog<TCatActivity, SingleInputBean>(

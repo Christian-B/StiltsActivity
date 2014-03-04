@@ -163,6 +163,5 @@ public class AbstractStiltsConfigurationPanel<BoundedActivity extends AbstractSt
         outputFormatSelector.setSelectedItem(configBean.getFormatOfOutput());
         outputTypeSelector.setSelectedItem(configBean.getTypeOfOutput());
         debugSelector.setSelected(configBean.isDebugMode());
-
     }
 }

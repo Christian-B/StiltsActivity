@@ -22,7 +22,6 @@ public class SingleInputConfigurationPanel <BoundedActivity extends SingleInputA
             
     public SingleInputConfigurationPanel(BoundedActivity activity) {
         super(activity);
-        initGui();
     }
 
     protected void initGui() {

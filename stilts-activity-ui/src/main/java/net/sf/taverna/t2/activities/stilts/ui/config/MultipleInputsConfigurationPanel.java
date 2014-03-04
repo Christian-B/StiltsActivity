@@ -33,7 +33,6 @@ public class MultipleInputsConfigurationPanel
             
     public MultipleInputsConfigurationPanel(BoundedActivity activity) {
         super(activity);
-        initGui();
     }
 
     protected void initGui() {
