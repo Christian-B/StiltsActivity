@@ -1,6 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.ui.config;
 
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -11,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.MultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.MultipleInputsTypeActivity;
 
@@ -37,18 +35,20 @@ public class MultipleInputsConfigurationPanel
 
     protected void initGui() {
         super.initGui();
-  
-        JLabel labelNumberOfInputs = new JLabel(NUMBER_OF_INPUTS  + ": ");
-        inputPanel.add(labelNumberOfInputs);
+
         numberOfInputs = configBean.getNumberOfInputs();
-        numberOfInputsField = new JTextField(numberOfInputs+"");
-        numberOfInputsField.getDocument().addDocumentListener(this);
-        inputPanel.add(numberOfInputsField);
-        labelNumberOfInputs.setLabelFor(numberOfInputsField);
+        if (configBean.isFixedNumberOfInputs()){
+            JLabel labelNumberOfInputs = new JLabel(NUMBER_OF_INPUTS  + ": ");
+            inputPanel.add(labelNumberOfInputs);
+            numberOfInputsField = new JTextField(numberOfInputs+"");
+            numberOfInputsField.getDocument().addDocumentListener(this);
+            inputPanel.add(numberOfInputsField);
+            labelNumberOfInputs.setLabelFor(numberOfInputsField);
         
-        JLabel setFirstLabel = new JLabel("Warning set the number of inputs first.");
-        inputPanel.add(setFirstLabel);
-        inputPanel.add(new JLabel(""));
+            JLabel setFirstLabel = new JLabel("Warning set the number of inputs first.");
+            inputPanel.add(setFirstLabel);
+            inputPanel.add(new JLabel(""));
+        }
         
         inputsTypesSelectors = new ArrayList<JComboBox>();
         for (int i = 1; i<= numberOfInputs; i++){
@@ -69,24 +69,26 @@ public class MultipleInputsConfigurationPanel
         if (!super.checkValues()){
             return false;
         }
-        String numberOfInputsString = numberOfInputsField.getText();
-        if (numberOfInputsString == null || numberOfInputsString.isEmpty()){
-            String message = NUMBER_OF_INPUTS + " must be specified";
-            JOptionPane.showMessageDialog(this, "test", "Missing " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        int numberOfInputs;
-        try{
-            numberOfInputs = Integer.parseInt(numberOfInputsString);
-        } catch (NumberFormatException ex){
-            String message = NUMBER_OF_INPUTS + " is not a valid possitive integer.";
-            JOptionPane.showMessageDialog(this, "test", "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
-            return false;            
-        }
-        if (numberOfInputs < 2){
-            String message = NUMBER_OF_INPUTS + " should be 2 or more.";
-            JOptionPane.showMessageDialog(this, "test", "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
-            return false;                        
+        if (configBean.isFixedNumberOfInputs()){
+            String numberOfInputsString = numberOfInputsField.getText();
+            if (numberOfInputsString == null || numberOfInputsString.isEmpty()){
+                String message = NUMBER_OF_INPUTS + " must be specified";
+                JOptionPane.showMessageDialog(this, "test", "Missing " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            int numberOfInputs;
+            try{
+                numberOfInputs = Integer.parseInt(numberOfInputsString);
+            } catch (NumberFormatException ex){
+                String message = NUMBER_OF_INPUTS + " is not a valid possitive integer.";
+                JOptionPane.showMessageDialog(this, "test", "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
+                return false;            
+            }
+            if (numberOfInputs < 2){
+                String message = NUMBER_OF_INPUTS + " should be 2 or more.";
+                JOptionPane.showMessageDialog(this, "test", "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
+                return false;                        
+            }
         }
         for (int i = 0; i< configBean.getNumberOfInputs(); i++){
             if (!StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST.contains(inputsTypesSelectors.get(i).getSelectedItem())){
@@ -109,8 +111,10 @@ public class MultipleInputsConfigurationPanel
         if (super.isConfigurationChanged()){
             return true;
         }
-        if (configBean.getNumberOfInputs() != numberOfInputs){
-           return true;
+        if (configBean.isFixedNumberOfInputs()){
+            if (configBean.getNumberOfInputs() != numberOfInputs){
+                return true;
+            }
         }
         for (int i = 0; i < numberOfInputs; i++){
             String beanType = configBean.getTypesOfInputs().get(i);

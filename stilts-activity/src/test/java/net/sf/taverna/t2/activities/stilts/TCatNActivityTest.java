@@ -40,7 +40,8 @@ public class TCatNActivityTest {
         typesOfInputs.add(StiltsConfigurationConstants.STRING_TYPE);
         configBean.setTypesOfInputs(typesOfInputs);
         configBean.setTypeOfOutput(StiltsConfigurationConstants.STRING_TYPE);
-    }
+        configBean.setFixedNumberOfInputs(false);
+   }
 
     @After
     public void reportDone() throws Exception {

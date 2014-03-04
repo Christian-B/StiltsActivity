@@ -10,6 +10,7 @@ import java.util.List;
 public class MultipleInputsBean extends AbstractStiltsBean 
         implements MultipleInputsInterface, Serializable {
     private int numberOfInputs;
+    private boolean fixedNumberOfInputs;        
     private List<String> typesOfInputs;
 
     @Override
@@ -30,6 +31,22 @@ public class MultipleInputsBean extends AbstractStiltsBean
     @Override
     public void setTypesOfInputs(List<String> typesOfInput) {
         this.typesOfInputs = typesOfInput;
+    }
+
+    /**
+     * @return the fixedNumberOfInputs
+     */
+    @Override
+    public boolean isFixedNumberOfInputs() {
+        return fixedNumberOfInputs;
+    }
+
+    /**
+     * @param fixedNumberOfInputs the fixedNumberOfInputs to set
+     */
+    @Override
+    public void setFixedNumberOfInputs(boolean fixedNumberOfInputs) {
+        this.fixedNumberOfInputs = fixedNumberOfInputs;
     }
       
 }

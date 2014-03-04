@@ -43,6 +43,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         tcatService.setTypesOfInputs(typesOfInputs);
 	tcatService.setTypeOfOutput(StiltsConfigurationConstants.STRING_TYPE);
         tcatService.setDebugMode(true);
+        tcatService.setFixedNumberOfInputs(true);
 	// Optional: set description
 	tcatService.setDescription("TCat");
 	results.add(tcatService);

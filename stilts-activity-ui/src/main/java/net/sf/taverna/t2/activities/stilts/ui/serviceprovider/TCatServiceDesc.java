@@ -21,6 +21,7 @@ public class TCatServiceDesc extends ServiceDescription<SingleFormatMultipleInpu
     private String typeOfOutput;
     private boolean debugMode;
     private int numberOfInputs;
+    private boolean fixedNumberOfInputs;        
     
     /**
       * The subclass of Activity which should be instantiated when adding a service
@@ -174,6 +175,14 @@ public class TCatServiceDesc extends ServiceDescription<SingleFormatMultipleInpu
     @Override
     public void setNumberOfInputs(int numberOfInputs) {
         this.numberOfInputs = numberOfInputs;
+    }
+
+    public boolean isFixedNumberOfInputs() {
+        return fixedNumberOfInputs;
+    }
+
+    public void setFixedNumberOfInputs(boolean fixedNumberOfInputs) {
+        this.fixedNumberOfInputs = fixedNumberOfInputs;
     }
 
 }

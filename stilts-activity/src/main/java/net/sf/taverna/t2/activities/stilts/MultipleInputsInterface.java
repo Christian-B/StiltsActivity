@@ -28,5 +28,16 @@ public interface MultipleInputsInterface extends AbstractStiltsInterface {
      * @param typesOfInputs the typeOfInputs to set
      */
     public void setTypesOfInputs(List<String> typesOfInputs);
+    
+    /**
+     * @return the fixedNumberOfInputs
+     */
+    public boolean isFixedNumberOfInputs();
+
+    /**
+     * @param fixedNumberOfInputs the fixedNumberOfInputs to set
+     */
+    public void setFixedNumberOfInputs(boolean fixedNumberOfInputs);
+
       
 }
