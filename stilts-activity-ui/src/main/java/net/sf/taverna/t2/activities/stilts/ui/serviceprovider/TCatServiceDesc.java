@@ -46,6 +46,7 @@ public class TCatServiceDesc extends ServiceDescription<SingleFormatMultipleInpu
         bean.setTypesOfInputs(getTypesOfInputs());
         bean.setTypeOfOutput(getTypeOfOutput());
         bean.setNumberOfInputs(getNumberOfInputs());
+        bean.setFixedNumberOfInputs(isFixedNumberOfInputs());
         return bean;
     }
 

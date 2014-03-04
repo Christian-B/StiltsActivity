@@ -30,12 +30,14 @@ public class SingleInputConfigurationPanel <BoundedActivity extends SingleInputA
         JLabel labelInputFormatType = new JLabel(INPUT_FORMAT_LABEL + ": ");
         inputPanel.add(labelInputFormatType);
         inputFormatSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_FORMATS_ARRAY);
+        inputTypeSelector.setSelectedItem(configBean.getTypeOfInput());
         inputPanel.add(inputFormatSelector);
         labelInputFormatType.setLabelFor(inputFormatSelector);
 
         JLabel labelInputType = new JLabel(INPUT_TYPE_LABEL + ": ");
         inputPanel.add(labelInputType);
         inputTypeSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_TYPE_ARRAY);
+        inputFormatSelector.setSelectedItem(configBean.getFormatOfInput());
         inputPanel.add(inputTypeSelector);
         labelInputType.setLabelFor(inputTypeSelector);
     }

@@ -68,18 +68,21 @@ public class AbstractStiltsConfigurationPanel<BoundedActivity extends AbstractSt
         JLabel labelOutputFormat = new JLabel(OUTPUT_FORMAT_LABEL + ": ");
         outputPanel.add(labelOutputFormat);
         outputFormatSelector = new JComboBox(StiltsConfigurationConstants.VALID_OUTPUT_FORMATS_ARRAY);
+        outputFormatSelector.setSelectedItem(configBean.getFormatOfOutput());
         outputPanel.add(outputFormatSelector);
         labelOutputFormat.setLabelFor(outputFormatSelector);
 
         JLabel labelOutputType = new JLabel(OUTPUT_TYPE_LABEL + ": ");
         outputPanel.add(labelOutputType);
         outputTypeSelector = new JComboBox(StiltsConfigurationConstants.VALID_OUTPUT_TYPE_ARRAY);
+        outputTypeSelector.setSelectedItem(configBean.getTypeOfOutput());
         outputPanel.add(outputTypeSelector);
         labelOutputType.setLabelFor(outputTypeSelector);
 
         JLabel labelDebug = new JLabel(DEBUG_LABEL + ": ");
         miscellaneousPanel.add(labelDebug);
         debugSelector = new JCheckBox();
+        debugSelector.setSelected(configBean.isDebugMode());
         miscellaneousPanel.add(debugSelector);
         labelDebug.setLabelFor(debugSelector);
     }

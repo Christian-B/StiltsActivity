@@ -23,7 +23,7 @@ public class MultipleInputsConfigurationPanel
         implements DocumentListener{
 
     private JTextField numberOfInputsField;
-    private int numberOfInputs;
+    protected int numberOfInputs;
     private List<JComboBox> inputsTypesSelectors;
             
     public static final String NUMBER_OF_INPUTS = "Number of input tables";
@@ -37,7 +37,7 @@ public class MultipleInputsConfigurationPanel
         super.initGui();
 
         numberOfInputs = configBean.getNumberOfInputs();
-        if (configBean.isFixedNumberOfInputs()){
+        if (!configBean.isFixedNumberOfInputs()){
             JLabel labelNumberOfInputs = new JLabel(NUMBER_OF_INPUTS  + ": ");
             inputPanel.add(labelNumberOfInputs);
             numberOfInputsField = new JTextField(numberOfInputs+"");
@@ -55,6 +55,7 @@ public class MultipleInputsConfigurationPanel
             JLabel labelInputType = new JLabel(INPUT_TYPE_LABEL + " (table "+ i + "): ");
             inputPanel.add(labelInputType);
             JComboBox inputTypeSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_TYPE_ARRAY);
+            inputTypeSelector.setSelectedItem(configBean.getTypesOfInputs().get(i-1));
             inputPanel.add(inputTypeSelector);
             labelInputType.setLabelFor(inputTypeSelector);
             inputsTypesSelectors.add(inputTypeSelector);
@@ -69,7 +70,7 @@ public class MultipleInputsConfigurationPanel
         if (!super.checkValues()){
             return false;
         }
-        if (configBean.isFixedNumberOfInputs()){
+        if (!configBean.isFixedNumberOfInputs()){
             String numberOfInputsString = numberOfInputsField.getText();
             if (numberOfInputsString == null || numberOfInputsString.isEmpty()){
                 String message = NUMBER_OF_INPUTS + " must be specified";
@@ -111,7 +112,7 @@ public class MultipleInputsConfigurationPanel
         if (super.isConfigurationChanged()){
             return true;
         }
-        if (configBean.isFixedNumberOfInputs()){
+        if (!configBean.isFixedNumberOfInputs()){
             if (configBean.getNumberOfInputs() != numberOfInputs){
                 return true;
             }
@@ -174,7 +175,7 @@ public class MultipleInputsConfigurationPanel
         }
     }
 
-    private void updateIndividualInputFields() {
+    protected void updateIndividualInputFields() {
         for (int i = configBean.getTypesOfInputs().size(); i < numberOfInputs; i++){
             configBean.getTypesOfInputs().add(configBean.getTypesOfInputs().get(0));
        }
