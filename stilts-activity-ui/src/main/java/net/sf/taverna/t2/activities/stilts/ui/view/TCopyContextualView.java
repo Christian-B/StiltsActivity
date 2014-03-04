@@ -4,8 +4,6 @@ import java.awt.Frame;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 
 import net.sf.taverna.t2.activities.stilts.TCopyActivity;
@@ -14,7 +12,7 @@ import net.sf.taverna.t2.activities.stilts.ui.config.TCopyConfigureAction;
 @SuppressWarnings("serial")
 public class TCopyContextualView extends AbstractStiltsContextualView {
     private final TCopyActivity activity;
-    private JLabel description = new JLabel("ads");
+    private StiltsBeanPanel mainFrame;
 
     public TCopyContextualView(TCopyActivity activity) {
         super();
@@ -24,16 +22,9 @@ public class TCopyContextualView extends AbstractStiltsContextualView {
 
     @Override
     public JComponent getMainFrame() {
-        JPanel jPanel = new JPanel();
-        jPanel.add(description);
-        refreshView();
-        return jPanel;
-    }
-
-    @Override
-    public String getViewTitle() {
-        SingleInputBean configuration = activity.getConfiguration();
-        return "Copy from format " + configuration.getFormatOfInput() + " to " + configuration.getFormatOfInput();
+        SingleInputBean bean = activity.getConfiguration();
+        mainFrame = StiltsBeanPanelFactory.getMainFrame(bean);
+        return mainFrame;
     }
 
     /**
@@ -42,8 +33,13 @@ public class TCopyContextualView extends AbstractStiltsContextualView {
     @Override
     public void refreshView() {
         SingleInputBean configuration = activity.getConfiguration();
-//        description.setText("Copy from format " + configuration.getFormatOfInput() 
-//                + " to " + configuration.getFormatOfInput());
+        StiltsBeanPanelFactory.refreshView(configuration, mainFrame);
+    }
+
+    @Override
+    public String getViewTitle() {
+        SingleInputBean configuration = activity.getConfiguration();
+        return "Copy from format " + configuration.getFormatOfInput() + " to " + configuration.getFormatOfInput();
     }
 
     @Override

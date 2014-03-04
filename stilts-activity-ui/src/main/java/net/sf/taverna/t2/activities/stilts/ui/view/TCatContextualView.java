@@ -27,12 +27,6 @@ public class TCatContextualView extends AbstractStiltsContextualView {
         return mainFrame;
     }
 
-    @Override
-    public String getViewTitle() {
-        SingleFormatMultipleInputsBean configuration = activity.getConfiguration();
-        return "Contatenate from format " + configuration.getFormatOfInputs() + " to " + configuration.getFormatOfOutput();
-    }
-
     /**
       * Typically called when the activity configuration has changed.
       */
@@ -40,6 +34,12 @@ public class TCatContextualView extends AbstractStiltsContextualView {
     public void refreshView() {
         SingleFormatMultipleInputsBean configuration = activity.getConfiguration();
         StiltsBeanPanelFactory.refreshView(configuration, mainFrame);
+    }
+
+    @Override
+    public String getViewTitle() {
+        SingleFormatMultipleInputsBean configuration = activity.getConfiguration();
+        return "Contatenate from format " + configuration.getFormatOfInputs() + " to " + configuration.getFormatOfOutput();
     }
 
     @Override

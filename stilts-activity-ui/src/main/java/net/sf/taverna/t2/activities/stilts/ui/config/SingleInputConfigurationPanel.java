@@ -6,11 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import net.sf.taverna.t2.activities.stilts.SingleInputActivity;
 import net.sf.taverna.t2.activities.stilts.SingleInputBean;
-import net.sf.taverna.t2.activities.stilts.AbstractStilsActivity;
-import net.sf.taverna.t2.activities.stilts.AbstractStiltsBean;
 
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
-import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
 
 @SuppressWarnings("serial")
 public class SingleInputConfigurationPanel <BoundedActivity extends SingleInputActivity, 
@@ -20,8 +17,8 @@ public class SingleInputConfigurationPanel <BoundedActivity extends SingleInputA
     private JComboBox inputFormatSelector;
     private JComboBox inputTypeSelector;
             
-    private static final String INPUT_FORMAT_LABEL = "Input Format";
-    private static final String INPUT_TYPE_LABEL = "Input Type";
+    public static final String INPUT_FORMAT_LABEL = "Input Format";
+    public static final String INPUT_TYPE_LABEL = "Input Type";
             
     public SingleInputConfigurationPanel(BoundedActivity activity) {
         super(activity);
@@ -32,15 +29,15 @@ public class SingleInputConfigurationPanel <BoundedActivity extends SingleInputA
         super.initGui();
   
         JLabel labelInputFormatType = new JLabel(INPUT_FORMAT_LABEL + ": ");
-        add(labelInputFormatType);
+        inputPanel.add(labelInputFormatType);
         inputFormatSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_FORMATS_ARRAY);
-        add(inputFormatSelector);
+        inputPanel.add(inputFormatSelector);
         labelInputFormatType.setLabelFor(inputFormatSelector);
 
         JLabel labelInputType = new JLabel(INPUT_TYPE_LABEL + ": ");
-        add(labelInputType);
+        inputPanel.add(labelInputType);
         inputTypeSelector = new JComboBox(StiltsConfigurationConstants.VALID_INPUT_TYPE_ARRAY);
-        add(inputTypeSelector);
+        inputPanel.add(inputTypeSelector);
         labelInputType.setLabelFor(inputTypeSelector);
     }
 
@@ -96,7 +93,7 @@ public class SingleInputConfigurationPanel <BoundedActivity extends SingleInputA
         noteConfiguration(new SingleInputBean());
     }
 
-    protected void noteConfiguration(BoundedBean bean) {
+    protected void noteConfiguration(SingleInputBean bean) {
     	super.noteConfiguration(bean);
         configBean.setFormatOfInput(inputFormatSelector.getSelectedItem().toString());
         configBean.setTypeOfInput(inputTypeSelector.getSelectedItem().toString());        
