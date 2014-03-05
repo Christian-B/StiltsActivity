@@ -10,10 +10,8 @@ import java.util.Map;
 
 import net.sf.taverna.t2.activities.testutils.ActivityInvoker;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
-import org.junit.After;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class ExactMatchActivityTest {
@@ -73,6 +71,8 @@ public class ExactMatchActivityTest {
         assertTrue("Wrong output : Header line missing. ", result.contains("code,Last,Email,Job,id,name,number"));
         assertTrue("Wrong output : Smith line missing. ", result.contains("1,Smith,test@example.com,Programmer,1,Peter,1433"));
         assertTrue("Wrong output : Brown line missing. ", result.contains("2,Brown,test@example.com,Boss,2,Jack,456"));
+        String[] lines = result.split(System.lineSeparator());
+        assertTrue("Wrong number of lines. Expected 3 found " + lines.length, lines.length == 3);
     }
 
     @Test
@@ -112,6 +112,8 @@ public class ExactMatchActivityTest {
         assertTrue("Wrong output : Smith line missing. ", result.contains("1,Peter,Smith,test@example.com,Programmer,1,Peter,1433"));
         assertTrue("Wrong output : Brown line missing. ", result.contains("2,Jack,Brown,test@example.com,Boss,2,Jack,456"));
         assertTrue("Wrong output : BAd Peter Line found. ", !result.contains("2,Peter"));        
+        String[] lines = result.split(System.lineSeparator());
+        assertTrue("Wrong number of lines. Expected 3 found " + lines.length, lines.length == 3);
     }
 
     @Test

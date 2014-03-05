@@ -14,10 +14,8 @@ import net.sf.taverna.t2.activities.testutils.ActivityInvoker;
 import net.sf.taverna.t2.workflowmodel.OutputPort;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityInputPort;
-import org.junit.After;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class TCatNActivityTest {
@@ -45,7 +43,7 @@ public class TCatNActivityTest {
 
     @Test
     public void executeAsynch() throws Exception {
-        System.out.println("Running TCat");
+        System.out.println("Running TCatN");
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
@@ -70,6 +68,8 @@ public class TCatNActivityTest {
         assertTrue("Wrong output : Header line missing. ", result.contains("# id name      number"));
         assertTrue("Wrong output : Christian line missing. ", result.contains("Christian"));
         assertTrue("Wrong output : Peter line missing. ", result.contains("Peter"));
+        String[] lines = result.split(System.lineSeparator());
+        assertTrue("Wrong number of lines. Expected 5 found " + lines.length, lines.length == 5);
     }
 
     @Test
@@ -108,7 +108,11 @@ public class TCatNActivityTest {
         //assertEquals("simple", outputs.get("simpleOutput"));
         String result = outputs.get(AbstractStilsActivity.RESULT_PARAMETER_NAME).toString();
         System.out.println(result);
-        //assertEquals("Unexpected outputs", AbstractStilsActivity.SUCCESS_MESSAGE, result);
+        assertTrue("Wrong output : Header line missing. ", result.contains("# id name      number"));
+        assertTrue("Wrong output : Christian line missing. ", result.contains("Christian"));
+        assertTrue("Wrong output : Peter line missing. ", result.contains("Peter"));
+        String[] lines = result.split(System.lineSeparator());
+        assertTrue("Wrong number of lines. Expected 7 found " + lines.length, lines.length == 7);
     }
 
     @Test

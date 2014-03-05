@@ -104,6 +104,8 @@ public class TJoinActivityTest {
         assertTrue("Wrong output : Header line missing. ", result.contains("id_1,name_1,number_1,id_2,name_2,number_2,id_3,name_3,number_3"));
         assertTrue("Wrong output : John line missing. ", result.contains("1,John,1234,45,Peter,1433,4,Micheal,23234"));
         assertTrue("Wrong output : Christian line missing. ", result.contains("2,Christian,4567,22,Jack,456,6,Jack,3453"));
+        String[] lines = result.split(System.lineSeparator());
+        assertTrue("Wrong number of lines. Expected 3 found " + lines.length, lines.length == 3);
     }
 
 }

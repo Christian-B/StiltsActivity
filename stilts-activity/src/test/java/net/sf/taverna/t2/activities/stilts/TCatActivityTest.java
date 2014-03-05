@@ -67,6 +67,8 @@ public class TCatActivityTest {
         assertTrue("Wrong output : Header line missing. ", result.contains("id,name,number"));
         assertTrue("Wrong output : Christian line missing. ", result.contains("Christian"));
         assertTrue("Wrong output : Peter line missing. ", result.contains("Peter"));
+        String[] lines = result.split(System.lineSeparator());
+        assertTrue("Wrong number of lines. Expected 5 found " + lines.length, lines.length == 5);
     }
 
     @Test
