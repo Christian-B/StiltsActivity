@@ -25,6 +25,7 @@ public class StiltsRunner implements Runnable
             Stilts.main(parameters);
             consumer.reset(RunStatus.SUCCESS);
        } catch (Exception ex){
+           ex.printStackTrace();
             consumer.reset(RunStatus.FAILED);
        } finally {
             System.setSecurityManager(securityBackup);
