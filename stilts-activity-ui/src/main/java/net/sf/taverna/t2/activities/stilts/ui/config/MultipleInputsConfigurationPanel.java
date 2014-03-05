@@ -154,7 +154,9 @@ public class MultipleInputsConfigurationPanel
     public void refreshConfiguration() {
         super.refreshConfiguration();
         numberOfInputs = configBean.getNumberOfInputs();
-        numberOfInputsField.setText(numberOfInputs+"");
+        if (!configBean.isFixedNumberOfInputs()){
+            numberOfInputsField.setText(numberOfInputs+"");
+        }
         for (int i = 0; i < numberOfInputs; i++){
             inputsTypesSelectors.get(i).setSelectedItem(configBean.getTypesOfInputs().get(i));
         }
