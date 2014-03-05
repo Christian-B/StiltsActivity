@@ -10,7 +10,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
 public class ExactMatchActivity<BoundedBean extends ExactMatchBean> 
-        extends AbstracMatchActivity<BoundedBean>{
+        extends AbstractMatchActivity<BoundedBean>{
 
     @Override
     protected void checkBean(BoundedBean configBean)

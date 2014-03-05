@@ -11,7 +11,7 @@ import net.sf.taverna.t2.reference.T2Reference;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class AbstracMatchActivity<BoundedBean extends AbstractMatchBean> 
+public class AbstractMatchActivity<BoundedBean extends AbstractMatchBean> 
         extends MultipleFormatsActivity<BoundedBean>{
 
     /*

@@ -8,7 +8,7 @@ import java.util.List;
  * 
  */
 public class AbstractMatchBean extends MultipleFormatsBean 
-        implements AbstracMatchInterface, Serializable {
+        implements AbstractMatchInterface, Serializable {
  
     private String findValue;
     private String joinValue;
@@ -19,7 +19,7 @@ public class AbstractMatchBean extends MultipleFormatsBean
         this.setFixedNumberOfInputs(true);        
     }
     
-    public AbstractMatchBean(AbstracMatchInterface other){
+    public AbstractMatchBean(AbstractMatchInterface other){
         super(other);
         this.setNumberOfInputs(2);
         this.setFixedNumberOfInputs(true);

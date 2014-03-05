@@ -4,7 +4,7 @@ package net.sf.taverna.t2.activities.stilts;
  *
  * @author christian
  */
-public interface ExactMatchInterface extends AbstracMatchInterface {
+public interface ExactMatchInterface extends AbstractMatchInterface {
     
     /**
      * @return the numbertOfColumnsToMatch

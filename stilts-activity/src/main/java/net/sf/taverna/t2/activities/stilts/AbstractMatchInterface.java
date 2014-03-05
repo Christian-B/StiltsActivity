@@ -4,7 +4,7 @@ package net.sf.taverna.t2.activities.stilts;
  * Stilts activity configuration bean.
  * 
  */
-public interface AbstracMatchInterface extends MultipleFormatsInterface {
+public interface AbstractMatchInterface extends MultipleFormatsInterface {
 
     /**
      * @return the findValue
