@@ -343,7 +343,7 @@ public class AbstractStilsActivity<BoundedBean extends AbstractStiltsBean> exten
     }	
     
     @Override
-    public BoundedBean getConfiguration() {
+    public final BoundedBean getConfiguration() {
         return this.configBean;
     }
 

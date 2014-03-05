@@ -70,10 +70,4 @@ public class MultipleFormatsActivity<BoundedBean extends MultipleFormatsBean>
         }
         return parameters;
     }
-
-    @Override
-    public BoundedBean getConfiguration() {
-        return this.configBean;
-    }
-
 }

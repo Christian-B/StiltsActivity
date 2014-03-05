@@ -76,9 +76,4 @@ public class SingleInputActivity<BoundedBean extends SingleInputBean> extends Ab
         return parameters;
     }
 
-    @Override
-    public SingleInputBean getConfiguration() {
-        return this.configBean;
-    }
-
-}
+ }

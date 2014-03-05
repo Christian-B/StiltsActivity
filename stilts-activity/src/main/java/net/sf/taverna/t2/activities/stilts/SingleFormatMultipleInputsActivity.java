@@ -56,9 +56,4 @@ public class SingleFormatMultipleInputsActivity<BoundedBean extends SingleFormat
         return parameters;
     }
 
-    @Override
-    public BoundedBean getConfiguration() {
-        return this.configBean;
-    }
-
 }

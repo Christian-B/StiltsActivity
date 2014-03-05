@@ -68,7 +68,7 @@ public class MultipleInputsActivity<BoundedBean extends MultipleInputsBean>
         return this.getInputFilePath(callback, type, input);
     }
     
-    /* Parameters must be dded by super classes as
+    /* Parameters must be daded by super classes as
     TCat uses in, in 
     TCatN uses in1, in2 and nin
     @Override
@@ -79,10 +79,5 @@ public class MultipleInputsActivity<BoundedBean extends MultipleInputsBean>
         }
         return parameters;
     }*/
-
-    @Override
-    public BoundedBean getConfiguration() {
-        return this.configBean;
-    }
 
 }

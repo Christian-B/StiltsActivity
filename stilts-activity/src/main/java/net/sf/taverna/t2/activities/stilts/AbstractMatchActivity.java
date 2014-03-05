@@ -75,9 +75,4 @@ public class AbstractMatchActivity<BoundedBean extends AbstractMatchBean>
         return parameters;
     }
 
-    @Override
-    public BoundedBean getConfiguration() {
-        return this.configBean;
-    }
-
 }
