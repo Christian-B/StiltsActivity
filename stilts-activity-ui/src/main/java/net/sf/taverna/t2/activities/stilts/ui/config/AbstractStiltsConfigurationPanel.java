@@ -96,14 +96,14 @@ public class AbstractStiltsConfigurationPanel<BoundedActivity extends AbstractSt
             String message = outputFormatSelector.getSelectedItem() + 
                     " Used for " + OUTPUT_FORMAT_LABEL + 
                     " Is not a valid output format. Valid formats are: " + StiltsConfigurationConstants.VALID_OUTPUT_FORMATS_LIST;
-            JOptionPane.showMessageDialog(this, "test", "Illegal format", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, message, "Illegal " + OUTPUT_FORMAT_LABEL, JOptionPane.ERROR_MESSAGE);
             return false;
         }         
         if (!StiltsConfigurationConstants.VALID_OUTPUT_TYPE_LIST.contains(outputTypeSelector.getSelectedItem())){
             String message = outputFormatSelector.getSelectedItem() + 
                     " Used for " + OUTPUT_FORMAT_LABEL + 
                     " Is not a valid output type. Valid types are: " + StiltsConfigurationConstants.VALID_OUTPUT_TYPE_LIST;
-            JOptionPane.showMessageDialog(this, "test", "Illegal type ", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, message, "Illegal " + OUTPUT_FORMAT_LABEL , JOptionPane.ERROR_MESSAGE);
             return false;
         }
          // All valid, return true

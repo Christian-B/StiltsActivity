@@ -55,7 +55,7 @@ public class MultipleFormatsConfigurationPanel
                 String message = inputsFormatsSelectors.get(i).getSelectedItem() + 
                         " Used for " + INPUT_FORMAT_LABEL + (i+1) +  
                         " Is not a valid input format. Valid types are: " + StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST;
-                JOptionPane.showMessageDialog(this, "test", "Illegal type ", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, message, "Illegal " + INPUT_FORMAT_LABEL + (i+1), JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }

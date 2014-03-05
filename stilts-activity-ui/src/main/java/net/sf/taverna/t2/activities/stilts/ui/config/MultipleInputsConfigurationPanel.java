@@ -74,7 +74,7 @@ public class MultipleInputsConfigurationPanel
             String numberOfInputsString = numberOfInputsField.getText();
             if (numberOfInputsString == null || numberOfInputsString.isEmpty()){
                 String message = NUMBER_OF_INPUTS + " must be specified";
-                JOptionPane.showMessageDialog(this, "test", "Missing " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, message, "Missing " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             int numberOfInputs;
@@ -82,12 +82,12 @@ public class MultipleInputsConfigurationPanel
                 numberOfInputs = Integer.parseInt(numberOfInputsString);
             } catch (NumberFormatException ex){
                 String message = NUMBER_OF_INPUTS + " is not a valid possitive integer.";
-                JOptionPane.showMessageDialog(this, "test", "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, message, "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
                 return false;            
             }
             if (numberOfInputs < 2){
                 String message = NUMBER_OF_INPUTS + " should be 2 or more.";
-                JOptionPane.showMessageDialog(this, "test", "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, message, "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
                 return false;                        
             }
         }
@@ -96,7 +96,7 @@ public class MultipleInputsConfigurationPanel
                 String message = inputsTypesSelectors.get(i).getSelectedItem() + 
                         " Used for " + INPUT_TYPE_LABEL + (i+1) +  
                         " Is not a valid input type. Valid types are: " + StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST;
-                JOptionPane.showMessageDialog(this, "test", "Illegal type ", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, message, "Illegal " + INPUT_TYPE_LABEL + (i+1), JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
