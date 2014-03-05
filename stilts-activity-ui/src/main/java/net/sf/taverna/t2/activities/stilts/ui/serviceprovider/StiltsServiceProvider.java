@@ -79,6 +79,26 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
 	exactMatchServiceDesc.setDescription("Match on 1 Column");
 	results.add(exactMatchServiceDesc);
       
+        System.out.println ("here");
+        TJoinServiceDesc tJoinService = new TJoinServiceDesc();
+        // Populate the service description bean
+        System.out.println ("1");
+        tJoinService.setFormatsOfInputs(AllCsv);
+        tJoinService.setFormatOfOutput("tst");
+        tJoinService.setNumberOfInputs(2);
+        System.out.println ("2");
+        tJoinService.setTypesOfInputs(allFilePath);
+	tJoinService.setTypeOfOutput(StiltsConfigurationConstants.STRING_TYPE);
+        tJoinService.setDebugMode(true);
+        System.out.println ("3");
+        tJoinService.setFixedNumberOfInputs(false);
+	// Optional: set description
+        System.out.println ("4");
+	tJoinService.setDescription("Join");
+	results.add(tJoinService);
+
+        System.out.println ("5");
+
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time
         callBack.partialResults(results);

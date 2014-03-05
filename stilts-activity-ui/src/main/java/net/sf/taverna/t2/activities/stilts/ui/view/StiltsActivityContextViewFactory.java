@@ -11,6 +11,7 @@ import net.sf.taverna.t2.activities.stilts.ExactMatchActivity;
 import net.sf.taverna.t2.activities.stilts.TCatActivity;
 import net.sf.taverna.t2.activities.stilts.TCatNActivity;
 import net.sf.taverna.t2.activities.stilts.TCopyActivity;
+import net.sf.taverna.t2.activities.stilts.TJoinActivity;
 
 public class StiltsActivityContextViewFactory implements
             ContextualViewFactory<AbstractStilsActivity> {
@@ -31,6 +32,9 @@ public class StiltsActivityContextViewFactory implements
         }
         if (activity instanceof ExactMatchActivity){
             return Arrays.<ContextualView>asList(new ExactMatchContextualView((ExactMatchActivity)activity));
+        }
+        if (activity instanceof TJoinActivity){
+            return Arrays.<ContextualView>asList(new TJoinContextualView((TJoinActivity)activity));
         }
         return null;
     }
