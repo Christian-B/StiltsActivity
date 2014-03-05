@@ -8,9 +8,10 @@ import net.sf.taverna.t2.activities.stilts.SingleInputBean;
 
 import net.sf.taverna.t2.activities.stilts.TCopyActivity;
 import net.sf.taverna.t2.activities.stilts.ui.config.TCopyConfigureAction;
+import net.sf.taverna.t2.workbench.ui.views.contextualviews.ContextualView;
 
 @SuppressWarnings("serial")
-public class TCopyContextualView extends AbstractStiltsContextualView {
+public class TCopyContextualView extends ContextualView {
     private final TCopyActivity activity;
     private StiltsBeanPanel mainFrame;
 
@@ -45,6 +46,15 @@ public class TCopyContextualView extends AbstractStiltsContextualView {
     @Override
     public Action getConfigureAction(final Frame owner) {
         return new TCopyConfigureAction(activity, owner);
+    }
+
+    /**
+      * View position hint
+      */
+    @Override
+    public int getPreferredPosition() {
+        // We want to be on top
+        return 100;
     }
 
 }

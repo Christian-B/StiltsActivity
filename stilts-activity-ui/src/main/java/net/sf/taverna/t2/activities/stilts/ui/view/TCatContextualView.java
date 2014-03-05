@@ -8,9 +8,10 @@ import net.sf.taverna.t2.activities.stilts.SingleFormatMultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.TCatActivity;
 
 import net.sf.taverna.t2.activities.stilts.ui.config.TCatConfigureAction;
+import net.sf.taverna.t2.workbench.ui.views.contextualviews.ContextualView;
 
 @SuppressWarnings("serial")
-public class TCatContextualView extends AbstractStiltsContextualView {
+public class TCatContextualView extends ContextualView {
     private final TCatActivity activity;
     private StiltsBeanPanel mainFrame;
 
@@ -45,6 +46,15 @@ public class TCatContextualView extends AbstractStiltsContextualView {
     @Override
     public Action getConfigureAction(final Frame owner) {
         return new TCatConfigureAction(activity, owner);
+    }
+    
+   /**
+      * View position hint
+      */
+    @Override
+    public int getPreferredPosition() {
+        // We want to be on top
+        return 100;
     }
 
 }

@@ -9,9 +9,10 @@ import net.sf.taverna.t2.activities.stilts.TCatNActivity;
 
 import net.sf.taverna.t2.activities.stilts.ui.config.TCatConfigureAction;
 import net.sf.taverna.t2.activities.stilts.ui.config.TCatNConfigureAction;
+import net.sf.taverna.t2.workbench.ui.views.contextualviews.ContextualView;
 
 @SuppressWarnings("serial")
-public class TCatNContextualView extends AbstractStiltsContextualView {
+public class TCatNContextualView extends ContextualView {
     private final TCatNActivity activity;
     private StiltsBeanPanel mainFrame;
 
@@ -46,6 +47,15 @@ public class TCatNContextualView extends AbstractStiltsContextualView {
     @Override
     public Action getConfigureAction(final Frame owner) {
         return new TCatNConfigureAction(activity, owner);
+    }
+
+    /**
+      * View position hint
+      */
+    @Override
+    public int getPreferredPosition() {
+        // We want to be on top
+        return 100;
     }
 
 }
