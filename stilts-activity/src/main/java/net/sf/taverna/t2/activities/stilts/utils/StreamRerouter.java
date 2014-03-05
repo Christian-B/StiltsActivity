@@ -73,7 +73,6 @@ public class StreamRerouter implements Runnable
     }
 
     public synchronized void reset(RunStatus newStatus) {
-        System.out.println("reset " + newStatus);
         runStatus = newStatus;
 //        closeOut();
         closeErr();
@@ -121,7 +120,6 @@ public class StreamRerouter implements Runnable
     public void run(){
         try {
             while(runStatus == RunStatus.RUNNING){
-                System.out.println("checking ");
                 checkIn();
  //               checkOut();
                 checkErr();
