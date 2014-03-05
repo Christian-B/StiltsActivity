@@ -72,7 +72,8 @@ public class StreamRerouter implements Runnable
         }
     }
 
-    public void reset(RunStatus newStatus) {
+    public synchronized void reset(RunStatus newStatus) {
+        System.out.println("reset " + newStatus);
         runStatus = newStatus;
 //        closeOut();
         closeErr();
@@ -87,12 +88,14 @@ public class StreamRerouter implements Runnable
         return errRecord.toString();
     }
 
-    private void checkErr() throws IOException{
-        while (errReader.ready()){        
-            String temp= errReader.readLine();
-            errRecord.append(temp);
-            errRecord.append(System.lineSeparator());
-            originalSystemErr.println("err: " + temp);
+    private synchronized void checkErr() throws IOException{
+        if(runStatus == RunStatus.RUNNING){
+            while (errReader.ready()){        
+                String temp= errReader.readLine();
+                errRecord.append(temp);
+                errRecord.append(System.lineSeparator());
+                originalSystemErr.println("err: " + temp);
+            }
         }
     }
     
@@ -106,9 +109,11 @@ public class StreamRerouter implements Runnable
         }
     }
 */
-    private void checkIn() throws IOException{
-        if (originalSystemIn.available() > 0){
-            System.setIn(originalSystemIn);
+    private synchronized void checkIn() throws IOException{
+        if(runStatus == RunStatus.RUNNING){
+            if (originalSystemIn.available() > 0){
+                System.setIn(originalSystemIn);
+            }
        }
     }
 
@@ -116,6 +121,7 @@ public class StreamRerouter implements Runnable
     public void run(){
         try {
             while(runStatus == RunStatus.RUNNING){
+                System.out.println("checking ");
                 checkIn();
  //               checkOut();
                 checkErr();
@@ -123,6 +129,7 @@ public class StreamRerouter implements Runnable
             }
         }
         catch (Exception e){
+           e.printStackTrace();
            reset(RunStatus.ERROR);
         }       
     }
