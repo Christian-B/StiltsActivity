@@ -9,11 +9,10 @@ import net.sf.taverna.t2.reference.T2Reference;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class ExactMatchActivity<BoundedBean extends ExactMatchBean> 
-        extends AbstractMatchActivity<BoundedBean>{
+public class ExactMatchActivity extends AbstractMatchActivity<ExactMatchBean>{
 
     @Override
-    protected void checkBean(BoundedBean configBean)
+    protected void checkBean(ExactMatchBean configBean)
             throws ActivityConfigurationException {
         super.checkBean(configBean);
         if (configBean.getNumbertOfColumnsToMatch() < 1) {

@@ -66,6 +66,19 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
 	tcatnService.setDescription("TCatN");
 	results.add(tcatnService);
 
+        ExactMatchServiceDesc exactMatchServiceDesc = new ExactMatchServiceDesc();
+        exactMatchServiceDesc.setFormatsOfInputs(AllCsv);
+        exactMatchServiceDesc.setTypesOfInputs(allFilePath);
+        exactMatchServiceDesc.setFormatOfOutput("csv");
+ 	exactMatchServiceDesc.setTypeOfOutput(StiltsConfigurationConstants.STRING_TYPE);
+        exactMatchServiceDesc.setDebugMode(true);
+        exactMatchServiceDesc.setNumbertOfColumnsToMatch(1);
+        exactMatchServiceDesc.setFindValue("all");
+        exactMatchServiceDesc.setJoinValue("1and2");
+        exactMatchServiceDesc.setFixcolsValue("dups");
+	exactMatchServiceDesc.setDescription("Match on 1 Column");
+	results.add(exactMatchServiceDesc);
+      
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time
         callBack.partialResults(results);

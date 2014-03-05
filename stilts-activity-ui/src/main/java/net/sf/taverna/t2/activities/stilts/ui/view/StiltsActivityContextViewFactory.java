@@ -7,6 +7,7 @@ import net.sf.taverna.t2.workbench.ui.views.contextualviews.ContextualView;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ContextualViewFactory;
 
 import net.sf.taverna.t2.activities.stilts.AbstractStilsActivity;
+import net.sf.taverna.t2.activities.stilts.ExactMatchActivity;
 import net.sf.taverna.t2.activities.stilts.TCatActivity;
 import net.sf.taverna.t2.activities.stilts.TCatNActivity;
 import net.sf.taverna.t2.activities.stilts.TCopyActivity;
@@ -27,6 +28,9 @@ public class StiltsActivityContextViewFactory implements
         }
         if (activity instanceof TCopyActivity){
             return Arrays.<ContextualView>asList(new TCopyContextualView((TCopyActivity)activity));
+        }
+        if (activity instanceof ExactMatchActivity){
+            return Arrays.<ContextualView>asList(new ExactMatchContextualView((ExactMatchActivity)activity));
         }
         return null;
     }
