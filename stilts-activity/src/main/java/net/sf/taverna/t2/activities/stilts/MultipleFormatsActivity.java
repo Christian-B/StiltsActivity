@@ -5,12 +5,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.taverna.t2.invocation.InvocationContext;
-import net.sf.taverna.t2.reference.ReferenceService;
 import net.sf.taverna.t2.reference.T2Reference;
-import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
-import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
 public class MultipleFormatsActivity<BoundedBean extends MultipleFormatsBean> 
@@ -61,7 +57,9 @@ public class MultipleFormatsActivity<BoundedBean extends MultipleFormatsBean>
         if (parameters == null){  // super.prepareParameters failed
             return null; //callback.fail(.. aready called
         }
-        parameters.add("nin=" + getConfiguration().getNumberOfInputs());
+        if (!configBean.isFixedNumberOfInputs()){
+            parameters.add("nin=" + getConfiguration().getNumberOfInputs());
+        }
         for (int inputsNumber = 1; inputsNumber <= configBean.getNumberOfInputs(); inputsNumber++){
             String inputPath = getInputFilePath(inputs, callback, inputsNumber);
             if (inputPath == null){

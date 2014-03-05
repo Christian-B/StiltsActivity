@@ -45,4 +45,26 @@ public class StiltsConfigurationConstants implements Serializable {
     public static final String[] VALID_OUTPUT_TYPE_ARRAY = {FILE_PATH_TYPE, STRING_TYPE};
     public static final List<String> VALID_OUTPUT_TYPE_LIST = Arrays.asList(VALID_OUTPUT_TYPE_ARRAY);
     
+    public static final String[] VALID_FIND_VALUES_ARRAY = {
+        "all",
+        "best",
+        "best1",
+        "best2"};
+    public static final List<String> VALID_FIND_VALUES_LIST = Arrays.asList(VALID_FIND_VALUES_ARRAY);
+    
+    public static final String[] VALID_JOIN_VALUES_ARRAY = {
+        "1and2",
+        "1or2",
+        "all1",
+        "all2",
+        "1not2",
+        "2not1",
+        "1xor2"};
+    public static final List<String> VALID_JOIN_VALUES_LIST = Arrays.asList(VALID_JOIN_VALUES_ARRAY);
+    
+    public static final String[] VALID_FIXCOLS_VALUES_ARRAY = { 
+        "none",
+        "dups",
+        "all"};
+    public static final List<String> VALID_FIXCOLS_VALUES_LIST = Arrays.asList(VALID_FIXCOLS_VALUES_ARRAY);
 }
