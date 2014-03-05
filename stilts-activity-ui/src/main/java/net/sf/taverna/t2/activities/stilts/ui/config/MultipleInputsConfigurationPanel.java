@@ -11,13 +11,13 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.sf.taverna.t2.activities.stilts.MultipleInputsBean;
-import net.sf.taverna.t2.activities.stilts.MultipleInputsTypeActivity;
+import net.sf.taverna.t2.activities.stilts.MultipleInputsActivity;
 
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 
 @SuppressWarnings("serial")
 public class MultipleInputsConfigurationPanel 
-        <BoundedActivity extends MultipleInputsTypeActivity, 
+        <BoundedActivity extends MultipleInputsActivity, 
         BoundedBean extends MultipleInputsBean>  extends
         AbstractStiltsConfigurationPanel<BoundedActivity, BoundedBean> 
         implements DocumentListener{
