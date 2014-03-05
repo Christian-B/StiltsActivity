@@ -11,7 +11,7 @@ import net.sf.taverna.t2.reference.T2Reference;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class MatchActivity<BoundedBean extends MatchBean> 
+public class AbstracMatchActivity<BoundedBean extends AbstractMatchBean> 
         extends MultipleFormatsActivity<BoundedBean>{
 
     /*
@@ -19,9 +19,6 @@ public class MatchActivity<BoundedBean extends MatchBean>
      * would not apply if port names are looked up dynamically from the servic
      * operation, like done for WSDL services.
      */
-    static final String MACTH_COLUMNS_TABLE1_PARAMETER_NAME = "Table 1 Match Column";
-    static final String MACTH_COLUMNS_TABLE2_PARAMETER_NAME = "Table 2 Match Column";
-
     public static final String FIND_PARAMETER_NAME = "Find Option";
     public static final String JOIN_PARAMETER_NAME = "Join Option";
     public static final String FIXCOLS_PARAMETER_NAME = "Fixcols Option";
@@ -64,9 +61,6 @@ public class MatchActivity<BoundedBean extends MatchBean>
 
     protected void configurePorts() {
         super.configurePorts();
-        // Hard coded inputPath port, expecting a single String
-        addInput(MACTH_COLUMNS_TABLE1_PARAMETER_NAME, 0, true, null, String.class);
-        addInput(MACTH_COLUMNS_TABLE2_PARAMETER_NAME, 0, true, null, String.class);
     }
 	
     @Override
@@ -78,17 +72,6 @@ public class MatchActivity<BoundedBean extends MatchBean>
             return null; //callback.fail(.. aready called
         }
         parameters.addAll(newParameters);
-        parameters.add("matcher=exact");
-        String columns1 = getStringParameter(inputs, callback, MACTH_COLUMNS_TABLE1_PARAMETER_NAME, REQUIRED_PARAMETER);
-        if (columns1 == null){ //getFailed
-            return null; //callback.fail(.. aready called            
-        }
-        parameters.add("values1=" + columns1);
-        String columns2 = getStringParameter(inputs, callback, MACTH_COLUMNS_TABLE2_PARAMETER_NAME, REQUIRED_PARAMETER);
-        if (columns2 == null){ //getFailed
-            return null; //callback.fail(.. aready called            
-        }
-        parameters.add("values2=" + columns2);
         return parameters;
     }
 

@@ -24,6 +24,18 @@ import java.util.Vector;
  */
 public class MyUtils {
     
+    public static String ordinal(int i) {
+        String[] sufixes = new String[] { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th" };
+        switch (i % 100) {
+            case 11:
+            case 12:
+            case 13:
+                return i + "th";
+        default:
+            return i + sufixes[i % 10];
+        }
+    }
+    
 	public static String readFileAsString(String filePath) throws java.io.IOException{
 	    byte[] buffer = new byte[(int) new File(filePath).length()];
 	    BufferedInputStream f = null;

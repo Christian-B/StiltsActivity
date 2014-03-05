@@ -7,14 +7,14 @@ import java.util.List;
  * Stilts activity configuration bean.
  * 
  */
-public class MatchBean extends MultipleFormatsBean 
-        implements MatchInterface, Serializable {
+public class AbstractMatchBean extends MultipleFormatsBean 
+        implements AbstracMatchInterface, Serializable {
  
     private String findValue;
     private String joinValue;
     private String fixcolsValue;
 
-    public MatchBean(){
+    public AbstractMatchBean(){
         this.setNumberOfInputs(2);
         this.setFixedNumberOfInputs(true);
     }
