@@ -93,7 +93,7 @@ public class StreamRerouter implements Runnable
                 String temp= errReader.readLine();
                 errRecord.append(temp);
                 errRecord.append(System.lineSeparator());
-                originalSystemErr.println("err: " + temp);
+                originalSystemErr.println(temp);
             }
         }
     }

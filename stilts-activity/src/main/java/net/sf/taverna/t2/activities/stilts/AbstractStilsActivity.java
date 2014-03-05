@@ -276,10 +276,6 @@ public class AbstractStilsActivity<BoundedBean extends AbstractStiltsBean> exten
             Logger.getLogger(AbstractStilsActivity.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        System.out.println("Slits run: " + rerouter.getRunStatus());
-        System.out.println("ERROR:");
-        System.out.println(rerouter.getSavedErr());
- 
         if (configBean.isDebugMode()){
             writeStringParameter(callback, outputs, rerouter.getSavedErr(), ERROR_PARAMETER_NAME);
         }
@@ -291,7 +287,7 @@ public class AbstractStilsActivity<BoundedBean extends AbstractStiltsBean> exten
                 return false;
             }
         }
-        System.out.println("Run done");
+        System.out.println("Run done "+ rerouter.getRunStatus());
         return true;
     }
 
