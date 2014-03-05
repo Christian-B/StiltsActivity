@@ -14,6 +14,11 @@ public class ExactMatchBean extends AbstractMatchBean
     public ExactMatchBean(){
     }
 
+    public ExactMatchBean(ExactMatchInterface other){
+        super(other);
+        this.numbertOfColumnsToMatch = other.getNumbertOfColumnsToMatch();
+    }
+
     /**
      * @return the numbertOfColumnsToMatch
      */

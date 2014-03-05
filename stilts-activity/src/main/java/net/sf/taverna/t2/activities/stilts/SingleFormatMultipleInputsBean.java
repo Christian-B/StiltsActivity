@@ -11,6 +11,13 @@ public class SingleFormatMultipleInputsBean extends MultipleInputsBean
         implements SingleFormatMultipleInputsInterface, Serializable {
     private String formatOfInputs;
 
+    public SingleFormatMultipleInputsBean(){}
+    
+    public SingleFormatMultipleInputsBean(SingleFormatMultipleInputsInterface other){
+        super(other);
+        this.formatOfInputs = other.getFormatOfInputs();
+    }
+
     @Override
     public String getFormatOfInputs() {
         return formatOfInputs;

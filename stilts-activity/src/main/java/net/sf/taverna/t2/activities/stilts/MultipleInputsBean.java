@@ -13,6 +13,15 @@ public class MultipleInputsBean extends AbstractStiltsBean
     private boolean fixedNumberOfInputs;        
     private List<String> typesOfInputs;
 
+    public MultipleInputsBean(){}
+    
+    public MultipleInputsBean(MultipleInputsInterface other){
+        super(other);
+        this.fixedNumberOfInputs = other.isFixedNumberOfInputs();
+        this.numberOfInputs = other.getNumberOfInputs();
+        this.typesOfInputs = other.getTypesOfInputs();
+    }
+    
     @Override
     public int getNumberOfInputs() {
         return numberOfInputs;

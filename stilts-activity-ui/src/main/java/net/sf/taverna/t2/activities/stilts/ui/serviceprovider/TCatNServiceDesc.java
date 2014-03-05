@@ -40,14 +40,7 @@ public class TCatNServiceDesc extends ServiceDescription<MultipleFormatsBean>
       */
     @Override
     public MultipleFormatsBean getActivityConfiguration() {
-        MultipleFormatsBean bean = new MultipleFormatsBean();
-        bean.setFormatsOfInputs(getFormatsOfInputs());
-        bean.setFormatOfOutput(getFormatOfOutput());
-        bean.setTypesOfInputs(getTypesOfInputs());
-        bean.setTypeOfOutput(getTypeOfOutput());
-        bean.setNumberOfInputs(getNumberOfInputs());
-        bean.setFixedNumberOfInputs(isFixedNumberOfInputs());
-        return bean;
+        return new MultipleFormatsBean(this);
     }
 
     /**

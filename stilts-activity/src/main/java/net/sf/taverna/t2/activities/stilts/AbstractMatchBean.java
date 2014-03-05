@@ -16,7 +16,16 @@ public class AbstractMatchBean extends MultipleFormatsBean
 
     public AbstractMatchBean(){
         this.setNumberOfInputs(2);
+        this.setFixedNumberOfInputs(true);        
+    }
+    
+    public AbstractMatchBean(AbstracMatchInterface other){
+        super(other);
+        this.setNumberOfInputs(2);
         this.setFixedNumberOfInputs(true);
+        this.findValue = other.getFindValue();
+        this.fixcolsValue = other.getFixcolsValue();
+        this.joinValue= other.getJoinValue();
     }
 
     /**

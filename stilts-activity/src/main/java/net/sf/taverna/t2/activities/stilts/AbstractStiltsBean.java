@@ -11,6 +11,15 @@ public class AbstractStiltsBean implements AbstractStiltsInterface, Serializable
     private String typeOfOutput;
     private boolean debugMode = true;
      
+    
+    public AbstractStiltsBean(){}
+    
+    public AbstractStiltsBean(AbstractStiltsInterface other){
+        this.debugMode = other.isDebugMode();
+        this.formatOfOutput = other.getFormatOfOutput();
+        this.typeOfOutput = other.getTypeOfOutput();
+    }
+    
      /**
      * @return the formatOfOutput
      */

@@ -11,6 +11,14 @@ public class SingleInputBean extends AbstractStiltsBean
     private String formatOfInput;
     private String typeOfInput;
       
+    public SingleInputBean(){}
+    
+    public SingleInputBean(SingleInputInterface other){
+        super(other);
+        this.formatOfInput = other.getFormatOfInput();
+        this.typeOfInput = other.getTypeOfInput();
+    }
+    
    /**
      * @return the formatOfInput
      */

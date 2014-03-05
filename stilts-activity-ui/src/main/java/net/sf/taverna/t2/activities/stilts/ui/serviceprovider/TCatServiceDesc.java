@@ -40,14 +40,7 @@ public class TCatServiceDesc extends ServiceDescription<SingleFormatMultipleInpu
       */
     @Override
     public SingleFormatMultipleInputsBean getActivityConfiguration() {
-        SingleFormatMultipleInputsBean bean = new SingleFormatMultipleInputsBean();
-        bean.setFormatOfInputs(getFormatOfInputs());
-        bean.setFormatOfOutput(getFormatOfOutput());
-        bean.setTypesOfInputs(getTypesOfInputs());
-        bean.setTypeOfOutput(getTypeOfOutput());
-        bean.setNumberOfInputs(getNumberOfInputs());
-        bean.setFixedNumberOfInputs(isFixedNumberOfInputs());
-        return bean;
+        return new SingleFormatMultipleInputsBean(this);
     }
 
     /**

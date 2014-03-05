@@ -11,6 +11,13 @@ public class MultipleFormatsBean extends MultipleInputsBean
         implements MultipleFormatsInterface, Serializable {
     private List<String> formatsOfInputs;
 
+    public MultipleFormatsBean(){}
+    
+    public MultipleFormatsBean(MultipleFormatsInterface other){
+        super(other);
+        this.formatsOfInputs = other.getFormatsOfInputs();
+    }
+    
     @Override
     public List<String> getFormatsOfInputs() {
         return formatsOfInputs;

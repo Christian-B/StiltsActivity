@@ -40,12 +40,7 @@ public class TCopyServiceDesc extends ServiceDescription<SingleInputBean>
       */
     @Override
     public SingleInputBean getActivityConfiguration() {
-        SingleInputBean bean = new SingleInputBean();
-        bean.setFormatOfInput(getFormatOfInput());
-        bean.setFormatOfOutput(getFormatOfOutput());
-        bean.setTypeOfInput(getTypeOfInput());
-        bean.setTypeOfOutput(getTypeOfOutput());
-        return bean;
+        return new SingleInputBean(this);
     }
 
     /**
