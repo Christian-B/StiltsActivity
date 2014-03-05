@@ -43,12 +43,6 @@ public class TCatNActivityTest {
         configBean.setFixedNumberOfInputs(false);
    }
 
-    @After
-    public void reportDone() throws Exception {
-        System.out.println("test done");
-        System.err.println("Error stream ok");
-    }
-    
     @Test
     public void executeAsynch() throws Exception {
         System.out.println("Running TCat");
