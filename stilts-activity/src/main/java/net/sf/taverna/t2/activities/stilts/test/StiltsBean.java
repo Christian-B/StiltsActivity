@@ -20,7 +20,7 @@ public class StiltsBean implements Serializable{
     public StiltsBean() {}
     
     public StiltsBean(StilsProcessBean process, StiltsOutputFormat outputFormatEnum, StiltsOutputType outputTypeEnum,
-            boolean debugMode) {
+            boolean debugMode)  throws ActivityConfigurationException{
         this.process = process;
         this.outputFormatEnum = outputFormatEnum;
         this.outputTypeEnum = outputTypeEnum;

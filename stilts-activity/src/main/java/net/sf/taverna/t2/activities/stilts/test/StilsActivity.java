@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.taverna.t2.activities.stilts.utils.RunStatus;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsRunner;
@@ -119,6 +120,9 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile){
         List<String> parameters = createProcessParameters(configBean.getProcess(), inputs, callback);
+        if (parameters == null){ //createProcessParameters failed.
+            return null;//callback.fail already done
+        }
         parameters.add("ofmt=" + configBean.getFormatOfOutput());
         parameters.add("out=" + outputFile);
         if (parameters == null){
@@ -214,6 +218,13 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         List<String> parameters = new ArrayList<String>();
         if (processBean instanceof TPipeBean){
             parameters.add("tpipe");
+        } else if (processBean instanceof TCatBean){
+            parameters.add("tcat");
+        } else if (processBean instanceof TCatNBean){
+            parameters.add("tcatn");
+        } else {
+            callback.fail("Unexpected process " + processBean.getClass());
+            return null;
         }
         StilsInputsBean inputBean = processBean.getInputs();
         boolean ok = addInputParameters(inputBean, parameters, inputs, callback);
@@ -228,6 +239,10 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     private void configureInputPorts(StilsInputsBean inputBean) {
         if (inputBean instanceof SingleInputBean){
             configureSingleInputPorts((SingleInputBean)inputBean);
+        } else if (inputBean instanceof MultipleInputsBean){
+            configureMultipleInputsPorts((MultipleInputsBean)inputBean);
+        } else{
+            throw new UnsupportedOperationException("Unexpected input bean class: " + inputBean.getClass());
         }
     }
 
@@ -235,6 +250,10 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
         if (inputBean instanceof SingleInputBean){
             return addSingleInputParameters((SingleInputBean)inputBean, parameters, inputs, callback);
+        } else if (inputBean instanceof SingleFormatMultipleInputsBean){
+            return addSingleFormatMultipleInputsParameters((SingleFormatMultipleInputsBean)inputBean, parameters, inputs, callback);
+        } else if (inputBean instanceof MultipleFormatsBean){
+            return addMultipleFormatsParameters((MultipleFormatsBean)inputBean, parameters, inputs, callback);
         } else {
             callback.fail("Unexpected Bean class + " + inputBean.getClass());
             return FAILED;
@@ -261,7 +280,46 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         return OK;
     }
     
-    //Support methods
+    //Multiple Input Beand 
+    private void configureMultipleInputsPorts(MultipleInputsBean inputBean) {
+        for (int i = 1; i <= inputBean.retreiveNumberOfInputs(); i++){
+            addInput(inputTableParameter(i), 0, true, null, String.class);
+        }
+    }
+
+    private boolean addSingleFormatMultipleInputsParameters(SingleFormatMultipleInputsBean inputBean, List<String> parameters,
+            final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
+        List<StiltsInputType> types = inputBean.retreiveStiltsInputsType();
+        for (int i = 1; i <= inputBean.retreiveNumberOfInputs(); i++){
+            String input = this.getStringParameter(inputs, callback, inputTableParameter(i), REQUIRED_PARAMETER ); 
+            String inputPath = getInputFilePath(callback, types.get(i-1), input);
+            if (inputPath == null){
+                return FAILED;
+            }
+            parameters.add("in=" + inputPath);
+        }
+        parameters.add("ifmt="+ inputBean.getFormatOfInputs());      
+        return OK;
+    }
+       
+    private boolean addMultipleFormatsParameters(MultipleFormatsBean inputBean, List<String> parameters,
+            final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
+        parameters.add("nin=" + inputBean.retreiveNumberOfInputs());
+        List<StiltsInputType> types = inputBean.retreiveStiltsInputsType();
+        List<StiltsInputFormat> formats = inputBean.retreiveStiltsInputsFormat();
+        for (int i = 1; i <= inputBean.retreiveNumberOfInputs(); i++){
+            String input = this.getStringParameter(inputs, callback, inputTableParameter(i), REQUIRED_PARAMETER ); 
+            String inputPath = getInputFilePath(callback, types.get(i-1), input);
+            if (inputPath == null){
+                return FAILED;
+            }
+            parameters.add("in" + i + "=" + inputPath);
+            parameters.add("ifmt" + i + "="+ formats.get(i-1).getStiltsName());      
+        }
+        return OK;
+    }
+
+   //Support methods
     private File createOutputFile(final AsynchronousActivityCallback callback) {
         try {
             return File.createTempFile("Stilts", ".txt");
@@ -398,6 +456,11 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         }
         return stringBuilder.toString();
     }   
+
+    //Naming methods 
+    public static String inputTableParameter(int table){
+        return "Input Table " + table;
+    }
 
 
 }
