@@ -8,6 +8,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 
 import net.sf.taverna.t2.activities.testutils.ActivityInvoker;
 import net.sf.taverna.t2.workflowmodel.OutputPort;
@@ -30,22 +34,21 @@ public class TPipeActivityTest {
 
     @Before
     public void makeConfigBean() throws Exception {
-        configBean = new StiltsBean();
-        configBean.setDebugMode(false);
-        configBean.setFormatOfOutput("csv");
-        configBean.setTypeOfOutput(StiltsConfigurationConstants.STRING_TYPE);
-        SingleInputBean inputBean = new SingleInputBean();
-        inputBean.setFormatOfInput("tst");
-        inputBean.setTypeOfInput(StiltsConfigurationConstants.FILE_PATH_TYPE);
+        SingleInputBean inputBean = new SingleInputBean(StiltsInputFormat.TST, StiltsInputType.FILE);
         TPipeBean processBean = new TPipeBean(inputBean);
-        configBean.setProcess(processBean);
+        configBean = new StiltsBean(processBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false);
     }
 
-    @Test(expected = ActivityConfigurationException.class)
-    public void invalidConfiguration() throws ActivityConfigurationException {
+    //@Test(expected = ActivityConfigurationException.class)
+    //public void invalidConfiguration() throws ActivityConfigurationException {
+    //    configBean.setFormatOfOutput("invalidExample");
+    //    // Should throw ActivityConfigurationException
+    //    activity.configure(configBean);
+    //}
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void invalidOutput() throws ActivityConfigurationException {
         configBean.setFormatOfOutput("invalidExample");
-        // Should throw ActivityConfigurationException
-        activity.configure(configBean);
     }
 
     @Test

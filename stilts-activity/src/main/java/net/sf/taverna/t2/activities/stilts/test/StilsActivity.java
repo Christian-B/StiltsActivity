@@ -2,21 +2,22 @@ package net.sf.taverna.t2.activities.stilts.test;
 
 import net.sf.taverna.t2.activities.stilts.*;
 import java.io.BufferedReader;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import net.sf.taverna.t2.activities.stilts.utils.MyUtils;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static net.sf.taverna.t2.activities.stilts.test.StilsActivityHolding.ERROR_PARAMETER_NAME;
 import net.sf.taverna.t2.activities.stilts.utils.RunStatus;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsRunner;
 import net.sf.taverna.t2.activities.stilts.utils.StreamRerouter;
 
@@ -51,7 +52,8 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
 
     @Override
     public final void configure(StiltsBean configBean) throws ActivityConfigurationException {
-        checkBean(configBean);
+        configBean.checkValid();
+        
         // Store for getConfiguration(), but you could also make
         // getConfiguration() return a new bean from other sources
         this.configBean = configBean;
@@ -98,26 +100,6 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
           });
     }	
     
-    private void checkBean(StiltsBean configBean) throws ActivityConfigurationException {
-        this.configBean = configBean;
-        if (!StiltsConfigurationConstants.VALID_OUTPUT_FORMATS_LIST.contains(
-                configBean.getFormatOfOutput())) {
-            throw new ActivityConfigurationException(
-                    "Output format \"" + configBean.getFormatOfOutput() + 
-                    "\" not valid. Must be one of " + 
-                    StiltsConfigurationConstants.VALID_OUTPUT_FORMATS_LIST);
-        }
-        if (!StiltsConfigurationConstants.VALID_OUTPUT_TYPE_LIST.contains(
-                configBean.getTypeOfOutput())) {
-            throw new ActivityConfigurationException(
-                    "Output format \"" + configBean.getTypeOfOutput() + 
-                    "\" not valid. Must be one of " + 
-                    StiltsConfigurationConstants.VALID_OUTPUT_TYPE_LIST);
-        }
-        checkProcessBean(configBean.getProcess());
-        //Add pre and post processing here later
-    }
-
     private void configurePorts() {
         // In case we are being reconfigured - remove existing ports first
         // to avoid duplicates
@@ -197,11 +179,16 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     private void addResults(final AsynchronousActivityCallback callback, 
             Map<String, T2Reference> outputs, File outputFile, boolean runSuccessfull) {
         if (runSuccessfull){
-            String outputValue;
-            if (configBean.getTypeOfOutput().equals(StiltsConfigurationConstants.FILE_PATH_TYPE)){
-                outputValue = outputFile.getAbsolutePath();
-            } else {
-                outputValue = readFile(callback, outputFile);
+            String outputValue = null;
+            switch (configBean.retreiveStiltsOutputType()){
+                case FILE:
+                   outputValue = outputFile.getAbsolutePath();
+                    break;
+                case STRING:
+                    outputValue = readFile(callback, outputFile);
+                    break;
+                default:
+                    callback.fail("Unexpected Output type: " + configBean.retreiveStiltsOutputType());
             }
             if (outputValue == null){
                 return;
@@ -215,17 +202,6 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             callback.receiveResult(outputs, new int[0]);
         }
         //else do nothing as callback fail already called.
-    }
-
-    //Process methods 
-    private void checkProcessBean(StilsProcessBean processBean) throws ActivityConfigurationException {
-        if (processBean instanceof TPipeBean){
-            //No process specific checking
-        } else {
-            throw new ActivityConfigurationException("Unexpected Bean class + " + processBean.getClass());
-        }
-        StilsInputsBean inputBean = processBean.getInputs();
-        checkInputBean(inputBean);
     }
 
     private void configureProcessPorts(StilsProcessBean processBean){
@@ -249,14 +225,6 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     }
 
     //InputPorts methods
-    private void checkInputBean(StilsInputsBean inputBean) throws ActivityConfigurationException {
-        if (inputBean instanceof SingleInputBean){
-            checkSingleInputBean((SingleInputBean)inputBean);
-        } else {
-            throw new ActivityConfigurationException("Unexpected Bean class + " + inputBean.getClass());
-        }
-    }
-
     private void configureInputPorts(StilsInputsBean inputBean) {
         if (inputBean instanceof SingleInputBean){
             configureSingleInputPorts((SingleInputBean)inputBean);
@@ -275,23 +243,6 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     
     
     //SingleInput Methods
-    private void checkSingleInputBean(SingleInputBean inputBean) throws ActivityConfigurationException {
-        if (!StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST.contains(
-                inputBean.getFormatOfInput())) {
-            throw new ActivityConfigurationException(
-                    "Input format \"" + inputBean.getFormatOfInput() + 
-                    "\" not valid. Must be one of " + 
-                    StiltsConfigurationConstants.VALID_INPUT_FORMATS_LIST);
-        }
-        if (!StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST.contains(
-                inputBean.getTypeOfInput())) {
-            throw new ActivityConfigurationException(
-                    "Input Typet \"" + inputBean.getTypeOfInput() + 
-                    "\" not valid. Must be one of " + 
-                    StiltsConfigurationConstants.VALID_INPUT_TYPE_LIST);
-        }
-    }
-    
     private void configureSingleInputPorts(SingleInputBean inputBean) {
         addInput(INPUT_TABLE_PARAMETER_NAME, 0, true, null, String.class);
     }
@@ -299,7 +250,7 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     private boolean addSingleInputParameters(SingleInputBean inputBean, List<String> parameters,
             final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
         String input = this.getStringParameter(inputs, callback, INPUT_TABLE_PARAMETER_NAME, REQUIRED_PARAMETER ); 
-        String type = inputBean.getTypeOfInput();
+        StiltsInputType type = inputBean.retreiveStiltsInputType();
         String inputPath = getInputFilePath(callback, type, input);
         if (inputPath == null){
             return FAILED;
@@ -364,38 +315,47 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     }
     
     private final String getInputFilePath(final AsynchronousActivityCallback callback,
-            String type, String input) {
-       if (type == null){
+            StiltsInputType type, String input) {
+        if (type == null){
             callback.fail("Unexpected type null.");
             return null;           
-       }
-       if (type.isEmpty()){
-            callback.fail("Unexpected empty type.");
-            return null;           
-       }
-       if (input == null){
+        }
+        if (input == null){
             callback.fail("Unexpected input null.");
             return null;           
-       }
-       if (input.isEmpty()){
+        }
+        if (input.isEmpty()){
             callback.fail("Unexpected empoty input.");
             return null;           
-       }
-       if (type.equals(StiltsConfigurationConstants.FILE_PATH_TYPE)){
-           File test = new File(input);
-           if (test.exists()){
-               return test.getAbsolutePath();
-           } else {
-               callback.fail("Unable to locate file at " + test.getAbsolutePath());
-               return null;
-           }
-       }
-       try {
-            return MyUtils.writeStringAsTmpFile(input).getAbsolutePath();
-        } catch (IOException ex) {
-            callback.fail("Error writing input to tempFile.", ex);
-            return null;           
         }
+        switch (type){
+            case FILE:
+                File test = new File(input);
+                    if (test.exists()){
+                        return test.getAbsolutePath();
+                    } else {
+                        callback.fail("Unable to locate file at " + test.getAbsolutePath());
+                        return null;
+                    }
+            case STRING:
+                try {
+                    return MyUtils.writeStringAsTmpFile(input).getAbsolutePath();
+                } catch (IOException ex) {
+                    callback.fail("Error writing input to tempFile.", ex);
+                    return null;           
+                }
+            case URL:
+                try {
+                    URI exampleUri = new URI(input);
+                    return input;
+                } catch (URISyntaxException e) {
+                    callback.fail("Invalid URL: "+ input,e);
+                    return null;
+                }
+            default:
+                callback.fail("Unexpected input type: " + type);
+                return null;
+       }
     }
   
     private void toSystemOut(String[] parameters){

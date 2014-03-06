@@ -1,51 +1,70 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.sf.taverna.t2.activities.stilts.test;
+
+import java.io.Serializable;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
+import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
  *
  * @author christian
  */
-public class StiltsBean {
+public class StiltsBean implements Serializable{
     //StilsPreProcessorBean preprocessor;
-    private String formatOfOutput;
-    private String typeOfOutput;
-    private boolean debugMode = true;
+    private StiltsOutputFormat outputFormatEnum;
+    private StiltsOutputType outputTypeEnum;
     private StilsProcessBean process;
+    private boolean debugMode = true;
     //StilsPostProcessorBean postprocessor;
+
+    public StiltsBean() {}
+    
+    public StiltsBean(StilsProcessBean process, StiltsOutputFormat outputFormatEnum, StiltsOutputType outputTypeEnum,
+            boolean debugMode) {
+        this.process = process;
+        this.outputFormatEnum = outputFormatEnum;
+        this.outputTypeEnum = outputTypeEnum;
+        this.debugMode = debugMode;
+    }
 
     /**
      * @return the formatOfOutput
      */
     public String getFormatOfOutput() {
-        return formatOfOutput;
+        return outputFormatEnum.getStiltsName();
     }
 
     /**
      * @param formatOfOutput the formatOfOutput to set
      */
     public void setFormatOfOutput(String formatOfOutput) {
-        this.formatOfOutput = formatOfOutput;
+        outputFormatEnum = StiltsOutputFormat.byStiltsName(formatOfOutput);
     }
 
     /**
      * @return the typeOfOutput
      */
     public String getTypeOfOutput() {
-        return typeOfOutput;
+        return outputTypeEnum.getUserName();
     }
 
     /**
      * @param typeOfOutput the typeOfOutput to set
      */
     public void setTypeOfOutput(String typeOfOutput) {
-        this.typeOfOutput = typeOfOutput;
+        outputTypeEnum  = StiltsOutputType.byUserName(typeOfOutput);
     }
-
+    
+    /**
+     * None getter method to obtain the Output type as an ENUM.
+     * 
+     * Method name does not start with "get" so it is not picked up by the Serializer
+     * @return the typeOfOutput
+     */    
+    public StiltsOutputType retreiveStiltsOutputType(){
+        return outputTypeEnum;
+    }
+    
     /**
      * @return the debugMode
      */
@@ -72,5 +91,15 @@ public class StiltsBean {
      */
     public void setProcess(StilsProcessBean process) {
         this.process = process;
+    }
+    
+    public void checkValid() throws ActivityConfigurationException{
+        if (outputFormatEnum == null){
+            throw new ActivityConfigurationException("Output format not set.");
+        }
+        if (outputTypeEnum == null){
+            throw new ActivityConfigurationException("Output type not set.");
+        }
+        process.checkValid();
     }
 }

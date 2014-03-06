@@ -1,5 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.test;
 
+import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
+
 /**
  *
  * @author christian
@@ -20,4 +22,9 @@ public class StilsProcessBean {
     public void setInputs(StilsInputsBean inputs) {
         this.inputs = inputs;
     }
+    
+    public void checkValid() throws ActivityConfigurationException{
+        inputs.checkValid();
+    }
+
 }

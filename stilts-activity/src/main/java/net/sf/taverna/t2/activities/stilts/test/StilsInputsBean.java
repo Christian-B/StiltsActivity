@@ -6,10 +6,14 @@
 
 package net.sf.taverna.t2.activities.stilts.test;
 
+import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
+
 /**
  *
  * @author christian
  */
-public class StilsInputsBean {
+public abstract class StilsInputsBean {
+
+    public abstract void checkValid() throws ActivityConfigurationException;
     
 }
