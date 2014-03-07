@@ -222,6 +222,8 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             parameters.add("tcat");
         } else if (processBean instanceof TCatNBean){
             parameters.add("tcatn");
+        } else if (processBean instanceof TJoinBean){
+            parameters.add("tjoin");
         } else {
             callback.fail("Unexpected process " + processBean.getClass());
             return null;
