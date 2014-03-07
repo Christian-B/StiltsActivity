@@ -11,17 +11,15 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * Stilts activity configuration bean.
  * 
  */
-public class MultipleFormatsBean extends MultipleInputsBean 
+public abstract class MultipleFormatsBean extends MultipleInputsBean 
         implements Serializable {
     private List<StiltsInputFormat> formatsOfInputEnums;
-    private int numberOfInputs;
 
     public MultipleFormatsBean(){}
     
     public MultipleFormatsBean(List<StiltsInputType> typesOfInputsEnum, List<StiltsInputFormat> formatsOfInputEnums){
         super(typesOfInputsEnum);
         this.formatsOfInputEnums = formatsOfInputEnums;
-        this.numberOfInputs = formatsOfInputEnums.size();
     }
 
     public final List<String> getFormatsOfInputs() {
@@ -43,23 +41,9 @@ public class MultipleFormatsBean extends MultipleInputsBean
         return formatsOfInputEnums;
     }
 
-    /**
-     * @return the numberOfInputs
-     */
-    public final int getNumberOfInputs() {
-        return numberOfInputs;
-    }
-
-    /**
-     * @param numberOfInputs the numberOfInputs to set
-     */
-    public final void setNumberOfInputs(int numberOfInputs) {
-        this.numberOfInputs = numberOfInputs;
-    }
-      
     @Override
     public void checkValid() throws ActivityConfigurationException {
-        if (numberOfInputs < 2){
+        if (retreiveNumberOfInputs() < 2){
             throw new ActivityConfigurationException("Number of inputs must be 2 or greater.");
         }
         if (formatsOfInputEnums == null){
@@ -67,15 +51,9 @@ public class MultipleFormatsBean extends MultipleInputsBean
         }
         if (formatsOfInputEnums.size() != retreiveNumberOfInputs()){
              throw new ActivityConfigurationException("Length of Inputs formats: " + formatsOfInputEnums.size() 
-                    + " does not match number of inputs: " + getNumberOfInputs());
+                    + " does not match number of inputs: " + retreiveNumberOfInputs());
         }   
         super.checkValid();
     }
-    
-    @Override
-    public final int retreiveNumberOfInputs() {
-        return getNumberOfInputs();
-    }
-
       
 }

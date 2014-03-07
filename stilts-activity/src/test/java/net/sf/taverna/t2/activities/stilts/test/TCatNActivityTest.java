@@ -36,7 +36,7 @@ public class TCatNActivityTest {
         List<StiltsInputFormat> formatsOfInputsEnums = new ArrayList<StiltsInputFormat>();
         formatsOfInputsEnums.add(StiltsInputFormat.TST);
         formatsOfInputsEnums.add(StiltsInputFormat.CSV);
-        MultipleFormatsBean inputBean = new MultipleFormatsBean(typesOfInputsEnums, formatsOfInputsEnums);
+        MultipleFormatsBean inputBean = new FlexibleInputsBean(typesOfInputsEnums, formatsOfInputsEnums);
         TCatNBean processBean = new TCatNBean(inputBean);
         configBean = new StiltsBean(processBean, StiltsOutputFormat.ASCII, StiltsOutputType.STRING, false);
    }
@@ -87,7 +87,7 @@ public class TCatNActivityTest {
         formatsOfInputsEnums.add(StiltsInputFormat.TST);
         formatsOfInputsEnums.add(StiltsInputFormat.CSV);
         formatsOfInputsEnums.add(StiltsInputFormat.CSV);
-        MultipleFormatsBean inputBean = new MultipleFormatsBean(typesOfInputsEnums, formatsOfInputsEnums);
+        FlexibleInputsBean inputBean = new FlexibleInputsBean(typesOfInputsEnums, formatsOfInputsEnums);
         configBean.getProcess().setInputs(inputBean);
         activity.configure(configBean);
 
@@ -135,7 +135,7 @@ public class TCatNActivityTest {
         formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
         formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
         formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
-        MultipleFormatsBean inputBean = (MultipleFormatsBean)configBean.getProcess().getInputs();
+        FlexibleInputsBean inputBean = (FlexibleInputsBean)configBean.getProcess().getInputs();
         inputBean.setFormatsOfInputs(formatsOfInputs);
         ArrayList<String> typesOfInputs = new ArrayList<String>();
         typesOfInputs.add(StiltsInputType.FILE.getUserName());
@@ -161,7 +161,7 @@ public class TCatNActivityTest {
         formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
         formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
         formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
-        MultipleFormatsBean inputBean = (MultipleFormatsBean)configBean.getProcess().getInputs();
+        FlexibleInputsBean inputBean = (FlexibleInputsBean)configBean.getProcess().getInputs();
         inputBean.setFormatsOfInputs(formatsOfInputs);
         ArrayList<String> typesOfInputs = new ArrayList<String>();
         typesOfInputs.add(StiltsInputType.FILE.getUserName());
