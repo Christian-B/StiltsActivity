@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static net.sf.taverna.t2.activities.stilts.ExactMatchActivity.getMatchColumnName;
 import net.sf.taverna.t2.activities.stilts.utils.RunStatus;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
@@ -209,6 +210,9 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     }
 
     private void configureProcessPorts(StilsProcessBean processBean){
+        if (processBean instanceof ExactMatchBean){
+            configureTMatch2Ports((TMatch2Bean)processBean);
+        }
         StilsInputsBean inputBean = processBean.getInputs();
         configureInputPorts(inputBean);
     }
@@ -224,6 +228,10 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             parameters.add("tcatn");
         } else if (processBean instanceof TJoinBean){
             parameters.add("tjoin");
+        } else if (processBean instanceof TMatch2Bean){
+            if (!addTMatch2Parameters((TMatch2Bean)processBean, parameters, inputs, callback)){
+                return null; //Callback fail already called
+            }
         } else {
             callback.fail("Unexpected process " + processBean.getClass());
             return null;
@@ -303,10 +311,17 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         parameters.add("ifmt="+ inputBean.getFormatOfInputs());      
         return OK;
     }
-       
+           
     private boolean addMultipleFormatsParameters(MultipleFormatsBean inputBean, List<String> parameters,
             final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
-        parameters.add("nin=" + inputBean.retreiveNumberOfInputs());
+        if (inputBean instanceof FlexibleInputsBean){
+            parameters.add("nin=" + inputBean.retreiveNumberOfInputs());
+        } else if (inputBean instanceof TwoInputsBean){
+            //not required
+        } else {
+            callback.fail("Unexpected Bean class + " + inputBean.getClass());
+            return FAILED;           
+        }
         List<StiltsInputType> types = inputBean.retreiveStiltsInputsType();
         List<StiltsInputFormat> formats = inputBean.retreiveStiltsInputsFormat();
         for (int i = 1; i <= inputBean.retreiveNumberOfInputs(); i++){
@@ -320,6 +335,60 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         }
         return OK;
     }
+
+    //Merge
+    private void configureTMatch2Ports(TMatch2Bean tMatch2Bean) {
+        if (tMatch2Bean instanceof ExactMatchBean){
+            configureExactMatchPorts((ExactMatchBean)tMatch2Bean);
+        } else {
+            throw new UnsupportedOperationException("Unexpected input bean class: " + tMatch2Bean);
+        }
+    }
+    
+    private boolean addTMatch2Parameters(TMatch2Bean tMatch2Bean, List<String> parameters,
+            final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
+        parameters.add("tmatch2");
+        parameters.add("find=" + tMatch2Bean.getFindValue());
+        parameters.add("fixcols=" + tMatch2Bean.getFixcolsValue());
+        parameters.add("join=" + tMatch2Bean.getJoinValue());
+        if (tMatch2Bean instanceof ExactMatchBean){
+            return addExactMatchParameters((ExactMatchBean)tMatch2Bean, parameters, inputs, callback);
+        } else {
+            callback.fail("Unexpected Bean class + " + tMatch2Bean.getClass());
+            return FAILED;
+        }
+    }
+
+    private void configureExactMatchPorts(ExactMatchBean exactMatchBean) {
+        for (int table = 1; table <= 2; table++){
+            for (int column = 1; column <= exactMatchBean.getNumbertOfColumnsToMatch(); column++){
+                addInput(getMatchColumnName(table, column), 0, true, null, String.class);
+            }
+        }
+    }
+
+    private boolean addExactMatchParameters(ExactMatchBean exactMatchBean, List<String> parameters,
+            final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
+        String matcher = "matcher=exact";
+        //Add an extra +exact for each eaxtra column (more than 1)
+        for (int column = 1; column <  exactMatchBean.getNumbertOfColumnsToMatch(); column++){
+            matcher+= "+exact";
+        }
+        parameters.add(matcher);
+        for (int table = 1; table <= 2; table++){
+            String values = "values" + table + "=";
+            for (int column = 1; column <= exactMatchBean.getNumbertOfColumnsToMatch(); column++){
+                String columnName = getStringParameter(inputs, callback, getMatchColumnName(table, column), REQUIRED_PARAMETER);
+                if (columnName == null){ //getFailed
+                    return FAILED; //callback.fail(.. aready called            
+                }
+                values+=columnName + " ";
+            }
+            parameters.add(values);
+        } 
+        return OK;
+    }
+
 
    //Support methods
     private File createOutputFile(final AsynchronousActivityCallback callback) {
@@ -463,6 +532,11 @@ public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     public static String inputTableParameter(int table){
         return "Input Table " + table;
     }
+
+    public static String getMatchColumnName(int table, int matchPosition){     
+        return "Name of " + MyUtils.ordinal(matchPosition) + " column to match in " + MyUtils.ordinal(table) + " Table "; 
+    }
+    
 
 
 }
