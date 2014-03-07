@@ -21,7 +21,7 @@ public class TJoinActivityTest {
 
     private StiltsBean configBean;
 
-    private final StilsActivity activity = new StilsActivity();
+    private final StiltsActivity activity = new StiltsActivity();
 
     @Before
     public void makeConfigBean() throws Exception {
@@ -42,14 +42,14 @@ public class TJoinActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(StilsActivity.inputTableParameter(1), "src/test/resources/test.tst");
-        inputs.put(StilsActivity.inputTableParameter(2), 
+        inputs.put(StiltsActivity.inputTableParameter(1), "src/test/resources/test.tst");
+        inputs.put(StiltsActivity.inputTableParameter(2), 
                 "id,name,number\n" +
                 "45,Peter,1433\n" +
                 "22,Jack,456");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
@@ -58,7 +58,7 @@ public class TJoinActivityTest {
         System.out.println("Run done");
         assertEquals("Unexpected outputs", 1, outputs.size());
         //assertEquals("simple", outputs.get("simpleOutput"));
-        String result = outputs.get(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
+        String result = outputs.get(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
         System.out.println(result);
         assertTrue("Wrong output : Header line missing. ", result.contains("id_1,name_1,number_1,id_2,name_2,number_2"));
         assertTrue("Wrong output : John line missing. ", result.contains("1,John,1234,45,Peter,1433"));
@@ -81,15 +81,15 @@ public class TJoinActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(StilsActivity.inputTableParameter(1), "src/test/resources/test.tst");
-        inputs.put(StilsActivity.inputTableParameter(2), 
+        inputs.put(StiltsActivity.inputTableParameter(1), "src/test/resources/test.tst");
+        inputs.put(StiltsActivity.inputTableParameter(2), 
                 "id,name,number\n" +
                 "45,Peter,1433\n" +
                 "22,Jack,456");
-        inputs.put(StilsActivity.inputTableParameter(3), "src/test/resources/test2.csv");
+        inputs.put(StiltsActivity.inputTableParameter(3), "src/test/resources/test2.csv");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
@@ -98,7 +98,7 @@ public class TJoinActivityTest {
         System.out.println("Run done");
         assertEquals("Unexpected outputs", 1, outputs.size());
         //assertEquals("simple", outputs.get("simpleOutput"));
-        String result = outputs.get(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
+        String result = outputs.get(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
         System.out.println(result);
         assertTrue("Wrong output : Header line missing. ", result.contains("id_1,name_1,number_1,id_2,name_2,number_2,id_3,name_3,number_3"));
         assertTrue("Wrong output : John line missing. ", result.contains("1,John,1234,45,Peter,1433,4,Micheal,23234"));

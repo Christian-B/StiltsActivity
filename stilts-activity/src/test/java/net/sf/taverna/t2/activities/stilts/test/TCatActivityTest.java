@@ -26,7 +26,7 @@ public class TCatActivityTest {
 
     private StiltsBean configBean;
 
-    private final StilsActivity activity = new StilsActivity();
+    private final StiltsActivity activity = new StiltsActivity();
 
     @Before
     public void makeConfigBean() throws Exception {
@@ -45,14 +45,14 @@ public class TCatActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(StilsActivity.inputTableParameter(1), "src/test/resources/test.csv");
-        inputs.put(StilsActivity.inputTableParameter(2), 
+        inputs.put(StiltsActivity.inputTableParameter(1), "src/test/resources/test.csv");
+        inputs.put(StiltsActivity.inputTableParameter(2), 
                 "id,name,number\n" +
                 "45,Peter,1433\n" +
                 "22,Jack,456");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
@@ -61,7 +61,7 @@ public class TCatActivityTest {
         System.out.println("Run done");
         assertEquals("Unexpected outputs", 1, outputs.size());
         //assertEquals("simple", outputs.get("simpleOutput"));
-        String result = outputs.get(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
+        String result = outputs.get(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
         System.out.println(result);
         assertTrue("Wrong output : Header line missing. ", result.contains("id,name,number"));
         assertTrue("Wrong output : Christian line missing. ", result.contains("Christian"));
@@ -115,14 +115,14 @@ public class TCatActivityTest {
     @Test
     public void configureActivity() throws Exception {
         Set<String> expectedInputs = new HashSet<String>();
-        expectedInputs.add(StilsActivity.inputTableParameter(1));
-        expectedInputs.add(StilsActivity.inputTableParameter(2));
+        expectedInputs.add(StiltsActivity.inputTableParameter(1));
+        expectedInputs.add(StiltsActivity.inputTableParameter(2));
 
         Set<String> expectedOutputs = new HashSet<String>();
-        expectedOutputs.add(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME);
+        expectedOutputs.add(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME);
         if (configBean.isDebugMode()){
-            expectedOutputs.add(StilsActivity.ERROR_PARAMETER_NAME);
-            expectedOutputs.add(StilsActivity.STILTS_PARAMETER_NAME);
+            expectedOutputs.add(StiltsActivity.ERROR_PARAMETER_NAME);
+            expectedOutputs.add(StiltsActivity.STILTS_PARAMETER_NAME);
         } 
         activity.configure(configBean);
 

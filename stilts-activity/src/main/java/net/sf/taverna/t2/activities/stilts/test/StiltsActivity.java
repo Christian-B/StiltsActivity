@@ -31,7 +31,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.AbstractAsynchronousAc
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
 
-public class StilsActivity extends AbstractAsynchronousActivity<StiltsBean> { 
+public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> { 
 
     //Output Port names
     static final String OUTPUT_TABLE_PARAMETER_NAME = "Output Table";

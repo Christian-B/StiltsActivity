@@ -27,7 +27,7 @@ public class ExactMatchActivityTest {
 
     private StiltsBean configBean;
 
-    private final StilsActivity activity = new StilsActivity();
+    private final StiltsActivity activity = new StiltsActivity();
 
     @Before
     public void makeConfigBean() throws Exception {
@@ -48,11 +48,11 @@ public class ExactMatchActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(StilsActivity.inputTableParameter(1), 
+        inputs.put(StiltsActivity.inputTableParameter(1), 
                 "code,Last,Email,Job" + System.lineSeparator() + 
                 "1,Smith,test@example.com,Programmer" + System.lineSeparator() + 
                 "2,Brown,test@example.com,Boss");
-        inputs.put(StilsActivity.inputTableParameter(2), 
+        inputs.put(StiltsActivity.inputTableParameter(2), 
                 "id,name,number" + System.lineSeparator() + 
                 "1,Peter,1433" + System.lineSeparator() + 
                 "2,Jack,456");
@@ -60,7 +60,7 @@ public class ExactMatchActivityTest {
         inputs.put(ExactMatchActivity.getMatchColumnName(2, 1),"id"); 
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
@@ -69,7 +69,7 @@ public class ExactMatchActivityTest {
         System.out.println("Run done");
         assertEquals("Unexpected outputs", 1, outputs.size());
         //assertEquals("simple", outputs.get("simpleOutput"));
-        String result = outputs.get(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
+        String result = outputs.get(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
         System.out.println(result);
         assertTrue("Wrong output : Header line missing. ", result.contains("code,Last,Email,Job,id,name,number"));
         assertTrue("Wrong output : Smith line missing. ", result.contains("1,Smith,test@example.com,Programmer,1,Peter,1433"));
@@ -86,11 +86,11 @@ public class ExactMatchActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(StilsActivity.inputTableParameter(1), 
+        inputs.put(StiltsActivity.inputTableParameter(1), 
                 "code,first, Last,Email,Job" + System.lineSeparator() + 
                 "1,Peter,Smith,test@example.com,Programmer" + System.lineSeparator() + 
                 "2,Jack,Brown,test@example.com,Boss");
-        inputs.put(StilsActivity.inputTableParameter(2), 
+        inputs.put(StiltsActivity.inputTableParameter(2), 
                 "id,name,number" + System.lineSeparator() + 
                 "1,Peter,1433" + System.lineSeparator() + 
                 "2,Peter,1433" + System.lineSeparator() + 
@@ -101,7 +101,7 @@ public class ExactMatchActivityTest {
         inputs.put(ExactMatchActivity.getMatchColumnName(2, 2),"name"); 
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
@@ -110,7 +110,7 @@ public class ExactMatchActivityTest {
         System.out.println("Run done");
         assertEquals("Unexpected outputs", 1, outputs.size());
         //assertEquals("simple", outputs.get("simpleOutput"));
-        String result = outputs.get(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
+        String result = outputs.get(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
         System.out.println(result);
         assertTrue("Wrong output : Header line missing. ", result.contains("code,first,Last,Email,Job,id,name,number"));
         assertTrue("Wrong output : Smith line missing. ", result.contains("1,Peter,Smith,test@example.com,Programmer,1,Peter,1433"));

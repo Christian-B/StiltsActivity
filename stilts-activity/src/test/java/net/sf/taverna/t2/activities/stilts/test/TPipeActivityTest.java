@@ -26,7 +26,7 @@ public class TPipeActivityTest {
 
     private StiltsBean configBean;
 
-    private final StilsActivity activity = new StilsActivity();
+    private final StiltsActivity activity = new StiltsActivity();
 
     private static final String CSV_STRING = "id,name,number" + System.lineSeparator() +
             "1,John,1234" + System.lineSeparator() +
@@ -58,10 +58,10 @@ public class TPipeActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(StilsActivity.INPUT_TABLE_PARAMETER_NAME, "src/test/resources/test.tst");
+        inputs.put(StiltsActivity.INPUT_TABLE_PARAMETER_NAME, "src/test/resources/test.tst");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
@@ -69,7 +69,7 @@ public class TPipeActivityTest {
 
         assertEquals("Unexpected outputs", 1, outputs.size());
         //assertEquals("simple", outputs.get("simpleOutput"));
-        String result = outputs.get(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
+        String result = outputs.get(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
         System.out.println(result);
         assertEquals("Unexpected outputs", CSV_STRING, result);
     }
@@ -81,22 +81,22 @@ public class TPipeActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(StilsActivity.INPUT_TABLE_PARAMETER_NAME, "src/test/resources/test.tst");
+        inputs.put(StiltsActivity.INPUT_TABLE_PARAMETER_NAME, "src/test/resources/test.tst");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
-        expectedOutputTypes.put(StilsActivity.ERROR_PARAMETER_NAME, String.class);
-        expectedOutputTypes.put(StilsActivity.STILTS_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(StiltsActivity.ERROR_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(StiltsActivity.STILTS_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
                 activity, inputs, expectedOutputTypes);
 
         assertEquals("Unexpected outputs", 3, outputs.size());
-        String result = outputs.get(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
+        String result = outputs.get(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
         System.out.println(result);
         assertEquals("Unexpected outputs", CSV_STRING, result);
-        String error = outputs.get(StilsActivity.ERROR_PARAMETER_NAME).toString();
+        String error = outputs.get(StiltsActivity.ERROR_PARAMETER_NAME).toString();
         assertEquals("Unexpected Error", "", error);
     }
 
@@ -107,10 +107,10 @@ public class TPipeActivityTest {
         activity.configure(configBean);
 
         Map<String, Object> inputs = new HashMap<String, Object>();
-        inputs.put(StilsActivity.INPUT_TABLE_PARAMETER_NAME, "src/test/resources/test.csv");
+        inputs.put(StiltsActivity.INPUT_TABLE_PARAMETER_NAME, "src/test/resources/test.csv");
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
-        expectedOutputTypes.put(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
+        expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
         //expectedOutputTypes.put("moreOutputs", String.class);
 
         Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
@@ -118,9 +118,9 @@ public class TPipeActivityTest {
 
         assertEquals("Unexpected outputs", 1, outputs.size());
         //assertEquals("simple", outputs.get("simpleOutput"));
-        String result = outputs.get(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
+        String result = outputs.get(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
         System.out.println(result);
-        assertEquals("Unexpected outputs", StilsActivity.FAILED_MESSAGE, result);
+        assertEquals("Unexpected outputs", StiltsActivity.FAILED_MESSAGE, result);
     }
 
     @Test
@@ -143,13 +143,13 @@ public class TPipeActivityTest {
     @Test
     public void configureActivity() throws Exception {
         Set<String> expectedInputs = new HashSet<String>();
-        expectedInputs.add(StilsActivity.INPUT_TABLE_PARAMETER_NAME);
+        expectedInputs.add(StiltsActivity.INPUT_TABLE_PARAMETER_NAME);
 
         Set<String> expectedOutputs = new HashSet<String>();
-        expectedOutputs.add(StilsActivity.OUTPUT_TABLE_PARAMETER_NAME);
+        expectedOutputs.add(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME);
         if (configBean.isDebugMode()){
-            expectedOutputs.add(StilsActivity.ERROR_PARAMETER_NAME);
-            expectedOutputs.add(StilsActivity.STILTS_PARAMETER_NAME);
+            expectedOutputs.add(StiltsActivity.ERROR_PARAMETER_NAME);
+            expectedOutputs.add(StiltsActivity.STILTS_PARAMETER_NAME);
         } 
         activity.configure(configBean);
 
