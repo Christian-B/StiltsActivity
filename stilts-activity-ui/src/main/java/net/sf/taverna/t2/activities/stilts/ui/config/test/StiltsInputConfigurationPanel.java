@@ -2,7 +2,7 @@ package net.sf.taverna.t2.activities.stilts.ui.config.test;
 
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
-import net.sf.taverna.t2.activities.stilts.test.StitlsInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 @SuppressWarnings("serial")

@@ -1,22 +1,19 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.test;
 
-import net.sf.taverna.t2.activities.stilts.ui.serviceprovider.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Icon;
-import net.sf.taverna.t2.activities.stilts.test.ExactMatchBean;
-import net.sf.taverna.t2.activities.stilts.test.FlexibleInputsBean;
-import net.sf.taverna.t2.activities.stilts.test.MultipleFormatsBean;
-import net.sf.taverna.t2.activities.stilts.test.SingleFormatMultipleInputsBean;
-import net.sf.taverna.t2.activities.stilts.test.SingleInputBean;
-import net.sf.taverna.t2.activities.stilts.test.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.test.TCatBean;
-import net.sf.taverna.t2.activities.stilts.test.TCatNBean;
-import net.sf.taverna.t2.activities.stilts.test.TJoinBean;
-import net.sf.taverna.t2.activities.stilts.test.TPipeBean;
-import net.sf.taverna.t2.activities.stilts.test.TwoInputsBean;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
+import net.sf.taverna.t2.activities.stilts.input.ExactMatchBean;
+import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
+import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
+import net.sf.taverna.t2.activities.stilts.process.TCatBean;
+import net.sf.taverna.t2.activities.stilts.process.TCatNBean;
+import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
+import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
+import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;

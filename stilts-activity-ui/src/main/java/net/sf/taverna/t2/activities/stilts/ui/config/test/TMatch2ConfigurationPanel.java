@@ -5,7 +5,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.ListCellRenderer;
-import net.sf.taverna.t2.activities.stilts.test.TMatch2Bean;
+import net.sf.taverna.t2.activities.stilts.process.TMatch2Bean;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;

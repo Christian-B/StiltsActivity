@@ -1,7 +1,6 @@
-package net.sf.taverna.t2.activities.stilts.test;
+package net.sf.taverna.t2.activities.stilts.input;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
@@ -11,28 +10,35 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * Stilts activity configuration bean.
  * 
  */
-public class FlexibleInputsBean extends MultipleFormatsBean 
+public class SingleFormatMultipleInputsBean extends MultipleInputsBean 
         implements Serializable {
+    private StiltsInputFormat formatOfInputs;
     private int numberOfInputs;
-
-    public FlexibleInputsBean(){}
     
-    public FlexibleInputsBean(List<StiltsInputType> typesOfInputsEnum, List<StiltsInputFormat> formatsOfInputEnums){
-        super(typesOfInputsEnum, formatsOfInputEnums );
-        this.numberOfInputs = formatsOfInputEnums.size();
+    public SingleFormatMultipleInputsBean(){}
+    
+    public SingleFormatMultipleInputsBean(List<StiltsInputType> typesOfInputsEnum, StiltsInputFormat inputsFormatEnum){
+        super(typesOfInputsEnum);
+        this.formatOfInputs = inputsFormatEnum;
+        numberOfInputs = typesOfInputsEnum.size();
+    }
+    
+    @Override
+    public int retreiveNumberOfInputs() {
+        return numberOfInputs;
     }
 
     /**
      * @return the numberOfInputs
      */
-    public final int getNumberOfInputs() {
+    public int getNumberOfInputs() {
         return numberOfInputs;
     }
 
     /**
      * @param numberOfInputs the numberOfInputs to set
      */
-    public final void setNumberOfInputs(int numberOfInputs) {
+    public void setNumberOfInputs(int numberOfInputs) {
         this.numberOfInputs = numberOfInputs;
     }
       
@@ -41,12 +47,24 @@ public class FlexibleInputsBean extends MultipleFormatsBean
         if (numberOfInputs < 2){
             throw new ActivityConfigurationException("Number of inputs must be 2 or greater.");
         }
+        if (formatOfInputs == null){
+            throw new ActivityConfigurationException("Inputs format not set.");
+        }
         super.checkValid();
     }
-    
-    @Override
-    public final int retreiveNumberOfInputs() {
-        return getNumberOfInputs();
+
+    /**
+     * @return the formatOfInputs
+     */
+    public StiltsInputFormat getFormatOfInputs() {
+        return formatOfInputs;
+    }
+
+    /**
+     * @param formatOfInputs the formatOfInputs to set
+     */
+    public void setFormatOfInputs(StiltsInputFormat formatOfInputs) {
+        this.formatOfInputs = formatOfInputs;
     }
 
     /**
@@ -60,4 +78,5 @@ public class FlexibleInputsBean extends MultipleFormatsBean
         this.numberOfInputs = numberOfInputs;
         super.resetNumberOfInputs(numberOfInputs);
     }     
+
 }

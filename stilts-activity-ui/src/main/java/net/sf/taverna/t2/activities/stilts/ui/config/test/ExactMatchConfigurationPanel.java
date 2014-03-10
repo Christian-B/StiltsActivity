@@ -4,7 +4,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import net.sf.taverna.t2.activities.stilts.test.ExactMatchBean;
+import net.sf.taverna.t2.activities.stilts.input.ExactMatchBean;
 
 @SuppressWarnings("serial")
 public class ExactMatchConfigurationPanel extends TMatch2ConfigurationPanel <ExactMatchBean>{

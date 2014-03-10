@@ -1,5 +1,7 @@
-package net.sf.taverna.t2.activities.stilts.test;
+package net.sf.taverna.t2.activities.stilts.process;
 
+import net.sf.taverna.t2.activities.stilts.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -9,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;

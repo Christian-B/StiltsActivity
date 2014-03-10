@@ -5,7 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import net.sf.taverna.t2.activities.stilts.test.StiltsProcessBean;
+import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
 
 @SuppressWarnings("serial")
 public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessBean> extends JPanel{

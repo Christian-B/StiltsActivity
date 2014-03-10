@@ -6,7 +6,7 @@ import java.util.List;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.ContextualView;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ContextualViewFactory;
 
-import net.sf.taverna.t2.activities.stilts.test.StiltsActivity;
+import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 
 public class StiltsActivityContextViewFactory implements
             ContextualViewFactory<StiltsActivity> {

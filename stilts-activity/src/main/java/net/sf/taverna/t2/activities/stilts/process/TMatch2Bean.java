@@ -1,5 +1,6 @@
-package net.sf.taverna.t2.activities.stilts.test;
+package net.sf.taverna.t2.activities.stilts.process;
 
+import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsJoin;

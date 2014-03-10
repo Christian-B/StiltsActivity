@@ -1,6 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.test;
 
-import net.sf.taverna.t2.activities.stilts.test.FlexibleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
 
 @SuppressWarnings("serial")
 public class FlexibleInputsConfigurationPanel extends MultipleFormatsConfigurationPanel<FlexibleInputsBean> {

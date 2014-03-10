@@ -4,14 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.Icon;
-import net.sf.taverna.t2.activities.stilts.test.StiltsProcessBean;
+import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
 
 import net.sf.taverna.t2.servicedescriptions.ServiceDescription;
 import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
 
-import net.sf.taverna.t2.activities.stilts.test.StiltsActivity;
-import net.sf.taverna.t2.activities.stilts.test.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.test.StiltsInterface;
+import net.sf.taverna.t2.activities.stilts.StiltsActivity;
+import net.sf.taverna.t2.activities.stilts.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.StiltsInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 

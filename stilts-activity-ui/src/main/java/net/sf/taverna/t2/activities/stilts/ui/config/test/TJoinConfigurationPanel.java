@@ -1,7 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.test;
 
 import javax.swing.JLabel;
-import net.sf.taverna.t2.activities.stilts.test.TJoinBean;
+import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
 
 @SuppressWarnings("serial")
 public class TJoinConfigurationPanel extends StiltsProcessConfigurationPanel <TJoinBean>{

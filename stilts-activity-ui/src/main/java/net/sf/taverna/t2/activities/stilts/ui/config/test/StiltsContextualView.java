@@ -4,9 +4,8 @@ import java.awt.Frame;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import net.sf.taverna.t2.activities.stilts.test.StiltsActivity;
-import net.sf.taverna.t2.activities.stilts.test.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.StiltsActivity;
+import net.sf.taverna.t2.activities.stilts.StiltsBean;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.ContextualView;
 

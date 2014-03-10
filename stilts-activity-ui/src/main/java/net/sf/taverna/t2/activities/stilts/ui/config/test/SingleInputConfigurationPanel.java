@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.ListCellRenderer;
-import net.sf.taverna.t2.activities.stilts.test.SingleInputBean;
+import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;

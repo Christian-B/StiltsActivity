@@ -1,8 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.test;
 
 import java.awt.GridBagConstraints;
-import net.sf.taverna.t2.activities.stilts.test.FlexibleInputsBean;
-import net.sf.taverna.t2.activities.stilts.test.TwoInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
 
 @SuppressWarnings("serial")
 public class TwoInputsConfigurationPanel extends MultipleFormatsConfigurationPanel<TwoInputsBean> {

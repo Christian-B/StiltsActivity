@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import net.sf.taverna.t2.activities.stilts.test.MultipleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.MultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 
 @SuppressWarnings("serial")

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import net.sf.taverna.t2.activities.stilts.test.MultipleFormatsBean;
-import net.sf.taverna.t2.activities.stilts.test.MultipleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
+import net.sf.taverna.t2.activities.stilts.input.MultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 
 @SuppressWarnings("serial")

@@ -1,8 +1,10 @@
-package net.sf.taverna.t2.activities.stilts.test;
+package net.sf.taverna.t2.activities.stilts.process;
 
+import net.sf.taverna.t2.activities.stilts.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.*;
 import java.util.ArrayList;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -18,7 +20,6 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 
 import net.sf.taverna.t2.activities.testutils.ActivityInvoker;
-import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,16 @@
-package net.sf.taverna.t2.activities.stilts.test;
+package net.sf.taverna.t2.activities.stilts;
 
-import net.sf.taverna.t2.activities.stilts.*;
+import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
+import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
+import net.sf.taverna.t2.activities.stilts.input.MultipleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.ExactMatchBean;
+import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
+import net.sf.taverna.t2.activities.stilts.process.TMatch2Bean;
+import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
+import net.sf.taverna.t2.activities.stilts.process.TCatNBean;
 import java.io.BufferedReader;
 import net.sf.taverna.t2.activities.stilts.utils.MyUtils;
 import java.io.File;
@@ -13,12 +23,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
+import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
+import net.sf.taverna.t2.activities.stilts.process.TCatBean;
 import net.sf.taverna.t2.activities.stilts.utils.RunStatus;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsRunner;
 import net.sf.taverna.t2.activities.stilts.utils.StreamRerouter;
 
@@ -33,12 +43,12 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCa
 public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> { 
 
     //Output Port names
-    static final String OUTPUT_TABLE_PARAMETER_NAME = "Output Table";
-    static final String STILTS_PARAMETER_NAME = "Stilts Parameters";
-    static final String ERROR_PARAMETER_NAME = "Stilts Errors";
+    public static final String OUTPUT_TABLE_PARAMETER_NAME = "Output Table";
+    public static final String STILTS_PARAMETER_NAME = "Stilts Parameters";
+    public static final String ERROR_PARAMETER_NAME = "Stilts Errors";
     
     //Input Port Name
-    static final String INPUT_TABLE_PARAMETER_NAME = "Input Table";
+    public static final String INPUT_TABLE_PARAMETER_NAME = "Input Table";
 
     //These booleans are used in methods call to flag if the parameter must be present
     static final boolean REQUIRED_PARAMETER = true;

@@ -1,6 +1,7 @@
-package net.sf.taverna.t2.activities.stilts.test;
+package net.sf.taverna.t2.activities.stilts;
 
 import java.io.Serializable;
+import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;

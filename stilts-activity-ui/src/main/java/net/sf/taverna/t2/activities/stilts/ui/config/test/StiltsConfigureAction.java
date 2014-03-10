@@ -3,8 +3,8 @@ package net.sf.taverna.t2.activities.stilts.ui.config.test;
 import net.sf.taverna.t2.activities.stilts.ui.config.*;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
-import net.sf.taverna.t2.activities.stilts.test.StiltsActivity;
-import net.sf.taverna.t2.activities.stilts.test.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.StiltsActivity;
+import net.sf.taverna.t2.activities.stilts.StiltsBean;
 
 import net.sf.taverna.t2.workbench.ui.actions.activity.ActivityConfigurationAction;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationDialog;

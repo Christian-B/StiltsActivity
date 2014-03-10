@@ -3,7 +3,7 @@ package net.sf.taverna.t2.activities.stilts.ui.config.test;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import net.sf.taverna.t2.activities.stilts.test.SingleFormatMultipleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 
 @SuppressWarnings("serial")

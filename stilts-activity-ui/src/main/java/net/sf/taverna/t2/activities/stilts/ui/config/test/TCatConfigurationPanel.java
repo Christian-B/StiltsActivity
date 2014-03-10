@@ -1,8 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.test;
 
 import javax.swing.JLabel;
-import net.sf.taverna.t2.activities.stilts.test.SingleFormatMultipleInputsBean;
-import net.sf.taverna.t2.activities.stilts.test.TCatBean;
+import net.sf.taverna.t2.activities.stilts.process.TCatBean;
 
 @SuppressWarnings("serial")
 public class TCatConfigurationPanel extends StiltsProcessConfigurationPanel <TCatBean>{

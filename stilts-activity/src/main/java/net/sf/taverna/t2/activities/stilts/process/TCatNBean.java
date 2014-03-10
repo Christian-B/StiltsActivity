@@ -1,4 +1,6 @@
-package net.sf.taverna.t2.activities.stilts.test;
+package net.sf.taverna.t2.activities.stilts.process;
+
+import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
 
 /**
  *
