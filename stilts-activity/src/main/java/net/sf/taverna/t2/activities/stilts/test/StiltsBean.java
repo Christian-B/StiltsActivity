@@ -13,13 +13,13 @@ public class StiltsBean implements StiltsInterface, Serializable{
     //StilsPreProcessorBean preprocessor;
     private StiltsOutputFormat outputFormat;
     private StiltsOutputType outputType;
-    private StilsProcessBean process;
+    private StiltsProcessBean process;
     private boolean debugMode = true;
     //StilsPostProcessorBean postprocessor;
 
     public StiltsBean() {}
     
-    public StiltsBean(StilsProcessBean process, StiltsOutputFormat outputFormatEnum, StiltsOutputType outputTypeEnum,
+    public StiltsBean(StiltsProcessBean process, StiltsOutputFormat outputFormatEnum, StiltsOutputType outputTypeEnum,
             boolean debugMode)  throws ActivityConfigurationException{
         this.process = process;
         this.outputFormat = outputFormatEnum;
@@ -51,14 +51,14 @@ public class StiltsBean implements StiltsInterface, Serializable{
     /**
      * @return the process
      */
-    public StilsProcessBean getProcess() {
+    public StiltsProcessBean getProcess() {
         return process;
     }
 
     /**
      * @param process the process to set
      */
-    public void setProcess(StilsProcessBean process) {
+    public void setProcess(StiltsProcessBean process) {
         this.process = process;
     }
     

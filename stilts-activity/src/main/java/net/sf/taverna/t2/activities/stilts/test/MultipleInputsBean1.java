@@ -10,7 +10,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * Stilts activity configuration bean.
  * 
  */
-public abstract class MultipleInputsBean1 extends StilsInputsBean implements Serializable {
+public abstract class MultipleInputsBean1 extends StitlsInputsBean implements Serializable {
     
     private List<StiltsInputType> typesOfInputsEnums;
     

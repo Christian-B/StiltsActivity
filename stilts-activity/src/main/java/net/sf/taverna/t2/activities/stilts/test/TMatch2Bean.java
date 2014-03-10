@@ -9,7 +9,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  *
  * @author christian
  */
-public class TMatch2Bean extends StilsProcessBean {
+public class TMatch2Bean extends StiltsProcessBean {
  
     private StiltsFind findEnum;
     private StiltsJoin joinEnum;

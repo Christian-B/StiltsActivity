@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.test.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.test.FlexibleInputsBean;
-import net.sf.taverna.t2.activities.stilts.test.StilsInputsBean;
-import net.sf.taverna.t2.activities.stilts.test.StilsProcessBean;
+import net.sf.taverna.t2.activities.stilts.test.StitlsInputsBean;
+import net.sf.taverna.t2.activities.stilts.test.StiltsProcessBean;
 import net.sf.taverna.t2.activities.stilts.test.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.test.StiltsBean;
 import net.sf.taverna.t2.activities.stilts.test.TCatNBean;
@@ -207,9 +207,9 @@ public class StiltsConfigurationPanel extends
         debugSelector.setSelected(configBean.isDebugMode());
     }
 
-    private StiltsProcessConfigurationPanel createProcessPanel(StilsProcessBean processBean) {
+    private StiltsProcessConfigurationPanel createProcessPanel(StiltsProcessBean processBean) {
         StiltsInputConfigurationPanel inputPanel;
-        StilsInputsBean inputBean = processBean.getInputs();
+        StitlsInputsBean inputBean = processBean.getInputs();
         if (inputBean instanceof FlexibleInputsBean){
             inputPanel = new FlexibleInputsConfigurationPanel((FlexibleInputsBean)inputBean, editable);
         } else if (inputBean instanceof SingleInputBean){

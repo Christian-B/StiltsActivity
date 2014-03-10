@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.Icon;
-import net.sf.taverna.t2.activities.stilts.test.StilsProcessBean;
+import net.sf.taverna.t2.activities.stilts.test.StiltsProcessBean;
 
 import net.sf.taverna.t2.servicedescriptions.ServiceDescription;
 import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
@@ -18,13 +18,13 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 public class StiltsServiceDesc extends ServiceDescription<StiltsBean> 
         implements StiltsInterface{
 
-    private StilsProcessBean process;
+    private StiltsProcessBean process;
     private StiltsOutputFormat outputFormatEnum;
     private StiltsOutputType outputTypeEnum;    
     private boolean debugMode;
     private String name;
     
-    public StiltsServiceDesc(StilsProcessBean process, StiltsOutputFormat outputFormatEnum, 
+    public StiltsServiceDesc(StiltsProcessBean process, StiltsOutputFormat outputFormatEnum, 
             StiltsOutputType outputTypeEnum, boolean debugMode, String name){
        this.process =  process;
        this.outputFormatEnum = outputFormatEnum;
@@ -34,7 +34,7 @@ public class StiltsServiceDesc extends ServiceDescription<StiltsBean>
     }
     
     @Override
-    public StilsProcessBean getProcess() {
+    public StiltsProcessBean getProcess() {
         return process;
     }
 

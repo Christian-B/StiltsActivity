@@ -2,11 +2,11 @@ package net.sf.taverna.t2.activities.stilts.ui.config.test;
 
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
-import net.sf.taverna.t2.activities.stilts.test.StilsInputsBean;
+import net.sf.taverna.t2.activities.stilts.test.StitlsInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 @SuppressWarnings("serial")
-public abstract class StiltsInputConfigurationPanel<BoundedBean extends StilsInputsBean> extends JPanel{
+public abstract class StiltsInputConfigurationPanel<BoundedBean extends StitlsInputsBean> extends JPanel{
  
     BoundedBean inputBean;
     final boolean editable;

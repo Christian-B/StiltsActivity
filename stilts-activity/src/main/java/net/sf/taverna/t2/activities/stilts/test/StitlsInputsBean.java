@@ -12,7 +12,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  *
  * @author christian
  */
-public abstract class StilsInputsBean {
+public abstract class StitlsInputsBean {
 
     public abstract void checkValid() throws ActivityConfigurationException;
     

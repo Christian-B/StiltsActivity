@@ -9,7 +9,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * Stilts activity configuration bean.
  * 
  */
-public class SingleInputBean extends StilsInputsBean implements Serializable {
+public class SingleInputBean extends StitlsInputsBean implements Serializable {
     private StiltsInputFormat inputFormatEnum;
     private StiltsInputType inputTypeEnum;
       

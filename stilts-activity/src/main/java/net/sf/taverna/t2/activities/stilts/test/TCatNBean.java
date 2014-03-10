@@ -4,7 +4,7 @@ package net.sf.taverna.t2.activities.stilts.test;
  *
  * @author christian
  */
-public class TCatNBean extends StilsProcessBean {
+public class TCatNBean extends StiltsProcessBean {
  
     public TCatNBean(){
         

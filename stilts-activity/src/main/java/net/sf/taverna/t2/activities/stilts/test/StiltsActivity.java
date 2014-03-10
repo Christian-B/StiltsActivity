@@ -210,15 +210,15 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         //else do nothing as callback fail already called.
     }
 
-    private void configureProcessPorts(StilsProcessBean processBean){
+    private void configureProcessPorts(StiltsProcessBean processBean){
         if (processBean instanceof ExactMatchBean){
             configureTMatch2Ports((TMatch2Bean)processBean);
         }
-        StilsInputsBean inputBean = processBean.getInputs();
+        StitlsInputsBean inputBean = processBean.getInputs();
         configureInputPorts(inputBean);
     }
 
-    private List<String> createProcessParameters(StilsProcessBean processBean,
+    private List<String> createProcessParameters(StiltsProcessBean processBean,
             final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback){
         List<String> parameters = new ArrayList<String>();
         if (processBean instanceof TPipeBean){
@@ -237,7 +237,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             callback.fail("Unexpected process " + processBean.getClass());
             return null;
         }
-        StilsInputsBean inputBean = processBean.getInputs();
+        StitlsInputsBean inputBean = processBean.getInputs();
         boolean ok = addInputParameters(inputBean, parameters, inputs, callback);
         if (!ok) {
             return null;
@@ -247,7 +247,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     }
 
     //InputPorts methods
-    private void configureInputPorts(StilsInputsBean inputBean) {
+    private void configureInputPorts(StitlsInputsBean inputBean) {
         if (inputBean instanceof SingleInputBean){
             configureSingleInputPorts((SingleInputBean)inputBean);
         } else if (inputBean instanceof MultipleInputsBean){
@@ -257,7 +257,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         }
     }
 
-    private boolean addInputParameters(StilsInputsBean inputBean, List<String> parameters,
+    private boolean addInputParameters(StitlsInputsBean inputBean, List<String> parameters,
             final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
         if (inputBean instanceof SingleInputBean){
             return addSingleInputParameters((SingleInputBean)inputBean, parameters, inputs, callback);

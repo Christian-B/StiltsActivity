@@ -6,20 +6,20 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  *
  * @author christian
  */
-public class StilsProcessBean {
-    private StilsInputsBean inputs;
+public class StiltsProcessBean {
+    private StitlsInputsBean inputs;
 
     /**
      * @return the inputs
      */
-    public StilsInputsBean getInputs() {
+    public StitlsInputsBean getInputs() {
         return inputs;
     }
 
     /**
      * @param inputs the inputs to set
      */
-    public void setInputs(StilsInputsBean inputs) {
+    public void setInputs(StitlsInputsBean inputs) {
         this.inputs = inputs;
     }
     

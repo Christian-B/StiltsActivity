@@ -22,7 +22,7 @@ public interface StiltsInterface {
     /**
      * @return the process
      */
-    public StilsProcessBean getProcess();
+    public StiltsProcessBean getProcess();
     
     /**
      * @return the debugMode
