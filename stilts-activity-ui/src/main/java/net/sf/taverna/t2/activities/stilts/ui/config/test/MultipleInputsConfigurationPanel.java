@@ -44,7 +44,7 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
         initGui();
     }
     
-    void initGui() {
+   void initGui() {
         removeAll();
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -140,6 +140,7 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
     /**
       * Check if the user has changed the configuration from the original
       */
+    @Override
     public boolean isConfigurationChanged(){
         if (adjustableNumberOfInputs){
             String numberOfInputsString = numberOfInputsField.getText();
@@ -169,6 +170,7 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
       * Prepare a new configuration bean from the UI, to be returned with
       * getConfiguration()
       */
+    @Override
     public void noteConfiguration(){
         ArrayList<StiltsInputType> types = new ArrayList<StiltsInputType>();
         for (int i = 0; i < getNumberOfInputs(); i++){
@@ -181,7 +183,9 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
       * Update GUI from a changed configuration bean (perhaps by undo/redo).
       * 
       */
-    public void refreshConfiguration(){
+     @Override
+     public void refreshConfiguration(BoundedBean inputBean){
+        super.refreshConfiguration(inputBean);
         if (adjustableNumberOfInputs){
             numberOfInputsField = new JTextField(getNumberOfInputs()+"");
         }

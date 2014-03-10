@@ -26,9 +26,14 @@ public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessB
                         BorderFactory.createTitledBorder("Process"),
                         BorderFactory.createEmptyBorder(5,5,5,5)));
         add(processPanel, c);        
-        c.gridy = 1;
+        c.gridy = getInputRow();
         add(inputPanel, c);        
     }
+    
+    int getInputRow(){
+        return 1;
+    }
+    
     /**
       * Check that user values in UI are valid
       */
@@ -66,7 +71,8 @@ public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessB
       * Update GUI from a changed configuration bean (perhaps by undo/redo).
       * 
       */
-    public void refreshConfiguration() {
-        inputPanel.noteConfiguration();        
+    public void refreshConfiguration(BoundedBean processBean) {
+        this.processBean = processBean;
+        inputPanel.refreshConfiguration(processBean.getInputs());        
     }
 }

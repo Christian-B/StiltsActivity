@@ -349,9 +349,9 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     private boolean addTMatch2Parameters(TMatch2Bean tMatch2Bean, List<String> parameters,
             final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
         parameters.add("tmatch2");
-        parameters.add("find=" + tMatch2Bean.getFindValue());
-        parameters.add("fixcols=" + tMatch2Bean.getFixcolsValue());
-        parameters.add("join=" + tMatch2Bean.getJoinValue());
+        parameters.add("find=" + tMatch2Bean.getFindValue().getStiltsName());
+        parameters.add("fixcols=" + tMatch2Bean.getFixcolsValue().getStiltsName());
+        parameters.add("join=" + tMatch2Bean.getJoinValue().getStiltsName());
         if (tMatch2Bean instanceof ExactMatchBean){
             return addExactMatchParameters((ExactMatchBean)tMatch2Bean, parameters, inputs, callback);
         } else {

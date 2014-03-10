@@ -4,7 +4,7 @@ package net.sf.taverna.t2.activities.stilts.utils;
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/tmatch2-usage.html
  * @author christian
  */
-public enum StiltsJoin {
+public enum StiltsJoin implements DescribableInterface{
 
     ONE_AND_TWO("1and2","An output row for each row represented in both input tables"),
     ONE_OR_TWO("1or2","An output row for each row represented in either or both of the input tables"),

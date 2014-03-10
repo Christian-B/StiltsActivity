@@ -12,13 +12,4 @@ public class TPipeConfigurationPanel extends StiltsProcessConfigurationPanel <TP
         processPanel.add(new JLabel("Simple Piping Tool"));
     }
 
-    /**
-      * Update GUI from a changed configuration bean (perhaps by undo/redo).
-      * 
-      */
-    @Override
-    public void refreshConfiguration() {
-        super.refreshConfiguration();    
-        processBean = new TPipeBean((SingleInputBean)inputPanel.getConfiguration());
-    }
 }

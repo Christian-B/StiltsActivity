@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Icon;
+import net.sf.taverna.t2.activities.stilts.test.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.test.FlexibleInputsBean;
 import net.sf.taverna.t2.activities.stilts.test.MultipleFormatsBean;
 import net.sf.taverna.t2.activities.stilts.test.SingleFormatMultipleInputsBean;
@@ -14,9 +15,13 @@ import net.sf.taverna.t2.activities.stilts.test.TCatBean;
 import net.sf.taverna.t2.activities.stilts.test.TCatNBean;
 import net.sf.taverna.t2.activities.stilts.test.TJoinBean;
 import net.sf.taverna.t2.activities.stilts.test.TPipeBean;
+import net.sf.taverna.t2.activities.stilts.test.TwoInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsJoin;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 
@@ -66,6 +71,11 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         StiltsServiceDesc tJoinDescription = new StiltsServiceDesc(tJoinBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Join various files different formats");
         results.add(tJoinDescription);
         
+        TwoInputsBean twoInputBean = new TwoInputsBean(typesOfInputsEnums, formatsOfInputsEnums);
+        ExactMatchBean exactMatchBean = new ExactMatchBean(1, StiltsFind.ALL, StiltsFixcols.DUPS, StiltsJoin.ONE_AND_TWO, twoInputBean);
+        StiltsServiceDesc exactMatchDescription = new StiltsServiceDesc(exactMatchBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Exact Macth two or more files");
+        results.add(exactMatchDescription);
+
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time
         callBack.partialResults(results);

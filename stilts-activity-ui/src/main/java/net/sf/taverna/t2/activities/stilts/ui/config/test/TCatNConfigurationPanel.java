@@ -12,13 +12,4 @@ public class TCatNConfigurationPanel extends StiltsProcessConfigurationPanel <TC
         processPanel.add(new JLabel("Multiple File Catenatiom Tool"));
     }
 
-    /**
-      * Update GUI from a changed configuration bean (perhaps by undo/redo).
-      * 
-      */
-    @Override
-    public void refreshConfiguration() {
-        super.refreshConfiguration();    
-        processBean = new TCatNBean((MultipleFormatsBean)inputPanel.getConfiguration());
-    }
 }

@@ -23,12 +23,14 @@ public abstract class StiltsInputConfigurationPanel<BoundedBean extends StitlsIn
     
      /**
       * Check that user values in UI are valid
+     * @return 
       */
     public abstract boolean checkValues();
 
     /**
       * Return configuration bean generated from user interface last time
       * noteConfiguration() was called.
+     * @return Return configuration bean generated from user interface
       */
     public BoundedBean getConfiguration(){
         return inputBean;
@@ -49,5 +51,7 @@ public abstract class StiltsInputConfigurationPanel<BoundedBean extends StitlsIn
       * Update GUI from a changed configuration bean (perhaps by undo/redo).
       * 
       */
-    public abstract void refreshConfiguration();
+    public void refreshConfiguration(BoundedBean inputBean){
+        this.inputBean = inputBean;
+    }
 }

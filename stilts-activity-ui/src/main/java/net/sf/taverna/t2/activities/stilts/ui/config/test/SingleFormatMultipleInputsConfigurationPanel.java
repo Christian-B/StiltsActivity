@@ -50,6 +50,7 @@ public class SingleFormatMultipleInputsConfigurationPanel<BoundedBean extends Si
     /**
       * Check if the user has changed the configuration from the original
       */
+    @Override
     public boolean isConfigurationChanged(){
         if (super.isConfigurationChanged()){
             return true;
@@ -64,6 +65,7 @@ public class SingleFormatMultipleInputsConfigurationPanel<BoundedBean extends Si
       * Prepare a new configuration bean from the UI, to be returned with
       * getConfiguration()
       */
+    @Override
     public void noteConfiguration(){
         super.noteConfiguration();
         inputBean.setNumberOfInputs(oldNumberOfInputs);
@@ -74,8 +76,9 @@ public class SingleFormatMultipleInputsConfigurationPanel<BoundedBean extends Si
       * Update GUI from a changed configuration bean (perhaps by undo/redo).
       * 
       */
-    public void refreshConfiguration(){
-        super.refreshConfiguration();
+    @Override
+    public void refreshConfiguration(BoundedBean inputBean){
+        super.refreshConfiguration(inputBean);
         inputsFormatSelector.setSelectedItem(inputBean.getFormatOfInputs());
     }
 

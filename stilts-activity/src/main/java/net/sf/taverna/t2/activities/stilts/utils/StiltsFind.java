@@ -4,7 +4,7 @@ package net.sf.taverna.t2.activities.stilts.utils;
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/tmatch2-usage.html
  * @author christian
  */
-public enum StiltsFind {
+public enum StiltsFind implements DescribableInterface {
 
     ALL("all","All matches. Every match between the two tables is included in the result. "
             + "Rows from both of the input tables may appear multiple times in the result."),

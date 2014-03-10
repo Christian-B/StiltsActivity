@@ -55,6 +55,7 @@ public class SingleInputConfigurationPanel extends StiltsInputConfigurationPanel
     /**
      * Check that user values in UI are valid
      */
+    @Override
     public boolean checkValues(){
         //Assume inputsTypesSelectors of correct length
         //All must have a valid value;
@@ -64,6 +65,7 @@ public class SingleInputConfigurationPanel extends StiltsInputConfigurationPanel
     /**
       * Check if the user has changed the configuration from the original
       */
+    @Override
     public boolean isConfigurationChanged(){
         StiltsInputFormat beanType = inputBean.retreiveStiltsInputFormat();
         Object configType = inputTypeSelector.getSelectedItem();
@@ -82,6 +84,7 @@ public class SingleInputConfigurationPanel extends StiltsInputConfigurationPanel
       * Prepare a new configuration bean from the UI, to be returned with
       * getConfiguration()
       */
+    @Override
     public void noteConfiguration(){
         inputBean = new SingleInputBean();
         inputBean.resetFormatOfInput((StiltsInputFormat)inputFormatSelector.getSelectedItem());
@@ -92,7 +95,9 @@ public class SingleInputConfigurationPanel extends StiltsInputConfigurationPanel
       * Update GUI from a changed configuration bean (perhaps by undo/redo).
       * 
       */
-    public void refreshConfiguration(){
+    @Override
+    public void refreshConfiguration(SingleInputBean inputBean){
+        super.refreshConfiguration(inputBean);
         inputTypeSelector.setSelectedItem(inputBean.retreiveStiltsInputType());
         inputFormatSelector.setSelectedItem(inputBean.retreiveStiltsInputFormat());
     }

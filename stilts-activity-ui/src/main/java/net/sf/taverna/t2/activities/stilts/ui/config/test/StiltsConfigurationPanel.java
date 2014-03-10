@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
+import net.sf.taverna.t2.activities.stilts.test.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.test.SingleFormatMultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.test.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.test.FlexibleInputsBean;
@@ -209,6 +210,8 @@ public class StiltsConfigurationPanel extends
         outputFormatSelector.setSelectedItem(configBean.getOutputFormat());
         outputTypeSelector.setSelectedItem(configBean.getOutputType());
         debugSelector.setSelected(configBean.isDebugMode());
+        
+        processPanel.refreshConfiguration(configBean.getProcess());
     }
 
     private StiltsProcessConfigurationPanel createProcessPanel(StiltsProcessBean processBean) {
@@ -235,6 +238,8 @@ public class StiltsConfigurationPanel extends
             return new TCatNConfigurationPanel((TCatNBean)processBean, (MultipleFormatsConfigurationPanel)inputPanel);
         } else if (processBean instanceof TJoinBean){
             return new TJoinConfigurationPanel((TJoinBean)processBean, (MultipleFormatsConfigurationPanel)inputPanel);
+        } else if (processBean instanceof ExactMatchBean){
+            return new ExactMatchConfigurationPanel((ExactMatchBean)processBean, (TwoInputsConfigurationPanel)inputPanel, editable);
         } else{
              System.err.println("Unexpected process bean class: " + inputBean.getClass());
              throw new UnsupportedOperationException("Unexpected process bean class: " + processBean.getClass());

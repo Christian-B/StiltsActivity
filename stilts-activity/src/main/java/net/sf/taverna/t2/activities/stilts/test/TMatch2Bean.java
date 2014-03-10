@@ -11,9 +11,9 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  */
 public class TMatch2Bean extends StiltsProcessBean {
  
-    private StiltsFind findEnum;
-    private StiltsJoin joinEnum;
-    private StiltsFixcols fixcolsEnum;
+    private StiltsFind findValue;
+    private StiltsJoin joinValue;
+    private StiltsFixcols fixcolsValue;
 
     public TMatch2Bean(){
         
@@ -21,64 +21,64 @@ public class TMatch2Bean extends StiltsProcessBean {
     
     public TMatch2Bean(StiltsFind findEnum, StiltsFixcols fixcolsEnum, StiltsJoin joinEnum, TwoInputsBean inputBean){
         setInputs(inputBean);
-        this.findEnum = findEnum;
-        this.fixcolsEnum = fixcolsEnum;
-        this.joinEnum = joinEnum;
+        this.findValue = findEnum;
+        this.fixcolsValue = fixcolsEnum;
+        this.joinValue = joinEnum;
     }
     
+    public void checkValid() throws ActivityConfigurationException{
+        super.checkValid();
+        if (findValue == null){
+             throw new ActivityConfigurationException("Find parameter not set.");
+        }
+        if (joinValue == null){
+             throw new ActivityConfigurationException("Join Paramter not set.");
+        }
+        if (fixcolsValue == null){
+             throw new ActivityConfigurationException("Fixcols parameter not set.");
+        }
+    }
+
     /**
      * @return the findValue
      */
-    public String getFindValue() {
-        return findEnum.getStiltsName();
+    public StiltsFind getFindValue() {
+        return findValue;
     }
 
     /**
      * @param findValue the findValue to set
      */
-    public void setFindValue(String findValue) {
-        this.findEnum = StiltsFind.byStiltsName(findValue);
+    public void setFindValue(StiltsFind findValue) {
+        this.findValue = findValue;
     }
 
     /**
      * @return the joinValue
      */
-    public String getJoinValue() {
-        return joinEnum.getStiltsName();
+    public StiltsJoin getJoinValue() {
+        return joinValue;
     }
 
     /**
      * @param joinValue the joinValue to set
      */
-    public void setJoinValue(String joinValue) {
-        joinEnum = StiltsJoin.byStiltsName(joinValue);
+    public void setJoinValue(StiltsJoin joinValue) {
+        this.joinValue = joinValue;
     }
 
     /**
      * @return the fixcolsValue
      */
-    public String getFixcolsValue() {
-        return fixcolsEnum.getStiltsName();
+    public StiltsFixcols getFixcolsValue() {
+        return fixcolsValue;
     }
 
     /**
      * @param fixcolsValue the fixcolsValue to set
      */
-    public void setFixcolsValue(String fixcolsValue) {
-        fixcolsEnum = StiltsFixcols.byStiltsName(fixcolsValue);
-    }
-    
-    public void checkValid() throws ActivityConfigurationException{
-        super.checkValid();
-        if (findEnum == null){
-             throw new ActivityConfigurationException("Find parameter not set.");
-        }
-        if (joinEnum  == null){
-             throw new ActivityConfigurationException("Join Paramter not set.");
-        }
-        if (fixcolsEnum == null){
-             throw new ActivityConfigurationException("Fixcols parameter not set.");
-        }
+    public void setFixcolsValue(StiltsFixcols fixcolsValue) {
+        this.fixcolsValue = fixcolsValue;
     }
 
 }

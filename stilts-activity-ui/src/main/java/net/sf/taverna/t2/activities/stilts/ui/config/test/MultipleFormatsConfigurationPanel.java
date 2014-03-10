@@ -53,6 +53,7 @@ public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends Mult
     /**
      * Check that user values in UI are valid
      */
+    @Override
     public boolean checkValues(){
         //Assume inputsTypesSelectors of correct length
         //All must have a valid value;
@@ -62,7 +63,11 @@ public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends Mult
     /**
       * Check if the user has changed the configuration from the original
       */
+    @Override
     public boolean isConfigurationChanged(){
+        if (super.isConfigurationChanged()){
+            return true;
+        }
         List<StiltsInputFormat> formats = inputBean.getFormatsOfInputs();
         for (int i = 0; i < getNumberOfInputs(); i++){
             if (inputsFormatsSelectors.get(i).getSelectedItem().equals(formats.get(i))){
@@ -76,6 +81,7 @@ public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends Mult
       * Prepare a new configuration bean from the UI, to be returned with
       * getConfiguration()
       */
+    @Override
     public void noteConfiguration(){
         super.noteConfiguration();
         ArrayList<StiltsInputFormat> formats = new ArrayList<StiltsInputFormat>();
@@ -90,7 +96,9 @@ public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends Mult
       * Update GUI from a changed configuration bean (perhaps by undo/redo).
       * 
       */
-    public void refreshConfiguration(){
+    @Override
+    public void refreshConfiguration(BoundedBean inputBean){
+        super.refreshConfiguration(inputBean);
         List<StiltsInputFormat> formats = inputBean.getFormatsOfInputs();
         for (int i = 0; i < getNumberOfInputs(); i++){
             inputsFormatsSelectors.get(i).setSelectedItem(formats.get(i));
