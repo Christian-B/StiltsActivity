@@ -4,7 +4,7 @@ package net.sf.taverna.t2.activities.stilts.utils;
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/tmatch2-usage.html
  * @author christian
  */
-public enum StiltsFixcols {
+public enum StiltsFixcols implements DescribableInterface{
 
     NONE("none","columns are not renamed"),
     DUPS("dups","columns which would otherwise have duplicate names in the output will be renamed to indicate which table they came from"),

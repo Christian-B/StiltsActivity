@@ -10,7 +10,7 @@ package net.sf.taverna.t2.activities.stilts.utils;
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/outFormats.html
  * @author christian
  */
-public enum StiltsOutputFormat {
+public enum StiltsOutputFormat implements DescribableInterface {
 
     FITS_PLUS("fits-plus","FITS file; primary HDU contains a VOTable representation of the metadata, "
             + "subsequent extensions contain one or more FITS binary tables (behaves the same as fits-basic for most purposes)"),

@@ -1,6 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.test;
 
-import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -45,11 +44,6 @@ public class TPipeActivityTest {
     //    // Should throw ActivityConfigurationException
     //    activity.configure(configBean);
     //}
-
-    @Test(expected = UnsupportedOperationException.class)
-    public void invalidOutput() throws ActivityConfigurationException {
-        configBean.setFormatOfOutput("invalidExample");
-    }
 
     @Test
     public void executeAsynch() throws Exception {

@@ -66,6 +66,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     
     @Override
     public StiltsBean getConfiguration() {
+        System.out.println(configBean);
         return configBean;
     }
 
@@ -124,7 +125,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         if (parameters == null){ //createProcessParameters failed.
             return null;//callback.fail already done
         }
-        parameters.add("ofmt=" + configBean.getFormatOfOutput());
+        parameters.add("ofmt=" + configBean.getOutputFormat().getStiltsName());
         parameters.add("out=" + outputFile);
         if (parameters == null){
             return null;
@@ -185,7 +186,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             Map<String, T2Reference> outputs, File outputFile, boolean runSuccessfull) {
         if (runSuccessfull){
             String outputValue = null;
-            switch (configBean.retreiveStiltsOutputType()){
+            switch (configBean.getOutputType()){
                 case FILE:
                    outputValue = outputFile.getAbsolutePath();
                     break;
@@ -193,7 +194,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
                     outputValue = readFile(callback, outputFile);
                     break;
                 default:
-                    callback.fail("Unexpected Output type: " + configBean.retreiveStiltsOutputType());
+                    callback.fail("Unexpected Output type: " + configBean.getOutputType());
             }
             if (outputValue == null){
                 return;
@@ -299,7 +300,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
 
     private boolean addSingleFormatMultipleInputsParameters(SingleFormatMultipleInputsBean inputBean, List<String> parameters,
             final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
-        List<StiltsInputType> types = inputBean.retreiveStiltsInputsType();
+        List<StiltsInputType> types = inputBean.getTypesOfInputs();
         for (int i = 1; i <= inputBean.retreiveNumberOfInputs(); i++){
             String input = this.getStringParameter(inputs, callback, inputTableParameter(i), REQUIRED_PARAMETER ); 
             String inputPath = getInputFilePath(callback, types.get(i-1), input);
@@ -322,8 +323,8 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             callback.fail("Unexpected Bean class + " + inputBean.getClass());
             return FAILED;           
         }
-        List<StiltsInputType> types = inputBean.retreiveStiltsInputsType();
-        List<StiltsInputFormat> formats = inputBean.retreiveStiltsInputsFormat();
+        List<StiltsInputType> types = inputBean.getTypesOfInputs();
+        List<StiltsInputFormat> formats = inputBean.getFormatsOfInputs();
         for (int i = 1; i <= inputBean.retreiveNumberOfInputs(); i++){
             String input = this.getStringParameter(inputs, callback, inputTableParameter(i), REQUIRED_PARAMETER ); 
             String inputPath = getInputFilePath(callback, types.get(i-1), input);

@@ -9,7 +9,7 @@ package net.sf.taverna.t2.activities.stilts.utils;
 /**
  * @author christian
  */
-public enum StiltsInputType {
+public enum StiltsInputType  implements DescribableInterface {
 
     FILE("File","Path to a local file. "),
     STRING("String","A String representing the table. Will be written to a temp file"),

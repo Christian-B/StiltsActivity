@@ -130,18 +130,18 @@ public class TCatNActivityTest {
         } else {
             assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
         }
-        ArrayList<String> formatsOfInputs = new ArrayList<String>();
-        formatsOfInputs.add(StiltsInputFormat.TST.getStiltsName());
-        formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
-        formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
-        formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
+        ArrayList<StiltsInputFormat> formatsOfInputs = new ArrayList<StiltsInputFormat>();
+        formatsOfInputs.add(StiltsInputFormat.TST);
+        formatsOfInputs.add(StiltsInputFormat.CSV);
+        formatsOfInputs.add(StiltsInputFormat.CSV);
+        formatsOfInputs.add(StiltsInputFormat.CSV);
         FlexibleInputsBean inputBean = (FlexibleInputsBean)configBean.getProcess().getInputs();
         inputBean.setFormatsOfInputs(formatsOfInputs);
-        ArrayList<String> typesOfInputs = new ArrayList<String>();
-        typesOfInputs.add(StiltsInputType.FILE.getUserName());
-        typesOfInputs.add(StiltsInputType.STRING.getUserName());
-        typesOfInputs.add(StiltsInputType.FILE.getUserName());
-        typesOfInputs.add(StiltsInputType.FILE.getUserName());
+        ArrayList<StiltsInputType> typesOfInputs = new ArrayList<StiltsInputType>();
+        typesOfInputs.add(StiltsInputType.FILE);
+        typesOfInputs.add(StiltsInputType.STRING);
+        typesOfInputs.add(StiltsInputType.FILE);
+        typesOfInputs.add(StiltsInputType.FILE);
         inputBean.setTypesOfInputs(typesOfInputs);
         inputBean.setNumberOfInputs(4);
         activity.configure(configBean);
@@ -156,17 +156,17 @@ public class TCatNActivityTest {
 
     @Test(expected = ActivityConfigurationException.class)
     public void reConfiguredActivityLengthError() throws Exception {
-        ArrayList<String> formatsOfInputs = new ArrayList<String>();
-        formatsOfInputs.add(StiltsInputFormat.TST.getStiltsName());
-        formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
-        formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
-        formatsOfInputs.add(StiltsInputFormat.CSV.getStiltsName());
+        ArrayList<StiltsInputFormat> formatsOfInputs = new ArrayList<StiltsInputFormat>();
+        formatsOfInputs.add(StiltsInputFormat.TST);
+        formatsOfInputs.add(StiltsInputFormat.CSV);
+        formatsOfInputs.add(StiltsInputFormat.CSV);
+        formatsOfInputs.add(StiltsInputFormat.CSV);
         FlexibleInputsBean inputBean = (FlexibleInputsBean)configBean.getProcess().getInputs();
         inputBean.setFormatsOfInputs(formatsOfInputs);
-        ArrayList<String> typesOfInputs = new ArrayList<String>();
-        typesOfInputs.add(StiltsInputType.FILE.getUserName());
-        typesOfInputs.add(StiltsInputType.STRING.getUserName());
-        typesOfInputs.add(StiltsInputType.FILE.getUserName());
+        ArrayList<StiltsInputType> typesOfInputs = new ArrayList<StiltsInputType>();
+        typesOfInputs.add(StiltsInputType.FILE);
+        typesOfInputs.add(StiltsInputType.STRING);
+        typesOfInputs.add(StiltsInputType.FILE);
         inputBean.setTypesOfInputs(typesOfInputs);
         inputBean.setNumberOfInputs(4);
         activity.configure(configBean);
@@ -177,15 +177,6 @@ public class TCatNActivityTest {
         } else {
             assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
         }
-    }
-
-    @Test(expected = UnsupportedOperationException.class)
-    public void reConfiguredActivityTypeError() throws Exception {
-        ArrayList<String> formatsOfInputs = new ArrayList<String>();
-        formatsOfInputs.add("tst");
-        formatsOfInputs.add("opps");
-        MultipleFormatsBean inputBean = (MultipleFormatsBean)configBean.getProcess().getInputs();
-        inputBean.setFormatsOfInputs(formatsOfInputs);
     }
 
     @Test

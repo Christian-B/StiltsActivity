@@ -83,11 +83,11 @@ public class TCatActivityTest {
             assertEquals("Unexpected outputs", 1, activity.getOutputPorts().size());
         }
         SingleFormatMultipleInputsBean inputBean = (SingleFormatMultipleInputsBean)configBean.getProcess().getInputs();
-        ArrayList<String> typesOfInputs = new ArrayList<String>();
-        typesOfInputs.add(StiltsOutputType.FILE.getUserName());
-        typesOfInputs.add(StiltsOutputType.FILE.getUserName());
-        typesOfInputs.add(StiltsOutputType.FILE.getUserName());
-        typesOfInputs.add(StiltsOutputType.STRING.getUserName());
+        ArrayList<StiltsInputType> typesOfInputs = new ArrayList<StiltsInputType>();
+        typesOfInputs.add(StiltsInputType.FILE);
+        typesOfInputs.add(StiltsInputType.FILE);
+        typesOfInputs.add(StiltsInputType.FILE);
+        typesOfInputs.add(StiltsInputType.STRING);
         inputBean.setTypesOfInputs(typesOfInputs);
         inputBean.setNumberOfInputs(4);
         activity.configure(configBean);
@@ -103,10 +103,10 @@ public class TCatActivityTest {
     @Test(expected = ActivityConfigurationException.class)
     public void reConfiguredActivityLengthError() throws Exception {
         SingleFormatMultipleInputsBean inputBean = (SingleFormatMultipleInputsBean)configBean.getProcess().getInputs();
-        ArrayList<String> typesOfInputs = new ArrayList<String>();
-        typesOfInputs.add(StiltsOutputType.FILE.getUserName());
-        typesOfInputs.add(StiltsOutputType.FILE.getUserName());
-        typesOfInputs.add(StiltsOutputType.STRING.getUserName());
+        ArrayList<StiltsInputType> typesOfInputs = new ArrayList<StiltsInputType>();
+        typesOfInputs.add(StiltsInputType.FILE);
+        typesOfInputs.add(StiltsInputType.FILE);
+        typesOfInputs.add(StiltsInputType.STRING);
         inputBean.setTypesOfInputs(typesOfInputs);
         inputBean.setNumberOfInputs(4);
         activity.configure(configBean);

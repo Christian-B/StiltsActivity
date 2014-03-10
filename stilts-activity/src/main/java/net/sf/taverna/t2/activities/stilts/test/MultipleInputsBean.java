@@ -12,40 +12,14 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  */
 public abstract class MultipleInputsBean extends StilsInputsBean implements Serializable {
     
-    private List<StiltsInputType> typesOfInputsEnums;
+    private List<StiltsInputType> typesOfInputs;
     
     protected MultipleInputsBean(List<StiltsInputType> typesOfInputsEnum){
-        this.typesOfInputsEnums = typesOfInputsEnum;
+        this.typesOfInputs = typesOfInputsEnum;
     }
       
     protected MultipleInputsBean(){}
     
-    public List<String> getTypesOfInputs() {
-        ArrayList<String> typesOfInputs = new ArrayList<String>();
-        for (StiltsInputType type:typesOfInputsEnums){
-            typesOfInputs.add(type.getUserName());
-        }
-        return typesOfInputs;
-    }
-
-    public void setTypesOfInputs(List<String> typesOfInput) {
-        typesOfInputsEnums = new ArrayList<StiltsInputType>();
-        for (String type:typesOfInput){
-            typesOfInputsEnums.add(StiltsInputType.byUserName(type));
-        }
-    }
-
-    /**
-     * None getter method to obtain the Input types as ENUMs.
-     * 
-     * Method name does not start with "get" so it is not picked up by the Serializer
-     * @return the typeOfInput
-     */    
-    public List<StiltsInputType> retreiveStiltsInputsType(){
-        return typesOfInputsEnums;
-    }
-    
-
     /**
      * None getter method to obtain the number of inputs
      * 
@@ -55,12 +29,27 @@ public abstract class MultipleInputsBean extends StilsInputsBean implements Seri
     public abstract int retreiveNumberOfInputs();
     
     public void checkValid() throws ActivityConfigurationException{
-        if (typesOfInputsEnums == null){
+        if (getTypesOfInputs() == null){
              throw new ActivityConfigurationException("Inputs types not set.");
         }
-        if (typesOfInputsEnums.size() != retreiveNumberOfInputs()){
-             throw new ActivityConfigurationException("Length of Inputs types: " + typesOfInputsEnums.size() 
+        if (typesOfInputs.size() != retreiveNumberOfInputs()){
+             throw new ActivityConfigurationException("Length of Inputs types: " + typesOfInputs.size() 
                     + " does not match number of inputs: " + retreiveNumberOfInputs());
         }   
     }
+
+    /**
+     * @return the typesOfInputs
+     */
+    public List<StiltsInputType> getTypesOfInputs() {
+        return typesOfInputs;
+    }
+
+    /**
+     * @param typesOfInputs the typesOfInputs to set
+     */
+    public void setTypesOfInputs(List<StiltsInputType> typesOfInputs) {
+        this.typesOfInputs = typesOfInputs;
+    }
+
 }

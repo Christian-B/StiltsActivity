@@ -12,27 +12,17 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  */
 public class SingleFormatMultipleInputsBean extends MultipleInputsBean 
         implements Serializable {
-    private StiltsInputFormat inputsFormatEnum;
+    private StiltsInputFormat formatOfInputs;
     private int numberOfInputs;
     
     public SingleFormatMultipleInputsBean(){}
     
     public SingleFormatMultipleInputsBean(List<StiltsInputType> typesOfInputsEnum, StiltsInputFormat inputsFormatEnum){
         super(typesOfInputsEnum);
-        this.inputsFormatEnum = inputsFormatEnum;
+        this.formatOfInputs = inputsFormatEnum;
         numberOfInputs = typesOfInputsEnum.size();
     }
     
-    //@Override
-    public String getFormatOfInputs() {
-        return inputsFormatEnum.getStiltsName();
-    }
-
-    //@Override
-    public void setFormatOfInputs(String formatOfInputs) {
-        inputsFormatEnum = StiltsInputFormat.byStiltsName(formatOfInputs);
-    }
-
     @Override
     public int retreiveNumberOfInputs() {
         return numberOfInputs;
@@ -57,11 +47,24 @@ public class SingleFormatMultipleInputsBean extends MultipleInputsBean
         if (numberOfInputs < 2){
             throw new ActivityConfigurationException("Number of inputs must be 2 or greater.");
         }
-        if (inputsFormatEnum == null){
+        if (formatOfInputs == null){
             throw new ActivityConfigurationException("Inputs format not set.");
         }
         super.checkValid();
     }
 
+    /**
+     * @return the formatOfInputs
+     */
+    public StiltsInputFormat getFormatOfInputs() {
+        return formatOfInputs;
+    }
+
+    /**
+     * @param formatOfInputs the formatOfInputs to set
+     */
+    public void setFormatOfInputs(StiltsInputFormat formatOfInputs) {
+        this.formatOfInputs = formatOfInputs;
+    }
 
 }

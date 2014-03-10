@@ -10,7 +10,7 @@ package net.sf.taverna.t2.activities.stilts.utils;
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/inFormats.html
  * @author christian
  */
-public enum StiltsInputFormat {
+public enum StiltsInputFormat  implements DescribableInterface {
      FITS("fits", "FITS format - FITS binary or ASCII tables can be read. "
              + "For commands which take a single input table, by default the first table HDU in the file will used, "
              + "but this can be altered for multi-extension FITS files by supplying an identifier after a '#' sign. "

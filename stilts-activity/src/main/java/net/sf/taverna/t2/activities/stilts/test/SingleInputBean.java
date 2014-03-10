@@ -34,6 +34,20 @@ public class SingleInputBean extends StilsInputsBean implements Serializable {
         this.inputFormatEnum = StiltsInputFormat.byStiltsName(formatOfInput);
     }
 
+    public void resetFormatOfInput(StiltsInputFormat formatOfInput) {
+        this.inputFormatEnum = formatOfInput;
+    }
+
+    /**
+     * None getter method to obtain the Input format as an ENUM.
+     * 
+     * Method name does not start with "get" so it is not picked up by the Serializer
+     * @return the typeOfInput
+     */    
+    public StiltsInputFormat retreiveStiltsInputFormat(){
+        return inputFormatEnum;
+    }
+    
     /**
      * @return the typeOfInput
      */
@@ -56,6 +70,10 @@ public class SingleInputBean extends StilsInputsBean implements Serializable {
      */
     public void setTypeOfInput(String typeOfInput) {
         this.inputTypeEnum = StiltsInputType.byUserName(typeOfInput);
+    }
+    
+    public void resetTypeOfInput(StiltsInputType typeOfInput) {
+        this.inputTypeEnum = typeOfInput;
     }
     
     public void checkValid() throws ActivityConfigurationException{

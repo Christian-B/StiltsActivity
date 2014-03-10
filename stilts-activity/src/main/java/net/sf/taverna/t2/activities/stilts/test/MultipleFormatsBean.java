@@ -13,32 +13,13 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  */
 public abstract class MultipleFormatsBean extends MultipleInputsBean 
         implements Serializable {
-    private List<StiltsInputFormat> formatsOfInputEnums;
+    private List<StiltsInputFormat> formatsOfInputs;
 
     public MultipleFormatsBean(){}
     
     public MultipleFormatsBean(List<StiltsInputType> typesOfInputsEnum, List<StiltsInputFormat> formatsOfInputEnums){
         super(typesOfInputsEnum);
-        this.formatsOfInputEnums = formatsOfInputEnums;
-    }
-
-    public final List<String> getFormatsOfInputs() {
-        ArrayList<String> formatsOfInputs = new ArrayList<String>();
-        for (StiltsInputFormat type:formatsOfInputEnums){
-            formatsOfInputs.add(type.getStiltsName());
-        }
-        return formatsOfInputs;
-    }
-
-    public final void setFormatsOfInputs(List<String> formatsOfInput) {
-        formatsOfInputEnums = new ArrayList<StiltsInputFormat>();
-        for (String format:formatsOfInput){
-            formatsOfInputEnums.add(StiltsInputFormat.byStiltsName(format));
-        }
-    }
-    
-    List<StiltsInputFormat> retreiveStiltsInputsFormat() {
-        return formatsOfInputEnums;
+        this.formatsOfInputs = formatsOfInputEnums;
     }
 
     @Override
@@ -46,14 +27,28 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
         if (retreiveNumberOfInputs() < 2){
             throw new ActivityConfigurationException("Number of inputs must be 2 or greater.");
         }
-        if (formatsOfInputEnums == null){
+        if (formatsOfInputs == null){
              throw new ActivityConfigurationException("Inputs formats not set.");
         }
-        if (formatsOfInputEnums.size() != retreiveNumberOfInputs()){
-             throw new ActivityConfigurationException("Length of Inputs formats: " + formatsOfInputEnums.size() 
+        if (formatsOfInputs.size() != retreiveNumberOfInputs()){
+             throw new ActivityConfigurationException("Length of Inputs formats: " + formatsOfInputs.size() 
                     + " does not match number of inputs: " + retreiveNumberOfInputs());
         }   
         super.checkValid();
     }
-      
-}
+
+    /**
+     * @return the formatsOfInputs
+     */
+    public List<StiltsInputFormat> getFormatsOfInputs() {
+        return formatsOfInputs;
+    }
+
+    /**
+     * @param formatsOfInputs the formatsOfInputs to set
+     */
+    public void setFormatsOfInputs(List<StiltsInputFormat> formatsOfInputs) {
+        this.formatsOfInputs = formatsOfInputs;
+    }
+
+ }

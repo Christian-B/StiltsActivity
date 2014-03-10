@@ -9,10 +9,10 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  *
  * @author christian
  */
-public class StiltsBean implements Serializable{
+public class StiltsBean implements StiltsInterface, Serializable{
     //StilsPreProcessorBean preprocessor;
-    private StiltsOutputFormat outputFormatEnum;
-    private StiltsOutputType outputTypeEnum;
+    private StiltsOutputFormat outputFormat;
+    private StiltsOutputType outputType;
     private StilsProcessBean process;
     private boolean debugMode = true;
     //StilsPostProcessorBean postprocessor;
@@ -22,47 +22,16 @@ public class StiltsBean implements Serializable{
     public StiltsBean(StilsProcessBean process, StiltsOutputFormat outputFormatEnum, StiltsOutputType outputTypeEnum,
             boolean debugMode)  throws ActivityConfigurationException{
         this.process = process;
-        this.outputFormatEnum = outputFormatEnum;
-        this.outputTypeEnum = outputTypeEnum;
+        this.outputFormat = outputFormatEnum;
+        this.outputType = outputTypeEnum;
         this.debugMode = debugMode;
     }
 
-    /**
-     * @return the formatOfOutput
-     */
-    public String getFormatOfOutput() {
-        return outputFormatEnum.getStiltsName();
-    }
-
-    /**
-     * @param formatOfOutput the formatOfOutput to set
-     */
-    public void setFormatOfOutput(String formatOfOutput) {
-        outputFormatEnum = StiltsOutputFormat.byStiltsName(formatOfOutput);
-    }
-
-    /**
-     * @return the typeOfOutput
-     */
-    public String getTypeOfOutput() {
-        return outputTypeEnum.getUserName();
-    }
-
-    /**
-     * @param typeOfOutput the typeOfOutput to set
-     */
-    public void setTypeOfOutput(String typeOfOutput) {
-        outputTypeEnum  = StiltsOutputType.byUserName(typeOfOutput);
-    }
-    
-    /**
-     * None getter method to obtain the Output type as an ENUM.
-     * 
-     * Method name does not start with "get" so it is not picked up by the Serializer
-     * @return the typeOfOutput
-     */    
-    public StiltsOutputType retreiveStiltsOutputType(){
-        return outputTypeEnum;
+    public StiltsBean(StiltsInterface other) {
+        this.process = other.getProcess();
+        this.outputFormat = other.getOutputFormat();
+        this.outputType = other.getOutputType();
+        this.debugMode = other.isDebugMode();
     }
     
     /**
@@ -94,12 +63,41 @@ public class StiltsBean implements Serializable{
     }
     
     public void checkValid() throws ActivityConfigurationException{
-        if (outputFormatEnum == null){
+        if (getOutputFormat() == null){
             throw new ActivityConfigurationException("Output format not set.");
         }
-        if (outputTypeEnum == null){
+        if (getOutputType() == null){
             throw new ActivityConfigurationException("Output type not set.");
         }
         process.checkValid();
     }
+
+    /**
+     * @return the outputFormat
+     */
+    public StiltsOutputFormat getOutputFormat() {
+        return outputFormat;
+    }
+
+    /**
+     * @param outputFormat the outputFormat to set
+     */
+    public void setOutputFormat(StiltsOutputFormat outputFormat) {
+        this.outputFormat = outputFormat;
+    }
+
+    /**
+     * @return the outputType
+     */
+    public StiltsOutputType getOutputType() {
+        return outputType;
+    }
+
+    /**
+     * @param outputType the outputType to set
+     */
+    public void setOutputType(StiltsOutputType outputType) {
+        this.outputType = outputType;
+    }
+
 }
