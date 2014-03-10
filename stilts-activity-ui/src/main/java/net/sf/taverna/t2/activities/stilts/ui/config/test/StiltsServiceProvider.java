@@ -7,8 +7,10 @@ import java.util.List;
 import javax.swing.Icon;
 import net.sf.taverna.t2.activities.stilts.test.FlexibleInputsBean;
 import net.sf.taverna.t2.activities.stilts.test.MultipleFormatsBean;
+import net.sf.taverna.t2.activities.stilts.test.SingleFormatMultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.test.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.test.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.test.TCatBean;
 import net.sf.taverna.t2.activities.stilts.test.TCatNBean;
 import net.sf.taverna.t2.activities.stilts.test.TPipeBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
@@ -30,28 +32,35 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         // Use callback.status() for long-running searches
         // callBack.status("Resolving example services");
 
-        List<ServiceDescription> results = new ArrayList<ServiceDescription>();
-
-        SingleInputBean inputBean = new SingleInputBean(StiltsInputFormat.TST, StiltsInputType.FILE);
-        TPipeBean tPipeBean = new TPipeBean(inputBean);
-        StiltsServiceDesc tPipeDescription = new StiltsServiceDesc(tPipeBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Copy to new Format");
- 	// Optional: set description
-	tPipeDescription.setDescription("Copy to new Format");
-	results.add(tPipeDescription);
-
         List<StiltsInputType> typesOfInputsEnums = new ArrayList<StiltsInputType>();
         typesOfInputsEnums.add(StiltsInputType.FILE);
         typesOfInputsEnums.add(StiltsInputType.STRING);
         List<StiltsInputFormat> formatsOfInputsEnums = new ArrayList<StiltsInputFormat>();
         formatsOfInputsEnums.add(StiltsInputFormat.TST);
         formatsOfInputsEnums.add(StiltsInputFormat.CSV);
-        MultipleFormatsBean flexibleInputBean = new FlexibleInputsBean(typesOfInputsEnums, formatsOfInputsEnums);
-        TCatNBean tCatBean = new TCatNBean(flexibleInputBean);
-        StiltsServiceDesc tCatDescription = new StiltsServiceDesc(tCatBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Concatenate various Files");
- 	// Optional: set description
-	tCatDescription.setDescription("Concatenate various Files");
-	results.add(tCatDescription);
 
+        List<ServiceDescription> results = new ArrayList<ServiceDescription>();
+
+        SingleInputBean singleInputBean = new SingleInputBean(StiltsInputFormat.TST, StiltsInputType.FILE);
+        TPipeBean tPipeBean = new TPipeBean(singleInputBean);
+        StiltsServiceDesc tPipeDescription = new StiltsServiceDesc(tPipeBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Copy to new Format");
+ 	// Optional: set description
+	//tPipeDescription.setDescription("Copy to new Format");
+	results.add(tPipeDescription);
+
+        MultipleFormatsBean flexibleInputBean = new FlexibleInputsBean(typesOfInputsEnums, formatsOfInputsEnums);
+        TCatNBean tCatNBean = new TCatNBean(flexibleInputBean);
+        StiltsServiceDesc tCatNDescription = new StiltsServiceDesc(tCatNBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Concatenate various Files diffferent formats");
+	// Optional: set description
+	//tCatNDescription.setDescription("Concatenate various Files");
+	results.add(tCatNDescription);
+
+        SingleFormatMultipleInputsBean singleFormatMultipleInputsBean = 
+                new SingleFormatMultipleInputsBean(typesOfInputsEnums, StiltsInputFormat.CSV);
+        TCatBean tCatBean = new TCatBean(singleFormatMultipleInputsBean);
+        StiltsServiceDesc tCatDescription = new StiltsServiceDesc(tCatBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Concatenate various Files same format");
+        results.add(tCatDescription);
+        
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time
         callBack.partialResults(results);

@@ -12,12 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
+import net.sf.taverna.t2.activities.stilts.test.SingleFormatMultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.test.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.test.FlexibleInputsBean;
 import net.sf.taverna.t2.activities.stilts.test.StitlsInputsBean;
 import net.sf.taverna.t2.activities.stilts.test.StiltsProcessBean;
 import net.sf.taverna.t2.activities.stilts.test.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.test.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.test.TCatBean;
 import net.sf.taverna.t2.activities.stilts.test.TCatNBean;
 import net.sf.taverna.t2.activities.stilts.test.TPipeBean;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
@@ -214,13 +216,17 @@ public class StiltsConfigurationPanel extends
             inputPanel = new FlexibleInputsConfigurationPanel((FlexibleInputsBean)inputBean, editable);
         } else if (inputBean instanceof SingleInputBean){
             inputPanel = new SingleInputConfigurationPanel((SingleInputBean)inputBean, editable);
+        } else if (inputBean instanceof SingleFormatMultipleInputsBean){
+            inputPanel = new SingleFormatMultipleInputsConfigurationPanel((SingleFormatMultipleInputsBean)inputBean, editable);
         } else {
              System.err.println("Unexpected input bean class: " + inputBean.getClass());
              throw new UnsupportedOperationException("Unexpected input bean class: " + inputBean.getClass());
         }   
-        System.out.println(inputBean);
+        System.out.println(processBean + " -> " + inputBean);
         if (processBean instanceof TPipeBean){
             return new TPipeConfigurationPanel((TPipeBean)processBean, (SingleInputConfigurationPanel)inputPanel);
+        } else if (processBean instanceof TCatBean){
+            return new TCatConfigurationPanel((TCatBean)processBean, (SingleFormatMultipleInputsConfigurationPanel)inputPanel);
         } else if (processBean instanceof TCatNBean){
             return new TCatNConfigurationPanel((TCatNBean)processBean, (MultipleFormatsConfigurationPanel)inputPanel);
         } else{

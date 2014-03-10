@@ -14,8 +14,8 @@ public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends Mult
  
     private List<JComboBox<StiltsInputFormat>> inputsFormatsSelectors;
             
-    MultipleFormatsConfigurationPanel(BoundedBean inputBean, boolean editable, int headerRows){
-        super(inputBean, editable, headerRows);
+    MultipleFormatsConfigurationPanel(BoundedBean inputBean, boolean adjustableNumberOfInputs, boolean editable){
+        super(inputBean, adjustableNumberOfInputs, editable);
     }
     
     @Override
