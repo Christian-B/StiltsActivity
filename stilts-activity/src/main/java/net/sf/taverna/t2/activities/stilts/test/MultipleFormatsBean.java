@@ -51,4 +51,11 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
         this.formatsOfInputs = formatsOfInputs;
     }
 
+    public void resetNumberOfInputs(int numberOfInputs){
+        super.resetNumberOfInputs(numberOfInputs);
+        while (formatsOfInputs.size() < numberOfInputs){
+            formatsOfInputs.add(formatsOfInputs.get(0));
+        }
+    }
+
  }

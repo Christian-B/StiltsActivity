@@ -1,5 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.test;
 
+import java.awt.GridBagConstraints;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -12,16 +13,21 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends MultipleFormatsBean> extends MultipleInputsConfigurationPanel<BoundedBean>{
  
     private List<JComboBox<StiltsInputFormat>> inputsFormatsSelectors;
-    
-    MultipleFormatsConfigurationPanel(BoundedBean inputBean, boolean editable){
-        super(inputBean, editable);
+            
+    MultipleFormatsConfigurationPanel(BoundedBean inputBean, boolean editable, int headerRows){
+        super(inputBean, editable, headerRows);
     }
     
     @Override
     void initGui() {
         super.initGui();
+        GridBagConstraints c = new GridBagConstraints();
+
+        //Format Type Table Header
+        c.gridx = 0;
+        c.gridy = headerRows + 2;
         JLabel label = new JLabel(TYPE_LABEL);
-        add(label);
+        add(label, c);
         List<StiltsInputFormat> formats = inputBean.getFormatsOfInputs();
         if (editable){
             inputsFormatsSelectors = new ArrayList<JComboBox<StiltsInputFormat>>();
@@ -29,14 +35,16 @@ public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends Mult
                 JComboBox<StiltsInputFormat> box = new JComboBox<StiltsInputFormat>(StiltsInputFormat.values());
                 box.setSelectedItem(formats.get(i));
                 box.setRenderer(listCellRenderer);
-                add(box);
+                c.gridx = i + 1;
+                add(box, c);
                 inputsFormatsSelectors.add(box);
             }
         } else {
             for (int i = 0; i < getNumberOfInputs(); i++){
                 label = new JLabel(formats.get(i).toString());
                 label.setToolTipText(formats.get(i).getDescription());
-                add(label);
+                c.gridx = i + 1;
+                add(label, c);
             }            
         }
         

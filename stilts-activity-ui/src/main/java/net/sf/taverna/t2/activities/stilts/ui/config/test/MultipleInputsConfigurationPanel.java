@@ -1,5 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.test;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,23 +15,34 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
         extends StiltsInputConfigurationPanel<BoundedBean>{
  
     private List<JComboBox<StiltsInputType>> inputsTypesSelectors;
-    
-    MultipleInputsConfigurationPanel(BoundedBean inputBean, boolean editable){
+    final int headerRows; 
+
+    MultipleInputsConfigurationPanel(BoundedBean inputBean, boolean editable, int headerRows){
         super(inputBean, editable);
+        this.headerRows = headerRows;
         initGui();
     }
     
     void initGui() {
         removeAll();
-        this.setLayout(new GridLayout(0, getNumberOfInputs() + 1));
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        //Format Type Table Header
+        c.gridx = 0;
+        c.gridy = headerRows;
         JLabel label = new JLabel("");
-        add(label);
+        add(label, c);
         for (int i = 0; i < getNumberOfInputs(); i++){
             label = new JLabel("Table " + (i+1));
-            add(label);
+            c.gridx = i + 1;
+            add(label, c);
         }
+        
+        c.gridx = 0;
+        c.gridy = headerRows + 1;
         label = new JLabel(TYPE_LABEL);
-        add(label);
+        add(label, c);
         List<StiltsInputType> types = inputBean.getTypesOfInputs();
         if (editable){
             inputsTypesSelectors = new ArrayList<JComboBox<StiltsInputType>>();
@@ -37,14 +50,16 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
                 JComboBox<StiltsInputType> box = new JComboBox<StiltsInputType>(StiltsInputType.values());
                 box.setSelectedItem(types.get(i));
                 box.setRenderer(listCellRenderer);
-                add(box);
+                c.gridx = i + 1;
+                add(box, c);
                 inputsTypesSelectors.add(box);
             }
         } else {
             for (int i = 0; i < getNumberOfInputs(); i++){
                 label = new JLabel(types.get(i).toString());
                 label.setToolTipText(types.get(i).getDescription());
-                add(label);
+                c.gridx = i + 1;
+                add(label, c);
             }            
         }
     }

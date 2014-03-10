@@ -52,4 +52,9 @@ public abstract class MultipleInputsBean extends StitlsInputsBean implements Ser
         this.typesOfInputs = typesOfInputs;
     }
 
+    public void resetNumberOfInputs(int numberOfInputs){
+        while (typesOfInputs.size() < numberOfInputs){
+            typesOfInputs.add(typesOfInputs.get(0));
+        }
+    }
 }

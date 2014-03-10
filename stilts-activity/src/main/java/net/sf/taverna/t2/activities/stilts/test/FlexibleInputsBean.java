@@ -49,5 +49,15 @@ public class FlexibleInputsBean extends MultipleFormatsBean
         return getNumberOfInputs();
     }
 
-      
+    /**
+     * Resests the number of inputs, adjusting the length of the type and info arrays.
+     * 
+     * @throws NullPOinterException if called on a bean before all values have bee set at least once.
+     * 
+     * @param numberOfInputs 
+     */
+    public void resetNumberOfInputs(int numberOfInputs){
+        this.numberOfInputs = numberOfInputs;
+        super.resetNumberOfInputs(numberOfInputs);
+    }     
 }
