@@ -1,12 +1,9 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.config.input;
 
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
-import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 
@@ -16,7 +13,7 @@ public class SingleInputConfigurationPanel extends StiltsInputConfigurationPanel
     private JComboBox<StiltsInputType> inputTypeSelector;
     private JComboBox<StiltsInputFormat> inputFormatSelector;
     
-    SingleInputConfigurationPanel(SingleInputBean inputBean, boolean editable){
+    public SingleInputConfigurationPanel(SingleInputBean inputBean, boolean editable){
         super(inputBean, editable);
         initGui();
     }

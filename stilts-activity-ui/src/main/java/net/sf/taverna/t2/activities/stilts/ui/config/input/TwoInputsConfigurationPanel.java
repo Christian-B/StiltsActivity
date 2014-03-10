@@ -1,13 +1,11 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.config.input;
 
-import java.awt.GridBagConstraints;
-import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
 
 @SuppressWarnings("serial")
 public class TwoInputsConfigurationPanel extends MultipleFormatsConfigurationPanel<TwoInputsBean> {
  
-    TwoInputsConfigurationPanel(TwoInputsBean inputBean, boolean editable){
+    public TwoInputsConfigurationPanel(TwoInputsBean inputBean, boolean editable){
         super(inputBean, FIXED_NUMBER_OF_INPUT_TABLES, editable);
     }
     

@@ -1,4 +1,4 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.config.input;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
@@ -12,7 +12,7 @@ public class SingleFormatMultipleInputsConfigurationPanel<BoundedBean extends Si
  
     private JComboBox<StiltsInputFormat> inputsFormatSelector;
             
-    SingleFormatMultipleInputsConfigurationPanel(BoundedBean inputBean, boolean editable){
+    public SingleFormatMultipleInputsConfigurationPanel(BoundedBean inputBean, boolean editable){
         super(inputBean, ADJUSTABLE_NUMBER_OF_INPUT_TABLES, editable);
     }
     

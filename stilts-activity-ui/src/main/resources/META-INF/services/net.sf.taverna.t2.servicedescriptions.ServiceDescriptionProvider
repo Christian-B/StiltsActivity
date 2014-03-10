@@ -1,1 +1,1 @@
-net.sf.taverna.t2.activities.stilts.ui.config.test.StiltsServiceProvider
+net.sf.taverna.t2.activities.stilts.ui.serviceprovider.StiltsServiceProvider

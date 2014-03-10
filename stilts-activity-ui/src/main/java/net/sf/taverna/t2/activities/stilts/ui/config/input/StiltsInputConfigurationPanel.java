@@ -1,5 +1,6 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.config.input;
 
+import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;

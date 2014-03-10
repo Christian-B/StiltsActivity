@@ -1,6 +1,5 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.config;
 
-import net.sf.taverna.t2.activities.stilts.ui.config.*;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;

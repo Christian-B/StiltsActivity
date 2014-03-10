@@ -1,5 +1,6 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.config;
 
+import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -25,6 +26,18 @@ import net.sf.taverna.t2.activities.stilts.process.TCatNBean;
 import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
 import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
+import net.sf.taverna.t2.activities.stilts.ui.config.process.ExactMatchConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.input.FlexibleInputsConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.input.MultipleFormatsConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.input.SingleFormatMultipleInputsConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.input.SingleInputConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.input.StiltsInputConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.process.StiltsProcessConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.process.TCatConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.process.TCatNConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.process.TJoinConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.process.TPipeConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.input.TwoInputsConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;

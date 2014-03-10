@@ -1,4 +1,4 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.config.process;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
+import net.sf.taverna.t2.activities.stilts.ui.config.input.StiltsInputConfigurationPanel;
 
 @SuppressWarnings("serial")
 public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessBean> extends JPanel{

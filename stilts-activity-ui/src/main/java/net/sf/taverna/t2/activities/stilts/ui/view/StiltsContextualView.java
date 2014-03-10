@@ -1,5 +1,7 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.view;
 
+import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigureAction;
+import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigurationPanel;
 import java.awt.Frame;
 
 import javax.swing.Action;

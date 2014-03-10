@@ -1,4 +1,4 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.serviceprovider;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,10 +1,11 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.config.process;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.input.ExactMatchBean;
+import net.sf.taverna.t2.activities.stilts.ui.config.input.TwoInputsConfigurationPanel;
 
 @SuppressWarnings("serial")
 public class ExactMatchConfigurationPanel extends TMatch2ConfigurationPanel <ExactMatchBean>{
@@ -13,7 +14,7 @@ public class ExactMatchConfigurationPanel extends TMatch2ConfigurationPanel <Exa
     
     private static final String NUMBER_OF_COLUMNS_TO_MATCH_LABEL = "Number of colimns to Match";
    
-    ExactMatchConfigurationPanel(ExactMatchBean processBean, TwoInputsConfigurationPanel inputPanel, boolean editable){
+    public ExactMatchConfigurationPanel(ExactMatchBean processBean, TwoInputsConfigurationPanel inputPanel, boolean editable){
         super(processBean, inputPanel, editable);
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;

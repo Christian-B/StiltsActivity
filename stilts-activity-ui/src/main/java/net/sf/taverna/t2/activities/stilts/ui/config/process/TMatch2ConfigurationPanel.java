@@ -1,5 +1,7 @@
-package net.sf.taverna.t2.activities.stilts.ui.config.test;
+package net.sf.taverna.t2.activities.stilts.ui.config.process;
 
+import net.sf.taverna.t2.activities.stilts.ui.config.input.TwoInputsConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JComboBox;
