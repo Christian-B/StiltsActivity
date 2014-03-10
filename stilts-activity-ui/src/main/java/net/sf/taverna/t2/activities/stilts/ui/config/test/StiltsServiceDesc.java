@@ -81,7 +81,7 @@ public class StiltsServiceDesc extends ServiceDescription<StiltsBean>
 
     @Override
     protected List<? extends Object> getIdentifyingData() {
-        return getPath();
+        return Arrays.<Object>asList(name, process.toString());
     }
 
 }

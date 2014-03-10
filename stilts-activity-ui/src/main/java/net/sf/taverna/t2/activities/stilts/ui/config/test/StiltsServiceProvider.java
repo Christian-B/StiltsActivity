@@ -37,7 +37,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         StiltsServiceDesc tPipeDescription = new StiltsServiceDesc(tPipeBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Copy to new Format");
  	// Optional: set description
 	tPipeDescription.setDescription("Copy to new Format");
-	//results.add(tPipeDescription);
+	results.add(tPipeDescription);
 
         List<StiltsInputType> typesOfInputsEnums = new ArrayList<StiltsInputType>();
         typesOfInputsEnums.add(StiltsInputType.FILE);
