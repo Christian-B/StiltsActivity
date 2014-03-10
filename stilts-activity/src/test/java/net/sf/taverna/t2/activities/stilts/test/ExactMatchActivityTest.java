@@ -56,8 +56,8 @@ public class ExactMatchActivityTest {
                 "id,name,number" + System.lineSeparator() + 
                 "1,Peter,1433" + System.lineSeparator() + 
                 "2,Jack,456");
-        inputs.put(ExactMatchActivity.getMatchColumnName(1, 1),"code"); 
-        inputs.put(ExactMatchActivity.getMatchColumnName(2, 1),"id"); 
+        inputs.put(StiltsActivity.getMatchColumnName(1, 1),"code"); 
+        inputs.put(StiltsActivity.getMatchColumnName(2, 1),"id"); 
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
         expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
@@ -95,10 +95,10 @@ public class ExactMatchActivityTest {
                 "1,Peter,1433" + System.lineSeparator() + 
                 "2,Peter,1433" + System.lineSeparator() + 
                 "2,Jack,456");
-        inputs.put(ExactMatchActivity.getMatchColumnName(1, 1),"code"); 
-        inputs.put(ExactMatchActivity.getMatchColumnName(1, 2),"first"); 
-        inputs.put(ExactMatchActivity.getMatchColumnName(2, 1),"id"); 
-        inputs.put(ExactMatchActivity.getMatchColumnName(2, 2),"name"); 
+        inputs.put(StiltsActivity.getMatchColumnName(1, 1),"code"); 
+        inputs.put(StiltsActivity.getMatchColumnName(1, 2),"first"); 
+        inputs.put(StiltsActivity.getMatchColumnName(2, 1),"id"); 
+        inputs.put(StiltsActivity.getMatchColumnName(2, 2),"name"); 
 
         Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
         expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);

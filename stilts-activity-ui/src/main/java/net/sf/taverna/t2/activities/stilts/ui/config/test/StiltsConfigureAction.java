@@ -3,9 +3,6 @@ package net.sf.taverna.t2.activities.stilts.ui.config.test;
 import net.sf.taverna.t2.activities.stilts.ui.config.*;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
-import net.sf.taverna.t2.activities.stilts.SingleFormatMultipleInputsBean;
-import net.sf.taverna.t2.activities.stilts.SingleInputBean;
-import net.sf.taverna.t2.activities.stilts.TCatActivity;
 import net.sf.taverna.t2.activities.stilts.test.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.test.StiltsBean;
 
@@ -26,8 +23,9 @@ public class StiltsConfigureAction extends
 
     @SuppressWarnings("unchecked")
     public void actionPerformed(ActionEvent e) {
-        ActivityConfigurationDialog<TCatActivity, SingleInputBean> currentDialog = 
+        ActivityConfigurationDialog<StiltsActivity, StiltsBean> currentDialog = 
                 ActivityConfigurationAction.getDialog(getActivity());
+        
         if (currentDialog != null) {
             currentDialog.toFront();
             return;

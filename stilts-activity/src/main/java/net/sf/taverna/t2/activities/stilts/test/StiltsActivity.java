@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static net.sf.taverna.t2.activities.stilts.ExactMatchActivity.getMatchColumnName;
 import net.sf.taverna.t2.activities.stilts.utils.RunStatus;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
@@ -164,7 +163,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         try {
             runnerThread.join();
         } catch (InterruptedException ex) {
-            Logger.getLogger(AbstractStilsActivity.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         
         if (configBean.isDebugMode()){

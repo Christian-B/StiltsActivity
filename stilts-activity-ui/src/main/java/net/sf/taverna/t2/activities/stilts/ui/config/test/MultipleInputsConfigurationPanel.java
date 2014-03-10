@@ -14,7 +14,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.sf.taverna.t2.activities.stilts.test.MultipleInputsBean;
-import static net.sf.taverna.t2.activities.stilts.ui.config.MultipleInputsConfigurationPanel.NUMBER_OF_INPUTS;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 
 @SuppressWarnings("serial")
@@ -116,21 +115,21 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
         if (adjustableNumberOfInputs){
             String numberOfInputsString = numberOfInputsField.getText();
             if (numberOfInputsString == null || numberOfInputsString.isEmpty()){
-                String message = NUMBER_OF_INPUTS + " must be specified";
-                JOptionPane.showMessageDialog(this, message, "Missing " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
+                String message = NUMBER_OF_INPUTS_LABEL + " must be specified";
+                JOptionPane.showMessageDialog(this, message, "Missing " + NUMBER_OF_INPUTS_LABEL, JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             int numberOfInputs;
             try{
                 numberOfInputs = Integer.parseInt(numberOfInputsString);
             } catch (NumberFormatException ex){
-                String message = NUMBER_OF_INPUTS + " is not a valid possitive integer.";
-                JOptionPane.showMessageDialog(this, message, "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
+                String message = NUMBER_OF_INPUTS_LABEL + " is not a valid possitive integer.";
+                JOptionPane.showMessageDialog(this, message, "Invalid " + NUMBER_OF_INPUTS_LABEL, JOptionPane.ERROR_MESSAGE);
                 return false;            
             }
             if (numberOfInputs < 2){
-                String message = NUMBER_OF_INPUTS + " should be 2 or more.";
-                JOptionPane.showMessageDialog(this, message, "Invalid " + NUMBER_OF_INPUTS, JOptionPane.ERROR_MESSAGE);
+                String message = NUMBER_OF_INPUTS_LABEL + " should be 2 or more.";
+                JOptionPane.showMessageDialog(this, message, "Invalid " + NUMBER_OF_INPUTS_LABEL, JOptionPane.ERROR_MESSAGE);
                 return false;                        
             }
         }
