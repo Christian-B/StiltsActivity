@@ -26,7 +26,7 @@ public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends Mult
         //Format Type Table Header
         c.gridx = 0;
         c.gridy = headerRows + 2;
-        JLabel label = new JLabel(TYPE_LABEL);
+        JLabel label = new JLabel(FORMAT_LABEL);
         add(label, c);
         List<StiltsInputFormat> formats = inputBean.getFormatsOfInputs();
         if (editable){

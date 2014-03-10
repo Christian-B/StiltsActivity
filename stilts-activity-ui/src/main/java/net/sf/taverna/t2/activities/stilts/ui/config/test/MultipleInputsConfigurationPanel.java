@@ -30,6 +30,7 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
     private JTextField numberOfInputsField; 
     private final boolean adjustableNumberOfInputs;
     static final boolean ADJUSTABLE_NUMBER_OF_INPUT_TABLES = true;        
+    static final boolean FIXED_NUMBER_OF_INPUT_TABLES = false;        
 
     MultipleInputsConfigurationPanel(BoundedBean inputBean, boolean adjustableNumberOfInputs, boolean editable){
         super(inputBean, editable);
@@ -49,6 +50,9 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
         GridBagConstraints c = new GridBagConstraints();
 
         if (adjustableNumberOfInputs){
+            c.gridx = 0;
+            c.gridy = 0;
+            c.gridwidth = getNumberOfInputs() + 1;
             if (editable){
                 JPanel numberOfInputsPanel = new JPanel();
                 JLabel numberOfInputsLabel = new JLabel(NUMBER_OF_INPUTS_LABEL);
@@ -64,6 +68,7 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
                 JLabel numberOfInputsLabel = new JLabel(NUMBER_OF_INPUTS_LABEL + ": " + getNumberOfInputs());
                 add(numberOfInputsLabel, c);
             }
+            c.gridwidth = 1;
         }
         
         //Format Type Table Header

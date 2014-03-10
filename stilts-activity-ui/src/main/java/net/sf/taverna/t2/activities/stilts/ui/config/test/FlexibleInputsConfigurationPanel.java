@@ -1,6 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.test;
 
-import java.awt.GridBagConstraints;
 import net.sf.taverna.t2.activities.stilts.test.FlexibleInputsBean;
 
 @SuppressWarnings("serial")
@@ -13,10 +12,7 @@ public class FlexibleInputsConfigurationPanel extends MultipleFormatsConfigurati
     @Override
     void initGui() {
         super.initGui();        
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-    }
+   }
 
     @Override
     int getNumberOfInputs() {

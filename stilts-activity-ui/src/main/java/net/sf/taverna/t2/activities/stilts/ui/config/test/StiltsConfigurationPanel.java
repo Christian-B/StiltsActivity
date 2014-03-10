@@ -21,7 +21,9 @@ import net.sf.taverna.t2.activities.stilts.test.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.test.StiltsBean;
 import net.sf.taverna.t2.activities.stilts.test.TCatBean;
 import net.sf.taverna.t2.activities.stilts.test.TCatNBean;
+import net.sf.taverna.t2.activities.stilts.test.TJoinBean;
 import net.sf.taverna.t2.activities.stilts.test.TPipeBean;
+import net.sf.taverna.t2.activities.stilts.test.TwoInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
@@ -218,6 +220,8 @@ public class StiltsConfigurationPanel extends
             inputPanel = new SingleInputConfigurationPanel((SingleInputBean)inputBean, editable);
         } else if (inputBean instanceof SingleFormatMultipleInputsBean){
             inputPanel = new SingleFormatMultipleInputsConfigurationPanel((SingleFormatMultipleInputsBean)inputBean, editable);
+        } else if (inputBean instanceof TwoInputsBean){
+            inputPanel = new TwoInputsConfigurationPanel((TwoInputsBean)inputBean, editable);
         } else {
              System.err.println("Unexpected input bean class: " + inputBean.getClass());
              throw new UnsupportedOperationException("Unexpected input bean class: " + inputBean.getClass());
@@ -229,6 +233,8 @@ public class StiltsConfigurationPanel extends
             return new TCatConfigurationPanel((TCatBean)processBean, (SingleFormatMultipleInputsConfigurationPanel)inputPanel);
         } else if (processBean instanceof TCatNBean){
             return new TCatNConfigurationPanel((TCatNBean)processBean, (MultipleFormatsConfigurationPanel)inputPanel);
+        } else if (processBean instanceof TJoinBean){
+            return new TJoinConfigurationPanel((TJoinBean)processBean, (MultipleFormatsConfigurationPanel)inputPanel);
         } else{
              System.err.println("Unexpected process bean class: " + inputBean.getClass());
              throw new UnsupportedOperationException("Unexpected process bean class: " + processBean.getClass());

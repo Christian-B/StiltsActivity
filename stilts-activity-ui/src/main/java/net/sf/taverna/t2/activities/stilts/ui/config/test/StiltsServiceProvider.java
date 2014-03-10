@@ -12,6 +12,7 @@ import net.sf.taverna.t2.activities.stilts.test.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.test.StiltsBean;
 import net.sf.taverna.t2.activities.stilts.test.TCatBean;
 import net.sf.taverna.t2.activities.stilts.test.TCatNBean;
+import net.sf.taverna.t2.activities.stilts.test.TJoinBean;
 import net.sf.taverna.t2.activities.stilts.test.TPipeBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsConfigurationConstants;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
@@ -60,6 +61,10 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         TCatBean tCatBean = new TCatBean(singleFormatMultipleInputsBean);
         StiltsServiceDesc tCatDescription = new StiltsServiceDesc(tCatBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Concatenate various Files same format");
         results.add(tCatDescription);
+        
+        TJoinBean tJoinBean = new TJoinBean(flexibleInputBean);
+        StiltsServiceDesc tJoinDescription = new StiltsServiceDesc(tJoinBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Join various files different formats");
+        results.add(tJoinDescription);
         
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time
