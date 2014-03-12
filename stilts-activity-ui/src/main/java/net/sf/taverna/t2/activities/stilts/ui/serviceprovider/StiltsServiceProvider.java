@@ -14,6 +14,7 @@ import net.sf.taverna.t2.activities.stilts.process.TCatNBean;
 import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
 import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
+import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
@@ -72,6 +73,12 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         ExactMatchBean exactMatchBean = new ExactMatchBean(1, StiltsFind.ALL, StiltsFixcols.DUPS, StiltsJoin.ONE_AND_TWO, twoInputBean);
         StiltsServiceDesc exactMatchDescription = new StiltsServiceDesc(exactMatchBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Exact Macth two or more files");
         results.add(exactMatchDescription);
+
+        UserSpecifiedPreProcessorBean userSpecifiedPreProcessorBean = new UserSpecifiedPreProcessorBean("delcols 1");
+        StiltsServiceDesc userSpecifiedPreProcessorDescription =
+                new StiltsServiceDesc(userSpecifiedPreProcessorBean, tPipeBean, 
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Configurable Filter");
+ 	results.add(userSpecifiedPreProcessorDescription);
 
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time

@@ -12,7 +12,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * @author christian
  */
 public class StiltsBean implements StiltsInterface, Serializable{
-    private StiltsPreProcessBean preprocessor;
+    private StiltsPreProcessBean preprocess;
     private StiltsOutputFormat outputFormat;
     private StiltsOutputType outputType;
     private StiltsProcessBean process;
@@ -28,7 +28,7 @@ public class StiltsBean implements StiltsInterface, Serializable{
     
     public StiltsBean(StiltsPreProcessBean preprocessor, StiltsProcessBean process, StiltsOutputFormat outputFormatEnum, StiltsOutputType outputTypeEnum,
             boolean debugMode)  throws ActivityConfigurationException{
-        this.preprocessor = preprocessor;
+        this.preprocess = preprocessor;
         this.process = process;
         this.outputFormat = outputFormatEnum;
         this.outputType = outputTypeEnum;
@@ -37,6 +37,7 @@ public class StiltsBean implements StiltsInterface, Serializable{
 
     public StiltsBean(StiltsInterface other) {
         this.process = other.getProcess();
+        this.preprocess = other.getPreprocess();
         this.outputFormat = other.getOutputFormat();
         this.outputType = other.getOutputType();
         this.debugMode = other.isDebugMode();
@@ -109,17 +110,17 @@ public class StiltsBean implements StiltsInterface, Serializable{
     }
 
     /**
-     * @return the preprocessor
+     * @return the preprocess
      */
-    public StiltsPreProcessBean getPreprocessor() {
-        return preprocessor;
+    public StiltsPreProcessBean getPreprocess() {
+        return preprocess;
     }
 
     /**
-     * @param preprocessor the preprocessor to set
+     * @param preprocess the preprocess to set
      */
-    public void setPreprocessor(StiltsPreProcessBean preprocessor) {
-        this.preprocessor = preprocessor;
+    public void setPreprocess(StiltsPreProcessBean preprocess) {
+        this.preprocess = preprocess;
     }
 
 }

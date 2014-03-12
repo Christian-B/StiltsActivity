@@ -133,7 +133,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile){
         List<String> parameters = createProcessParameters(configBean.getProcess(), inputs, callback);
-        addPreProcessParameters(configBean.getPreprocessor(), parameters, inputs, callback);
+        addPreProcessParameters(configBean.getPreprocess(), parameters, inputs, callback);
         if (parameters == null){ //createProcessParameters failed.
             return null;//callback.fail already done
         }

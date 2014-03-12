@@ -51,7 +51,7 @@ public class UserSpecifiedPreProcessorActivityTest {
     @Test
     public void delCol1() throws Exception {
         System.out.println("delCol1");
-        UserSpecifiedPreProcessorBean preProcessorBean = (UserSpecifiedPreProcessorBean)configBean.getPreprocessor();
+        UserSpecifiedPreProcessorBean preProcessorBean = (UserSpecifiedPreProcessorBean)configBean.getPreprocess();
         preProcessorBean.setPreProcessCommand("delcols 1");
         String expected = "name,number" + System.lineSeparator() +
             "John,1234" + System.lineSeparator() +
@@ -80,7 +80,7 @@ public class UserSpecifiedPreProcessorActivityTest {
     @Test
     public void delColName() throws Exception {
         System.out.println("delCol1");
-        UserSpecifiedPreProcessorBean preProcessorBean = (UserSpecifiedPreProcessorBean)configBean.getPreprocessor();
+        UserSpecifiedPreProcessorBean preProcessorBean = (UserSpecifiedPreProcessorBean)configBean.getPreprocess();
         preProcessorBean.setPreProcessCommand("delcols name");
         String expected = "id,number" + System.lineSeparator() +
             "1,1234" + System.lineSeparator() +

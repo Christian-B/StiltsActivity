@@ -26,6 +26,8 @@ import net.sf.taverna.t2.activities.stilts.process.TCatNBean;
 import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
 import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
+import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
+import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.process.ExactMatchConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.input.FlexibleInputsConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.input.MultipleFormatsConfigurationPanel;
@@ -38,6 +40,8 @@ import net.sf.taverna.t2.activities.stilts.ui.config.process.TCatNConfigurationP
 import net.sf.taverna.t2.activities.stilts.ui.config.process.TJoinConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.process.TPipeConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.input.TwoInputsConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.preprocess.StiltsPreProcessConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.preprocess.UserSpecifiedPreProcessorConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
@@ -53,6 +57,7 @@ public class StiltsConfigurationPanel extends
     private final boolean editable;
     
     private final StiltsProcessConfigurationPanel processPanel;
+    private final StiltsPreProcessConfigurationPanel preprocessPanel;
     private final JPanel outputPanel;
     private final JPanel miscellaneousPanel;
     
@@ -73,25 +78,46 @@ public class StiltsConfigurationPanel extends
     }
     
     public StiltsConfigurationPanel(StiltsActivity activity, boolean editable) {
-        this.editable = editable;
-        this.activity = activity;
-        configBean = activity.getConfiguration();
-        setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        processPanel = createProcessPanel(configBean.getProcess());
-        add(processPanel, c);        
-        outputPanel = new JPanel(new GridLayout(0, 2));
-        outputPanel.setBorder(BorderFactory.createCompoundBorder(
+        try {
+            this.editable = editable;
+            this.activity = activity;
+            configBean = activity.getConfiguration();
+            setLayout(new GridBagLayout());
+            GridBagConstraints c = new GridBagConstraints();
+            c.gridx = 0;
+            c.gridy = 0;
+            processPanel = createProcessPanel(configBean.getProcess());
+            add(processPanel, c); 
+        
+            int row;
+            StiltsPreProcessBean preprocessBean = configBean.getPreprocess();
+            if (preprocessBean != null){
+                preprocessPanel = createPreprocessPanel(preprocessBean);
+                c.gridy = 1;
+                add(preprocessPanel, c); 
+                row = 2;
+            } else {
+                preprocessPanel = null;
+                row = 1;
+            }
+        
+            outputPanel = new JPanel(new GridLayout(0, 2));
+            outputPanel.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createTitledBorder("Outputs"),
                         BorderFactory.createEmptyBorder(5,5,5,5)));
-        c.gridy = 1;
-        add(outputPanel, c);
-        miscellaneousPanel = new JPanel(new GridLayout(0, 2));
-        c.gridy = 2;
-        add(miscellaneousPanel, c);
-        initGui();
+            c.gridy = row;
+            add(outputPanel, c);
+        
+            miscellaneousPanel = new JPanel(new GridLayout(0, 2));
+            c.gridy = row + 1;
+            add(miscellaneousPanel, c);
+        
+            initGui();
+        } catch (RuntimeException ex){
+            ex.printStackTrace();
+            throw ex;
+        }     
+
     }
 
      private void initGui() {
@@ -158,6 +184,9 @@ public class StiltsConfigurationPanel extends
         }
         processPanel.checkValues();
          // All valid, return true
+        if (preprocessPanel != null){
+            preprocessPanel.checkValues();
+        }
         return true;
     }
 
@@ -189,6 +218,14 @@ public class StiltsConfigurationPanel extends
         if (configBean.isDebugMode() != debugSelector.isSelected()){
             return true;
         }
+        if (processPanel.isConfigurationChanged()){
+            return true;
+        }
+        if (preprocessPanel != null){
+            if (preprocessPanel.isConfigurationChanged()){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -207,6 +244,12 @@ public class StiltsConfigurationPanel extends
         configBean.setDebugMode(debugSelector.isSelected());
         processPanel.noteConfiguration();
         configBean.setProcess(processPanel.getConfiguration());
+        if (preprocessPanel != null){
+            preprocessPanel.noteConfiguration();
+            configBean.setPreprocess(preprocessPanel.getConfiguration());
+        } else {
+            configBean.setPreprocess(null);            
+        }
     }
 
     /**
@@ -225,7 +268,10 @@ public class StiltsConfigurationPanel extends
         debugSelector.setSelected(configBean.isDebugMode());
         
         processPanel.refreshConfiguration(configBean.getProcess());
-    }
+        if (preprocessPanel != null){
+            preprocessPanel.refreshConfiguration(configBean.getPreprocess());
+        }
+     }
 
     private StiltsProcessConfigurationPanel createProcessPanel(StiltsProcessBean processBean) {
         StiltsInputConfigurationPanel inputPanel;
@@ -242,7 +288,6 @@ public class StiltsConfigurationPanel extends
              System.err.println("Unexpected input bean class: " + inputBean.getClass());
              throw new UnsupportedOperationException("Unexpected input bean class: " + inputBean.getClass());
         }   
-        System.out.println(processBean + " -> " + inputBean);
         if (processBean instanceof TPipeBean){
             return new TPipeConfigurationPanel((TPipeBean)processBean, (SingleInputConfigurationPanel)inputPanel);
         } else if (processBean instanceof TCatBean){
@@ -254,8 +299,18 @@ public class StiltsConfigurationPanel extends
         } else if (processBean instanceof ExactMatchBean){
             return new ExactMatchConfigurationPanel((ExactMatchBean)processBean, (TwoInputsConfigurationPanel)inputPanel, editable);
         } else{
-             System.err.println("Unexpected process bean class: " + inputBean.getClass());
+             System.err.println("Unexpected process bean class: " + processBean.getClass());
              throw new UnsupportedOperationException("Unexpected process bean class: " + processBean.getClass());
         }   
+    }
+
+    private StiltsPreProcessConfigurationPanel createPreprocessPanel(StiltsPreProcessBean preprocessBean) {
+        if (preprocessBean instanceof UserSpecifiedPreProcessorBean){
+            StiltsPreProcessConfigurationPanel panel = new UserSpecifiedPreProcessorConfigurationPanel((UserSpecifiedPreProcessorBean)preprocessBean, editable);
+            return panel;
+        } else{
+            System.err.println("Unexpected preprocess bean class: " + preprocessBean.getClass());
+            throw new UnsupportedOperationException("Unexpected process bean class: " + preprocessBean.getClass());
+        }      
     }
 }

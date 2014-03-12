@@ -19,11 +19,11 @@ public class ExactMatchConfigurationPanel extends TMatch2ConfigurationPanel <Exa
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
-        c.weightx = 2;
+        c.gridwidth = 2;
         processPanel.add(new JLabel("Exact Match Tool"), c);
         c.gridx = 0;
         c.gridy = 4;
-        c.weightx = 1;
+        c.gridwidth = 1;
         JLabel numberOfColumnsToMatchLabel = new JLabel(NUMBER_OF_COLUMNS_TO_MATCH_LABEL);
         processPanel.add(numberOfColumnsToMatchLabel,c );
         c.gridx = 1;

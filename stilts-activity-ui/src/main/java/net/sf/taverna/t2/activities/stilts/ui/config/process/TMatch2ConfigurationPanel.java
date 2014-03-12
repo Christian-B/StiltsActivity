@@ -33,7 +33,7 @@ public class TMatch2ConfigurationPanel<BoundedBean extends TMatch2Bean> extends 
         this.editable = editable;
         processPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 1;
+        c.gridwidth = 1;
 
         c.gridx = 0;
         c.gridy = 1;
