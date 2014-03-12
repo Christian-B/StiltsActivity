@@ -10,6 +10,12 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 public class StiltsProcessBean {
     private StitlsInputsBean inputs;
 
+    StiltsProcessBean(){}
+    
+    StiltsProcessBean(StitlsInputsBean inputs){
+        this.inputs = inputs;
+    }
+    
     /**
      * @return the inputs
      */

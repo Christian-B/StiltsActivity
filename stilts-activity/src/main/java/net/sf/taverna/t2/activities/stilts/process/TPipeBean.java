@@ -13,6 +13,6 @@ public class TPipeBean extends StiltsProcessBean {
     }
     
     public TPipeBean(SingleInputBean inputBean){
-        setInputs(inputBean);
+        super(inputBean);
     }
 }

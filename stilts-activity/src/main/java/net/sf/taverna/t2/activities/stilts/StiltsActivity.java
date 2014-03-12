@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
+import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
+import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
 import net.sf.taverna.t2.activities.stilts.process.TCatBean;
 import net.sf.taverna.t2.activities.stilts.utils.RunStatus;
@@ -131,6 +133,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile){
         List<String> parameters = createProcessParameters(configBean.getProcess(), inputs, callback);
+        addPreProcessParameters(configBean.getPreprocessor(), parameters, inputs, callback);
         if (parameters == null){ //createProcessParameters failed.
             return null;//callback.fail already done
         }
@@ -399,6 +402,21 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         return OK;
     }
 
+    //PreProcess stuff
+    private boolean addPreProcessParameters(StiltsPreProcessBean preprocessor, List<String> parameters, Map<String, T2Reference> inputs, 
+            AsynchronousActivityCallback callback) {
+        if (preprocessor == null){
+            return OK;
+        } else if (preprocessor instanceof UserSpecifiedPreProcessorBean){
+            parameters.add("cmd=" + ((UserSpecifiedPreProcessorBean)preprocessor).getPreProcessCommand());
+            return true;
+        } else {
+            callback.fail("Unexpected process " + preprocessor.getClass());
+            return FAILED;
+        }
+    }
+    
+
 
    //Support methods
     private File createOutputFile(final AsynchronousActivityCallback callback) {
@@ -546,7 +564,5 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     public static String getMatchColumnName(int table, int matchPosition){     
         return "Name of " + MyUtils.ordinal(matchPosition) + " column to match in " + MyUtils.ordinal(table) + " Table "; 
     }
-    
-
 
 }

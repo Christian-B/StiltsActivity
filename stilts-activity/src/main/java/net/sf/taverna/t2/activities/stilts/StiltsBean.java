@@ -1,6 +1,7 @@
 package net.sf.taverna.t2.activities.stilts;
 
 import java.io.Serializable;
+import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
@@ -11,7 +12,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * @author christian
  */
 public class StiltsBean implements StiltsInterface, Serializable{
-    //StilsPreProcessorBean preprocessor;
+    private StiltsPreProcessBean preprocessor;
     private StiltsOutputFormat outputFormat;
     private StiltsOutputType outputType;
     private StiltsProcessBean process;
@@ -22,6 +23,12 @@ public class StiltsBean implements StiltsInterface, Serializable{
     
     public StiltsBean(StiltsProcessBean process, StiltsOutputFormat outputFormatEnum, StiltsOutputType outputTypeEnum,
             boolean debugMode)  throws ActivityConfigurationException{
+        this(null, process, outputFormatEnum, outputTypeEnum, debugMode);
+    }
+    
+    public StiltsBean(StiltsPreProcessBean preprocessor, StiltsProcessBean process, StiltsOutputFormat outputFormatEnum, StiltsOutputType outputTypeEnum,
+            boolean debugMode)  throws ActivityConfigurationException{
+        this.preprocessor = preprocessor;
         this.process = process;
         this.outputFormat = outputFormatEnum;
         this.outputType = outputTypeEnum;
@@ -99,6 +106,20 @@ public class StiltsBean implements StiltsInterface, Serializable{
      */
     public void setOutputType(StiltsOutputType outputType) {
         this.outputType = outputType;
+    }
+
+    /**
+     * @return the preprocessor
+     */
+    public StiltsPreProcessBean getPreprocessor() {
+        return preprocessor;
+    }
+
+    /**
+     * @param preprocessor the preprocessor to set
+     */
+    public void setPreprocessor(StiltsPreProcessBean preprocessor) {
+        this.preprocessor = preprocessor;
     }
 
 }
