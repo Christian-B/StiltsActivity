@@ -4,24 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Icon;
-import net.sf.taverna.t2.activities.stilts.input.ExactMatchBean;
-import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
-import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
-import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
-import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
-import net.sf.taverna.t2.activities.stilts.process.TCatBean;
-import net.sf.taverna.t2.activities.stilts.process.TCatNBean;
-import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
-import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
-import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
-import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorBean;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsJoin;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
+import net.sf.taverna.t2.activities.stilts.input.*;
+import net.sf.taverna.t2.activities.stilts.preprocess.*;
+import net.sf.taverna.t2.activities.stilts.process.*;
+import net.sf.taverna.t2.activities.stilts.utils.*;
 
 import net.sf.taverna.t2.servicedescriptions.ServiceDescription;
 import net.sf.taverna.t2.servicedescriptions.ServiceDescriptionProvider;
@@ -79,6 +65,12 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(userSpecifiedPreProcessorBean, tPipeBean, 
                         StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Configurable Filter");
  	results.add(userSpecifiedPreProcessorDescription);
+
+        DeleteColumnPreProcessorBean deleteColumnPreProcessorBean = new DeleteColumnPreProcessorBean("1");
+        StiltsServiceDesc deleteColumnPreProcessorDescription =
+                new StiltsServiceDesc(deleteColumnPreProcessorBean, tPipeBean, 
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Delete Column");
+ 	results.add(deleteColumnPreProcessorDescription);
 
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time

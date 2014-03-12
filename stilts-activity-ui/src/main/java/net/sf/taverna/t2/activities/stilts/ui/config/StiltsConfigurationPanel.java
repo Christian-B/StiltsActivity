@@ -1,6 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.ui.config;
 
-import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -8,45 +7,21 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
-import net.sf.taverna.t2.activities.stilts.input.ExactMatchBean;
-import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
-import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
-import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
-import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
-import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
-import net.sf.taverna.t2.activities.stilts.StiltsActivity;
-import net.sf.taverna.t2.activities.stilts.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.process.TCatBean;
-import net.sf.taverna.t2.activities.stilts.process.TCatNBean;
-import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
-import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
-import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
-import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
-import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorBean;
-import net.sf.taverna.t2.activities.stilts.ui.config.process.ExactMatchConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.input.FlexibleInputsConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.input.MultipleFormatsConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.input.SingleFormatMultipleInputsConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.input.SingleInputConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.input.StiltsInputConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.process.StiltsProcessConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.process.TCatConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.process.TCatNConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.process.TJoinConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.process.TPipeConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.input.TwoInputsConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.preprocess.StiltsPreProcessConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.ui.config.preprocess.UserSpecifiedPreProcessorConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
+
+import net.sf.taverna.t2.activities.stilts.*;
+import net.sf.taverna.t2.activities.stilts.input.*;
+import net.sf.taverna.t2.activities.stilts.process.*;
+import net.sf.taverna.t2.activities.stilts.preprocess.*;
+import net.sf.taverna.t2.activities.stilts.ui.config.input.*;
+import net.sf.taverna.t2.activities.stilts.ui.config.preprocess.*;
+import net.sf.taverna.t2.activities.stilts.ui.config.process.*;
+import net.sf.taverna.t2.activities.stilts.utils.*;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 
 @SuppressWarnings("serial")
 public class StiltsConfigurationPanel extends
@@ -307,6 +282,9 @@ public class StiltsConfigurationPanel extends
     private StiltsPreProcessConfigurationPanel createPreprocessPanel(StiltsPreProcessBean preprocessBean) {
         if (preprocessBean instanceof UserSpecifiedPreProcessorBean){
             StiltsPreProcessConfigurationPanel panel = new UserSpecifiedPreProcessorConfigurationPanel((UserSpecifiedPreProcessorBean)preprocessBean, editable);
+            return panel;
+        } else if (preprocessBean instanceof DeleteColumnPreProcessorBean){
+            StiltsPreProcessConfigurationPanel panel = new DeleteColumnPreProcessorConfigurationPanel((DeleteColumnPreProcessorBean)preprocessBean, editable);
             return panel;
         } else{
             System.err.println("Unexpected preprocess bean class: " + preprocessBean.getClass());
