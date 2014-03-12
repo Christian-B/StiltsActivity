@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
+import net.sf.taverna.t2.activities.stilts.preprocess.DeleteColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
 import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
@@ -410,14 +411,15 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         } else if (preprocessor instanceof UserSpecifiedPreProcessorBean){
             parameters.add("cmd=" + ((UserSpecifiedPreProcessorBean)preprocessor).getPreProcessCommand());
             return true;
+        } else if (preprocessor instanceof DeleteColumnPreProcessorBean){
+            parameters.add("cmd=delcols \"" + ((DeleteColumnPreProcessorBean)preprocessor).getColumn() + "\"");
+            return true;
         } else {
             callback.fail("Unexpected process " + preprocessor.getClass());
             return FAILED;
         }
     }
     
-
-
    //Support methods
     private File createOutputFile(final AsynchronousActivityCallback callback) {
         try {
