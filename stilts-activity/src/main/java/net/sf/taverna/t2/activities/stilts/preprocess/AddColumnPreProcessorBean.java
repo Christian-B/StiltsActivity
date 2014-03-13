@@ -1,54 +1,30 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
  *
  * @author christian
- */
-public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
+ */public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     
-    //Note at least one of beforeColumn or afterColumn must be null
-    private String beforeColumn;
-    private String afterColumn;
+    private StiltsLocationType newColumnLocation;
+    private String locationColumn;
     //New Name must be specified.
     private String newColName;
 
     AddColumnPreProcessorBean(){  
     }
 
-    AddColumnPreProcessorBean(String beforeColumn, String afterColumn, String newColName){  
-        this.beforeColumn = beforeColumn;
-        this.afterColumn = afterColumn;
+    AddColumnPreProcessorBean(String newColName){  
         this.newColName = newColName;
+        newColumnLocation = StiltsLocationType.END;
     }
 
-    /**
-     * @return the beforeColumn
-     */
-    public String getBeforeColumn() {
-        return beforeColumn;
-    }
-
-    /**
-     * @param beforeColumn the beforeColumn to set
-     */
-    public void setBeforeColumn(String beforeColumn) {
-        this.beforeColumn = beforeColumn;
-    }
-
-    /**
-     * @return the afterColumn
-     */
-    public String getAfterColumn() {
-        return afterColumn;
-    }
-
-    /**
-     * @param afterColumn the afterColumn to set
-     */
-    public void setAfterColumn(String afterColumn) {
-        this.afterColumn = afterColumn;
+    AddColumnPreProcessorBean(String newColName, StiltsLocationType newColumnLocation,  String locationColumn){  
+        this.newColumnLocation = newColumnLocation;
+        this.locationColumn = locationColumn;        
+        this.newColName = newColName;
     }
 
     /**
@@ -57,7 +33,7 @@ public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     public String getNewColName() {
         return newColName;
     }
-
+  
     /**
      * @param newColName the newColName to set
      */
@@ -67,15 +43,52 @@ public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
 
     @Override
     public void checkValid() throws ActivityConfigurationException {
-        if (newColName == null){
+        if (getNewColName() == null){
             throw new ActivityConfigurationException("New column name not specified");
         }
-        if (newColName.trim().isEmpty()){
+        if (getNewColName().trim().isEmpty()){
             throw new ActivityConfigurationException("New column name is empty");
         }
-        if (beforeColumn != null && afterColumn != null){
-            throw new ActivityConfigurationException("Both before Column and after column specified.");            
+        if (newColumnLocation == StiltsLocationType.END){
+            if (locationColumn != null){
+                throw new ActivityConfigurationException("Location Column specified but location for new column is " + newColumnLocation); 
+            }    
+        } else {
+           if (getNewColName() == null){
+                throw new ActivityConfigurationException("New column location is " + newColumnLocation + " But no location column specified");
+            }
+            if (getNewColName().trim().isEmpty()){
+                throw new ActivityConfigurationException("New column location is " + newColumnLocation + " But location column name is empty");
+            }
         }
     }
- 
+
+    /**
+     * @return the newColumnLocation
+     */
+    public StiltsLocationType getNewColumnLocation() {
+        return newColumnLocation;
+    }
+
+    /**
+     * @param newColumnLocation the newColumnLocation to set
+     */
+    public void setNewColumnLocation(StiltsLocationType newColumnLocation) {
+        this.newColumnLocation = newColumnLocation;
+    }
+
+    /**
+     * @return the locationColumn
+     */
+    public String getLocationColumn() {
+        return locationColumn;
+    }
+
+    /**
+     * @param locationColumn the locationColumn to set
+     */
+    public void setLocationColumn(String locationColumn) {
+        this.locationColumn = locationColumn;
+    }
+
 }

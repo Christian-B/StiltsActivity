@@ -12,10 +12,30 @@ public enum StiltsTwoVariableOperator implements DescribableInterface {
     MULTIPLY("*","Multiply two numerical columns", StiltsOperatorType.OPERATOR),
     DIVIDE("/","Divide two numerical columns", StiltsOperatorType.OPERATOR),
     MODULUS("&","Modulus two numerical columns", StiltsOperatorType.OPERATOR),
+    AND("&&","Boolean and", StiltsOperatorType.OPERATOR),
+    OR("||","Boolean or", StiltsOperatorType.OPERATOR),
+    XOR("^","Boolean XOR(exclusive-or)", StiltsOperatorType.OPERATOR),
+    EQUALS("==","numeric identity", StiltsOperatorType.OPERATOR),
+    NOT_EQUALS("!=","numeric non-identity", StiltsOperatorType.OPERATOR),
+    LESS_THAN("<","less than", StiltsOperatorType.OPERATOR),
+    GREATHER_THAN(">","greather than", StiltsOperatorType.OPERATOR),
+    LESS_THAN_EQUALS("<=","less than or equals", StiltsOperatorType.OPERATOR),
+    GREATHER_THAN_EQUALS(">=","greather than or equals", StiltsOperatorType.OPERATOR),
+    //PLUS and STRING_CONATENATION share the same 
+    STRING_CONATENATION("+","string concatenation",StiltsOperatorType.OPERATOR),
     MAX("max",
-            "Returns the greater of two integer values. If the arguments have the same value, the result is that same value..",
+            "Returns the greater of two numerical values. If the arguments have the same value, the result is that same value..",
+            StiltsOperatorType.FUNCTION),
+    MAXREAL("maxReal",
+            "Returns the greater of two floating point values, ignoring blanks. If the arguments have the same value, the result is that same value. If one argument is blank, the result is the other one. If both arguments are blank, the result is blank.",
+            StiltsOperatorType.FUNCTION),
+    MIN("min",
+            "Returns the smaller of two integer values. If the arguments have the same value, the result is that same value.",
+            StiltsOperatorType.FUNCTION),
+    MINREAL("minReal",
+            "Returns the smaller of two floating point values, ignoring blanks. If the arguments have the same value, the result is that same value. If one argument is blank, the result is the other one. If both arguments are blank, the result is blank.",
             StiltsOperatorType.FUNCTION);
-    
+
     private final String stiltsSymbol;
     private final String description;
     private final StiltsOperatorType operatorType;

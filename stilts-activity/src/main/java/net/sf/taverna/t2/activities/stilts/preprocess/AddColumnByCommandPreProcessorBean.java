@@ -1,5 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -13,8 +14,13 @@ public class AddColumnByCommandPreProcessorBean extends AddColumnPreProcessorBea
     public AddColumnByCommandPreProcessorBean(){  
     }
 
-    public AddColumnByCommandPreProcessorBean(String command, String beforeColumn, String afterColumn, String newColName){ 
-        super(beforeColumn, afterColumn, newColName);
+    public AddColumnByCommandPreProcessorBean(String command, String newColName){ 
+        super(newColName);
+        this.command = command;
+    }
+
+    public AddColumnByCommandPreProcessorBean(String command, String newColName, StiltsLocationType newColumnLocation,  String locationColumn){ 
+        super(newColName, newColumnLocation, locationColumn);
         this.command = command;
     }
 

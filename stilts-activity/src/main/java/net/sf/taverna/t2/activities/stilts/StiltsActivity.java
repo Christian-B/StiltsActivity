@@ -430,11 +430,11 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             return FAILED; //callback fail already called.
         }
         String call = "cmd=addcol ";
-        if (preprocessor.getAfterColumn() != null){
-            call= call + "-after " + preprocessor.getAfterColumn();
+        if (preprocessor.getNewColumnLocation() ==  StiltsLocationType.AFTER){
+            call= call + "-after " + preprocessor.getLocationColumn();
         }
-        if (preprocessor.getBeforeColumn() != null){
-            call= call + "-before " + preprocessor.getBeforeColumn();
+        if (preprocessor.getNewColumnLocation() ==  StiltsLocationType.BEFORE){
+            call= call + "-before " + preprocessor.getLocationColumn();
         }
         call = call + " " + preprocessor.getNewColName() + " \"" + operator + "\"";
         parameters.add(call);

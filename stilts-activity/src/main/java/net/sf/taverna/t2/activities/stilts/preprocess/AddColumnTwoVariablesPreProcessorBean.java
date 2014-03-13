@@ -1,5 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsTwoVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -16,9 +17,16 @@ public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessor
     public AddColumnTwoVariablesPreProcessorBean(){  
     }
 
+    public AddColumnTwoVariablesPreProcessorBean(StiltsTwoVariableOperator operator, String variable1, String variable2, String newColName){
+        super(newColName);
+        this.operator = operator;
+        this.variable1 = variable1;
+        this.variable2 = variable2;
+    }
+
     public AddColumnTwoVariablesPreProcessorBean(StiltsTwoVariableOperator operator, String variable1, String variable2, 
-            String beforeColumn, String afterColumn, String newColName){
-        super(beforeColumn, afterColumn, newColName);
+            String newColName, StiltsLocationType newColumnLocation,  String locationColumn){ 
+        super(newColName, newColumnLocation, locationColumn);
         this.operator = operator;
         this.variable1 = variable1;
         this.variable2 = variable2;
