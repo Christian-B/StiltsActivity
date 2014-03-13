@@ -57,7 +57,7 @@ public class DeleteColumnPreProcessorConfigurationPanel extends StiltsPreProcess
       */
     public boolean checkValues() {
          // All valid, return true
-        if (!columnsCommandField.getText().trim().isEmpty()){
+        if (columnsCommandField.getText().trim().isEmpty()){
             String message = COLUMN_LABEL + " can not be empty";
             JOptionPane.showMessageDialog(this, message, "Empty " + COLUMN_LABEL, JOptionPane.ERROR_MESSAGE);
             return false;
@@ -79,6 +79,7 @@ public class DeleteColumnPreProcessorConfigurationPanel extends StiltsPreProcess
       */
     @Override
     public void noteConfiguration() {
+        preprocessBean = new DeleteColumnPreProcessorBean();
         super.noteConfiguration();
         preprocessBean.setColumn(columnsCommandField.getText());
     }

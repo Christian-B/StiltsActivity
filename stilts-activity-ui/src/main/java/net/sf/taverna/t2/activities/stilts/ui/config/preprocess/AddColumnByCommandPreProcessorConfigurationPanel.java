@@ -43,7 +43,10 @@ public class AddColumnByCommandPreProcessorConfigurationPanel extends AddColumnP
       */
     public boolean checkValues() {
          // All valid, return true
-        if (!commandField.getText().trim().isEmpty()){
+        if (!super.checkValues()){
+            return false;
+        }
+        if (commandField.getText().trim().isEmpty()){
             String message = COMMAND_LABEL + " can not be empty";
             JOptionPane.showMessageDialog(this, message, "Empty " + COMMAND_LABEL, JOptionPane.ERROR_MESSAGE);
             return false;
@@ -56,7 +59,13 @@ public class AddColumnByCommandPreProcessorConfigurationPanel extends AddColumnP
      * @return 
       */
     public boolean isConfigurationChanged() {
-        return (!commandField.getText().equals(preprocessBean.getCommand()));
+        if (super.isConfigurationChanged()){
+            return true;
+        }
+        if (!commandField.getText().equals(preprocessBean.getCommand())){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -65,6 +74,7 @@ public class AddColumnByCommandPreProcessorConfigurationPanel extends AddColumnP
       */
     @Override
     public void noteConfiguration() {
+        preprocessBean = new AddColumnByCommandPreProcessorBean();
         super.noteConfiguration();
         preprocessBean.setCommand(commandField.getText());
     }

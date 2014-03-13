@@ -65,7 +65,7 @@ public class SingleInputConfigurationPanel extends StiltsInputConfigurationPanel
     @Override
     public boolean isConfigurationChanged(){
         StiltsInputFormat beanType = inputBean.retreiveStiltsInputFormat();
-        Object configType = inputTypeSelector.getSelectedItem();
+        Object configType = inputFormatSelector.getSelectedItem();
         if (!beanType.equals(configType)){
             return true;
         }

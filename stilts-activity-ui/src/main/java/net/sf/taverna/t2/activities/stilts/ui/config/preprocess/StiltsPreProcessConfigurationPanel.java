@@ -11,6 +11,7 @@ public class StiltsPreProcessConfigurationPanel <BoundedBean extends StiltsPrePr
     BoundedBean preprocessBean;
 
     StiltsPreProcessConfigurationPanel(BoundedBean preprocessBean){
+        this.preprocessBean = preprocessBean;
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createTitledBorder("PreProcess"),
