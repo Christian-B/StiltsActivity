@@ -286,6 +286,10 @@ public class StiltsConfigurationPanel extends
         } else if (preprocessBean instanceof DeleteColumnPreProcessorBean){
             StiltsPreProcessConfigurationPanel panel = new DeleteColumnPreProcessorConfigurationPanel((DeleteColumnPreProcessorBean)preprocessBean, editable);
             return panel;
+        } else if (preprocessBean instanceof AddColumnByCommandPreProcessorBean){
+            StiltsPreProcessConfigurationPanel panel = 
+                    new AddColumnByCommandPreProcessorConfigurationPanel((AddColumnByCommandPreProcessorBean)preprocessBean, editable);
+            return panel;
         } else{
             System.err.println("Unexpected preprocess bean class: " + preprocessBean.getClass());
             throw new UnsupportedOperationException("Unexpected process bean class: " + preprocessBean.getClass());

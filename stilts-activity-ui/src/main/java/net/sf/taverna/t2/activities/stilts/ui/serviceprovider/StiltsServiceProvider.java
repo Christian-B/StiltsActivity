@@ -63,7 +63,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         UserSpecifiedPreProcessorBean userSpecifiedPreProcessorBean = new UserSpecifiedPreProcessorBean("delcols 1");
         StiltsServiceDesc userSpecifiedPreProcessorDescription =
                 new StiltsServiceDesc(userSpecifiedPreProcessorBean, tPipeBean, 
-                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Configurable Filter");
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Generic PreProcessor");
  	results.add(userSpecifiedPreProcessorDescription);
 
         DeleteColumnPreProcessorBean deleteColumnPreProcessorBean = new DeleteColumnPreProcessorBean("1");
@@ -71,6 +71,13 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(deleteColumnPreProcessorBean, tPipeBean, 
                         StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Delete Column");
  	results.add(deleteColumnPreProcessorDescription);
+
+        AddColumnByCommandPreProcessorBean  addColumnByCommandBean = 
+                new AddColumnByCommandPreProcessorBean("$1 + $3", "newCol", StiltsLocationType.AFTER, "$2");
+        StiltsServiceDesc addColumnByCommandDescription =
+                new StiltsServiceDesc(addColumnByCommandBean, tPipeBean, 
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Configurable Add Column");
+ 	results.add(addColumnByCommandDescription);
 
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time
