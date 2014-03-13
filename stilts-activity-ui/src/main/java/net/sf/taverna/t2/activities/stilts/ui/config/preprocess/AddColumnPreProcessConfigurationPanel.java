@@ -43,7 +43,6 @@ public class AddColumnPreProcessConfigurationPanel <BoundedBean extends AddColum
         add(new JLabel(NEW_COLUMN_LOCATION), c);
         c.gridx = 1;
         StiltsLocationType locationType = preprocessBean.getNewColumnLocation();
-        System.out.println(locationType);
         if (editable){
             locationTypeSelector = new JComboBox<StiltsLocationType>(StiltsLocationType.values());
             locationTypeSelector.setSelectedItem(locationType);

@@ -87,7 +87,6 @@ public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends Mult
         for (int i = 0; i < getNumberOfInputs(); i++){
             formats.add((StiltsInputFormat)inputsFormatsSelectors.get(i).getSelectedItem());
         }
-        System.out.println(formats);
         inputBean.setFormatsOfInputs(formats);
     }
 
