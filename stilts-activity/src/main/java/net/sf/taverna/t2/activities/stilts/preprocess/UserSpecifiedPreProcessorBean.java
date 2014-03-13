@@ -6,6 +6,8 @@
 
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
+
 /**
  *
  * @author christian
@@ -35,4 +37,14 @@ public class UserSpecifiedPreProcessorBean extends StiltsPreProcessBean{
         this.preProcessCommand = preProcessCommand;
     }
     
+    @Override
+    public void checkValid() throws ActivityConfigurationException {
+        if (preProcessCommand == null){
+            throw new ActivityConfigurationException("PreProcess Command not specified");
+        }
+        if (preProcessCommand.trim().isEmpty()){
+            throw new ActivityConfigurationException("PreProcess Command is empty");
+        }
+    }
+
 }

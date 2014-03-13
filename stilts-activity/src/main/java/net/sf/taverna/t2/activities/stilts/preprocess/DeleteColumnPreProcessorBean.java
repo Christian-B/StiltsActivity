@@ -6,6 +6,8 @@
 
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
+
 /**
  *
  * @author christian
@@ -33,6 +35,16 @@ public class DeleteColumnPreProcessorBean extends StiltsPreProcessBean{
      */
     public void setColumn(String column) {
         this.column = column;
+    }
+
+    @Override
+    public void checkValid() throws ActivityConfigurationException {
+        if (column == null){
+            throw new ActivityConfigurationException("Column not specified");
+        }
+        if (column.trim().isEmpty()){
+            throw new ActivityConfigurationException("Column is empty");
+        }
     }
 
       

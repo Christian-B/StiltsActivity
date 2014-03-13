@@ -23,25 +23,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
-import net.sf.taverna.t2.activities.stilts.preprocess.DeleteColumnPreProcessorBean;
-import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
-import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorBean;
-import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
-import net.sf.taverna.t2.activities.stilts.process.TCatBean;
-import net.sf.taverna.t2.activities.stilts.utils.RunStatus;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsRunner;
-import net.sf.taverna.t2.activities.stilts.utils.StreamRerouter;
+import net.sf.taverna.t2.activities.stilts.input.*;
+import net.sf.taverna.t2.activities.stilts.preprocess.*;
+import net.sf.taverna.t2.activities.stilts.process.*;
+import net.sf.taverna.t2.activities.stilts.utils.*;
 
 import net.sf.taverna.t2.invocation.InvocationContext;
 import net.sf.taverna.t2.reference.ReferenceService;
 import net.sf.taverna.t2.reference.T2Reference;
 import net.sf.taverna.t2.workflowmodel.OutputPort;
-import net.sf.taverna.t2.workflowmodel.processor.activity.AbstractAsynchronousActivity;
-import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
-import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
+import net.sf.taverna.t2.workflowmodel.processor.activity.*;
 
 public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> { 
 
@@ -414,12 +405,74 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         } else if (preprocessor instanceof DeleteColumnPreProcessorBean){
             parameters.add("cmd=delcols \"" + ((DeleteColumnPreProcessorBean)preprocessor).getColumn() + "\"");
             return true;
+        } else if (preprocessor instanceof AddColumnPreProcessorBean){
+            return addAddColumnPreProcessorParameters((AddColumnPreProcessorBean)preprocessor, parameters, callback);
         } else {
             callback.fail("Unexpected process " + preprocessor.getClass());
             return FAILED;
         }
     }
     
+    private boolean addAddColumnPreProcessorParameters(AddColumnPreProcessorBean preprocessor, List<String> parameters, 
+            AsynchronousActivityCallback callback) {
+        String operator;
+        if (preprocessor instanceof AddColumnByCommandPreProcessorBean){
+            operator = getOperator((AddColumnByCommandPreProcessorBean)preprocessor, callback);
+        } else if (preprocessor instanceof AddColumnOneVariablesPreProcessorBean){
+            operator = getOperator((AddColumnOneVariablesPreProcessorBean)preprocessor, callback);
+        } else if (preprocessor instanceof AddColumnTwoVariablesPreProcessorBean){
+            operator = getOperator((AddColumnTwoVariablesPreProcessorBean)preprocessor, callback);
+        } else {
+            callback.fail("Unexpected process " + preprocessor.getClass());
+            return FAILED;
+        }
+        if (operator == null){
+            return FAILED; //callback fail already called.
+        }
+        String call = "cmd=addcol ";
+        if (preprocessor.getAfterColumn() != null){
+            call= call + "-after " + preprocessor.getAfterColumn();
+        }
+        if (preprocessor.getBeforeColumn() != null){
+            call= call + "-before " + preprocessor.getBeforeColumn();
+        }
+        call = call + " " + preprocessor.getNewColName() + " \"" + operator + "\"";
+        parameters.add(call);
+        return true;
+    }
+
+    private String getOperator(AddColumnByCommandPreProcessorBean preprocessor, AsynchronousActivityCallback callback) {
+        return preprocessor.getCommand();
+    }
+
+    private String getOperator(AddColumnOneVariablesPreProcessorBean preprocessor, AsynchronousActivityCallback callback) {
+        StiltsOneVariableOperator operator = preprocessor.getOperator();
+        switch (operator.getOperatorType()){
+            case CONVERSION:
+                return "(" + operator.getStiltsSymbol() + ")" +  preprocessor.getVariable();
+            case FUNCTION:
+                return operator.getStiltsSymbol() + "(" + preprocessor.getVariable() + ")";
+            //case OPERATOR:
+            default: 
+                callback.fail("Unexpected Operator type " + operator.getOperatorType() + " for " + operator);
+                return null;
+        }
+    }
+
+    private String getOperator(AddColumnTwoVariablesPreProcessorBean preprocessor, AsynchronousActivityCallback callback) {
+        StiltsTwoVariableOperator operator = preprocessor.getOperator();
+        switch (operator.getOperatorType()){
+            //case CONVERSION:
+            case FUNCTION:
+                return operator.getStiltsSymbol() + "(" + preprocessor.getVariable1() + "," + preprocessor.getVariable2() + ")";
+            case OPERATOR:
+                return preprocessor.getVariable1() + operator.getStiltsSymbol() + preprocessor.getVariable2();
+            default: 
+                callback.fail("Unexpected Operator type " + operator.getOperatorType() + " for " + operator);
+                return null;
+        }
+    }
+
    //Support methods
     private File createOutputFile(final AsynchronousActivityCallback callback) {
         try {
@@ -566,5 +619,6 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     public static String getMatchColumnName(int table, int matchPosition){     
         return "Name of " + MyUtils.ordinal(matchPosition) + " column to match in " + MyUtils.ordinal(table) + " Table "; 
     }
+
 
 }
