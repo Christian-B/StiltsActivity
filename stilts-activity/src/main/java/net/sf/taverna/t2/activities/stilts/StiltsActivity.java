@@ -417,11 +417,13 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             AsynchronousActivityCallback callback) {
         String operator;
         if (preprocessor instanceof AddColumnByCommandPreProcessorBean){
-            operator = getOperator((AddColumnByCommandPreProcessorBean)preprocessor, callback);
+            operator = ((AddColumnByCommandPreProcessorBean)preprocessor).getCommand();
         } else if (preprocessor instanceof AddColumnOneVariablesPreProcessorBean){
-            operator = getOperator((AddColumnOneVariablesPreProcessorBean)preprocessor, callback);
+            AddColumnOneVariablesPreProcessorBean bean = (AddColumnOneVariablesPreProcessorBean)preprocessor;
+            operator = bean.getOperator().getCommand(bean.getVariable());
         } else if (preprocessor instanceof AddColumnTwoVariablesPreProcessorBean){
-            operator = getOperator((AddColumnTwoVariablesPreProcessorBean)preprocessor, callback);
+            AddColumnTwoVariablesPreProcessorBean bean = (AddColumnTwoVariablesPreProcessorBean)preprocessor;
+            operator =  bean.getOperator().getCommand(bean.getVariable1(), bean.getVariable2());
         } else {
             callback.fail("Unexpected process " + preprocessor.getClass());
             return FAILED;
@@ -439,38 +441,6 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         call = call + " " + preprocessor.getNewColName() + " \"" + operator + "\"";
         parameters.add(call);
         return true;
-    }
-
-    private String getOperator(AddColumnByCommandPreProcessorBean preprocessor, AsynchronousActivityCallback callback) {
-        return preprocessor.getCommand();
-    }
-
-    private String getOperator(AddColumnOneVariablesPreProcessorBean preprocessor, AsynchronousActivityCallback callback) {
-        StiltsOneVariableOperator operator = preprocessor.getOperator();
-        switch (operator.getOperatorType()){
-            case CONVERSION:
-                return "(" + operator.getStiltsSymbol() + ")" +  preprocessor.getVariable();
-            case FUNCTION:
-                return operator.getStiltsSymbol() + "(" + preprocessor.getVariable() + ")";
-            //case OPERATOR:
-            default: 
-                callback.fail("Unexpected Operator type " + operator.getOperatorType() + " for " + operator);
-                return null;
-        }
-    }
-
-    private String getOperator(AddColumnTwoVariablesPreProcessorBean preprocessor, AsynchronousActivityCallback callback) {
-        StiltsTwoVariableOperator operator = preprocessor.getOperator();
-        switch (operator.getOperatorType()){
-            //case CONVERSION:
-            case FUNCTION:
-                return operator.getStiltsSymbol() + "(" + preprocessor.getVariable1() + "," + preprocessor.getVariable2() + ")";
-            case OPERATOR:
-                return preprocessor.getVariable1() + operator.getStiltsSymbol() + preprocessor.getVariable2();
-            default: 
-                callback.fail("Unexpected Operator type " + operator.getOperatorType() + " for " + operator);
-                return null;
-        }
     }
 
    //Support methods

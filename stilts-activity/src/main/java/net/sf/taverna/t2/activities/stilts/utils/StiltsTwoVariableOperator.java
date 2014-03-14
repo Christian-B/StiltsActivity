@@ -70,5 +70,22 @@ public enum StiltsTwoVariableOperator implements DescribableInterface {
     public int numberOfVariables(){
         return 2;
     }
+    
+    public String getCommand(String variable1, String variable2){
+        switch (getOperatorType()){
+            case CONVERSION:
+                throw new UnsupportedOperationException(getOperatorType()+ " not supported with two variables");
+            case FUNCTION:
+                return getStiltsSymbol() + "(" + variable1 + "," + variable2 + ")";
+            case OPERATOR:
+                return variable1 + getStiltsSymbol() + variable2;
+            default: 
+                throw new UnsupportedOperationException(getOperatorType()+ " not supported with two variables");
+        }        
+    }
+    
+    public String getExample(){
+        return getCommand("a", "b");
+    }
 
 }
