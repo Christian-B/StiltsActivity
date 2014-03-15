@@ -76,7 +76,7 @@ public enum StiltsOneVariableOperator implements DescribableInterface {
         return 1;
     }
     
-    public String getCommand(String variable){
+    public String retrieveStilsCommand(String variable){
         switch (getOperatorType()){
             case CONVERSION:
                 return "(" + getStiltsSymbol() + ")" +  variable;
@@ -89,7 +89,7 @@ public enum StiltsOneVariableOperator implements DescribableInterface {
         }        
     }
     
-    public String getExample(){
-        return getCommand("x");
+    public String retrievExample(){
+        return retrieveStilsCommand("x");
     }
 }

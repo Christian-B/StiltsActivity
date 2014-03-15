@@ -38,6 +38,11 @@ public class AddColumnByCommandPreProcessorBean extends AddColumnPreProcessorBea
         this.command = command;
     }
 
+    @Override
+    public String retrieveStilsCommand(){
+        return super.retrieveStilsCommand() + "\"" + command + "\"";
+    }
+            
     @Override    
     public void checkValid() throws ActivityConfigurationException {
         if (command == null){

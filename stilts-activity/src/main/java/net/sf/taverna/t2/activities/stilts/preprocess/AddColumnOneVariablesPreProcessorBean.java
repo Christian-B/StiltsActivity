@@ -71,4 +71,9 @@ public class AddColumnOneVariablesPreProcessorBean extends AddColumnPreProcessor
         }
     }
  
+    @Override
+    public String retrieveStilsCommand(){
+        return super.retrieveStilsCommand() + "\"" + operator.retrieveStilsCommand(variable) + "\"";
+    }
+            
 }

@@ -42,6 +42,20 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
         this.newColName = newColName;
     }
 
+    public String retrieveStilsCommand(){
+        String command  = "cmd=addcol ";
+        switch (getNewColumnLocation()){
+            case AFTER:
+               return "cmd=addcol -after " + getLocationColumn() + " " + getNewColName() + " ";
+            case BEFORE:
+               return "cmd=addcol -before " + getLocationColumn() + " " + getNewColName() + " ";
+            case END:
+               return "cmd=addcol " + getNewColName() + " ";
+            default:    
+                throw new UnsupportedOperationException(getNewColumnLocation() + " not supported");
+        }
+    }
+    
     @Override
     public void checkValid() throws ActivityConfigurationException {
         if (getNewColName() == null){

@@ -406,43 +406,14 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             parameters.add("cmd=delcols \"" + ((DeleteColumnPreProcessorBean)preprocessor).getColumn() + "\"");
             return true;
         } else if (preprocessor instanceof AddColumnPreProcessorBean){
-            return addAddColumnPreProcessorParameters((AddColumnPreProcessorBean)preprocessor, parameters, callback);
+            parameters.add(((AddColumnPreProcessorBean)preprocessor).retrieveStilsCommand());
+            return true;
         } else {
             callback.fail("Unexpected process " + preprocessor.getClass());
             return FAILED;
         }
     }
     
-    private boolean addAddColumnPreProcessorParameters(AddColumnPreProcessorBean preprocessor, List<String> parameters, 
-            AsynchronousActivityCallback callback) {
-        String operator;
-        if (preprocessor instanceof AddColumnByCommandPreProcessorBean){
-            operator = ((AddColumnByCommandPreProcessorBean)preprocessor).getCommand();
-        } else if (preprocessor instanceof AddColumnOneVariablesPreProcessorBean){
-            AddColumnOneVariablesPreProcessorBean bean = (AddColumnOneVariablesPreProcessorBean)preprocessor;
-            operator = bean.getOperator().getCommand(bean.getVariable());
-        } else if (preprocessor instanceof AddColumnTwoVariablesPreProcessorBean){
-            AddColumnTwoVariablesPreProcessorBean bean = (AddColumnTwoVariablesPreProcessorBean)preprocessor;
-            operator =  bean.getOperator().getCommand(bean.getVariable1(), bean.getVariable2());
-        } else {
-            callback.fail("Unexpected process " + preprocessor.getClass());
-            return FAILED;
-        }
-        if (operator == null){
-            return FAILED; //callback fail already called.
-        }
-        String call = "cmd=addcol ";
-        if (preprocessor.getNewColumnLocation() ==  StiltsLocationType.AFTER){
-            call= call + "-after " + preprocessor.getLocationColumn();
-        }
-        if (preprocessor.getNewColumnLocation() ==  StiltsLocationType.BEFORE){
-            call= call + "-before " + preprocessor.getLocationColumn();
-        }
-        call = call + " " + preprocessor.getNewColName() + " \"" + operator + "\"";
-        parameters.add(call);
-        return true;
-    }
-
    //Support methods
     private File createOutputFile(final AsynchronousActivityCallback callback) {
         try {

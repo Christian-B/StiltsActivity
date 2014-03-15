@@ -93,5 +93,12 @@ public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessor
             throw new ActivityConfigurationException("Operator not specified");
         }
     }
+    
+    @Override
+    public String retrieveStilsCommand(){
+        return super.retrieveStilsCommand() + "\"" + operator.retrieveStilsCommand(variable1, variable2) + "\"";
+    }
+            
+
 
 }
