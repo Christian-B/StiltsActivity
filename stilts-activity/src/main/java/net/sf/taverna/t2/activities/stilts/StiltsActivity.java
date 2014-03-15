@@ -125,7 +125,10 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     
     protected List<String> prepareParameters(final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback, File outputFile){
         List<String> parameters = createProcessParameters(configBean.getProcess(), inputs, callback);
-        addPreProcessParameters(configBean.getPreprocess(), parameters, inputs, callback);
+        StiltsPreProcessBean preProcessor = configBean.getPreprocess();
+        if (preProcessor != null){
+            parameters.add(preProcessor.retrieveStilsCommand());
+        }
         if (parameters == null){ //createProcessParameters failed.
             return null;//callback.fail already done
         }
@@ -392,26 +395,6 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             parameters.add(values);
         } 
         return OK;
-    }
-
-    //PreProcess stuff
-    private boolean addPreProcessParameters(StiltsPreProcessBean preprocessor, List<String> parameters, Map<String, T2Reference> inputs, 
-            AsynchronousActivityCallback callback) {
-        if (preprocessor == null){
-            return OK;
-        } else if (preprocessor instanceof UserSpecifiedPreProcessorBean){
-            parameters.add("cmd=" + ((UserSpecifiedPreProcessorBean)preprocessor).getPreProcessCommand());
-            return true;
-        } else if (preprocessor instanceof DeleteColumnPreProcessorBean){
-            parameters.add("cmd=delcols \"" + ((DeleteColumnPreProcessorBean)preprocessor).getColumn() + "\"");
-            return true;
-        } else if (preprocessor instanceof AddColumnPreProcessorBean){
-            parameters.add(((AddColumnPreProcessorBean)preprocessor).retrieveStilsCommand());
-            return true;
-        } else {
-            callback.fail("Unexpected process " + preprocessor.getClass());
-            return FAILED;
-        }
     }
     
    //Support methods

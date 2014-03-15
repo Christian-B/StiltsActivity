@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -45,6 +39,11 @@ public class DeleteColumnPreProcessorBean extends StiltsPreProcessBean{
         if (column.trim().isEmpty()){
             throw new ActivityConfigurationException("Column is empty");
         }
+    }
+
+    @Override
+    public String retrieveStilsCommand() {
+        return "cmd=delcols \"" + column + "\"";
     }
 
       

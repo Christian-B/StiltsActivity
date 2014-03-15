@@ -47,4 +47,9 @@ public class UserSpecifiedPreProcessorBean extends StiltsPreProcessBean{
         }
     }
 
+    @Override
+    public String retrieveStilsCommand() {
+        return  "cmd=" + preProcessCommand;
+    }
+
 }

@@ -10,4 +10,6 @@ public abstract class StiltsPreProcessBean {
  
     public abstract void checkValid() throws ActivityConfigurationException;
 
+    public abstract String retrieveStilsCommand();
+
 }
