@@ -80,11 +80,18 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
  	results.add(addColumnByCommandDescription);
 
         AddColumnOneVariablesPreProcessorBean  addColumnOneVariableBean = 
-                new AddColumnOneVariablesPreProcessorBean(StiltsOneVariableOperator.FLOAT, "$3", "newCol");
+                new AddColumnOneVariablesPreProcessorBean(StiltsOneVariableOperator.ABS, "$3", "Absolute");
         StiltsServiceDesc addColumnOneVariableDescription =
                 new StiltsServiceDesc(addColumnOneVariableBean, tPipeBean, 
                         StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Add Column One Variable Operator");
  	results.add(addColumnOneVariableDescription);
+
+        AddColumnTwoVariablesPreProcessorBean  addColumnTwoVariableBean = 
+                new AddColumnTwoVariablesPreProcessorBean(StiltsTwoVariableOperator.AND, "$1", "$3", "sum");
+        StiltsServiceDesc addColumnTwoVariableDescription =
+                new StiltsServiceDesc(addColumnTwoVariableBean, tPipeBean, 
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Add Column Two Variables Operator");
+ 	results.add(addColumnTwoVariableDescription);
 
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time
