@@ -16,6 +16,11 @@ public class AddColumnByCommandPreProcessorConfigurationPanel extends AddColumnP
     
     public AddColumnByCommandPreProcessorConfigurationPanel(AddColumnByCommandPreProcessorBean preprocessBean, boolean editable){
         super(preprocessBean, editable);
+    }
+    
+    @Override
+    void addEditable(AddColumnByCommandPreProcessorBean preprocessBean){ 
+        super.addEditable(preprocessBean);
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = 2;
         c.gridx = 0;
@@ -28,13 +33,8 @@ public class AddColumnByCommandPreProcessorConfigurationPanel extends AddColumnP
         JLabel commandLabel = new JLabel (COMMAND_LABEL);
         add(commandLabel, c);
         c.gridx = 1;
-        if (editable){
-             commandField = new JTextField(preprocessBean.getCommand(), 20);
-             add(commandField, c);
-        } else {
-             JLabel preProcessCommandInfo = new JLabel(preprocessBean.getCommand());
-             add(preProcessCommandInfo, c);            
-        }
+        commandField = new JTextField(preprocessBean.getCommand(), 20);
+        add(commandField, c);
     }
    
     /**
@@ -63,7 +63,7 @@ public class AddColumnByCommandPreProcessorConfigurationPanel extends AddColumnP
             return true;
         }
         if (!commandField.getText().equals(preprocessBean.getCommand())){
-            return true;
+             return true;
         }
         return false;
     }

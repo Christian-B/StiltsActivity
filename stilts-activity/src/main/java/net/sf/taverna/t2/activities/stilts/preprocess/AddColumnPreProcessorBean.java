@@ -14,6 +14,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
     private String newColName;
 
     AddColumnPreProcessorBean(){  
+        newColumnLocation = StiltsLocationType.END;
     }
 
     AddColumnPreProcessorBean(String newColName){  

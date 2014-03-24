@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnPreProcessorBean;
+import net.sf.taverna.t2.activities.stilts.preprocess.DeleteColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
@@ -23,54 +24,40 @@ public class AddColumnPreProcessConfigurationPanel <BoundedBean extends AddColum
     private static final String NEW_COLUMN_LOCATION = "Location to add new column";
     private static final String NEW_COLUMN_REFFERENCE = "Reference Column for location" ;       
     
-    protected final ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
+    protected static ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
     
     AddColumnPreProcessConfigurationPanel(BoundedBean preprocessBean, boolean editable){
-        super(preprocessBean);
+        super(preprocessBean, editable);
+    }
+
+    @Override
+    void addEditable(BoundedBean preprocessBean){ 
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
         add(new JLabel(NEW_COLUMN_NAME_LABEL), c);
         c.gridx = 1;
-        if (editable){
-            newColumnNameField = new JTextField(preprocessBean.getNewColName());
-            add(newColumnNameField, c);
-        } else {
-            add(new JLabel (preprocessBean.getNewColName()), c);
-        }
+        newColumnNameField = new JTextField(preprocessBean.getNewColName(),20);
+        add(newColumnNameField, c);
         c.gridx = 0;
         c.gridy = 1;
         add(new JLabel(NEW_COLUMN_LOCATION), c);
         c.gridx = 1;
         StiltsLocationType locationType = preprocessBean.getNewColumnLocation();
-        if (editable){
-            locationTypeSelector = new JComboBox<StiltsLocationType>(StiltsLocationType.values());
-            locationTypeSelector.setSelectedItem(locationType);
-            locationTypeSelector.setRenderer(listCellRenderer);
-            add(locationTypeSelector, c);
-        } else {
-            JLabel locationTypeInfo = new JLabel (locationType.toString());
-            locationTypeInfo.setToolTipText(locationType.getDescription());
-            add(locationTypeInfo, c);
-        }
+        locationTypeSelector = new JComboBox<StiltsLocationType>(StiltsLocationType.values());
+        locationTypeSelector.setSelectedItem(locationType);
+        locationTypeSelector.setRenderer(listCellRenderer);
+        add(locationTypeSelector, c);
         c.gridx = 0;
         c.gridy = 2;
         add(new JLabel(NEW_COLUMN_REFFERENCE), c);
         c.gridx = 1;
-        if (editable){
-            if (preprocessBean.getLocationColumn() != null){
-                locationColumnField = new JTextField(preprocessBean.getLocationColumn(), 20);
-            } else {
-                locationColumnField = new JTextField(20);
-            }
-            add(locationColumnField, c);
+        if (preprocessBean.getLocationColumn() != null){
+            locationColumnField = new JTextField(preprocessBean.getLocationColumn(), 20);
         } else {
-            if (preprocessBean.getLocationColumn() != null){
-                add(new JLabel (preprocessBean.getLocationColumn()), c);
-            } else {
-                add(new JLabel ("n/a"), c);
-            }
-        }     
+            locationColumnField = new JTextField(20);
+        }
+        add(locationColumnField, c);
     }
     
     protected final int nextRow(){
@@ -81,7 +68,7 @@ public class AddColumnPreProcessConfigurationPanel <BoundedBean extends AddColum
       * Check that user values in UI are valid
       */
     public boolean checkValues() {
-        if (newColumnNameField.getText().trim().isEmpty()){
+/*        if (newColumnNameField.getText().trim().isEmpty()){
             String message = NEW_COLUMN_NAME_LABEL + " can not be empty";
             JOptionPane.showMessageDialog(this, message, "Empty " + NEW_COLUMN_NAME_LABEL, JOptionPane.ERROR_MESSAGE);
             return false;
@@ -93,7 +80,7 @@ public class AddColumnPreProcessConfigurationPanel <BoundedBean extends AddColum
                 return false;
             }        
         }
-        return true;
+*/        return true;
     }
 
     /**
@@ -101,9 +88,6 @@ public class AddColumnPreProcessConfigurationPanel <BoundedBean extends AddColum
       */
     public boolean isConfigurationChanged() {
         if (!newColumnNameField.getText().equals(preprocessBean.getNewColName())){
-            return true;
-        }
-        if (!locationTypeSelector.getSelectedItem().equals(preprocessBean.getNewColumnLocation())){
             return true;
         }
         if (!locationTypeSelector.getSelectedItem().equals(StiltsLocationType.END)){
@@ -119,7 +103,6 @@ public class AddColumnPreProcessConfigurationPanel <BoundedBean extends AddColum
       * getConfiguration()
       */
     public void noteConfiguration() {
-        super.noteConfiguration();
         preprocessBean.setNewColName(newColumnNameField.getText());
         preprocessBean.setNewColumnLocation((StiltsLocationType)locationTypeSelector.getSelectedItem());
         if (preprocessBean.getNewColumnLocation().equals(StiltsLocationType.END)){

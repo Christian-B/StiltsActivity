@@ -15,7 +15,11 @@ public class UserSpecifiedPreProcessorConfigurationPanel extends StiltsPreProces
     private static final String STILS_HELP_PAGE = "http://www.star.bristol.ac.uk/~mbt/stilts/sun256/filterSteps.html";
     
     public UserSpecifiedPreProcessorConfigurationPanel(UserSpecifiedPreProcessorBean preprocessBean, boolean editable){
-        super(preprocessBean);
+        super(preprocessBean, editable);
+    }
+    
+    @Override
+    void addEditable(UserSpecifiedPreProcessorBean preprocessBean){
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = 2;
         c.gridx = 0;
@@ -27,19 +31,15 @@ public class UserSpecifiedPreProcessorConfigurationPanel extends StiltsPreProces
         JLabel commandLabel = new JLabel (COMMAND_LABEL);
         add(commandLabel, c);
         c.gridx = 1;
-        if (editable){
-             preProcessCommandField = new JTextField(preprocessBean.getPreProcessCommand(), 20);
-             add(preProcessCommandField, c);
-        } else {
-             JLabel preProcessCommandInfo = new JLabel(preprocessBean.getPreProcessCommand());
-             add(preProcessCommandInfo, c);            
-        }
+        preProcessCommandField = new JTextField(preprocessBean.getPreProcessCommand(), 20);
+        add(preProcessCommandField, c);
     }
    
     /**
       * Check that user values in UI are valid
      * @return 
       */
+    @Override
     public boolean checkValues() {
          // All valid, return true
         if (!preProcessCommandField.getText().trim().isEmpty()){
@@ -54,6 +54,7 @@ public class UserSpecifiedPreProcessorConfigurationPanel extends StiltsPreProces
       * Check if the user has changed the configuration from the original
      * @return 
       */
+    @Override
     public boolean isConfigurationChanged() {
         return (!preProcessCommandField.getText().equals(preprocessBean.getPreProcessCommand()));
     }
@@ -64,7 +65,7 @@ public class UserSpecifiedPreProcessorConfigurationPanel extends StiltsPreProces
       */
     @Override
     public void noteConfiguration() {
-        super.noteConfiguration();
+        noteConfiguration();
         preprocessBean.setPreProcessCommand(preProcessCommandField.getText());
     }
 
@@ -72,6 +73,7 @@ public class UserSpecifiedPreProcessorConfigurationPanel extends StiltsPreProces
       * Update GUI from a changed configuration bean (perhaps by undo/redo).
       * 
       */
+    @Override
     public void refreshConfiguration(UserSpecifiedPreProcessorBean preprocessBean) {
         super.refreshConfiguration(preprocessBean);
         preProcessCommandField = new JTextField(preprocessBean.getPreProcessCommand());
