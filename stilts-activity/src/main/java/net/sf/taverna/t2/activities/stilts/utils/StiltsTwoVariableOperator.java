@@ -7,43 +7,64 @@ package net.sf.taverna.t2.activities.stilts.utils;
  */
 public enum StiltsTwoVariableOperator implements DescribableInterface {
 
-    PLUS("+","Adds two numerical columns",StiltsOperatorType.OPERATOR),
-    MINUS("-","Subtracts two numerical columns", StiltsOperatorType.OPERATOR),
-    MULTIPLY("*","Multiply two numerical columns", StiltsOperatorType.OPERATOR),
-    DIVIDE("/","Divide two numerical columns", StiltsOperatorType.OPERATOR),
-    MODULUS("&","Modulus two numerical columns", StiltsOperatorType.OPERATOR),
-    AND("&&","Boolean and", StiltsOperatorType.OPERATOR),
-    OR("||","Boolean or", StiltsOperatorType.OPERATOR),
-    XOR("^","Boolean XOR(exclusive-or)", StiltsOperatorType.OPERATOR),
-    EQUALS("==","numeric identity", StiltsOperatorType.OPERATOR),
-    NOT_EQUALS("!=","numeric non-identity", StiltsOperatorType.OPERATOR),
-    LESS_THAN("<","less than", StiltsOperatorType.OPERATOR),
-    GREATHER_THAN(">","greather than", StiltsOperatorType.OPERATOR),
-    LESS_THAN_EQUALS("<=","less than or equals", StiltsOperatorType.OPERATOR),
-    GREATHER_THAN_EQUALS(">=","greather than or equals", StiltsOperatorType.OPERATOR),
+    PLUS("+","Adds two numerical columns",StiltsOperatorType.OPERATOR, false),
+    MINUS("-","Subtracts two numerical columns", StiltsOperatorType.OPERATOR, false),
+    MULTIPLY("*","Multiply two numerical columns", StiltsOperatorType.OPERATOR, false),
+    DIVIDE("/","Divide two numerical columns", StiltsOperatorType.OPERATOR, false),
+    MODULUS("&","Modulus two numerical columns", StiltsOperatorType.OPERATOR, false),
+    AND("&&","Boolean and", StiltsOperatorType.OPERATOR, true),
+    OR("||","Boolean or", StiltsOperatorType.OPERATOR, true),
+    XOR("^","Boolean XOR(exclusive-or)", StiltsOperatorType.OPERATOR, true),
+    EQUALS("==","numeric identity", StiltsOperatorType.OPERATOR, true),
+    NOT_EQUALS("!=","numeric non-identity", StiltsOperatorType.OPERATOR, true),
+    LESS_THAN("<","less than", StiltsOperatorType.OPERATOR, true),
+    GREATHER_THAN(">","greather than", StiltsOperatorType.OPERATOR, true),
+    LESS_THAN_EQUALS("<=","less than or equals", StiltsOperatorType.OPERATOR, true),
+    GREATHER_THAN_EQUALS(">=","greather than or equals", StiltsOperatorType.OPERATOR, true),
     //PLUS and STRING_CONATENATION share the same 
-    STRING_CONATENATION("+","string concatenation",StiltsOperatorType.OPERATOR),
+    STRING_CONATENATION("+","string concatenation",StiltsOperatorType.OPERATOR, false),
     MAX("max",
             "Returns the greater of two numerical values. If the arguments have the same value, the result is that same value..",
-            StiltsOperatorType.FUNCTION),
+            StiltsOperatorType.FUNCTION, false),
     MAXREAL("maxReal",
             "Returns the greater of two floating point values, ignoring blanks. If the arguments have the same value, the result is that same value. If one argument is blank, the result is the other one. If both arguments are blank, the result is blank.",
-            StiltsOperatorType.FUNCTION),
+            StiltsOperatorType.FUNCTION, false),
     MIN("min",
             "Returns the smaller of two integer values. If the arguments have the same value, the result is that same value.",
-            StiltsOperatorType.FUNCTION),
+            StiltsOperatorType.FUNCTION, false),
     MINREAL("minReal",
             "Returns the smaller of two floating point values, ignoring blanks. If the arguments have the same value, the result is that same value. If one argument is blank, the result is the other one. If both arguments are blank, the result is blank.",
-            StiltsOperatorType.FUNCTION);
+            StiltsOperatorType.FUNCTION, false);
 
     private final String stiltsSymbol;
     private final String description;
     private final StiltsOperatorType operatorType;
-
-    StiltsTwoVariableOperator(String stiltsSymbol, String description, StiltsOperatorType operatorType){
+    private final boolean isBoolean;
+  
+    private final static StiltsTwoVariableOperator[] booleanValues;
+    
+    static {
+        int count = 0;
+        for (StiltsTwoVariableOperator operator: values()){
+            if (operator.isBoolean){
+                count++;
+            }
+        }
+        booleanValues = new StiltsTwoVariableOperator[count];
+        count = 0;
+        for (StiltsTwoVariableOperator operator: values()){
+            if (operator.isBoolean){
+                booleanValues[count]= operator;
+                count++;
+            }
+        }
+    }
+    
+    StiltsTwoVariableOperator(String stiltsSymbol, String description, StiltsOperatorType operatorType, boolean isBoolean){
         this.stiltsSymbol = stiltsSymbol;  
         this.description = description;
         this.operatorType = operatorType;
+        this.isBoolean = isBoolean;
     }
 
     /**
@@ -88,4 +109,11 @@ public enum StiltsTwoVariableOperator implements DescribableInterface {
         return retrieveStilsCommand("a", "b");
     }
 
+    public boolean isBoolean(){
+        return isBoolean;
+    }
+    
+    public static StiltsTwoVariableOperator[] booleanValues(){
+        return booleanValues;
+    }
 }
