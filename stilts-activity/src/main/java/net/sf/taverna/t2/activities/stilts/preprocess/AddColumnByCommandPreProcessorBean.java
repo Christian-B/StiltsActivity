@@ -45,6 +45,7 @@ public class AddColumnByCommandPreProcessorBean extends AddColumnPreProcessorBea
             
     @Override    
     public void checkValid() throws ActivityConfigurationException {
+        super.checkValid();
         if (command == null){
             throw new ActivityConfigurationException("Command not specified");
         }
