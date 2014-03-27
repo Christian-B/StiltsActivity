@@ -1,11 +1,12 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 
-import net.sf.taverna.t2.activities.stilts.preprocess.DeleteColumnPreProcessorBean;
+import net.sf.taverna.t2.activities.stilts.preprocess.KeepColumnPreProcessorBean;
+
 
 @SuppressWarnings("serial")
-public class DeleteColumnPreProcessorConfigurationPanel extends ColumnListPreProcessorConfigurationPanel<DeleteColumnPreProcessorBean>{
+public class KeepColumnPreProcessorConfigurationPanel extends ColumnListPreProcessorConfigurationPanel<KeepColumnPreProcessorBean>{
  
-    public DeleteColumnPreProcessorConfigurationPanel(DeleteColumnPreProcessorBean preprocessBean, boolean editable){
+    public KeepColumnPreProcessorConfigurationPanel(KeepColumnPreProcessorBean preprocessBean, boolean editable){
         super(preprocessBean, editable);
     }
     
@@ -15,7 +16,7 @@ public class DeleteColumnPreProcessorConfigurationPanel extends ColumnListPrePro
       */
     @Override
     public void noteConfiguration() {
-        preprocessBean = new DeleteColumnPreProcessorBean();
+        preprocessBean = new KeepColumnPreProcessorBean();
         super.noteConfiguration();
     }
 
@@ -24,12 +25,12 @@ public class DeleteColumnPreProcessorConfigurationPanel extends ColumnListPrePro
       * 
       */
     @Override
-    public void refreshConfiguration(DeleteColumnPreProcessorBean preprocessBean) {
+    public void refreshConfiguration(KeepColumnPreProcessorBean preprocessBean) {
         super.refreshConfiguration(preprocessBean);
     }
 
     @Override
     String getAction() {
-        return "Delete";
+        return "Keep";
     }
 }

@@ -286,6 +286,9 @@ public class StiltsConfigurationPanel extends
         } else if (preprocessBean instanceof DeleteColumnPreProcessorBean){
             StiltsPreProcessConfigurationPanel panel = new DeleteColumnPreProcessorConfigurationPanel((DeleteColumnPreProcessorBean)preprocessBean, editable);
             return panel;
+        } else if (preprocessBean instanceof KeepColumnPreProcessorBean){
+            StiltsPreProcessConfigurationPanel panel = new KeepColumnPreProcessorConfigurationPanel((KeepColumnPreProcessorBean)preprocessBean, editable);
+            return panel;
         } else if (preprocessBean instanceof AddColumnByCommandPreProcessorBean){
             StiltsPreProcessConfigurationPanel panel = 
                     new AddColumnByCommandPreProcessorConfigurationPanel((AddColumnByCommandPreProcessorBean)preprocessBean, editable);

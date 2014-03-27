@@ -69,8 +69,14 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         DeleteColumnPreProcessorBean deleteColumnPreProcessorBean = new DeleteColumnPreProcessorBean("1");
         StiltsServiceDesc deleteColumnPreProcessorDescription =
                 new StiltsServiceDesc(deleteColumnPreProcessorBean, tPipeBean, 
-                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Delete Column");
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Delete Column(s)");
  	results.add(deleteColumnPreProcessorDescription);
+
+        KeepColumnPreProcessorBean keepColumnPreProcessorBean = new KeepColumnPreProcessorBean("1");
+        StiltsServiceDesc keepColumnPreProcessorDescription =
+                new StiltsServiceDesc(keepColumnPreProcessorBean, tPipeBean, 
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Keep Column(s)");
+ 	results.add(keepColumnPreProcessorDescription);
 
         AddColumnByCommandPreProcessorBean  addColumnByCommandBean = 
                 new AddColumnByCommandPreProcessorBean("$1 + $3", "newCol", StiltsLocationType.AFTER, "$2");

@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.HashMap;
 import java.util.Map;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
-import net.sf.taverna.t2.activities.stilts.preprocess.DeleteColumnPreProcessorBean;
+import net.sf.taverna.t2.activities.stilts.preprocess.KeepColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
@@ -18,7 +18,7 @@ import net.sf.taverna.t2.activities.testutils.ActivityInvoker;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DeleteColumnPreProcessorActivityTest {
+public class KeepColumnPreProcessorActivityTest {
 
     private StiltsBean configBean;
 
@@ -31,7 +31,7 @@ public class DeleteColumnPreProcessorActivityTest {
     @Before
     public void makeConfigBean() throws Exception {
         SingleInputBean inputBean = new SingleInputBean(StiltsInputFormat.TST, StiltsInputType.FILE);
-        DeleteColumnPreProcessorBean preProcessBean = new DeleteColumnPreProcessorBean("1");
+        KeepColumnPreProcessorBean preProcessBean = new KeepColumnPreProcessorBean("1");
         TPipeBean processBean = new TPipeBean(inputBean);
         configBean = new StiltsBean(preProcessBean, processBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false);
     }
@@ -46,8 +46,8 @@ public class DeleteColumnPreProcessorActivityTest {
     @Test
     public void delCol12() throws Exception {
         System.out.println("delCol12");
-        DeleteColumnPreProcessorBean preProcessorBean = (DeleteColumnPreProcessorBean)configBean.getPreprocess();
-        preProcessorBean.setColumnList("1 2");
+        KeepColumnPreProcessorBean preProcessorBean = (KeepColumnPreProcessorBean)configBean.getPreprocess();
+        preProcessorBean.setColumnList("3");
         String expected = "number" + System.lineSeparator() +
             "1234" + System.lineSeparator() +
             "4567" + System.lineSeparator();
@@ -75,8 +75,8 @@ public class DeleteColumnPreProcessorActivityTest {
     @Test
     public void delCol3() throws Exception {
         System.out.println("delCol3");
-        DeleteColumnPreProcessorBean preProcessorBean = (DeleteColumnPreProcessorBean)configBean.getPreprocess();
-        preProcessorBean.setColumnList("3");
+        KeepColumnPreProcessorBean preProcessorBean = (KeepColumnPreProcessorBean)configBean.getPreprocess();
+        preProcessorBean.setColumnList("1 2");
         String expected = "id,name" + System.lineSeparator() +
             "1,John" + System.lineSeparator() +
             "2,Christian" + System.lineSeparator();
@@ -104,8 +104,8 @@ public class DeleteColumnPreProcessorActivityTest {
     @Test
     public void delColName() throws Exception {
         System.out.println("delColName");
-        DeleteColumnPreProcessorBean preProcessorBean = (DeleteColumnPreProcessorBean)configBean.getPreprocess();
-        preProcessorBean.setColumnList("name id");
+        KeepColumnPreProcessorBean preProcessorBean = (KeepColumnPreProcessorBean)configBean.getPreprocess();
+        preProcessorBean.setColumnList("number");
         String expected = "number" + System.lineSeparator() +
             "1234" + System.lineSeparator() +
             "4567" + System.lineSeparator();
