@@ -298,6 +298,14 @@ public class StiltsConfigurationPanel extends
             StiltsPreProcessConfigurationPanel panel = 
                     new AddColumnTwoVariablePreProcessorConfigurationPanel((AddColumnTwoVariablesPreProcessorBean)preprocessBean, editable);
             return panel;
+        } else if (preprocessBean instanceof SelectByCommandPreProcessorBean){
+            StiltsPreProcessConfigurationPanel panel = 
+                    new SelectByCommandPreProcessorConfigurationPanel((SelectByCommandPreProcessorBean)preprocessBean, editable);
+            return panel;
+        } else if (preprocessBean instanceof SelectTwoVariablesPreProcessorBean){
+            StiltsPreProcessConfigurationPanel panel = 
+                    new SelectTwoVariablePreProcessorConfigurationPanel((SelectTwoVariablesPreProcessorBean)preprocessBean, editable);
+            return panel;
         } else{
             System.err.println("Unexpected preprocess bean class: " + preprocessBean.getClass());
             throw new UnsupportedOperationException("Unexpected process bean class: " + preprocessBean.getClass());

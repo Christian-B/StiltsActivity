@@ -92,6 +92,20 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(addColumnTwoVariableBean, tPipeBean, 
                         StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Add Column Two Variables Operator");
  	results.add(addColumnTwoVariableDescription);
+        
+        SelectByCommandPreProcessorBean selectByCommandBean = new SelectByCommandPreProcessorBean("$1 <= 1");
+        StiltsServiceDesc selectByCommandDescription =
+                new StiltsServiceDesc(selectByCommandBean, tPipeBean, 
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Select Rows Fully Configurable");
+ 	results.add(selectByCommandDescription);
+
+        SelectTwoVariablesPreProcessorBean  selectTwoVariableBean = 
+                new SelectTwoVariablesPreProcessorBean(StiltsTwoVariableOperator.GREATHER_THAN_EQUALS, "$1", "$3");
+        StiltsServiceDesc selectTwoVariableDescription =
+                new StiltsServiceDesc(selectTwoVariableBean, tPipeBean, 
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Select Rows Two Variables Operator");
+ 	results.add(selectTwoVariableDescription);
+        
 
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time
