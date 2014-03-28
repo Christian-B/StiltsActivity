@@ -40,7 +40,6 @@ public abstract class RowCountPreProcessorConfigurationPanel<BoundedBean extends
     @Override
     public boolean checkValues() {
          // All valid, return true
-        System.out.println("Check values " + rowCountField.getText());
         if (rowCountField.getText().trim().isEmpty()){
             String message = "Rows(s) to " + getAction() + " can not be empty";
             JOptionPane.showMessageDialog(this, message, "Empty " + "Rows(s) to " + getAction(), JOptionPane.ERROR_MESSAGE);
