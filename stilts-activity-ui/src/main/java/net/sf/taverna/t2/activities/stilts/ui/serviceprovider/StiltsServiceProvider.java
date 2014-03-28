@@ -112,6 +112,17 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                         StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Select Rows Two Variables Operator");
  	results.add(selectTwoVariableDescription);
         
+        HeadRowsPreProcessorBean headRowsPreProcessorBean = new HeadRowsPreProcessorBean(10);
+        StiltsServiceDesc headRowsPreProcessorDescription =
+                new StiltsServiceDesc(headRowsPreProcessorBean, tPipeBean, 
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Head rows(s)");
+ 	results.add(headRowsPreProcessorDescription);
+
+        TailRowsPreProcessorBean tailRowsPreProcessorBean = new TailRowsPreProcessorBean(10);
+        StiltsServiceDesc tailRowsPreProcessorDescription =
+                new StiltsServiceDesc(tailRowsPreProcessorBean, tPipeBean, 
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Tail rows(s)");
+ 	results.add(tailRowsPreProcessorDescription);
 
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time

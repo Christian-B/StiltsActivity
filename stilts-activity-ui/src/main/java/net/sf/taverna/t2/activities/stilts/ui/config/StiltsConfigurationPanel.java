@@ -160,7 +160,9 @@ public class StiltsConfigurationPanel extends
         processPanel.checkValues();
          // All valid, return true
         if (preprocessPanel != null){
-            preprocessPanel.checkValues();
+            if (!preprocessPanel.checkValues()){
+                return false;
+            }
         }
         return true;
     }
@@ -308,6 +310,12 @@ public class StiltsConfigurationPanel extends
         } else if (preprocessBean instanceof SelectTwoVariablesPreProcessorBean){
             StiltsPreProcessConfigurationPanel panel = 
                     new SelectTwoVariablePreProcessorConfigurationPanel((SelectTwoVariablesPreProcessorBean)preprocessBean, editable);
+            return panel;
+        } else if (preprocessBean instanceof HeadRowsPreProcessorBean){
+            StiltsPreProcessConfigurationPanel panel = new HeadRowsPreProcessorConfigurationPanel((HeadRowsPreProcessorBean)preprocessBean, editable);
+            return panel;
+        } else if (preprocessBean instanceof TailRowsPreProcessorBean){
+            StiltsPreProcessConfigurationPanel panel = new TailRowsPreProcessorConfigurationPanel((TailRowsPreProcessorBean)preprocessBean, editable);
             return panel;
         } else{
             System.err.println("Unexpected preprocess bean class: " + preprocessBean.getClass());
