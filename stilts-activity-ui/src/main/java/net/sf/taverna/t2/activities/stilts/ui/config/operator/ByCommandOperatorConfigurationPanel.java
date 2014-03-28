@@ -21,7 +21,6 @@ public class ByCommandOperatorConfigurationPanel extends OperatorPreProcessConfi
     
     public ByCommandOperatorConfigurationPanel(ByCommandOperatorBean preprocessBean){
         super(preprocessBean);
-        System.out.println(preprocessBean);
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = 2;
         c.gridx = 0;
@@ -36,7 +35,6 @@ public class ByCommandOperatorConfigurationPanel extends OperatorPreProcessConfi
         c.gridx = 1;
         commandField = new JTextField(preprocessBean.getCommand(), 20);
         add(commandField, c);
-        System.out.println("done");
     }
    
     /**

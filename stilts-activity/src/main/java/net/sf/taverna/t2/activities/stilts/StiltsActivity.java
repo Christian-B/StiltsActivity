@@ -69,7 +69,6 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     
     @Override
     public StiltsBean getConfiguration() {
-        System.out.println(configBean);
         return configBean;
     }
 
