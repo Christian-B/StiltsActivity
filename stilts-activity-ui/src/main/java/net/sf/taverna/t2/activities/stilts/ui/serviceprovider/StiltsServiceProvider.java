@@ -1,5 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.ui.serviceprovider;
 
+import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import java.util.ArrayList;

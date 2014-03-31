@@ -4,7 +4,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import net.sf.taverna.t2.activities.stilts.input.ExactMatchBean;
+import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.input.TwoInputsConfigurationPanel;
 
 @SuppressWarnings("serial")

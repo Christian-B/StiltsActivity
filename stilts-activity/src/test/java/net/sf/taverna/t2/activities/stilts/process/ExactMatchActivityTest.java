@@ -2,7 +2,6 @@ package net.sf.taverna.t2.activities.stilts.process;
 
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
-import net.sf.taverna.t2.activities.stilts.input.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.*;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
