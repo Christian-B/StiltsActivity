@@ -7,8 +7,12 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- * Stilts activity configuration bean.
+ * Input bean for processes that accept multiple tables but which must all have the same format.
  * 
+ * Note: The restrictions that all tables must have the same format is a Stilts one.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class SingleFormatMultipleInputsBean extends MultipleInputsBean 
         implements Serializable {
@@ -70,9 +74,8 @@ public class SingleFormatMultipleInputsBean extends MultipleInputsBean
     /**
      * Resests the number of inputs, adjusting the length of the type and info arrays.
      * 
-     * @throws NullPOinterException if called on a bean before all values have bee set at least once.
-     * 
      * @param numberOfInputs 
+     * @throws NullPOinterException if called on a bean before all values have bee set at least once.
      */
     public void resetNumberOfInputs(int numberOfInputs){
         this.numberOfInputs = numberOfInputs;

@@ -6,8 +6,10 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- * Stilts activity configuration bean.
+ * Bean to define the inputs for a process that takes just a single input table.
  * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class SingleInputBean extends StitlsInputsBean implements Serializable {
     private StiltsInputFormat inputFormatEnum;
@@ -76,6 +78,7 @@ public class SingleInputBean extends StitlsInputsBean implements Serializable {
         this.inputTypeEnum = typeOfInput;
     }
     
+    @Override
     public void checkValid() throws ActivityConfigurationException{
         if (inputFormatEnum == null){
             throw new ActivityConfigurationException("Input format not set.");

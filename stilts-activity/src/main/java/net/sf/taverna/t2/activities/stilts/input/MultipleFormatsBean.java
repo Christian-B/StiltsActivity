@@ -7,8 +7,10 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- * Stilts activity configuration bean.
+ * AbstractBean for input where every table can have different formats and types
  * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public abstract class MultipleFormatsBean extends MultipleInputsBean 
         implements Serializable {
@@ -49,7 +51,13 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
     public void setFormatsOfInputs(List<StiltsInputFormat> formatsOfInputs) {
         this.formatsOfInputs = formatsOfInputs;
     }
-
+ 
+    @Override
+   /**
+     * Sets the number of inputs and adds if required assumes that the extra inputs will have the same type and format as the first.
+     * @param numberOfInputs 
+     * @throws NullPOinterException if called on a bean before all values have bee set at least once.
+     */
     public void resetNumberOfInputs(int numberOfInputs){
         super.resetNumberOfInputs(numberOfInputs);
         while (formatsOfInputs.size() < numberOfInputs){

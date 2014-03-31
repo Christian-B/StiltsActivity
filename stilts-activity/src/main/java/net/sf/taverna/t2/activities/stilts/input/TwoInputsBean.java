@@ -6,7 +6,10 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 
 /**
- * Stilts activity configuration bean.
+ * Bean that defines exactly two input tables which can be of different types and formats.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  * 
  */
 public class TwoInputsBean extends MultipleFormatsBean 
@@ -23,5 +26,16 @@ public class TwoInputsBean extends MultipleFormatsBean
         return 2;
     }
 
+    /*
+     * Should never be called, but just incase ignores any call with the value 2.
+     * 
+     * @param numberOfInputs Must be 2
+     * @throws UnsupportedOperationException if called with anything but 2
+     */
+    public void resetNumberOfInputs(int numberOfInputs){
+        if (numberOfInputs != 2){
+            throw new UnsupportedOperationException("Illegal call!");   
+        }
+    }
       
 }
