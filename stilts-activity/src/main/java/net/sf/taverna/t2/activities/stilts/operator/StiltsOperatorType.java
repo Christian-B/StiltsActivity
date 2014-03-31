@@ -1,4 +1,4 @@
-package net.sf.taverna.t2.activities.stilts.utils;
+package net.sf.taverna.t2.activities.stilts.operator;
 
 /**
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/sec9.4.html

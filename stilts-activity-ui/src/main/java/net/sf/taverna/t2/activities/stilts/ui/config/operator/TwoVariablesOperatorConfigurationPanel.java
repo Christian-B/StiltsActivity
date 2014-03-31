@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.operator.TwoVariablesOperatorBean;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsTwoVariableOperator;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 
 /**
  * Note: This was was an idea to split Operator from Preprocessor but is not currently being used.

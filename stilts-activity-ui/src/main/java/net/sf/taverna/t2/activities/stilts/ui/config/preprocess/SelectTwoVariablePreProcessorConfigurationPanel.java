@@ -9,7 +9,7 @@ import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.preprocess.SelectTwoVariablesPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsTwoVariableOperator;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 
 @SuppressWarnings("serial")
 public class SelectTwoVariablePreProcessorConfigurationPanel extends StiltsPreProcessConfigurationPanel<SelectTwoVariablesPreProcessorBean>{

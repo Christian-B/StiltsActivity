@@ -13,10 +13,10 @@ import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnTwoVariablesPrePr
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsOneVariableOperator;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsTwoVariableOperator;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 
 import net.sf.taverna.t2.activities.testutils.ActivityInvoker;
 

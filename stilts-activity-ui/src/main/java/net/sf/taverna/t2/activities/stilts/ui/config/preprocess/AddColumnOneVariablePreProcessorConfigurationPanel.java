@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnOneVariablesPreProcessorBean;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsOneVariableOperator;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 
 @SuppressWarnings("serial")
 public class AddColumnOneVariablePreProcessorConfigurationPanel extends AddColumnPreProcessConfigurationPanel<AddColumnOneVariablesPreProcessorBean>{

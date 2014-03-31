@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnTwoVariablesPreProcessorBean;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsTwoVariableOperator;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 
 @SuppressWarnings("serial")
 public class AddColumnTwoVariablePreProcessorConfigurationPanel extends AddColumnPreProcessConfigurationPanel<AddColumnTwoVariablesPreProcessorBean>{

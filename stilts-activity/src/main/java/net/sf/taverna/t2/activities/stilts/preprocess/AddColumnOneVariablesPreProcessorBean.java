@@ -1,7 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsOneVariableOperator;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**

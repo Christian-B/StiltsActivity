@@ -1,6 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.operator;
 
-import net.sf.taverna.t2.activities.stilts.utils.StiltsOneVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
