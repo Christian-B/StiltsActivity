@@ -317,6 +317,9 @@ public class StiltsConfigurationPanel extends
         } else if (preprocessBean instanceof TailRowsPreProcessorBean){
             StiltsPreProcessConfigurationPanel panel = new TailRowsPreProcessorConfigurationPanel((TailRowsPreProcessorBean)preprocessBean, editable);
             return panel;
+        } else if (preprocessBean instanceof SortPreProcessorBean){
+            StiltsPreProcessConfigurationPanel panel = new SortPreProcessorConfigurationPanel((SortPreProcessorBean)preprocessBean, editable);
+            return panel;
         } else{
             System.err.println("Unexpected preprocess bean class: " + preprocessBean.getClass());
             throw new UnsupportedOperationException("Unexpected process bean class: " + preprocessBean.getClass());

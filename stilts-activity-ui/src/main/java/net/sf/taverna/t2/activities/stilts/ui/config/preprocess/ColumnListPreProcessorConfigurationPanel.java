@@ -16,7 +16,7 @@ public abstract class ColumnListPreProcessorConfigurationPanel<BoundedBean exten
     }
     
     @Override
-    void addEditable(ColumnListPreProcessorBean preprocessBean){ 
+    void addEditable(BoundedBean preprocessBean){ 
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
@@ -29,7 +29,7 @@ public abstract class ColumnListPreProcessorConfigurationPanel<BoundedBean exten
         add(label2, c);
 
         c.gridy = 2;
-        JLabel label3 = new JLabel ("Can be the column number (starting at 1).");
+        JLabel label3 = new JLabel ("Can be the column number (starting at 1)(No $).");
         add(label3, c);
 
         c.gridy = 3;
@@ -45,6 +45,10 @@ public abstract class ColumnListPreProcessorConfigurationPanel<BoundedBean exten
         add(columnsListField, c);
     }
    
+    final int nextY(){
+        return 5;
+    }
+    
     /**
       * Check that user values in UI are valid
      * @return 

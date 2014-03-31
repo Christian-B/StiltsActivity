@@ -124,6 +124,12 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                         StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Tail rows(s)");
  	results.add(tailRowsPreProcessorDescription);
 
+        SortPreProcessorBean sortPreProcessorBean = new SortPreProcessorBean("1", false, false);
+        StiltsServiceDesc sortPreProcessorDescription =
+                new StiltsServiceDesc(sortPreProcessorBean, tPipeBean, 
+                        StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, "Sort rows");
+ 	results.add(sortPreProcessorDescription);
+
         // partialResults() can also be called several times from inside
         // for-loop if the full search takes a long time
         callBack.partialResults(results);
