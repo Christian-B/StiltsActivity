@@ -74,6 +74,46 @@ public class SortPreProcessorActivityTest {
     }
 
     @Test
+    public void addSort2() throws Exception {
+        System.out.println("sort2");
+        SingleInputBean inputBean = new SingleInputBean(StiltsInputFormat.CSV, StiltsInputType.STRING);
+        SortPreProcessorBean preProcessBean = new SortPreProcessorBean("$1 number", false, false);
+        TPipeBean processBean = new TPipeBean(inputBean);
+        configBean = new StiltsBean(preProcessBean, processBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false);
+        String input = "id,name,number" + System.lineSeparator() +
+            "1,John,1234" + System.lineSeparator() +
+            "3,Peter,900" + System.lineSeparator() + 
+            "1,John,1230" + System.lineSeparator() +
+            "2,Christian,4567" + System.lineSeparator() +
+            "3,Peter,800" + System.lineSeparator();
+        String expected = "id,name,number" + System.lineSeparator() +
+            "1,John,1230" + System.lineSeparator() +
+            "1,John,1234" + System.lineSeparator() +
+            "2,Christian,4567" + System.lineSeparator() +
+            "3,Peter,800" + System.lineSeparator() + 
+            "3,Peter,900" + System.lineSeparator();
+
+        configBean.setDebugMode(false);
+        activity.configure(configBean);
+
+        Map<String, Object> inputs = new HashMap<String, Object>();
+        inputs.put(StiltsActivity.INPUT_TABLE_PARAMETER_NAME, input);
+
+        Map<String, Class<?>> expectedOutputTypes = new HashMap<String, Class<?>>();
+        expectedOutputTypes.put(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME, String.class);
+        //expectedOutputTypes.put("moreOutputs", String.class);
+
+        Map<String, Object> outputs = ActivityInvoker.invokeAsyncActivity(
+                activity, inputs, expectedOutputTypes);
+
+        assertEquals("Unexpected outputs", 1, outputs.size());
+        //assertEquals("simple", outputs.get("simpleOutput"));
+        String result = outputs.get(StiltsActivity.OUTPUT_TABLE_PARAMETER_NAME).toString();
+        System.out.println(result);
+        assertEquals("Unexpected outputs", expected, result);
+    }
+
+    @Test
     public void addSortDown() throws Exception {
         System.out.println("sortDown");
         SingleInputBean inputBean = new SingleInputBean(StiltsInputFormat.CSV, StiltsInputType.STRING);
