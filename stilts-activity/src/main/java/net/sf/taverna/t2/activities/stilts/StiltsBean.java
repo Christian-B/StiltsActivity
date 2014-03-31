@@ -8,8 +8,10 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
- * @author christian
+ * Bean for a {@link StiltsActivity Stilts Activity}.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class StiltsBean implements StiltsInterface, Serializable{
     private StiltsPreProcessBean preprocess;
@@ -17,7 +19,6 @@ public class StiltsBean implements StiltsInterface, Serializable{
     private StiltsOutputType outputType;
     private StiltsProcessBean process;
     private boolean debugMode = true;
-    //StilsPostProcessorBean postprocessor;
 
     public StiltsBean() {}
     

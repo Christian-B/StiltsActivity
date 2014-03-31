@@ -6,8 +6,9 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 
 /**
- *
- * @author christian
+ * This interface allows the {@link StiltsBean StiltsBean} to reconfigure itself from a configuration panel without knowing the panel.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public interface StiltsInterface {
 
