@@ -1,3 +1,21 @@
+/*
+ * This is a Taverna plugin to expose the functionality of the 
+ * <a href="http://www.star.bristol.ac.uk/~mbt/stilts/sun256/index.html">Stilts tool</a> within a Taverna Plugin.
+ * 
+ * This particular plugin is designed to expose the parts of 
+ * <a href="http://www.star.bristol.ac.uk/~mbt/stilts/sun256/index.html">Stilts</a>
+ * that are not specific to astronomical data.
+ * 
+ * For astronomical data we recommend the 
+ * <a href="https://github.com/wf4ever/astrotaverna">Astrotaverna Taverna Plugin</a>
+ * written by Julian Garrido, which served as the inspiration for this code
+ * 
+ * This  plugin is offered under the same <a href="http://www.taverna.org.uk/about/legal-stuff/taverna-licence">license </a> as Taverna
+ * At the time of writing this was the <a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">Lesser General Public License (LGPL) Version 2.1</a> 
+ * 
+ * Stilts is offered under its own <a href="http://www.star.bristol.ac.uk/~mbt/stilts/sun256/abstract.html"">license </a>.
+ * At the time of writing this was the "GNU General Public Licence." 
+ */
 package net.sf.taverna.t2.activities.stilts;
 
 import java.io.BufferedReader;
@@ -36,6 +54,8 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     //These booleans are used in methods call to flag if the parameter must be present
     static final boolean REQUIRED_PARAMETER = true;
     static final boolean OPTIONAL_PARAMETER = true;
+    
+    //These boolean are used to flag if a method was successful or failed
     static final boolean FAILED = false;
     static final boolean OK = true;
     
@@ -43,7 +63,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     public static final String FAILED_MESSAGE = "Run failed! check " + ERROR_PARAMETER_NAME + " for details.";
     
     protected StiltsBean configBean;
-
+    
     @Override
     public final void configure(StiltsBean configBean) throws ActivityConfigurationException {
         configBean.checkValid();
