@@ -1,16 +1,5 @@
 package net.sf.taverna.t2.activities.stilts;
 
-import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
-import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
-import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
-import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
-import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
-import net.sf.taverna.t2.activities.stilts.input.MultipleInputsBean;
-import net.sf.taverna.t2.activities.stilts.input.ExactMatchBean;
-import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
-import net.sf.taverna.t2.activities.stilts.process.TMatch2Bean;
-import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
-import net.sf.taverna.t2.activities.stilts.process.TCatNBean;
 import java.io.BufferedReader;
 import net.sf.taverna.t2.activities.stilts.utils.MyUtils;
 import java.io.File;

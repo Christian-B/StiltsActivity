@@ -1,14 +1,11 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 
 import java.awt.GridBagConstraints;
-import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnPreProcessorBean;
-import net.sf.taverna.t2.activities.stilts.preprocess.DeleteColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
