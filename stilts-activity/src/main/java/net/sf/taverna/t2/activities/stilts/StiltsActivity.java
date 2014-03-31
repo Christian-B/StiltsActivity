@@ -318,23 +318,14 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     private List<String> createProcessParameters(StiltsProcessBean processBean,
             final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback){
         List<String> parameters = new ArrayList<String>();
-        if (processBean instanceof TPipeBean){
-            parameters.add("tpipe");
-        } else if (processBean instanceof TCatBean){
-            parameters.add("tcat");
-        } else if (processBean instanceof TCatNBean){
-            parameters.add("tcatn");
-        } else if (processBean instanceof TJoinBean){
-            parameters.add("tjoin");
-        } else if (processBean instanceof TMatch2Bean){
+        parameters.add(processBean.retrieveStilsCommand());
+        if (processBean instanceof TMatch2Bean){
             if (!addTMatch2Parameters((TMatch2Bean)processBean, parameters, inputs, callback)){
                 return null; //Callback fail already called
             }
-        } else {
-            //Oops new process added. Need to add code here
-            callback.fail("Unexpected process " + processBean.getClass());
-            return null;
         }
+        //Add here if any new process added specific paramters other than inputs
+        
         //Obtain the input type and add the appropriate paramters
         StitlsInputsBean inputBean = processBean.getInputs();
         boolean ok = addInputParameters(inputBean, parameters, inputs, callback);
@@ -497,7 +488,6 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
      */
     private boolean addTMatch2Parameters(TMatch2Bean tMatch2Bean, List<String> parameters,
             final Map<String, T2Reference> inputs, final AsynchronousActivityCallback callback) {
-        parameters.add("tmatch2");
         parameters.add("find=" + tMatch2Bean.getFindValue().getStiltsName());
         parameters.add("fixcols=" + tMatch2Bean.getFixcolsValue().getStiltsName());
         parameters.add("join=" + tMatch2Bean.getJoinValue().getStiltsName());

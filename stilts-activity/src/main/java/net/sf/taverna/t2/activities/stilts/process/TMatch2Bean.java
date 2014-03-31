@@ -82,4 +82,9 @@ public class TMatch2Bean extends StiltsProcessBean {
         this.fixcolsValue = fixcolsValue;
     }
 
+    @Override
+    public String retrieveStilsCommand() {
+        return "tmatch2";
+    }
+
 }

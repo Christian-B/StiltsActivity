@@ -7,7 +7,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  *
  * @author christian
  */
-public class StiltsProcessBean {
+public abstract class StiltsProcessBean {
     private StitlsInputsBean inputs;
 
     StiltsProcessBean(){}
@@ -33,5 +33,13 @@ public class StiltsProcessBean {
     public void checkValid() throws ActivityConfigurationException{
         inputs.checkValid();
     }
+
+    /**
+     * Obtains the Stilts name for the Process.
+     * 
+     * Intentional not a get method to avoid confusing the any bean parser.
+     * @return command as expected by Stilts
+     */
+    public abstract String retrieveStilsCommand();
 
 }

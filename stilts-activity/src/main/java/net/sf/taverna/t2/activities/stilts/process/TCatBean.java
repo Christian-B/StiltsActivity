@@ -15,4 +15,9 @@ public class TCatBean extends StiltsProcessBean {
     public TCatBean(SingleFormatMultipleInputsBean inputBean){
         setInputs(inputBean);
     }
+
+    @Override
+    public String retrieveStilsCommand() {
+        return "tcat";
+    }
 }

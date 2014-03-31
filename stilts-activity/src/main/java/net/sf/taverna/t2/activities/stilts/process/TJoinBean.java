@@ -15,4 +15,9 @@ public class TJoinBean extends StiltsProcessBean {
     public TJoinBean(MultipleFormatsBean inputBean){
         setInputs(inputBean);
     }
+
+    @Override
+    public String retrieveStilsCommand() {
+        return "tjoin";
+    }
 }

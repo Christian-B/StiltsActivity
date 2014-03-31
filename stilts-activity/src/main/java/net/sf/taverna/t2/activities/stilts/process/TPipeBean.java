@@ -15,4 +15,9 @@ public class TPipeBean extends StiltsProcessBean {
     public TPipeBean(SingleInputBean inputBean){
         super(inputBean);
     }
+
+    @Override
+    public String retrieveStilsCommand() {
+        return "tpipe";
+    }
 }
