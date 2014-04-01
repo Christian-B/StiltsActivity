@@ -7,7 +7,8 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * <p>
  * The workflow creator/ pluging configuration script will have to provide the full Stilts command.
  * 
- * @author christian
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class UserSpecifiedPreProcessorBean extends StiltsPreProcessBean{
    

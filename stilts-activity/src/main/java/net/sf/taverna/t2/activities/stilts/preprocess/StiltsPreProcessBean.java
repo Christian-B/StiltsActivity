@@ -7,7 +7,8 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * <p>
  * Defines that every Preprocess Bean must be able to check itself for validity 
  * and returns the String Stilts uses for this functionality.
- * @author christian
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public abstract class StiltsPreProcessBean {
  

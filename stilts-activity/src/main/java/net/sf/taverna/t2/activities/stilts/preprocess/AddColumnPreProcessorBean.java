@@ -4,13 +4,31 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
- * @author christian
+ * Based Class for all the Add Column PreProcesses.
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the name of the new colum, and where to place it.
+ * <p>
+ * Super classes will define what to put in the new column.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     
+    /**
+     * Defines where in comparison to the location Column the new column will be placed.
+     */ 
     private StiltsLocationType newColumnLocation;
+    /**
+     * Name or number of the column to place the new column before or after.
+     * 
+     * This value will be ignored if newColumnLocation = END.
+     * otherwise it is required.
+     */
     private String locationColumn;
-    //New Name must be specified.
+    
+    /**
+     * Name for the new column which must be specified.
+     */
     private String newColName;
 
     /**
@@ -55,6 +73,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
         this.newColName = newColName;
     }
 
+    @Override
     public String retrieveStilsCommand(){
         String command  = "cmd=addcol ";
         switch (getNewColumnLocation()){
