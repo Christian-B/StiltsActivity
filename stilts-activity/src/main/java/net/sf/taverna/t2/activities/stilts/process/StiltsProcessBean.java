@@ -4,14 +4,28 @@ import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
- * @author christian
+ * Abstract base class for all ProcessBeans
+ * <p>
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public abstract class StiltsProcessBean {
     private StitlsInputsBean inputs;
 
+    /**
+     * Serialization constructor
+     */
     StiltsProcessBean(){}
-    
+        
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param inputs 
+     */
     StiltsProcessBean(StitlsInputsBean inputs){
         this.inputs = inputs;
     }

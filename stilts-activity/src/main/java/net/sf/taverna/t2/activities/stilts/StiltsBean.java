@@ -72,14 +72,25 @@ public class StiltsBean implements StiltsInterface, Serializable{
         this.process = process;
     }
     
+    /**
+     * Check the bean and its sub Beans have the expected values set in the expected way.
+     * <p>
+     * Note: Only basic checking such as the presence of a value is done.
+     * Typically checks that a String value is not null or empty but not that the value makes sense.
+     * Cam detect if an integer which is expected to be positive is, but can not check if the value is too high.
+     * @throws ActivityConfigurationException Thrown if the bean and its current contents are known not to be valid.
+     */
     public void checkValid() throws ActivityConfigurationException{
         if (getOutputFormat() == null){
             throw new ActivityConfigurationException("Output format not set.");
-        }
+        } 
         if (getOutputType() == null){
             throw new ActivityConfigurationException("Output type not set.");
         }
         process.checkValid();
+        if (preprocess != null){
+            preprocess.checkValid();
+        }
     }
 
     /**

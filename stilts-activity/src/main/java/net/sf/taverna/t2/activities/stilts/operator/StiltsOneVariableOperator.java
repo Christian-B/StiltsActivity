@@ -3,9 +3,15 @@ package net.sf.taverna.t2.activities.stilts.operator;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 /**
+ * Operators that require a single variable.
+ * <p>
+ * Note: This is not a complete set of all operators offered by Stilts.
+ * Adding a new operator here will automatically have it picked up in the activity and the Guis.
+ * <p>
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/sec9.4.html
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/uk.ac.starlink.ttools.func.Arithmetic.html
- * @author christian
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public enum StiltsOneVariableOperator implements DescribableInterface {
 
@@ -43,7 +49,13 @@ public enum StiltsOneVariableOperator implements DescribableInterface {
             "Bitwise logical right shift",
             StiltsOperatorType.OPERATOR);
  
+    /**
+     * Stilts representation of this operator.
+     */
     private final String stiltsSymbol;
+    /**
+     * String to be shown in toolstips and other help locations
+     */
     private final String description;
     private final StiltsOperatorType operatorType;
 
@@ -78,6 +90,13 @@ public enum StiltsOneVariableOperator implements DescribableInterface {
         return 1;
     }
     
+    /**
+     * Returns a String that can be used in a Stilts Parameter.
+     * <p>
+     * In all case the deciding factor is how Stilts expects the function.
+     * @param variable any valid Stilts variable which can be complex (made up of other operators and variables)
+     * @return 
+     */
     public String retrieveStilsCommand(String variable){
         switch (getOperatorType()){
             case CONVERSION:

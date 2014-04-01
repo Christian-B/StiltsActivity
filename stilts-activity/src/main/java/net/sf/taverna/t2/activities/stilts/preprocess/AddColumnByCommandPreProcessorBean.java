@@ -11,9 +11,22 @@ public class AddColumnByCommandPreProcessorBean extends AddColumnPreProcessorBea
     
     private String command;
 
+    /**
+     * Serialization constructor
+     */
     public AddColumnByCommandPreProcessorBean(){  
     }
 
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param command
+     * @param newColName 
+     */
     public AddColumnByCommandPreProcessorBean(String command, String newColName){ 
         super(newColName);
         this.command = command;

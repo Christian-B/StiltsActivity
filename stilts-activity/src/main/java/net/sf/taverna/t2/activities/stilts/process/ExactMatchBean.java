@@ -15,10 +15,26 @@ public class ExactMatchBean extends TMatch2Bean {
  
     private int numbertOfColumnsToMatch;
 
+    /**
+     * Serialization constructor
+     */
     public ExactMatchBean(){
         
     }
     
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param numbertOfColumnsToMatch
+     * @param findEnum
+     * @param fixcolsEnum
+     * @param joinEnum
+     * @param inputBean 
+     */
     public ExactMatchBean(int numbertOfColumnsToMatch, StiltsFind findEnum, StiltsFixcols fixcolsEnum, StiltsJoin joinEnum, TwoInputsBean inputBean){
         super(findEnum, fixcolsEnum, joinEnum, inputBean);
         this.numbertOfColumnsToMatch = numbertOfColumnsToMatch;

@@ -6,6 +6,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * Note: This was was an idea to split Operator from Preprocessor but is not currently being used.
  *
  * @author christian
+ * @deprecated Never used
  */
 public class TwoVariablesOperatorBean implements StiltsOperatorBean{
     

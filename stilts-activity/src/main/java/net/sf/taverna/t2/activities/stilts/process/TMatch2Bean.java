@@ -16,10 +16,24 @@ public class TMatch2Bean extends StiltsProcessBean {
     private StiltsJoin joinValue;
     private StiltsFixcols fixcolsValue;
 
+    /**
+     * Serialization constructor
+     */
     public TMatch2Bean(){
-        
     }
     
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param findEnum
+     * @param fixcolsEnum
+     * @param joinEnum
+     * @param inputBean 
+     */
     public TMatch2Bean(StiltsFind findEnum, StiltsFixcols fixcolsEnum, StiltsJoin joinEnum, TwoInputsBean inputBean){
         setInputs(inputBean);
         this.findValue = findEnum;

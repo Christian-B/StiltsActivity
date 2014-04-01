@@ -14,9 +14,23 @@ public class SelectTwoVariablesPreProcessorBean extends StiltsPreProcessBean{
     private String variable1;
     private String variable2;
 
+    /**
+     * Serialization constructor
+     */
     public SelectTwoVariablesPreProcessorBean(){  
     }
 
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param operator
+     * @param variable1
+     * @param variable2 
+     */
     public SelectTwoVariablesPreProcessorBean(StiltsTwoVariableOperator operator, String variable1, String variable2){
         this.operator = operator;
         this.variable1 = variable1;

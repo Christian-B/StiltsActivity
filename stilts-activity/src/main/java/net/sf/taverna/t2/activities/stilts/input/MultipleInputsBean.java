@@ -9,6 +9,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * Abstract Bean for when there are multiple inputs.
  * <p>
  * Super classes will determine if these must all be the same type or different types.
+ * Super classes will determine how many tables there can be.
  * 
  * @author Christian Brenninkmeijer
  * @version 1.0
@@ -17,11 +18,23 @@ public abstract class MultipleInputsBean extends StitlsInputsBean implements Ser
     
     private List<StiltsInputType> typesOfInputs;
     
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param typesOfInputsEnum 
+     */
     protected MultipleInputsBean(List<StiltsInputType> typesOfInputsEnum){
         this.typesOfInputs = typesOfInputsEnum;
     }
       
-    protected MultipleInputsBean(){}
+     /**
+     * Serialization constructor
+     */
+   protected MultipleInputsBean(){}
     
     /**
      * None getter method to obtain the number of inputs

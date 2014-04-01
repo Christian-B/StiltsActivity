@@ -13,10 +13,22 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
     //New Name must be specified.
     private String newColName;
 
+    /**
+     * Serialization constructor
+     */
     AddColumnPreProcessorBean(){  
         newColumnLocation = StiltsLocationType.END;
     }
 
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param newColName 
+     */
     AddColumnPreProcessorBean(String newColName){  
         this.newColName = newColName;
         newColumnLocation = StiltsLocationType.END;

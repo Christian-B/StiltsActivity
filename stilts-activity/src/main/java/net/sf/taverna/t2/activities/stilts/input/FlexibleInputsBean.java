@@ -7,15 +7,29 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- * Stilts activity configuration bean.
- * 
+ * Bean for any number of inputs where every table can have different formats and types
+ * <p>
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class FlexibleInputsBean extends MultipleFormatsBean 
         implements Serializable {
     private int numberOfInputs;
 
+    /**
+     * Serialization constructor
+     */
     public FlexibleInputsBean(){}
     
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * @param typesOfInputsEnum
+     * @param formatsOfInputEnums 
+     */
     public FlexibleInputsBean(List<StiltsInputType> typesOfInputsEnum, List<StiltsInputFormat> formatsOfInputEnums){
         super(typesOfInputsEnum, formatsOfInputEnums );
         this.numberOfInputs = formatsOfInputEnums.size();

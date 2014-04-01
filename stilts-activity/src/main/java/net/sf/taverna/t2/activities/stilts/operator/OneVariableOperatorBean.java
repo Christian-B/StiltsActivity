@@ -5,6 +5,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 /**
  * Note: This was was an idea to split Operator from Preprocessor but is not currently being used.
  *
+ * @deprecated Never used
  * @author christian
  */
 public class OneVariableOperatorBean implements StiltsOperatorBean{
@@ -12,9 +13,22 @@ public class OneVariableOperatorBean implements StiltsOperatorBean{
     private StiltsOneVariableOperator operator;
     private String variable;
 
+    /**
+     * Serialization constructor
+     */
     public OneVariableOperatorBean(){  
     }
 
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param operator
+     * @param variable 
+     */
     public OneVariableOperatorBean(StiltsOneVariableOperator operator, String variable){
         super();
         this.operator = operator;

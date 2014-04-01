@@ -19,8 +19,21 @@ public class SingleFormatMultipleInputsBean extends MultipleInputsBean
     private StiltsInputFormat formatOfInputs;
     private int numberOfInputs;
     
+    /**
+     * Serialization constructor
+     */
     public SingleFormatMultipleInputsBean(){}
     
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param typesOfInputsEnum
+     * @param inputsFormatEnum 
+     */
     public SingleFormatMultipleInputsBean(List<StiltsInputType> typesOfInputsEnum, StiltsInputFormat inputsFormatEnum){
         super(typesOfInputsEnum);
         this.formatOfInputs = inputsFormatEnum;

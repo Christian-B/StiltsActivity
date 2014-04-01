@@ -13,9 +13,23 @@ public class AddColumnOneVariablesPreProcessorBean extends AddColumnPreProcessor
     private StiltsOneVariableOperator operator;
     private String variable;
 
+    /**
+     * Serialization constructor
+     */
     public AddColumnOneVariablesPreProcessorBean(){  
     }
 
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param operator
+     * @param variable
+     * @param newColName 
+     */
     public AddColumnOneVariablesPreProcessorBean(StiltsOneVariableOperator operator, String variable, String newColName){
         super(newColName);
         this.operator = operator;

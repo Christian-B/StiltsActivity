@@ -14,9 +14,24 @@ public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessor
     private String variable1;
     private String variable2;
 
+    /**
+     * Serialization constructor
+     */
     public AddColumnTwoVariablesPreProcessorBean(){  
     }
 
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param operator
+     * @param variable1
+     * @param variable2
+     * @param newColName 
+     */
     public AddColumnTwoVariablesPreProcessorBean(StiltsTwoVariableOperator operator, String variable1, String variable2, String newColName){
         super(newColName);
         this.operator = operator;

@@ -8,7 +8,9 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 
 /**
  * AbstractBean for input where every table can have different formats and types
- * 
+ * <p>
+ * Super classes will determine how many tables there can be.
+ * <p>
  * @author Christian Brenninkmeijer
  * @version 1.0
  */
@@ -16,8 +18,21 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
         implements Serializable {
     private List<StiltsInputFormat> formatsOfInputs;
 
+    /**
+     * Serialization constructor
+     */
     public MultipleFormatsBean(){}
     
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param typesOfInputsEnum
+     * @param formatsOfInputEnums 
+     */
     public MultipleFormatsBean(List<StiltsInputType> typesOfInputsEnum, List<StiltsInputFormat> formatsOfInputEnums){
         super(typesOfInputsEnum);
         this.formatsOfInputs = formatsOfInputEnums;

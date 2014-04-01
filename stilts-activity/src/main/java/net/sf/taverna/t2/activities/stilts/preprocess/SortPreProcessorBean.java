@@ -9,9 +9,23 @@ public class SortPreProcessorBean extends ColumnListPreProcessorBean{
     private boolean ascending = false;
     private boolean nullsAtBegining = false;
     
+    /**
+     * Serialization constructor
+     */
     public SortPreProcessorBean(){  
     }
 
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param columnList
+     * @param ascending
+     * @param nullsAtBegining 
+     */
     public SortPreProcessorBean(String columnList, boolean ascending, boolean nullsAtBegining){  
         super(columnList);
         this.ascending = ascending;

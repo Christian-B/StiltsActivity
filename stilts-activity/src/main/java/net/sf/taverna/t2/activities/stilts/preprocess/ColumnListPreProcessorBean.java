@@ -10,9 +10,21 @@ public abstract class ColumnListPreProcessorBean extends StiltsPreProcessBean{
     
     private String columnList;
 
+    /**
+     * Serialization constructor
+     */
     ColumnListPreProcessorBean(){  
     }
 
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param columnList 
+     */
     ColumnListPreProcessorBean(String columnList){  
         this.columnList = columnList;
     }

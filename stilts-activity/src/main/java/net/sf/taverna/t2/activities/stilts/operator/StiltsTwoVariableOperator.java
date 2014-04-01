@@ -3,9 +3,15 @@ package net.sf.taverna.t2.activities.stilts.operator;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 /**
+ * Operators that require a two variables.
+ * <p>
+ * Note: This is not a complete set of all operators offered by Stilts.
+ * Adding a new operator here will automatically have it picked up in the activity and the Guis.
+ * <p>
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/sec9.4.html
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/uk.ac.starlink.ttools.func.Arithmetic.html
- * @author christian
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public enum StiltsTwoVariableOperator implements DescribableInterface {
 
@@ -38,13 +44,32 @@ public enum StiltsTwoVariableOperator implements DescribableInterface {
             "Returns the smaller of two floating point values, ignoring blanks. If the arguments have the same value, the result is that same value. If one argument is blank, the result is the other one. If both arguments are blank, the result is blank.",
             StiltsOperatorType.FUNCTION, false);
 
+   /**
+     * Stilts representation of this operator.
+     */
     private final String stiltsSymbol;
+    /**
+     * String to be shown in toolstips and other help locations
+     */
     private final String description;
     private final StiltsOperatorType operatorType;
+    /**
+     * Flag to say if operator always returns a boolean value.
+     * <p>
+     * A true value shows that the operators is normally expected to always return a boolean.
+     * A false value shows that the operator will not typically return a boolean value,
+     * although it is possible that in some case with some variables the result can used as a boolean.
+     */
     private final boolean isBoolean;
   
+    /**
+     * A list of the Operators that always returns a boolean value.
+     */
     private final static StiltsTwoVariableOperator[] booleanValues;
     
+    /**
+     * Precompute the list of booleanValues as it never chances.
+     */
     static {
         int count = 0;
         for (StiltsTwoVariableOperator operator: values()){
@@ -94,6 +119,14 @@ public enum StiltsTwoVariableOperator implements DescribableInterface {
         return 2;
     }
     
+        /**
+     * Returns a String that can be used in a Stilts Parameter.
+     * <p>
+     * In all case the deciding factor is how Stilts expects the function.
+     * @param variable1 any valid Stilts variable which can be complex (made up of other operators and variables)
+     * @param variable2 any valid Stilts variable which can be complex (made up of other operators and variables)
+     * @return 
+     */
     public String retrieveStilsCommand(String variable1, String variable2){
         switch (getOperatorType()){
             case CONVERSION:
@@ -111,10 +144,20 @@ public enum StiltsTwoVariableOperator implements DescribableInterface {
         return retrieveStilsCommand("a", "b");
     }
 
+    /**
+      * 
+     * @return Flag to say if operator always returns a boolean value.
+     */
     public boolean isBoolean(){
         return isBoolean;
     }
     
+    
+    /**
+     * Similar to values() except that only the boolean operators are included.
+     *
+     * @return A list of the Operators that always returns a boolean value.
+     */
     public static StiltsTwoVariableOperator[] booleanValues(){
         return booleanValues;
     }

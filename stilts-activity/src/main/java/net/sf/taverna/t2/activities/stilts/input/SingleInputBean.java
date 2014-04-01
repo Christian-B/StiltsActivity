@@ -15,8 +15,21 @@ public class SingleInputBean extends StitlsInputsBean implements Serializable {
     private StiltsInputFormat inputFormatEnum;
     private StiltsInputType inputTypeEnum;
       
+    /**
+     * Serialization constructor
+     */
     public SingleInputBean(){}
     
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param formatEnum
+     * @param typeEnum 
+     */
     public SingleInputBean(StiltsInputFormat formatEnum, StiltsInputType typeEnum){
         this.inputFormatEnum = formatEnum;
         this.inputTypeEnum = typeEnum;
