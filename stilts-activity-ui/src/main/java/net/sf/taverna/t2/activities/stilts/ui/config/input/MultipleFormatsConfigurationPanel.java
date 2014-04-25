@@ -8,6 +8,14 @@ import javax.swing.JLabel;
 import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 
+/**
+ * Based Configuration panel for multiple inputs which that can have different formats and types 
+ * Super classes will allow the specification the number of input tables
+ * Allows various processes to share the same configuration code if they share the same type of input.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> Any type of MultipleFormatsBean
+ */
 @SuppressWarnings("serial")
 public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends MultipleFormatsBean> extends MultipleInputsConfigurationPanel<BoundedBean>{
  

@@ -6,6 +6,13 @@ import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
+/**
+ * Base class for the Input Configuration panel.
+ * Allows various processes to share the same configuration code if they share the same type of input.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> Any type of StitlsInputsBean
+ */
 @SuppressWarnings("serial")
 public abstract class StiltsInputConfigurationPanel<BoundedBean extends StitlsInputsBean> extends JPanel{
  

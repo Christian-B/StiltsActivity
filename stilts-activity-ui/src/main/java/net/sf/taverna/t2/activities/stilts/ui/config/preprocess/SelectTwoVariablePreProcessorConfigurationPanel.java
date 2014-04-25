@@ -11,6 +11,14 @@ import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 
+/**
+ * Select by Operator Command PreProcess Configuration Panel
+ * <p>
+ * Handles the specification of the Operator and the two variables.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class SelectTwoVariablePreProcessorConfigurationPanel extends StiltsPreProcessConfigurationPanel<SelectTwoVariablesPreProcessorBean>{
  

@@ -1,7 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 
 import java.awt.GridBagConstraints;
-import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -9,6 +8,14 @@ import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnOneVariablesPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 
+/**
+ * add Column based on a single variable PreProcess Configuration Panels
+ * <p>
+ * Allows the specification of the operator and the variable, while location and name of that column are handled by the super class.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class AddColumnOneVariablePreProcessorConfigurationPanel extends AddColumnPreProcessConfigurationPanel<AddColumnOneVariablesPreProcessorBean>{
  

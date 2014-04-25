@@ -73,6 +73,10 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.*;
  * The "Stilts Parameters" port will show the parameters as passed to Stilts.
  * The "Stilts Errors" will reflect everything captured on Standard Error while Stills was running.
  * In this case no Exception is thrown is Stilts exits with an irregular output.
+ * <p>
+ * Having just a Single complex AbstractAsynchronousActivity class allows a single implementation of each of 
+ * ActivityConfigurationPanel, ConfigurationAction, ContextualViewFactory, StiltsContextualView and ServiceDescription
+ * avoiding many similar UI binding classes.
 */
 public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> { 
 

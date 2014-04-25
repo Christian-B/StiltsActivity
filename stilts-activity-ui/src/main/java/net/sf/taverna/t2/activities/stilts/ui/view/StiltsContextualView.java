@@ -11,6 +11,15 @@ import net.sf.taverna.t2.activities.stilts.StiltsBean;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.ContextualView;
 
+/**
+ * Single ContextualView class for all Stilts Activities.
+ * <p>
+ * There is only one implementation of ContextualView because no matter which process and preprocess is used 
+ * the StiltsConfigurationPanel class is used, with the details delegated to panels.
+ * Similarly there is only one bstractAsynchronousActivity (StiltsActivity) which handles the running no matter which process or preprocess is used.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class StiltsContextualView extends ContextualView {
     private final StiltsActivity activity;

@@ -16,6 +16,15 @@ import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 
+/**
+ * Single Stilts implementation of the ServiceDescription.
+ * <p>
+ * Only a single ServiceDescription class is required because the details of the process and preprocess are stored in individual beans.
+ * 
+ * There is possible because there is only one implementation of Activity (StiltsActivity) which handles all the details no matter which process of preprocess is called.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */
 public class StiltsServiceDesc extends ServiceDescription<StiltsBean> 
         implements StiltsInterface{
 

@@ -4,6 +4,13 @@ import net.sf.taverna.t2.activities.stilts.ui.config.input.SingleInputConfigurat
 import javax.swing.JLabel;
 import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
 
+/**
+ * TPipe Process Configuration Panels
+ * <p>
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class TPipeConfigurationPanel extends StiltsProcessConfigurationPanel <TPipeBean>{
      

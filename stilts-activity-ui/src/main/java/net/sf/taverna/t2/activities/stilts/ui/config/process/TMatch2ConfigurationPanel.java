@@ -13,6 +13,16 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsJoin;
 
+/**
+ * Base class of all TMatch2 Process Configuration Panels
+ * <p>
+ * Allows the specification of Stilts find join and fixCols parameters while,
+ * Subclasses will specify how the match should be done.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> a specific StiltsProcessBean
+ */
 @SuppressWarnings("serial")
 public class TMatch2ConfigurationPanel<BoundedBean extends TMatch2Bean> extends StiltsProcessConfigurationPanel <BoundedBean>{
      

@@ -5,6 +5,15 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import net.sf.taverna.t2.activities.stilts.preprocess.SortPreProcessorBean;
 
+/**
+ * Sort PreProcess Configuration Panels
+ * <p>
+ * Allows users to specify how the sort should be handled for example ascending vs descending and where to place nulls.
+ * Specification of the columns list is handled by the super class.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class SortPreProcessorConfigurationPanel extends ColumnListPreProcessorConfigurationPanel<SortPreProcessorBean>{
  

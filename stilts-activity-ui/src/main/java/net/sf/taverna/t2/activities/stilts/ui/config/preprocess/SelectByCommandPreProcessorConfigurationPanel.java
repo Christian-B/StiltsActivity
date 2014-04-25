@@ -6,6 +6,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.preprocess.SelectByCommandPreProcessorBean;
 
+/**
+ * Select by Command PreProcess Configuration Panel
+ * <p>
+ * Handles the Select command 
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class SelectByCommandPreProcessorConfigurationPanel extends StiltsPreProcessConfigurationPanel<SelectByCommandPreProcessorBean>{
  

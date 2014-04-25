@@ -8,6 +8,16 @@ import javax.swing.JPanel;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.input.StiltsInputConfigurationPanel;
 
+/**
+ * Base class of all the Process Configuration Panels
+ * <p>
+ * This allow the specification of details such as checkValues(), getConfiguration(), noteConfiguration() and refreshConfiguration 
+ * to be delegated to the process specific panels.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> a specific StiltsProcessBean
+ */
 @SuppressWarnings("serial")
 public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessBean> extends JPanel{
  
@@ -31,6 +41,11 @@ public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessB
         add(inputPanel, c);        
     }
     
+    /**
+     * Specifies the row the input panel should so on/
+     * This allows super classes to add more rows
+     * @return 
+     */
     int getInputRow(){
         return 1;
     }

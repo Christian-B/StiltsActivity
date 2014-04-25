@@ -7,6 +7,16 @@ import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.input.TwoInputsConfigurationPanel;
 
+/**
+ * Exact Match Process Configuration Panels
+ * <p>
+ * Specifies the number of columns to match exactly.
+ * Workflow will specify the columns to match.
+ * Superclass adds the specification of Stilts find join and fixCols parameters.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class ExactMatchConfigurationPanel extends TMatch2ConfigurationPanel <ExactMatchBean>{
    

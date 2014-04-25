@@ -6,6 +6,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.preprocess.RowCountPreProcessorBean;
 
+/**
+ * Base class of all the All PreProcess using a row count Configuration Panels
+ * <p>
+ * Handles the details of the number of rows shared by these PreProcessors.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> a specific RowCountPreProcessorBean
+ */
 @SuppressWarnings("serial")
 public abstract class RowCountPreProcessorConfigurationPanel<BoundedBean extends RowCountPreProcessorBean>  extends StiltsPreProcessConfigurationPanel<BoundedBean>{
  

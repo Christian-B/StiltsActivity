@@ -8,6 +8,15 @@ import net.sf.taverna.t2.activities.stilts.StiltsBean;
 import net.sf.taverna.t2.workbench.ui.actions.activity.ActivityConfigurationAction;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationDialog;
 
+/**
+ * Single ConfigurationAction class for all Stilts Activities.
+ * <p>
+ * There is only one implementation of ConfigurationAction because no matter which process and preprocess is used 
+ * the StiltsConfigurationPanel class is used, with the details delegated to panels.
+ * Similarly there is only one bstractAsynchronousActivity (StiltsActivity) which handles the running no matter which process or preprocess is used.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class StiltsConfigureAction extends
 		ActivityConfigurationAction<StiltsActivity, StiltsBean> {

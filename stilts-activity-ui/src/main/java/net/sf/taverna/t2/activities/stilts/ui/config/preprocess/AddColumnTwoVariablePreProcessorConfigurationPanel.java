@@ -8,7 +8,14 @@ import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnTwoVariablesPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 
-@SuppressWarnings("serial")
+/**
+ * add Column based on a two variable PreProcess Configuration Panels
+ * <p>
+ * Allows the specification of the operator and the two variables, while location and name of that column are handled by the super class.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */@SuppressWarnings("serial")
 public class AddColumnTwoVariablePreProcessorConfigurationPanel extends AddColumnPreProcessConfigurationPanel<AddColumnTwoVariablesPreProcessorBean>{
  
     private JTextField variable1Field;

@@ -19,6 +19,8 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
 	
     /**
       * Do the actual search for services. Return using the callBack parameter.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
       */
     @SuppressWarnings("unchecked")
     public void findServiceDescriptionsAsync(FindServiceDescriptionsCallBack callBack) {

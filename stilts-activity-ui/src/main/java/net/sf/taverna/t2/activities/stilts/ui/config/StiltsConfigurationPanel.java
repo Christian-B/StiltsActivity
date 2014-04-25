@@ -38,8 +38,15 @@ import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityCon
  * OutputPanel: To get the output type and format
  * <p>
  * miscellaneousPanel: Any other information such as the debug state.
- * 
- * @author christian
+ * <p>
+ * This class includes factory methods createProcessPanel and createPreprocessPanel to create the processPanel and preprocessPanel panels.
+ * The specific detail of the methods checkValues(), getConfiguration(), isConfigurationChanged(), noteConfiguration() and refreshConfiguration()
+ * is delegated to these panels.
+ * <p>
+ * This allows a single ActivityConfigurationAction, ContextualViewFactory, ContextualView implementation to be used for all Processes and preprocesses, 
+ * rather than having to have specific implementations for all combination of these.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 @SuppressWarnings("serial")
 public class StiltsConfigurationPanel extends

@@ -6,7 +6,13 @@ import javax.swing.JLabel;
 import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 
-@SuppressWarnings("serial")
+/**
+ * Configuration panel for multiple inputs which that can have the same formats but possibly different types 
+ * Allows various processes to share the same configuration code if they share the same type of input.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> Any type of StitlsInputsBean
+ */@SuppressWarnings("serial")
 public class SingleFormatMultipleInputsConfigurationPanel<BoundedBean extends SingleFormatMultipleInputsBean> 
         extends MultipleInputsConfigurationPanel<BoundedBean>{
  

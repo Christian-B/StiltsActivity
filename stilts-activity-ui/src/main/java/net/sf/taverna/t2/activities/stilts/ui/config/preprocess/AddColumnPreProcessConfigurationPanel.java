@@ -10,6 +10,15 @@ import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 
+/**
+ * Base class of all the All add Column PreProcess Configuration Panels
+ * <p>
+ * Handles the details shared by all AddColumn PreProcessors such as name and location of the new column.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> a specific AddColumnPreProcessorBean
+ */
 @SuppressWarnings("serial")
 public class AddColumnPreProcessConfigurationPanel <BoundedBean extends AddColumnPreProcessorBean> extends StiltsPreProcessConfigurationPanel<BoundedBean>{
  

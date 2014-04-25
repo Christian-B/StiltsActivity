@@ -7,6 +7,12 @@ import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 
+/**
+ * Configuration panel for exactly one input table
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> Any type of StitlsInputsBean
+ */
 @SuppressWarnings("serial")
 public class SingleInputConfigurationPanel extends StiltsInputConfigurationPanel<SingleInputBean>{
  

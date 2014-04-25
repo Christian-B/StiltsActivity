@@ -7,6 +7,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
 
+/**
+ * Base class of all the PreProcess Configuration Panels
+ * <p>
+ * This allow the specification of details such as checkValues(), getConfiguration(), noteConfiguration() and refreshConfiguration 
+ * to be delegated to the preprocess specific panels.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> a specific StiltsPreProcessBean
+ */
 @SuppressWarnings("serial")
 public abstract class StiltsPreProcessConfigurationPanel <BoundedBean extends StiltsPreProcessBean> extends JPanel{
  

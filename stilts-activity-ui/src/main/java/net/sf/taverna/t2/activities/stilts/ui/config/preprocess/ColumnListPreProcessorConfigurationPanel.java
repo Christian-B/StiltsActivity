@@ -6,6 +6,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.preprocess.ColumnListPreProcessorBean;
 
+/**
+ * Base class of all the All PreProcess using a column list Configuration Panels
+ * <p>
+ * Handles the details of the column list shared by these PreProcessors.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> a specific ColumnListPreProcessorBean
+ */
 @SuppressWarnings("serial")
 public abstract class ColumnListPreProcessorConfigurationPanel<BoundedBean extends ColumnListPreProcessorBean>  extends StiltsPreProcessConfigurationPanel<BoundedBean>{
  

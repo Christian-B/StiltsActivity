@@ -15,6 +15,13 @@ import javax.swing.event.DocumentListener;
 import net.sf.taverna.t2.activities.stilts.input.MultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 
+/**
+ * Configuration panel for multiple inputs which have the same format but possibly different types 
+ * Allows various processes to share the same configuration code if they share the same type of input.
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ * @param <BoundedBean> Any type of MultipleInputsBean
+ */
 @SuppressWarnings("serial")
 public abstract class MultipleInputsConfigurationPanel<BoundedBean extends MultipleInputsBean> 
         extends StiltsInputConfigurationPanel<BoundedBean> implements DocumentListener{

@@ -6,6 +6,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnByCommandPreProcessorBean;
 
+/**
+ * By Command add Column PreProcess Configuration Panels
+ * <p>
+ * Allows the specification of what to add to the new column, while location and name of that column are handled by the super class.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class AddColumnByCommandPreProcessorConfigurationPanel extends AddColumnPreProcessConfigurationPanel<AddColumnByCommandPreProcessorBean>{
  

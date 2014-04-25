@@ -3,7 +3,14 @@ package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 import net.sf.taverna.t2.activities.stilts.preprocess.TailRowsPreProcessorBean;
 
 
-@SuppressWarnings("serial")
+/**
+ * Tail PreProcess Configuration Panels
+ * <p>
+ * Specification of the number of rows is handled by the super class.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
+ */@SuppressWarnings("serial")
 public class TailRowsPreProcessorConfigurationPanel extends RowCountPreProcessorConfigurationPanel<TailRowsPreProcessorBean>{
  
     public TailRowsPreProcessorConfigurationPanel(TailRowsPreProcessorBean preprocessBean, boolean editable){

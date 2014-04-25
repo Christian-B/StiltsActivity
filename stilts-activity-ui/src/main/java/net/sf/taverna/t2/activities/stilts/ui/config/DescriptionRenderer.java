@@ -8,7 +8,8 @@ import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 /**
  * Simple render that adds a tool tip using the DescribableInterface interface
- * @author christian
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class DescriptionRenderer extends JLabel implements ListCellRenderer<DescribableInterface>{
 
