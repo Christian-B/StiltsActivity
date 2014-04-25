@@ -1,6 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.utils;
 
 /**
+ * Specifies the format of the output table.
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/outFormats.html
  * @author christian
  */

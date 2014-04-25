@@ -3,7 +3,7 @@ package net.sf.taverna.t2.activities.stilts.utils;
 import uk.ac.starlink.ttools.Stilts;
 
 /**
- *
+ * Wrapper to run stilts in its own thread, informing the consumer when it is done.
  * @author christian
  */  
 public class StiltsRunner implements Runnable

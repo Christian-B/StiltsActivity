@@ -52,6 +52,9 @@ public abstract class StiltsProcessBean {
      * Obtains the Stilts name for the Process.
      * 
      * Intentional not a get method to avoid confusing the any bean parser.
+     * 
+     * Most of the parameter setting is done by StiltsActivity.createProcessParameters 
+     * so that it can mix information in the bean with information provided in the workflow.
      * @return command as expected by Stilts
      */
     public abstract String retrieveStilsCommand();

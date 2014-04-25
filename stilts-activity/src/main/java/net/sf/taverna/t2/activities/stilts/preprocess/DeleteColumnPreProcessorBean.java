@@ -1,8 +1,17 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
 /**
- *
- * @author christian
+ * Preprocess that deletes one or more columns
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the column(s) to be deleted..
+ * <p>
+ * Based on
+ *{@link http://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#delcols}
+ * 
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class DeleteColumnPreProcessorBean extends ColumnListPreProcessorBean{
     

@@ -1,6 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.utils;
 
 /**
+ * Specifies the format of the output table.
  * @author christian
  */
 public enum StiltsOutputType implements DescribableInterface{

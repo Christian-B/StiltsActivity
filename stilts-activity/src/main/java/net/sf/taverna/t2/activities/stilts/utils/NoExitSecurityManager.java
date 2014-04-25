@@ -3,8 +3,10 @@ package net.sf.taverna.t2.activities.stilts.utils;
 import java.security.Permission;
 
 /**
+ * Checks the status of the a Stilts Run.
  * 
- * @author Julian Garrido
+ * Extends the version in AstroTaverna by applying any existing Security Manager
+ * @author Julian Garrido and Christian Brenninkmeijer
  * @since    19 May 2011
  */
 public class NoExitSecurityManager extends SecurityManager {

@@ -4,11 +4,24 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
- * @author christian
+ * Full configurable Add Column PreProcessor.
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the name of the new colum, and where to place it. 
+ * and will define what to put in the new column.
+ * <p>
+ * The rule of what to add is totally configurable and as such the responsibility of the user
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class AddColumnByCommandPreProcessorBean extends AddColumnPreProcessorBean{
     
+    /**
+     * Stilts command to create the new columns.
+     * 
+     * Not including cmd=addcol -after refColun and new columnName
+     */
     private String command;
 
     /**

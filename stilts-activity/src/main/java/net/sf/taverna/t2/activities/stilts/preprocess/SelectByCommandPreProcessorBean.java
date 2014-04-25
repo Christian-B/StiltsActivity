@@ -3,11 +3,25 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
- * @author christian
+ * Preprocess that selects columns based on the user command, deleting any others.
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the select expression.
+ * <p>
+ * Based on
+ *{@link http://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#select}
+ * <p>
+ * The command must be a valid Stilts command returning a boolean
+ * {@linkhttp://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#jel}
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class SelectByCommandPreProcessorBean extends StiltsPreProcessBean{
     
+    /**
+     * A valid boolean Stilts command
+     */
     private String command;
 
     /**

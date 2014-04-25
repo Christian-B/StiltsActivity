@@ -7,6 +7,7 @@
 package net.sf.taverna.t2.activities.stilts.utils;
 
 /**
+ * Type of the input table.
  * @author christian
  */
 public enum StiltsInputType  implements DescribableInterface {

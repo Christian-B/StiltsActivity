@@ -5,13 +5,33 @@ import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
- * @author christian
+ * Preprocess that selects columns based on a Stilts Operator, deleting any others.
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the select operator and the expressions it takes.
+ * <p>
+ * Based on
+ *{@link http://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#select}
+ * <p>
+ * The variables must be a valid Stilts variables
+ * {@linkhttp://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#jel}
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class SelectTwoVariablesPreProcessorBean extends StiltsPreProcessBean{
     
+    /**
+     * A Stilts operator that returns a boolean value
+     */
     private StiltsTwoVariableOperator operator;
+    /** 
+     * Any valid Stilts expression which can be a column name, column number or a complex expression.
+     */
     private String variable1;
+    /** 
+     * Any valid Stilts expression which can be a column name, column number or a complex expression.
+     */
     private String variable2;
 
     /**

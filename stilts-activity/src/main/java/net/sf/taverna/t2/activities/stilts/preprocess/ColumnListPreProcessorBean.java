@@ -3,11 +3,25 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
- * @author christian
+ * Based Class for all the PreProcesses that are applied to a list of columns
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the columns to operate on.
+ * <p>
+ * Column list specification must be in the Stilts format as shown at;
+ * {@link http://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#colid-list}
+ * <p>
+ * Super classes will define what to do with the list of columns.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public abstract class ColumnListPreProcessorBean extends StiltsPreProcessBean{
     
+    /**
+     * List of columns to be operated on.
+     * Must be in Stilts format.
+     */
     private String columnList;
 
     /**

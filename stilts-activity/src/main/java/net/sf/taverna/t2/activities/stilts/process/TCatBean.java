@@ -3,7 +3,12 @@ package net.sf.taverna.t2.activities.stilts.process;
 import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
 
 /**
- *
+ * Concatenates two or more similar tables into a single table
+ * 
+ * <p>
+ * As all the tables must be the same format the inputBean must be a SingleFormatMultipleInputsBean
+ * 
+ * Implements {$link http://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#tcat}
  * @author christian
  */
 public class TCatBean extends StiltsProcessBean {
@@ -21,7 +26,6 @@ public class TCatBean extends StiltsProcessBean {
      * This method allows a single call to create the Bean and populate all the required fields.
      * This has the same effect as calling the unparameterized constructor and then all the setters.
      * None of the parameters should be null.
-     * 
      * @param inputBean 
      */
     public TCatBean(SingleFormatMultipleInputsBean inputBean){

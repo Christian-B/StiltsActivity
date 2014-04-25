@@ -1,18 +1,26 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
-import net.sf.taverna.t2.activities.stilts.process.TMatch2Bean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsJoin;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
+ * Extension of Stilts TMatch which matches/joines where values of one table exactly match does in another.
+ * <p>
+ * The number of columns to match is specified here.
+ * The name/ number of the columnns to match are supplied in the workflow as input parameters.
+ * <p>
+ * 
  * @author christian
  */
 public class ExactMatchBean extends TMatch2Bean {
  
+    /**
+     * The number of columns to match is specified here.
+     * The name/ number of the columnns to match are supplied in the workflow as input parameters.
+     */
     private int numbertOfColumnsToMatch;
 
     /**

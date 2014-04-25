@@ -5,8 +5,17 @@ import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
- * @author christian
+ * Add Column PreProcessor based on an Operator which takes a single variable.
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the name of the new colum, and where to place it. 
+ * and will define what to put in the new column.
+ * <p>
+ * The rule of what to add is based on one of Stilts Operators that take a single variable.
+ * The user will supply the operator and the variable (which may be complex)
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class AddColumnOneVariablesPreProcessorBean extends AddColumnPreProcessorBean{
     
@@ -26,8 +35,8 @@ public class AddColumnOneVariablesPreProcessorBean extends AddColumnPreProcessor
      * This has the same effect as calling the unparameterized constructor and then all the setters.
      * None of the parameters should be null.
      * 
-     * @param operator
-     * @param variable
+     * @param operator A Stilts Operator
+     * @param variable Any legal Stilts expression such as a column name, column name or a complex expression
      * @param newColName 
      */
     public AddColumnOneVariablesPreProcessorBean(StiltsOneVariableOperator operator, String variable, String newColName){
@@ -36,6 +45,19 @@ public class AddColumnOneVariablesPreProcessorBean extends AddColumnPreProcessor
         this.variable = variable;
     }
 
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param operator A Stilts Operator
+     * @param variable Any legal Stilts expression such as a column name, column name or a complex expression
+     * @param newColName
+     * @param newColumnLocation
+     * @param locationColumn 
+     */
     public AddColumnOneVariablesPreProcessorBean(StiltsOneVariableOperator operator, String variable, 
             String newColName, StiltsLocationType newColumnLocation,  String locationColumn){ 
         super(newColName, newColumnLocation, locationColumn);

@@ -14,7 +14,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 /**
- * 
+ * Utils mainly copied from Astro Taverna
  * @author Julian Garrido and Christian Brenninkmeijer
  * @since    19 May 2011
  */

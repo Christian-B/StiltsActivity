@@ -3,11 +3,21 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
- * @author christian
+ * Based Class for all the PreProcesses that are applied to a number of rows
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the columns to operate on.
+ * <p>
+ * Super classes will define what to do with the number of rows.
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public abstract class RowCountPreProcessorBean extends StiltsPreProcessBean{
     
+    /**
+     * Number of rows to operate on.
+     */
     private int numberOfRows;
 
     /**

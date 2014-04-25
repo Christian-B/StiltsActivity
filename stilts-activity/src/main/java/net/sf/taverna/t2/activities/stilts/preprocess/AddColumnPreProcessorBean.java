@@ -12,7 +12,8 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * Super classes will define what to put in the new column.
  * @author Christian Brenninkmeijer
  * @version 1.0
- */public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
+ */
+public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     
     /**
      * Defines where in comparison to the location Column the new column will be placed.

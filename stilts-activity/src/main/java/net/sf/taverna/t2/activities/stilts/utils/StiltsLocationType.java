@@ -1,5 +1,10 @@
 package net.sf.taverna.t2.activities.stilts.utils;
 
+/**
+ * Specifies where a new column should be inserted.
+ * 
+ * @author christian
+ */
 public enum StiltsLocationType implements DescribableInterface{
 
     AFTER("Insert the new column after the named column"),

@@ -1,6 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.utils;
 
 /**
+ * Determines what happens when a row in one table can be matched by more than one row in the other table
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/tmatch2-usage.html
  * @author christian
  */

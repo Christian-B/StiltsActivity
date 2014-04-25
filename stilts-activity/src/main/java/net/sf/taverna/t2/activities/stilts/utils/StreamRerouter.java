@@ -9,6 +9,11 @@ import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.io.StringBufferInputStream;
 
+/**
+ * Way of recording anything send to System.err while Stilts is running.
+ * 
+ * @author christian
+ */
 public class StreamRerouter implements Runnable
 {
 //    private final BufferedReader outReader;

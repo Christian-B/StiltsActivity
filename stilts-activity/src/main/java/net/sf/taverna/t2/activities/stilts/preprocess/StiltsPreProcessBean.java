@@ -7,6 +7,9 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * <p>
  * Defines that every Preprocess Bean must be able to check itself for validity 
  * and returns the String Stilts uses for this functionality.
+ * <p>
+ * Any Stilts process can take a Preprocess. 
+ * Although the most likely use is with a TPipe process which does nothing more than pass the table on.
  * @author Christian Brenninkmeijer
  * @version 1.0
  */

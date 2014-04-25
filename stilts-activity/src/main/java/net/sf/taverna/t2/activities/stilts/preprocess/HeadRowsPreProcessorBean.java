@@ -1,8 +1,17 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
 /**
- *
- * @author christian
+ * Preprocess that keeps the head/ first rows
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the rows to keep, deleting any others.
+ * <p>
+ * Based on
+ *{@link http://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#head}
+ * 
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class HeadRowsPreProcessorBean extends RowCountPreProcessorBean{
     

@@ -3,6 +3,9 @@ package net.sf.taverna.t2.activities.stilts.process;
 import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
 
 /**
+ * Concatenates two or more tables into a single table, these tabkes may have different formats
+ * 
+ * Implements {$link http://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#tcatn}
  *
  * @author christian
  */

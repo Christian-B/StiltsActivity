@@ -3,7 +3,10 @@ package net.sf.taverna.t2.activities.stilts.process;
 import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
 
 /**
- *
+ * Simple process which just sends the table to output.
+ * 
+ * Can be used together with a processor or just as a format convertor.
+ * 
  * @author christian
  */
 public class TPipeBean extends StiltsProcessBean {

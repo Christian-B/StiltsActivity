@@ -5,8 +5,17 @@ import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
- * @author christian
+ * Add Column PreProcessor based on an Operator which takes two variables.
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the name of the new colum, and where to place it. 
+ * and will define what to put in the new column.
+ * <p>
+ * The rule of what to add is based on one of Stilts Operators that take two variables.
+ * The user will supply the operator and the two variables (which may be complex)
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessorBean{
     
@@ -27,9 +36,9 @@ public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessor
      * This has the same effect as calling the unparameterized constructor and then all the setters.
      * None of the parameters should be null.
      * 
-     * @param operator
-     * @param variable1
-     * @param variable2
+     * @param operator A Stilts Operator
+     * @param variable1 Any legal Stilts expression such as a column name, column name or a complex expression
+     * @param variable2 Any legal Stilts expression such as a column name, column name or a complex expression
      * @param newColName 
      */
     public AddColumnTwoVariablesPreProcessorBean(StiltsTwoVariableOperator operator, String variable1, String variable2, String newColName){
@@ -39,6 +48,20 @@ public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessor
         this.variable2 = variable2;
     }
 
+    /**
+     * Parameterized constructor to help ensure the right information is passed in.
+     * <p>
+     * This method allows a single call to create the Bean and populate all the required fields.
+     * This has the same effect as calling the unparameterized constructor and then all the setters.
+     * None of the parameters should be null.
+     * 
+     * @param operator A Stilts Operator
+     * @param variable1 Any legal Stilts expression such as a column name, column name or a complex expression
+     * @param variable2 Any legal Stilts expression such as a column name, column name or a complex expression
+     * @param newColName
+     * @param newColumnLocation
+     * @param locationColumn 
+     */
     public AddColumnTwoVariablesPreProcessorBean(StiltsTwoVariableOperator operator, String variable1, String variable2, 
             String newColName, StiltsLocationType newColumnLocation,  String locationColumn){ 
         super(newColName, newColumnLocation, locationColumn);

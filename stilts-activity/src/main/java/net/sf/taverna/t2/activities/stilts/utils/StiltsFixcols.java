@@ -1,6 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.utils;
 
 /**
+ * Determines how input columns are renamed before use in the output table
+ * 
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/tmatch2-usage.html
  * @author christian
  */

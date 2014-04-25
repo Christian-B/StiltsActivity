@@ -1,12 +1,27 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
 /**
- *
- * @author christian
+ * Preprocess that sorts rows based on one or more columns
+ * <p>
+ * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
+ * as it helps the user specify the column(s) to sort by.
+ * <p>
+ * Based on
+ *{@link http://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#sort}
+ * 
+ * 
+ * @author Christian Brenninkmeijer
+ * @version 1.0
  */
 public class SortPreProcessorBean extends ColumnListPreProcessorBean{
     
+    /**
+     * Specify if the data should be sorted in ascending order
+     */
     private boolean ascending = false;
+    /** 
+     * Determines that nulls should be placed at the start of the table.
+     */
     private boolean nullsAtBegining = false;
     
     /**

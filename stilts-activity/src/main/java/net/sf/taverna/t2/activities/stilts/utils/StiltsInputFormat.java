@@ -1,6 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.utils;
 
 /**
+ * Format of an input table.
  * @see http://www.star.bristol.ac.uk/~mbt/stilts/sun256/inFormats.html
  * @author christian
  */

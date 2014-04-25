@@ -7,19 +7,34 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsJoin;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- *
+ * Base class for applying a Stilts Stilts Match/ join of two tables.
+ * <p>
+ * Based on {$link http://www.star.bris.ac.uk/~mbt/stilts/sun256/sun256.html#tmatch2}
+ * <p>
+ * Allows Workflow designers to specify match/join criteria such as find, fixcols and join.
+ * <p>
+ * Super classes will define how the matching is done.
  * @author christian
  */
 public class TMatch2Bean extends StiltsProcessBean {
  
+    /**
+     * Determines what happens when a row in one table can be matched by more than one row in the other table
+     */
     private StiltsFind findValue;
+    /**
+     * Determines which rows are included in the output table. 
+     */
     private StiltsJoin joinValue;
+    /**
+     * Determines how input columns are renamed before use in the output table
+     */
     private StiltsFixcols fixcolsValue;
 
     /**
      * Serialization constructor
      */
-    public TMatch2Bean(){
+    TMatch2Bean(){
     }
     
     /**
@@ -34,7 +49,7 @@ public class TMatch2Bean extends StiltsProcessBean {
      * @param joinEnum
      * @param inputBean 
      */
-    public TMatch2Bean(StiltsFind findEnum, StiltsFixcols fixcolsEnum, StiltsJoin joinEnum, TwoInputsBean inputBean){
+    TMatch2Bean(StiltsFind findEnum, StiltsFixcols fixcolsEnum, StiltsJoin joinEnum, TwoInputsBean inputBean){
         setInputs(inputBean);
         this.findValue = findEnum;
         this.fixcolsValue = fixcolsEnum;
@@ -98,6 +113,8 @@ public class TMatch2Bean extends StiltsProcessBean {
 
     @Override
     public String retrieveStilsCommand() {
+        //Currently the remaining parameters are applied in StiltsActivity.createProcessParameters
+        //this should idealy be moved here.
         return "tmatch2";
     }
 
