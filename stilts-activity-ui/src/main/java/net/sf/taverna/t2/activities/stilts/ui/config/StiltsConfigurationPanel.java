@@ -24,6 +24,23 @@ import net.sf.taverna.t2.activities.stilts.utils.*;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
 
+/**
+ * Main/Root Configuration panel for the Stilts Process.
+ * <p>
+ * Adds four panels to the gui.
+ * <p>
+ * processPanel which contains the information for the specific process being used.
+ * This will contain a superclass of StiltsProcessConfigurationPanel depending on the process being done.
+ * <p>
+ * preprocessPanel Added if required to obtain settings for the preprocessor
+ * This will contain a super class of StiltsPreProcessConfigurationPanel depending on the actual preprocessing being done.
+ * <p>
+ * OutputPanel: To get the output type and format
+ * <p>
+ * miscellaneousPanel: Any other information such as the debug state.
+ * 
+ * @author christian
+ */
 @SuppressWarnings("serial")
 public class StiltsConfigurationPanel extends
         ActivityConfigurationPanel<StiltsActivity, StiltsBean> {
@@ -35,6 +52,9 @@ public class StiltsConfigurationPanel extends
     private final StiltsProcessConfigurationPanel processPanel;
     private final StiltsPreProcessConfigurationPanel preprocessPanel;
     private final JPanel outputPanel;
+    /**
+     * Last panel to add things like debug
+     */
     private final JPanel miscellaneousPanel;
     
     private JComboBox<StiltsOutputFormat> outputFormatSelector;
