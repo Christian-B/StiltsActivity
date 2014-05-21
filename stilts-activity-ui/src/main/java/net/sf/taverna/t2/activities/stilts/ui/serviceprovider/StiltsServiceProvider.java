@@ -162,4 +162,8 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         return getName();
     }
 
+    public String getId() {
+        return "Stilts based Table tools";
+    }
+
 }
