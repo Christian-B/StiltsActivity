@@ -32,4 +32,10 @@ public class TJoinBean extends StiltsProcessBean {
     public String retrieveStilsCommand() {
         return "tjoin";
     }
+   
+    @Override
+    public String title() {
+        return "Join Tables based on Row number";
+    }
+
 }

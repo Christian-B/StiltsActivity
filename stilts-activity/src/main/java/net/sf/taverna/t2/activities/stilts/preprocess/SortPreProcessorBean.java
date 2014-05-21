@@ -88,5 +88,9 @@ public class SortPreProcessorBean extends ColumnListPreProcessorBean{
         this.ascending = ascending;
     }
 
-      
+    @Override
+    public String title() {
+        return "Sortt rows";
+    }
+ 
 }

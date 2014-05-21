@@ -137,6 +137,11 @@ public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessor
         return super.retrieveStilsCommand() + "\"" + operator.retrieveStilsCommand(variable1, variable2) + "\"";
     }
             
+    @Override
+    public String title() {
+        return "Add column using a two column operator";
+    }
+
 
 
 }

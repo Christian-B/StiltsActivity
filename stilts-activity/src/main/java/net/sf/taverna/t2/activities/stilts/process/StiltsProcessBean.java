@@ -59,4 +59,6 @@ public abstract class StiltsProcessBean {
      */
     public abstract String retrieveStilsCommand();
 
+    public abstract String title();
+    
 }

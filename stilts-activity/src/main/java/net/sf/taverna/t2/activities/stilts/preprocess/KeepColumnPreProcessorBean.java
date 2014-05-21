@@ -40,5 +40,9 @@ public class KeepColumnPreProcessorBean extends ColumnListPreProcessorBean{
         return "cmd=keepcols \"" + this.getColumnList() + "\"";
     }
 
-      
+    @Override
+    public String title() {
+        return "Keep only specified column(s)";
+    }
+  
 }

@@ -16,7 +16,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * Super classes will define how the matching is done.
  * @author christian
  */
-public class TMatch2Bean extends StiltsProcessBean {
+public abstract class TMatch2Bean extends StiltsProcessBean {
  
     /**
      * Determines what happens when a row in one table can be matched by more than one row in the other table

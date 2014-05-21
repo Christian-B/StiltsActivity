@@ -68,4 +68,10 @@ public class ExactMatchBean extends TMatch2Bean {
             throw new ActivityConfigurationException("Number of columns to match must be 1 or more.");
         }
     }
+    
+    @Override
+    public String title() {
+        return "Join Tables based on matching values";
+    }
+
 }

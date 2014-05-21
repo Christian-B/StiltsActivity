@@ -126,5 +126,10 @@ public class SelectTwoVariablesPreProcessorBean extends StiltsPreProcessBean{
     public String retrieveStilsCommand(){
         return "cmd=select \"" + operator.retrieveStilsCommand(variable1, variable2) + "\"";
     }
-            
+    
+    @Override
+    public String title() {
+        return "Select rows comparing two columns.";
+    }
+
 }

@@ -39,5 +39,10 @@ public class HeadRowsPreProcessorBean extends RowCountPreProcessorBean{
         return "cmd=head " + this.getNumberOfRows();
     }
 
-      
+    @Override
+    public String title() {
+        return "Keep only the first X rows";
+    }
+
+
 }

@@ -39,5 +39,9 @@ public class TailRowsPreProcessorBean extends RowCountPreProcessorBean{
         return "cmd=tail " + this.getNumberOfRows();
     }
 
-      
+    @Override
+    public String title() {
+        return "Keep only the last X rows";
+    }
+     
 }

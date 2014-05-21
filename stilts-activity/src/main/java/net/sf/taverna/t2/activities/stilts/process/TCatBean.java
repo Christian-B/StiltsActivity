@@ -36,4 +36,9 @@ public class TCatBean extends StiltsProcessBean {
     public String retrieveStilsCommand() {
         return "tcat";
     }
+
+    @Override
+    public String title() {
+        return "Concatenate Multiple tables with a Shared format";
+    }
 }

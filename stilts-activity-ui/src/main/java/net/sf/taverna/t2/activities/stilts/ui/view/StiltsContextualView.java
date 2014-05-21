@@ -1,13 +1,13 @@
 package net.sf.taverna.t2.activities.stilts.ui.view;
 
-import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigureAction;
-import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigurationPanel;
 import java.awt.Frame;
-
 import javax.swing.Action;
 import javax.swing.JComponent;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigureAction;
+import net.sf.taverna.t2.workbench.ui.actions.activity.HTMLBasedActivityContextualView;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.ContextualView;
 
@@ -21,39 +21,52 @@ import net.sf.taverna.t2.workbench.ui.views.contextualviews.ContextualView;
  * @version 1.0
  */
 @SuppressWarnings("serial")
-public class StiltsContextualView extends ContextualView {
+public class StiltsContextualView extends HTMLBasedActivityContextualView<StiltsBean>{
     private final StiltsActivity activity;
     //private StiltsBeanPanel mainFrame;
 
     public StiltsContextualView(StiltsActivity activity) {
-        super();
+        super(activity);
         this.activity = activity;
         initView();
     }
 
     @Override
-    public JComponent getMainFrame() {
-        return new  StiltsConfigurationPanel(activity, StiltsConfigurationPanel.NOT_EDITABLE);
+    public String getViewTitle() {
+//        if (activity == null){
+//            return "NULL";
+//        }
+//        return activity.toString();
+        try {
+            return activity.getTitle();
+        } catch (Exception ex){
+            return ex.getMessage();
+        }
     }
+
+ //   @Override
+ //   public JComponent getMainFrame() {
+ //       return new  StiltsConfigurationPanel(activity, StiltsConfigurationPanel.NOT_EDITABLE);
+ //   }
 
     /**
       * Typically called when the activity configuration has changed.
       */
-    @Override
-    public void refreshView() {
-        StiltsBean bean = activity.getConfiguration();
-    }
+//    @Override
+//    public void refreshView() {
+//        StiltsBean bean = activity.getConfiguration();
+//    }
 
-    @Override
-    public String getViewTitle() {
-        StiltsBean bean = activity.getConfiguration();
-        return "Test";
-    }
+//    @Override
+//    public String getViewTitle() {
+//        StiltsBean bean = activity.getConfiguration();
+//        return "Test";
+//   }
 
-    @Override
-    public Action getConfigureAction(final Frame owner) {
-        return new StiltsConfigureAction(activity, owner);
-    }
+//    @Override
+//    public Action getConfigureAction(final Frame owner) {
+//        return new StiltsConfigureAction(activity, owner);
+//    }
     
    /**
       * View position hint
@@ -62,6 +75,12 @@ public class StiltsContextualView extends ContextualView {
     public int getPreferredPosition() {
         // We want to be on top
         return 100;
+    }
+
+    @Override
+    protected String getRawTableRowsHtml() {
+        String html = "<tr><th>Name goes here</th><th>Depth</th></tr>";
+        return html;
     }
 
 }

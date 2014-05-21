@@ -766,5 +766,14 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         return "Name of " + MyUtils.ordinal(matchPosition) + " column to match in " + MyUtils.ordinal(table) + " Table "; 
     }
 
+    public String getTitle() {
+
+        try{
+        return configBean.title();
+        } catch (Exception ex){
+            return ex.getMessage();
+        }
+    }
+
 
 }

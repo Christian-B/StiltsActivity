@@ -39,5 +39,10 @@ public class DeleteColumnPreProcessorBean extends ColumnListPreProcessorBean{
         return "cmd=delcols \"" + this.getColumnList() + "\"";
     }
 
-      
+    @Override
+    public String title() {
+        return "Delete column(s)";
+    }
+
+
 }

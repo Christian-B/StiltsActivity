@@ -35,4 +35,11 @@ public class TPipeBean extends StiltsProcessBean {
     public String retrieveStilsCommand() {
         return "tpipe";
     }
+    
+    @Override
+    public String title() {
+        //This signifies that the title should come from the preprocessor
+        return null;
+    }
+
 }

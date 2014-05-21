@@ -69,5 +69,10 @@ public class UserSpecifiedPreProcessorBean extends StiltsPreProcessBean{
     public String retrieveStilsCommand() {
         return  "cmd=" + preProcessCommand;
     }
+    
+    @Override
+    public String title() {
+        return "Alter table using a Stiltts preprocessing step";
+    }
 
 }

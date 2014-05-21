@@ -13,7 +13,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  * @author Christian Brenninkmeijer
  * @version 1.0
  */
-public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
+public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     
     /**
      * Defines where in comparison to the location Column the new column will be placed.

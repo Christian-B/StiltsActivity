@@ -33,4 +33,6 @@ public abstract class StiltsPreProcessBean {
      */
     public abstract String retrieveStilsCommand();
 
+    public abstract String title();
+    
 }

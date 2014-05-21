@@ -71,5 +71,10 @@ public class SelectByCommandPreProcessorBean extends StiltsPreProcessBean{
             throw new ActivityConfigurationException("Command is empty");
         }
     }
+    
+    @Override
+    public String title() {
+        return "Select rows based on a Stils command";
+    }
 
 }

@@ -80,4 +80,9 @@ public class AddColumnByCommandPreProcessorBean extends AddColumnPreProcessorBea
         }
     }
 
+    @Override
+    public String title() {
+        return "Add column using a Stilts command";
+    }
+
 }

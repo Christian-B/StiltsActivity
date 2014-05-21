@@ -34,4 +34,10 @@ public class TCatNBean extends StiltsProcessBean {
     public String retrieveStilsCommand() {
         return "tcatn";
     }
+    
+        @Override
+    public String title() {
+        return "Concatenate Multiple tables with a different formats";
+    }
+
 }

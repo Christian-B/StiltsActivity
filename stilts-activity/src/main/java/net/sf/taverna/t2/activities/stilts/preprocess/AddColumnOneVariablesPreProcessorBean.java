@@ -111,5 +111,10 @@ public class AddColumnOneVariablesPreProcessorBean extends AddColumnPreProcessor
     public String retrieveStilsCommand(){
         return super.retrieveStilsCommand() + "\"" + operator.retrieveStilsCommand(variable) + "\"";
     }
-            
+   
+    @Override
+    public String title() {
+        return "Add column using a one column operator";
+    }
+
 }

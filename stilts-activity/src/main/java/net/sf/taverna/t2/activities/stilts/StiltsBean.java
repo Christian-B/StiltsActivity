@@ -135,4 +135,17 @@ public class StiltsBean implements StiltsInterface, Serializable{
         this.preprocess = preprocess;
     }
 
+    public String title() {
+        if (process.title() != null){
+            return process.title();
+        } else {
+            //TPipe returns null so the name comes from the preprocess
+            if (preprocess == null){
+                return "Change the format of a table";
+            } else {
+                return preprocess.title();
+            }
+        }
+    }
+
 }
