@@ -4,25 +4,15 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 
 import net.sf.taverna.t2.activities.stilts.*;
-import net.sf.taverna.t2.activities.stilts.input.*;
-import net.sf.taverna.t2.activities.stilts.preprocess.*;
-import net.sf.taverna.t2.activities.stilts.process.*;
-import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
-import net.sf.taverna.t2.activities.stilts.ui.config.input.*;
-import net.sf.taverna.t2.activities.stilts.ui.config.preprocess.*;
-import net.sf.taverna.t2.activities.stilts.ui.config.process.*;
 import net.sf.taverna.t2.activities.stilts.utils.*;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
@@ -56,12 +46,15 @@ public class StiltsConfigurationPanel extends
         ActivityConfigurationPanel<StiltsActivity, StiltsBean> {
 
     private final StiltsActivity activity;
-    
     private final ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
-     
+    private List<StiltsConfiguration> configurations;
+    private List<Component> selectors;
+    
     public StiltsConfigurationPanel(StiltsActivity activity) {
         try {
             this.activity = activity;
+            configurations = activity.configurations();
+            selectors = new ArrayList<Component>(configurations.size());
             refreshConfiguration();
         } catch (RuntimeException ex){
             ex.printStackTrace();
@@ -69,10 +62,32 @@ public class StiltsConfigurationPanel extends
         }     
     }
     
+    private Object getTheValue(Component component) {
+        if (component instanceof JCheckBox){
+            JCheckBox jCheckBox = (JCheckBox)component;
+            return jCheckBox.isSelected();
+        }
+        if (component instanceof JComboBox){
+            JComboBox jComboBox = (JComboBox)component;
+            return jComboBox.getSelectedItem();
+        }
+        if (component instanceof JTextField){
+            JTextField jTextField = (JTextField)component;
+            return jTextField.getText();
+        }
+        //Fall back which should never happen
+        return component.toString();
+    }
+
     @Override
     public boolean isConfigurationChanged() {
-        //TODO
-        return false;
+       for (int i = 0; i < configurations.size(); i++){
+           Object newValue = getTheValue(selectors.get(i));
+           if (!configurations.get(i).getItem().equals(newValue)){
+               return true;
+           }
+        }
+       return false;
     }
 
     @Override
@@ -82,7 +97,8 @@ public class StiltsConfigurationPanel extends
 
     @Override
     public void noteConfiguration() {
-        //TODO
+        //for (int i = 0; i < configurations.size(); i++){
+        //}
     }
     
     private Component getSelector(Object item) {
@@ -121,6 +137,11 @@ public class StiltsConfigurationPanel extends
         add(label, c);
         c.gridx = 1;
         Component selector = getSelector(configuration.getItem());
+        if (selectors.size() <= row){
+             selectors.add(selector);
+        } else {
+            selectors.set(row, selector);
+        }
         add(selector, c);
     }
    
@@ -128,7 +149,6 @@ public class StiltsConfigurationPanel extends
     public void refreshConfiguration() {
         removeAll();
         setLayout(new GridBagLayout());
-        List<StiltsConfiguration> configurations = activity.configurations();
         for (int i = 0; i < configurations.size(); i++){
             addConfiguration(configurations.get(i), i);
         }
@@ -139,6 +159,7 @@ public class StiltsConfigurationPanel extends
         //TODO
         return true;
     }
+
 
   
 }
