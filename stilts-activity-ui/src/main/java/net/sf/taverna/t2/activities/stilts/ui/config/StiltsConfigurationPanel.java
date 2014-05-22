@@ -97,6 +97,17 @@ public class StiltsConfigurationPanel extends
         }        if (item instanceof String){
             return new JTextField(item.toString());
         }
+        if (item instanceof String){
+            return new JTextField(item.toString());            
+        }
+        if (item instanceof Integer){
+            return new JTextField(item.toString());            
+        }
+        if (item instanceof Boolean){
+            JCheckBox selector = new JCheckBox();            
+            selector.setSelected(((Boolean)item).booleanValue());
+            return selector;
+        }
         return new JTextField(item.getClass() + "" + item.toString());
     }
 
