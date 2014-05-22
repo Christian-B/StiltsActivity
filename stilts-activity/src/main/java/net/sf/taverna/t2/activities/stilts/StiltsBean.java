@@ -17,9 +17,12 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 public class StiltsBean implements StiltsInterface, Serializable{
     private StiltsPreProcessBean preprocess;
     private StiltsOutputFormat outputFormat;
+    private final String OUTPUT_FORMAT_NAME = "Output table format";
     private StiltsOutputType outputType;
+    private final String OUTPUT_TYPE_NAME = "Output table type";
     private StiltsProcessBean process;
     private boolean debugMode = true;
+    private final String DEBUG_NAME = "DEBUG MODE";
 
     public StiltsBean() {}
     
@@ -149,6 +152,10 @@ public class StiltsBean implements StiltsInterface, Serializable{
         if (preprocess != null){
             configurations.addAll(preprocess.configurations());
         }
+        configurations.add(new StiltsConfiguration (OUTPUT_FORMAT_NAME,  outputFormat, true));
+        configurations.add(new StiltsConfiguration (OUTPUT_TYPE_NAME,  outputType, true));
+        configurations.add(new StiltsConfiguration (DEBUG_NAME,  debugMode, true));
         return configurations;
     }
 }
+  
