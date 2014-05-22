@@ -1,10 +1,12 @@
 package net.sf.taverna.t2.activities.stilts.ui.view;
 
 import java.awt.Frame;
+import java.util.List;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigureAction;
 import net.sf.taverna.t2.workbench.ui.actions.activity.HTMLBasedActivityContextualView;
@@ -33,10 +35,6 @@ public class StiltsContextualView extends HTMLBasedActivityContextualView<Stilts
 
     @Override
     public String getViewTitle() {
-//        if (activity == null){
-//            return "NULL";
-//        }
-//        return activity.toString();
         try {
             return activity.getTitle();
         } catch (Exception ex){
@@ -79,8 +77,15 @@ public class StiltsContextualView extends HTMLBasedActivityContextualView<Stilts
 
     @Override
     protected String getRawTableRowsHtml() {
-        String html = "<tr><th>Name goes here</th><th>Depth</th></tr>";
-        return html;
+        if (activity == null){
+            return "null";
+        }
+        List<StiltsConfiguration> configurations = activity.configurations();
+        StringBuilder html = new StringBuilder();
+        for (StiltsConfiguration configuration:configurations){
+            html.append("<tr><td>").append(configuration.getName()).append("</td><td>").append(configuration.getItem()).append("</td></tr>");
+        }
+        return html.toString();
     }
 
 }

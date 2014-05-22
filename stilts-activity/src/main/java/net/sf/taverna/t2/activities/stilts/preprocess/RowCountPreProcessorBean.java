@@ -1,5 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import java.util.ArrayList;
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -19,6 +22,7 @@ public abstract class RowCountPreProcessorBean extends StiltsPreProcessBean{
      * Number of rows to operate on.
      */
     private int numberOfRows;
+    private final String NUMBER_OF_ROWS_NAME = "Number of rows";
 
     /**
      * Serialization constructor
@@ -60,5 +64,11 @@ public abstract class RowCountPreProcessorBean extends StiltsPreProcessBean{
         this.numberOfRows = numberOfRows;
     }
 
-      
+          @Override
+    public List<StiltsConfiguration> configurations() {
+        ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
+        configurations.add(new StiltsConfiguration (NUMBER_OF_ROWS_NAME,  numberOfRows, true));
+        return configurations;        
+    }
+
 }

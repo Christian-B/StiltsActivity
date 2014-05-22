@@ -1,5 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.input;
 
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -24,5 +26,7 @@ public abstract class StitlsInputsBean {
      * @throws ActivityConfigurationException Thrown if the bean and its current contents are known not to be valid.
      */
     public abstract void checkValid() throws ActivityConfigurationException;
+
+    public abstract List<StiltsConfiguration> configurations();
     
 }

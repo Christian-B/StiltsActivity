@@ -1,7 +1,9 @@
 package net.sf.taverna.t2.activities.stilts.input;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -15,6 +17,7 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 public class FlexibleInputsBean extends MultipleFormatsBean 
         implements Serializable {
     private int numberOfInputs;
+    private final String NUMBER_OF_INPUTS_NAME = "Number of input tables";
 
     /**
      * Serialization constructor
@@ -73,4 +76,12 @@ public class FlexibleInputsBean extends MultipleFormatsBean
         this.numberOfInputs = numberOfInputs;
         super.resetNumberOfInputs(numberOfInputs);
     }     
-}
+    
+    @Override
+    public List<StiltsConfiguration> configurations() {
+        List<StiltsConfiguration> configurations = super.configurations();
+        configurations.add(new StiltsConfiguration (NUMBER_OF_INPUTS_NAME,  numberOfInputs, true));
+        return configurations;        
+    }
+}   
+

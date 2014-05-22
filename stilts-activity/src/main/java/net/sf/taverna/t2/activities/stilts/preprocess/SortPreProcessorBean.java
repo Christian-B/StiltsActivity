@@ -1,5 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+
 /**
  * Preprocess that sorts rows based on one or more columns
  * <p>
@@ -19,10 +22,12 @@ public class SortPreProcessorBean extends ColumnListPreProcessorBean{
      * Specify if the data should be sorted in ascending order
      */
     private boolean ascending = false;
+    private final String ASCENDING_NAME = "Sort Ascending";
     /** 
      * Determines that nulls should be placed at the start of the table.
      */
     private boolean nullsAtBegining = false;
+    private final String NULLS_AT_BEGINING_NAME = "Sort Nulls at the beginning";
     
     /**
      * Serialization constructor
@@ -93,4 +98,12 @@ public class SortPreProcessorBean extends ColumnListPreProcessorBean{
         return "Sortt rows";
     }
  
+   @Override
+    public List<StiltsConfiguration> configurations() {
+        List<StiltsConfiguration> configurations = super.configurations();
+        configurations.add(new StiltsConfiguration (ASCENDING_NAME,  ascending, true));
+        configurations.add(new StiltsConfiguration (NULLS_AT_BEGINING_NAME,  nullsAtBegining, true));
+        return configurations;        
+    }
 }
+ 

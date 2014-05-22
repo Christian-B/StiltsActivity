@@ -1,5 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -60,5 +62,10 @@ public abstract class StiltsProcessBean {
     public abstract String retrieveStilsCommand();
 
     public abstract String title();
-    
+
+    public List<StiltsConfiguration> configurations() {
+        List<StiltsConfiguration> configurations = inputs.configurations();
+        return configurations;        
+    }
+
 }

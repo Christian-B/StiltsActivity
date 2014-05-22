@@ -1,5 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import java.util.ArrayList;
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -25,14 +28,17 @@ public class SelectTwoVariablesPreProcessorBean extends StiltsPreProcessBean{
      * A Stilts operator that returns a boolean value
      */
     private StiltsTwoVariableOperator operator;
+    private final String OPERATOR_NAME = "Operator ";
     /** 
      * Any valid Stilts expression which can be a column name, column number or a complex expression.
      */
     private String variable1;
+    private final String VARIABLE1_NAME = "Left Variable ";
     /** 
      * Any valid Stilts expression which can be a column name, column number or a complex expression.
      */
     private String variable2;
+    private final String VARIABLE2_NAME = "Right Variable ";
 
     /**
      * Serialization constructor
@@ -130,6 +136,15 @@ public class SelectTwoVariablesPreProcessorBean extends StiltsPreProcessBean{
     @Override
     public String title() {
         return "Select rows comparing two columns.";
+    }
+
+    @Override
+    public List<StiltsConfiguration> configurations() {
+        ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
+        configurations.add(new StiltsConfiguration (OPERATOR_NAME,  operator, true));
+        configurations.add(new StiltsConfiguration (VARIABLE1_NAME,  variable1, true));
+        configurations.add(new StiltsConfiguration (VARIABLE2_NAME,  variable2, true));
+        return configurations;        
     }
 
 }

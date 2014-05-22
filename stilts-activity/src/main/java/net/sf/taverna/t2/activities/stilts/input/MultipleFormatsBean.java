@@ -1,7 +1,9 @@
 package net.sf.taverna.t2.activities.stilts.input;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -17,7 +19,8 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 public abstract class MultipleFormatsBean extends MultipleInputsBean 
         implements Serializable {
     private List<StiltsInputFormat> formatsOfInputs;
-
+    private final String INPUT_FORMAT_NAME = "Format of input table ";
+    
     /**
      * Serialization constructor
      */
@@ -80,4 +83,13 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
         }
     }
 
+    @Override
+    public List<StiltsConfiguration> configurations() {
+        List<StiltsConfiguration> configurations = super.configurations();
+        for (int table = 0; table < retreiveNumberOfInputs(); table++){
+            configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME + table + 1,  formatsOfInputs.get(table), true));
+        }
+        return configurations;        
+    }
+    
  }

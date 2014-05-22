@@ -1,5 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
 
 /**
@@ -41,4 +43,5 @@ public class TCatBean extends StiltsProcessBean {
     public String title() {
         return "Concatenate Multiple tables with a Shared format";
     }
+    
 }

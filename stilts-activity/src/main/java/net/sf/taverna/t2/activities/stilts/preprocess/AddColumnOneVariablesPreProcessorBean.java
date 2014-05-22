@@ -1,5 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -20,7 +22,9 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 public class AddColumnOneVariablesPreProcessorBean extends AddColumnPreProcessorBean{
     
     private StiltsOneVariableOperator operator;
+    private final String OPERATOR_NAME = "Operator ";
     private String variable;
+    private final String VARIABLE_NAME = "Variable ";
 
     /**
      * Serialization constructor
@@ -117,4 +121,12 @@ public class AddColumnOneVariablesPreProcessorBean extends AddColumnPreProcessor
         return "Add column using a one column operator";
     }
 
+    @Override
+    public List<StiltsConfiguration> configurations() {
+        List<StiltsConfiguration> configurations = super.configurations();
+        configurations.add(new StiltsConfiguration (OPERATOR_NAME,  operator, true));
+        configurations.add(new StiltsConfiguration (VARIABLE_NAME,  variable, true));
+        return configurations;        
+    }
 }
+ 

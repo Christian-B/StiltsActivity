@@ -1,6 +1,7 @@
 package net.sf.taverna.t2.activities.stilts;
 
 import java.io.Serializable;
+import java.util.List;
 import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
@@ -136,16 +137,18 @@ public class StiltsBean implements StiltsInterface, Serializable{
     }
 
     public String title() {
-        if (process.title() != null){
+        if (preprocess == null){
             return process.title();
         } else {
-            //TPipe returns null so the name comes from the preprocess
-            if (preprocess == null){
-                return "Change the format of a table";
-            } else {
-                return preprocess.title();
-            }
+             return process.title() + " and " + preprocess.title();
         }
-    }
+     }
 
+    public List<StiltsConfiguration> configurations(){
+        List<StiltsConfiguration> configurations = process.configurations();
+        if (preprocess != null){
+            configurations.addAll(preprocess.configurations());
+        }
+        return configurations;
+    }
 }

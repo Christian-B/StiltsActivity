@@ -1,5 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import java.util.ArrayList;
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -19,6 +22,7 @@ public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
      * Defines where in comparison to the location Column the new column will be placed.
      */ 
     private StiltsLocationType newColumnLocation;
+    private final String LOCATION_NAME = "How to place new column";
     /**
      * Name or number of the column to place the new column before or after.
      * 
@@ -26,6 +30,7 @@ public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
      * otherwise it is required.
      */
     private String locationColumn;
+    private final String COLUMN_NAME = "Where to place new column";
     
     /**
      * Name for the new column which must be specified.
@@ -139,4 +144,12 @@ public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
         this.locationColumn = locationColumn;
     }
 
+    @Override
+    public List<StiltsConfiguration> configurations() {
+        ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
+        configurations.add(new StiltsConfiguration (COLUMN_NAME,  locationColumn, true));
+        configurations.add(new StiltsConfiguration (LOCATION_NAME,  newColumnLocation, true));
+        return configurations;        
+    }
 }
+ 

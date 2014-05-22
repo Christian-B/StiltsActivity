@@ -767,13 +767,15 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
     }
 
     public String getTitle() {
-
         try{
-        return configBean.title();
+            return configBean.title();
         } catch (Exception ex){
             return ex.getMessage();
         }
     }
-
+    
+    public List<StiltsConfiguration> configurations() {
+        return configBean.configurations();
+    }
 
 }

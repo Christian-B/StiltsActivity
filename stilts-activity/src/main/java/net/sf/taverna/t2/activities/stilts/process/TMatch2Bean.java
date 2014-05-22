@@ -1,5 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
@@ -22,14 +24,19 @@ public abstract class TMatch2Bean extends StiltsProcessBean {
      * Determines what happens when a row in one table can be matched by more than one row in the other table
      */
     private StiltsFind findValue;
+    private final String FIND_NAME = "How to handle multiple matches";
+            
     /**
      * Determines which rows are included in the output table. 
      */
     private StiltsJoin joinValue;
+    private final String JOIN_NAME = "Which rows to include";
+    
     /**
      * Determines how input columns are renamed before use in the output table
      */
     private StiltsFixcols fixcolsValue;
+    private final String FIX_COLS_NAME = "How to rename columns";
 
     /**
      * Serialization constructor
@@ -116,6 +123,15 @@ public abstract class TMatch2Bean extends StiltsProcessBean {
         //Currently the remaining parameters are applied in StiltsActivity.createProcessParameters
         //this should idealy be moved here.
         return "tmatch2";
+    }
+
+        @Override
+    public List<StiltsConfiguration> configurations() {
+        List<StiltsConfiguration> configurations = super.configurations();
+        configurations.add(new StiltsConfiguration (FIND_NAME,  findValue, true));
+        configurations.add(new StiltsConfiguration (JOIN_NAME,  joinValue, true));
+        configurations.add(new StiltsConfiguration (FIX_COLS_NAME,  fixcolsValue, true));
+        return configurations;        
     }
 
 }

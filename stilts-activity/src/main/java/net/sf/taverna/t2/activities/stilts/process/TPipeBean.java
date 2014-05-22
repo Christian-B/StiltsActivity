@@ -1,5 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
 
 /**
@@ -38,8 +40,7 @@ public class TPipeBean extends StiltsProcessBean {
     
     @Override
     public String title() {
-        //This signifies that the title should come from the preprocessor
-        return null;
+        return "Copy Table";
     }
-
+    
 }

@@ -1,5 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
@@ -22,6 +24,7 @@ public class ExactMatchBean extends TMatch2Bean {
      * The name/ number of the columnns to match are supplied in the workflow as input parameters.
      */
     private int numbertOfColumnsToMatch;
+    private final String NUMBER_OF_COLUMNS_NAME = "Numbert of Columns to Match";
 
     /**
      * Serialization constructor
@@ -74,4 +77,12 @@ public class ExactMatchBean extends TMatch2Bean {
         return "Join Tables based on matching values";
     }
 
+    @Override
+    public List<StiltsConfiguration> configurations() {
+        List<StiltsConfiguration> configurations = super.configurations();
+        configurations.add(new StiltsConfiguration (NUMBER_OF_COLUMNS_NAME,  numbertOfColumnsToMatch, true));
+        return configurations;        
+    }
+
 }
+ 

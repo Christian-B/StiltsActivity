@@ -1,5 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -20,7 +23,10 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessorBean{
     
     private StiltsTwoVariableOperator operator;
+    private final String OPERATOR_NAME = "Operator ";
+    private final String VARIABLE1_NAME = "Left Variable ";
     private String variable1;
+    private final String VARIABLE2_NAME = "Right Variable ";
     private String variable2;
 
     /**
@@ -142,6 +148,13 @@ public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessor
         return "Add column using a two column operator";
     }
 
-
+    @Override
+    public List<StiltsConfiguration> configurations() {
+        List<StiltsConfiguration> configurations = super.configurations();
+        configurations.add(new StiltsConfiguration (OPERATOR_NAME,  operator, true));
+        configurations.add(new StiltsConfiguration (VARIABLE1_NAME,  variable1, true));
+        configurations.add(new StiltsConfiguration (VARIABLE2_NAME,  variable2, true));
+        return configurations;        
+    }
 
 }

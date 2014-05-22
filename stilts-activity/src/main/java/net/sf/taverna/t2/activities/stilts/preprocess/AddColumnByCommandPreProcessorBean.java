@@ -1,5 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
+import java.util.ArrayList;
+import java.util.List;
+import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -23,6 +26,7 @@ public class AddColumnByCommandPreProcessorBean extends AddColumnPreProcessorBea
      * Not including cmd=addcol -after refColun and new columnName
      */
     private String command;
+    private String COMMAND_NAME = "Add Column Command";
 
     /**
      * Serialization constructor
@@ -85,4 +89,10 @@ public class AddColumnByCommandPreProcessorBean extends AddColumnPreProcessorBea
         return "Add column using a Stilts command";
     }
 
+    @Override
+    public List<StiltsConfiguration> configurations() {
+        List<StiltsConfiguration> configurations = super.configurations();
+        configurations.add(new StiltsConfiguration (COMMAND_NAME,  command, true));
+        return configurations;        
+    }
 }
