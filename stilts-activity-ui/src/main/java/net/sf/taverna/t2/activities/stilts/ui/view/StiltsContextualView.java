@@ -88,4 +88,8 @@ public class StiltsContextualView extends HTMLBasedActivityContextualView<Stilts
         return html.toString();
     }
 
+    @Override
+    public Action getConfigureAction(final Frame owner) {
+        return new StiltsConfigureAction(activity, owner);
+    }
 }
