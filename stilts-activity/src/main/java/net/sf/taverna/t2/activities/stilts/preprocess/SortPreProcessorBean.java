@@ -1,8 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import java.util.List;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationUtils;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -101,17 +101,17 @@ public class SortPreProcessorBean extends ColumnListPreProcessorBean{
     }
  
    @Override
-    public List<StiltsConfiguration> configurations() {
+    List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
         configurations.add(new StiltsConfiguration (ASCENDING_NAME,  ascending, true));
         configurations.add(new StiltsConfiguration (NULLS_AT_BEGINING_NAME,  nullsAtBegining, true));
         return configurations;        
     }
     
-    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
-        super.checkConfiguration(newConfigurations);
-        ConfigurationUtils.checkClass(newConfigurations, ASCENDING_NAME, Boolean.class);
-        ConfigurationUtils.checkClass(newConfigurations, NULLS_AT_BEGINING_NAME, Boolean.class);
+    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
+        super.checkConfiguration(configurationGroup);
+        configurationGroup.checkClass(ASCENDING_NAME, Boolean.class);
+        configurationGroup.checkClass(NULLS_AT_BEGINING_NAME, Boolean.class);
     }
     
 }

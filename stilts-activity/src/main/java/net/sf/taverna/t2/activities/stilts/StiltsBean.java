@@ -1,11 +1,13 @@
 package net.sf.taverna.t2.activities.stilts;
 
-import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import net.sf.taverna.t2.activities.stilts.configuration.AllConfigurations;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -26,6 +28,14 @@ public class StiltsBean implements StiltsInterface, Serializable{
     private boolean debugMode = true;
     private final String DEBUG_NAME = "DEBUG MODE";
 
+    private static final String OUTPUT_CATEGORY = "outputs";
+    private static final String OUTPUT_TITLE = "Settings for Output Table";
+    private static final String MISCELLANEOUS_CATEGORY = "miscellaneous";
+    private static final String MISCELLANEOUS_TITLE = "Miscellaneous Settings";
+    public static final String INPUTS_CATEGORY = "inputs";
+    public static final String PROCESS_CATEGORY = "process";
+    public static final String PREPROCESS_CATEGORY = "preprocess";
+   
     public StiltsBean() {}
     
     public StiltsBean(StiltsProcessBean process, StiltsOutputFormat outputFormatEnum, StiltsOutputType outputTypeEnum,
@@ -149,31 +159,41 @@ public class StiltsBean implements StiltsInterface, Serializable{
         }
      }
 
-    public List<StiltsConfiguration> configurations(){
-        List<StiltsConfiguration> configurations = process.configurations();
+    public AllConfigurations configurations(){
+        AllConfigurations configurations = new AllConfigurations();
+        configurations.addGroup(process.getInputs().getConfigurationGroup());
+        configurations.addGroup(process.getConfigurationGroup());
         if (preprocess != null){
-            configurations.addAll(preprocess.configurations());
+            configurations.addGroup(preprocess.getConfigurationGroup());
         }
-        configurations.add(new StiltsConfiguration (OUTPUT_FORMAT_NAME,  outputFormat, true));
-        configurations.add(new StiltsConfiguration (OUTPUT_TYPE_NAME,  outputType, true));
-        configurations.add(new StiltsConfiguration (DEBUG_NAME,  debugMode, true));
+        List<StiltsConfiguration> outputConfigurations = new ArrayList<StiltsConfiguration>();
+        outputConfigurations.add(new StiltsConfiguration (OUTPUT_FORMAT_NAME,  outputFormat, true));
+        outputConfigurations.add(new StiltsConfiguration (OUTPUT_TYPE_NAME,  outputType, true));
+        ConfigurationGroup outputGroup = new ConfigurationGroup(OUTPUT_CATEGORY, OUTPUT_TITLE, outputConfigurations);
+        configurations.addGroup(outputGroup);
+        List<StiltsConfiguration> miscellaneousConfigurations = new ArrayList<StiltsConfiguration>();
+        miscellaneousConfigurations.add(new StiltsConfiguration (DEBUG_NAME,  debugMode, true));
+        ConfigurationGroup miscellaneousGroup = new ConfigurationGroup(MISCELLANEOUS_CATEGORY, MISCELLANEOUS_TITLE, miscellaneousConfigurations);
+        configurations.addGroup(miscellaneousGroup);
         return configurations;
     }
 
-    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException {
-        List<StiltsConfiguration> oldConfigurations = configurations();
+    public void checkConfiguration(AllConfigurations newConfigurations) throws ActivityConfigurationException {
+        AllConfigurations oldConfigurations = configurations();
         if (oldConfigurations.size() <  newConfigurations.size()){
             throw new ActivityConfigurationException("Configuration is missing one or mre elements");
         }
         if (oldConfigurations.size() >  newConfigurations.size()){
             throw new ActivityConfigurationException("Configuration has one or mre surplus elements");
         }
-        ConfigurationUtils.checkClass(newConfigurations, OUTPUT_FORMAT_NAME, StiltsOutputFormat.class);
-        ConfigurationUtils.checkClass(newConfigurations, OUTPUT_TYPE_NAME, StiltsOutputType.class);
-        ConfigurationUtils.checkClass(newConfigurations, DEBUG_NAME, Boolean.class);
-        process.checkConfiguration(newConfigurations);
+        ConfigurationGroup outputGroup = newConfigurations.getGroup(OUTPUT_CATEGORY);
+        outputGroup.checkClass(OUTPUT_FORMAT_NAME, StiltsOutputFormat.class);
+        outputGroup.checkClass(OUTPUT_TYPE_NAME, StiltsOutputType.class);
+        ConfigurationGroup miscellaneousGroup = newConfigurations.getGroup(MISCELLANEOUS_CATEGORY);
+        miscellaneousGroup.checkClass(DEBUG_NAME, Boolean.class);
+        process.checkConfiguration(newConfigurations.getGroup(PROCESS_CATEGORY));
         if (preprocess != null){
-            preprocess.checkConfiguration(newConfigurations);
+            preprocess.checkConfiguration(newConfigurations.getGroup(PREPROCESS_CATEGORY));
         }
    }
 }

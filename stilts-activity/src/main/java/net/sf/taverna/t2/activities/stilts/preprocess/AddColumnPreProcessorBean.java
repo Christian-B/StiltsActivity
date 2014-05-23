@@ -2,9 +2,8 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
-import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -147,16 +146,16 @@ public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     }
 
     @Override
-    public List<StiltsConfiguration> configurations() {
+    List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
         configurations.add(new StiltsConfiguration (COLUMN_NAME,  locationColumn, true));
         configurations.add(new StiltsConfiguration (LOCATION_NAME,  newColumnLocation, true));
         return configurations;        
     }
     
-    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
-        ConfigurationUtils.checkString(newConfigurations, COLUMN_NAME);
-        ConfigurationUtils.checkClass(newConfigurations, LOCATION_NAME, StiltsLocationType.class);
+    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
+        configurationGroup.checkString(COLUMN_NAME);
+        configurationGroup.checkClass(LOCATION_NAME, StiltsLocationType.class);
     }
 
 }

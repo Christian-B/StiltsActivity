@@ -1,10 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
-import java.util.ArrayList;
 import java.util.List;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
-import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -92,15 +90,15 @@ public class AddColumnByCommandPreProcessorBean extends AddColumnPreProcessorBea
     }
 
     @Override
-    public List<StiltsConfiguration> configurations() {
+    List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
         configurations.add(new StiltsConfiguration (COMMAND_NAME,  command, true));
         return configurations;        
     }
     
-    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
-        super.checkConfiguration(newConfigurations);
-        ConfigurationUtils.checkString(newConfigurations, COMMAND_NAME);
+    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
+        super.checkConfiguration(configurationGroup);
+        configurationGroup.checkString(COMMAND_NAME);
     }
 
 }

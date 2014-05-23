@@ -1,11 +1,10 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import java.util.List;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
-import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
-import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationUtils;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -150,7 +149,7 @@ public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessor
     }
 
     @Override
-    public List<StiltsConfiguration> configurations() {
+    List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
         configurations.add(new StiltsConfiguration (OPERATOR_NAME,  operator, true));
         configurations.add(new StiltsConfiguration (VARIABLE1_NAME,  variable1, true));
@@ -158,11 +157,11 @@ public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessor
         return configurations;        
     }
 
-    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
-        super.checkConfiguration(newConfigurations);
-        ConfigurationUtils.checkString(newConfigurations, VARIABLE1_NAME);
-        ConfigurationUtils.checkString(newConfigurations, VARIABLE2_NAME);
-        ConfigurationUtils.checkClass(newConfigurations, OPERATOR_NAME, StiltsTwoVariableOperator.class);
+    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
+        super.checkConfiguration(configurationGroup);
+        configurationGroup.checkString(VARIABLE1_NAME);
+        configurationGroup.checkString(VARIABLE2_NAME);
+        configurationGroup.checkClass(OPERATOR_NAME, StiltsTwoVariableOperator.class);
     }
 
 }

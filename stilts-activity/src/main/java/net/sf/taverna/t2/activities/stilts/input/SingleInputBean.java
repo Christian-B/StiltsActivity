@@ -3,8 +3,8 @@ package net.sf.taverna.t2.activities.stilts.input;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -17,9 +17,9 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  */
 public class SingleInputBean extends StitlsInputsBean implements Serializable {
     private StiltsInputFormat inputFormatEnum;
-    private String INPUT_FORMAT_NAME = "Format of Input Table";
+    private final static String INPUT_FORMAT_NAME = "Format of Input Table";
     private StiltsInputType inputTypeEnum;
-    private String INPUT_TYPE_NAME = "Type of Input Table";
+    private final static String INPUT_TYPE_NAME = "Type of Input Table";
       
     /**
      * Serialization constructor
@@ -108,16 +108,16 @@ public class SingleInputBean extends StitlsInputsBean implements Serializable {
     }
     
     @Override
-    public List<StiltsConfiguration> configurations() {
+    List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
         configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME,  inputFormatEnum, true));
         configurations.add(new StiltsConfiguration (INPUT_TYPE_NAME,  inputTypeEnum, true));
         return configurations;        
     }
 
-    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
-        ConfigurationUtils.checkClass(newConfigurations, INPUT_FORMAT_NAME, StiltsInputFormat.class);
-        ConfigurationUtils.checkClass(newConfigurations, INPUT_TYPE_NAME, StiltsInputType.class);
+    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
+        configurationGroup.checkClass(INPUT_FORMAT_NAME, StiltsInputFormat.class);
+        configurationGroup.checkClass(INPUT_TYPE_NAME, StiltsInputType.class);
     }
 
 }

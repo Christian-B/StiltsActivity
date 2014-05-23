@@ -6,6 +6,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigureAction;
@@ -80,10 +81,12 @@ public class StiltsContextualView extends HTMLBasedActivityContextualView<Stilts
         if (activity == null){
             return "null";
         }
-        List<StiltsConfiguration> configurations = activity.configurations();
         StringBuilder html = new StringBuilder();
-        for (StiltsConfiguration configuration:configurations){
-            html.append("<tr><td>").append(configuration.getName()).append("</td><td>").append(configuration.getItem()).append("</td></tr>");
+        for (ConfigurationGroup group:activity.configurations().getGroups()){
+            //writeTitle
+            for (StiltsConfiguration configuration:group.getConfigurations()){
+                html.append("<tr><td>").append(configuration.getName()).append("</td><td>").append(configuration.getItem()).append("</td></tr>");
+            }
         }
         return html.toString();
     }

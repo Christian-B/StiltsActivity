@@ -1,11 +1,10 @@
 package net.sf.taverna.t2.activities.stilts.ui.config;
 
-import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -14,6 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 
 import net.sf.taverna.t2.activities.stilts.*;
+import net.sf.taverna.t2.activities.stilts.configuration.AllConfigurations;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.*;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
@@ -48,14 +50,13 @@ public class StiltsConfigurationPanel extends
 
     private final StiltsActivity activity;
     private final ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
-    private List<StiltsConfiguration> configurations;
-    private List<Component> selectors;
+    private AllConfigurations configurations;
+    private HashMap<StiltsConfiguration, Component> selectors;
     
     public StiltsConfigurationPanel(StiltsActivity activity) {
         try {
             this.activity = activity;
             configurations = activity.configurations();
-            selectors = new ArrayList<Component>(configurations.size());
             refreshConfiguration();
         } catch (RuntimeException ex){
             ex.printStackTrace();
@@ -82,9 +83,9 @@ public class StiltsConfigurationPanel extends
 
     @Override
     public boolean isConfigurationChanged() {
-       for (int i = 0; i < configurations.size(); i++){
-           Object newValue = getTheValue(selectors.get(i));
-           if (!configurations.get(i).getItem().equals(newValue)){
+       for (StiltsConfiguration configuration:selectors.keySet()){
+           Object newValue = getTheValue(selectors.get(configuration));
+           if (!configuration.getItem().equals(newValue)){
                return true;
            }
         }
@@ -138,20 +139,22 @@ public class StiltsConfigurationPanel extends
         add(label, c);
         c.gridx = 1;
         Component selector = getSelector(configuration.getItem());
-        if (selectors.size() <= row){
-             selectors.add(selector);
-        } else {
-            selectors.set(row, selector);
-        }
+        selectors.put(configuration, selector);
         add(selector, c);
     }
    
     @Override
     public void refreshConfiguration() {
         removeAll();
+        selectors = new HashMap<StiltsConfiguration, Component>();
         setLayout(new GridBagLayout());
-        for (int i = 0; i < configurations.size(); i++){
-            addConfiguration(configurations.get(i), i);
+        int row = 0;
+        for (ConfigurationGroup group:configurations.getGroups()){
+            //writeTitle
+            for (StiltsConfiguration configuration:group.getConfigurations()){
+                addConfiguration(configuration, row);
+                row++;
+            }
         }
     }
 

@@ -3,8 +3,8 @@ package net.sf.taverna.t2.activities.stilts.input;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -85,7 +85,7 @@ public abstract class MultipleInputsBean extends StitlsInputsBean implements Ser
     }
     
     @Override
-    public List<StiltsConfiguration> configurations() {
+    List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
         for (int table = 0; table < retreiveNumberOfInputs(); table++){
             configurations.add(new StiltsConfiguration (INPUT_TYPE_NAME + table + 1,  typesOfInputs.get(table), true));
@@ -93,9 +93,9 @@ public abstract class MultipleInputsBean extends StitlsInputsBean implements Ser
        return configurations;        
     }
     
-    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
+    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
         for (int table = 0; table < retreiveNumberOfInputs(); table++){
-            ConfigurationUtils.checkClass(newConfigurations, INPUT_TYPE_NAME + table + 1, StiltsInputType.class);
+            configurationGroup.checkClass(INPUT_TYPE_NAME + table + 1, StiltsInputType.class);
         }
     }
 

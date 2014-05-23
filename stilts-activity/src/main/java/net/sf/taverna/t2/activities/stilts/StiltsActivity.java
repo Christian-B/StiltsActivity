@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import net.sf.taverna.t2.activities.stilts.configuration.AllConfigurations;
 import net.sf.taverna.t2.activities.stilts.input.*;
 import net.sf.taverna.t2.activities.stilts.preprocess.*;
 import net.sf.taverna.t2.activities.stilts.process.*;
@@ -775,11 +776,11 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         }
     }
     
-    public List<StiltsConfiguration> configurations() {
+    public AllConfigurations configurations() {
         return configBean.configurations();
     }
 
-    public void checkConfiguration(List<StiltsConfiguration> newConfiguration) throws ActivityConfigurationException{ 
+    public void checkConfiguration(AllConfigurations newConfiguration) throws ActivityConfigurationException{ 
         configBean.checkConfiguration(newConfiguration);
     }
 }
