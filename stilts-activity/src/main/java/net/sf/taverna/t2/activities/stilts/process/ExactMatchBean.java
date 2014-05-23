@@ -1,9 +1,9 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
-import net.sf.taverna.t2.activities.stilts.utils.ConfigurationUtils;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsJoin;

@@ -18,6 +18,7 @@
  */
 package net.sf.taverna.t2.activities.stilts;
 
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
 import java.io.BufferedReader;
 import net.sf.taverna.t2.activities.stilts.utils.MyUtils;

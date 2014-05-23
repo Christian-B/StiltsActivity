@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 
-package net.sf.taverna.t2.activities.stilts.utils;
+package net.sf.taverna.t2.activities.stilts.configuration;
 
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**

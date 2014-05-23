@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
-package net.sf.taverna.t2.activities.stilts;
+package net.sf.taverna.t2.activities.stilts.configuration;
+
+import net.sf.taverna.t2.activities.stilts.configuration.*;
 
 /**
  *

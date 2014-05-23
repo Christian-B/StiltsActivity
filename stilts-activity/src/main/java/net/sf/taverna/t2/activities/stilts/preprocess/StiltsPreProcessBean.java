@@ -2,7 +2,7 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import java.util.Collection;
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**

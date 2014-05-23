@@ -2,7 +2,7 @@ package net.sf.taverna.t2.activities.stilts.input;
 
 import java.io.Serializable;
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 

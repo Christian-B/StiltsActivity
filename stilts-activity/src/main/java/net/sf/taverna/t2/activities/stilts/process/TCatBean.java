@@ -1,7 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
 
 /**

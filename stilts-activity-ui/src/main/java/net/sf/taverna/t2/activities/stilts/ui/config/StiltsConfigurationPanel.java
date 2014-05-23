@@ -1,5 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.ui.config;
 
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

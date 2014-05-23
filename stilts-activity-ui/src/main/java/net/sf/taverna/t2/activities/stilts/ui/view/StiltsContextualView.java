@@ -6,7 +6,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigureAction;
 import net.sf.taverna.t2.workbench.ui.actions.activity.HTMLBasedActivityContextualView;

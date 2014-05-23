@@ -2,8 +2,8 @@ package net.sf.taverna.t2.activities.stilts.input;
 
 import java.io.Serializable;
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
-import net.sf.taverna.t2.activities.stilts.utils.ConfigurationUtils;
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;

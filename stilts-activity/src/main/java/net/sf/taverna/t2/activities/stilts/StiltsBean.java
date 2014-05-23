@@ -1,10 +1,11 @@
 package net.sf.taverna.t2.activities.stilts;
 
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import java.io.Serializable;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
-import net.sf.taverna.t2.activities.stilts.utils.ConfigurationUtils;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
