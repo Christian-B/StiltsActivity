@@ -43,5 +43,7 @@ public abstract class StiltsPreProcessBean {
     }
 
     public abstract List<StiltsConfiguration> configurations(); 
+
+    public abstract void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException;
     
 }

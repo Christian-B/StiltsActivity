@@ -3,9 +3,11 @@ package net.sf.taverna.t2.activities.stilts.process;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
+import net.sf.taverna.t2.activities.stilts.utils.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFixcols;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsJoin;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -134,4 +136,11 @@ public abstract class TMatch2Bean extends StiltsProcessBean {
         return configurations;        
     }
 
+    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
+        super.checkConfiguration(newConfigurations);
+        ConfigurationUtils.checkClass(newConfigurations, FIND_NAME, StiltsFind.class);    
+        ConfigurationUtils.checkClass(newConfigurations, JOIN_NAME, StiltsJoin.class);
+        ConfigurationUtils.checkClass(newConfigurations, FIX_COLS_NAME, StiltsFixcols.class);
+    }    
 }
+   

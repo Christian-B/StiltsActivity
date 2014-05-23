@@ -28,5 +28,7 @@ public abstract class StitlsInputsBean {
     public abstract void checkValid() throws ActivityConfigurationException;
 
     public abstract List<StiltsConfiguration> configurations();
+
+    public abstract void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException;
     
 }

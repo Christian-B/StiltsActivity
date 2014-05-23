@@ -68,4 +68,7 @@ public abstract class StiltsProcessBean {
         return configurations;        
     }
 
+    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException {
+        inputs.checkConfiguration (newConfigurations);
+    }
 }

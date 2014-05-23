@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.utils.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -92,4 +93,11 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
         return configurations;        
     }
     
+    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
+        super.checkConfiguration(newConfigurations);
+        for (int table = 0; table < retreiveNumberOfInputs(); table++){
+            ConfigurationUtils.checkClass(newConfigurations, INPUT_FORMAT_NAME + table + 1, StiltsInputFormat.class);
+        }
+    }
+
  }

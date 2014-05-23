@@ -778,4 +778,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         return configBean.configurations();
     }
 
+    public void checkConfiguration(List<StiltsConfiguration> newConfiguration) throws ActivityConfigurationException{ 
+        configBean.checkConfiguration(newConfiguration);
+    }
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.utils.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -112,6 +113,11 @@ public class SingleInputBean extends StitlsInputsBean implements Serializable {
         configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME,  inputFormatEnum, true));
         configurations.add(new StiltsConfiguration (INPUT_TYPE_NAME,  inputTypeEnum, true));
         return configurations;        
+    }
+
+    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
+        ConfigurationUtils.checkClass(newConfigurations, INPUT_FORMAT_NAME, StiltsInputFormat.class);
+        ConfigurationUtils.checkClass(newConfigurations, INPUT_TYPE_NAME, StiltsInputType.class);
     }
 
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.utils.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -83,5 +84,11 @@ public class FlexibleInputsBean extends MultipleFormatsBean
         configurations.add(new StiltsConfiguration (NUMBER_OF_INPUTS_NAME,  numberOfInputs, true));
         return configurations;        
     }
+    
+    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
+        super.checkConfiguration(newConfigurations);
+        ConfigurationUtils.checkPositiveInteger(newConfigurations, NUMBER_OF_INPUTS_NAME);
+    }
+
 }   
 

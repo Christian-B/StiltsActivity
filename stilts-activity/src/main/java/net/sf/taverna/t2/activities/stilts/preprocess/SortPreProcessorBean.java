@@ -2,6 +2,8 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.utils.ConfigurationUtils;
+import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
  * Preprocess that sorts rows based on one or more columns
@@ -105,5 +107,12 @@ public class SortPreProcessorBean extends ColumnListPreProcessorBean{
         configurations.add(new StiltsConfiguration (NULLS_AT_BEGINING_NAME,  nullsAtBegining, true));
         return configurations;        
     }
+    
+    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
+        super.checkConfiguration(newConfigurations);
+        ConfigurationUtils.checkClass(newConfigurations, ASCENDING_NAME, Boolean.class);
+        ConfigurationUtils.checkClass(newConfigurations, NULLS_AT_BEGINING_NAME, Boolean.class);
+    }
+    
 }
  

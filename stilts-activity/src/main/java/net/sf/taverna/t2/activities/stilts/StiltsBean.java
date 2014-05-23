@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
+import net.sf.taverna.t2.activities.stilts.utils.ConfigurationUtils;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -157,5 +158,23 @@ public class StiltsBean implements StiltsInterface, Serializable{
         configurations.add(new StiltsConfiguration (DEBUG_NAME,  debugMode, true));
         return configurations;
     }
+
+    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException {
+        List<StiltsConfiguration> oldConfigurations = configurations();
+        if (oldConfigurations.size() <  newConfigurations.size()){
+            throw new ActivityConfigurationException("Configuration is missing one or mre elements");
+        }
+        if (oldConfigurations.size() >  newConfigurations.size()){
+            throw new ActivityConfigurationException("Configuration has one or mre surplus elements");
+        }
+        ConfigurationUtils.checkClass(newConfigurations, OUTPUT_FORMAT_NAME, StiltsOutputFormat.class);
+        ConfigurationUtils.checkClass(newConfigurations, OUTPUT_TYPE_NAME, StiltsOutputType.class);
+        ConfigurationUtils.checkClass(newConfigurations, DEBUG_NAME, Boolean.class);
+        process.checkConfiguration(newConfigurations);
+        if (preprocess != null){
+            preprocess.checkConfiguration(newConfigurations);
+        }
+   }
 }
   
+

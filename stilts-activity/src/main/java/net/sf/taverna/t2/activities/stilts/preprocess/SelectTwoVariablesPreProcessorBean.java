@@ -5,6 +5,7 @@ import java.util.List;
 import net.sf.taverna.t2.activities.stilts.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
+import net.sf.taverna.t2.activities.stilts.utils.ConfigurationUtils;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -145,6 +146,13 @@ public class SelectTwoVariablesPreProcessorBean extends StiltsPreProcessBean{
         configurations.add(new StiltsConfiguration (VARIABLE1_NAME,  variable1, true));
         configurations.add(new StiltsConfiguration (VARIABLE2_NAME,  variable2, true));
         return configurations;        
+    }
+
+    public void checkConfiguration(List<StiltsConfiguration> newConfigurations) throws ActivityConfigurationException{ 
+        ConfigurationUtils.checkString(newConfigurations, VARIABLE1_NAME);
+        ConfigurationUtils.checkString(newConfigurations, VARIABLE2_NAME);
+        ConfigurationUtils.checkClass(newConfigurations, OPERATOR_NAME, StiltsTwoVariableOperator.class);
+        //TODO boolane variables only
     }
 
 }
