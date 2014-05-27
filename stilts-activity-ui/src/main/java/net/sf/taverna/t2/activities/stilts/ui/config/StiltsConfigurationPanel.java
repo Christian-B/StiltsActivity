@@ -143,6 +143,16 @@ public class StiltsConfigurationPanel extends
         add(selector, c);
     }
    
+    private void addTitle(String title, int row) {
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = row;
+        c.gridwidth = 2;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        JLabel label = new JLabel(title, JLabel.CENTER);
+        add(label, c);
+   }
+
     @Override
     public void refreshConfiguration() {
         removeAll();
@@ -150,7 +160,8 @@ public class StiltsConfigurationPanel extends
         setLayout(new GridBagLayout());
         int row = 0;
         for (ConfigurationGroup group:configurations.getGroups()){
-            //writeTitle
+            addTitle(group.getTitle(), row);
+            row++;
             for (StiltsConfiguration configuration:group.getConfigurations()){
                 addConfiguration(configuration, row);
                 row++;

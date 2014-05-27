@@ -83,7 +83,7 @@ public class StiltsContextualView extends HTMLBasedActivityContextualView<Stilts
         }
         StringBuilder html = new StringBuilder();
         for (ConfigurationGroup group:activity.configurations().getGroups()){
-            //writeTitle
+            html.append("<tr><td colspan=\"2\" align=center>").append(group.getTitle()).append("</td></tr>");
             for (StiltsConfiguration configuration:group.getConfigurations()){
                 html.append("<tr><td>").append(configuration.getName()).append("</td><td>").append(configuration.getItem()).append("</td></tr>");
             }
