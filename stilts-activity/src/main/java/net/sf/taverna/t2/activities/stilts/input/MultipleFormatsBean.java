@@ -87,7 +87,7 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
     List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
         for (int table = 0; table < retreiveNumberOfInputs(); table++){
-            configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME + table + 1,  formatsOfInputs.get(table), true));
+            configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME + (table + 1),  formatsOfInputs.get(table), true));
         }
         return configurations;        
     }
@@ -95,7 +95,7 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
     public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
         super.checkConfiguration(configurationGroup);
         for (int table = 0; table < retreiveNumberOfInputs(); table++){
-            configurationGroup.checkClass(INPUT_FORMAT_NAME + table + 1, StiltsInputFormat.class);
+            configurationGroup.checkClass(INPUT_FORMAT_NAME + (table + 1), StiltsInputFormat.class);
         }
     }
 

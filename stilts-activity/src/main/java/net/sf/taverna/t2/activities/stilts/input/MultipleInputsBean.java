@@ -88,14 +88,14 @@ public abstract class MultipleInputsBean extends StitlsInputsBean implements Ser
     List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
         for (int table = 0; table < retreiveNumberOfInputs(); table++){
-            configurations.add(new StiltsConfiguration (INPUT_TYPE_NAME + table + 1,  typesOfInputs.get(table), true));
+            configurations.add(new StiltsConfiguration (INPUT_TYPE_NAME + (table + 1),  typesOfInputs.get(table), true));
         }
        return configurations;        
     }
     
     public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
         for (int table = 0; table < retreiveNumberOfInputs(); table++){
-            configurationGroup.checkClass(INPUT_TYPE_NAME + table + 1, StiltsInputType.class);
+            configurationGroup.checkClass(INPUT_TYPE_NAME + (table + 1), StiltsInputType.class);
         }
     }
 
