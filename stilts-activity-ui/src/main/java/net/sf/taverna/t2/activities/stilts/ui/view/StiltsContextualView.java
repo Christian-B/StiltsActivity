@@ -7,6 +7,7 @@ import javax.swing.JComponent;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
+import net.sf.taverna.t2.activities.stilts.configuration.ListConfiguration;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigureAction;
@@ -85,14 +86,40 @@ public class StiltsContextualView extends HTMLBasedActivityContextualView<Stilts
         for (ConfigurationGroup group:activity.configurations().getGroups()){
             html.append("<tr><td colspan=\"2\" align=center>").append(group.getTitle()).append("</td></tr>");
             for (StiltsConfiguration configuration:group.getConfigurations()){
-                html.append("<tr><td>").append(configuration.getName()).append("</td><td>").append(configuration.getItem()).append("</td></tr>");
+                if (configuration instanceof ListConfiguration){
+                    addTableRows(html, (ListConfiguration)configuration);
+                } else {
+                    addHtmlRow(html, configuration.getName(), configuration.getItem());
+                }
             }
         }
         return html.toString();
+    }
+
+    private void addHtmlRow(StringBuilder html, String name, Object item) {
+        html.append("<tr><td>");
+        html.append(name);
+        html.append("</td><td>");
+        html.append(item);
+        html.append("</td></tr>");
+    }
+    
+    private void addTableRows(StringBuilder html, ListConfiguration listConfiguration) {
+        for (int listsIndex = 0; listsIndex < listConfiguration.numberOfLists(); listsIndex++){
+            List<Object> list = listConfiguration.getItem(listsIndex);
+            String name = listConfiguration.getName(listsIndex);
+            if (!name.endsWith(" ")){
+                name = name + " ";
+            }
+            for (int i = 0; i < list.size(); i++){
+                addHtmlRow(html, name + (i + 1), list.get(i));
+            }
+        }
     }
 
     @Override
     public Action getConfigureAction(final Frame owner) {
         return new StiltsConfigureAction(activity, owner);
     }
+
 }

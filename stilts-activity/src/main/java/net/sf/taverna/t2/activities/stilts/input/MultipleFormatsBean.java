@@ -1,8 +1,10 @@
 package net.sf.taverna.t2.activities.stilts.input;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
+import net.sf.taverna.t2.activities.stilts.configuration.ListConfiguration;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
@@ -85,10 +87,10 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
 
     @Override
     List<StiltsConfiguration> configurations() {
-        List<StiltsConfiguration> configurations = super.configurations();
-        for (int table = 0; table < retreiveNumberOfInputs(); table++){
-            configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME + (table + 1),  formatsOfInputs.get(table), true));
-        }
+        ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
+        ListConfiguration lists = new ListConfiguration (NUMBER_OF_INPUTS_NAME, INPUT_TYPE_NAME,  (List<Object>)(List<?>) getTypesOfInputs(), flexibleNumberOfTables());
+        lists.addList(INPUT_FORMAT_NAME,  (List<Object>)(List<?>)formatsOfInputs);
+        configurations.add(lists);
         return configurations;        
     }
     

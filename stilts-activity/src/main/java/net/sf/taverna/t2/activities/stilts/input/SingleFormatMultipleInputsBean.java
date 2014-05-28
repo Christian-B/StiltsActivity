@@ -21,7 +21,6 @@ public class SingleFormatMultipleInputsBean extends MultipleInputsBean
     private StiltsInputFormat formatOfInputs;
     private final String INPUT_FORMAT_NAME = "Format of input tables";
     private int numberOfInputs;
-    private final String NUMBER_OF_INPUTS_NAME = "Number of input tables";
 
     /**
      * Serialization constructor
@@ -49,6 +48,10 @@ public class SingleFormatMultipleInputsBean extends MultipleInputsBean
         return numberOfInputs;
     }
 
+    protected boolean flexibleNumberOfTables(){
+        return true;
+    }
+    
     /**
      * @return the numberOfInputs
      */
@@ -103,14 +106,12 @@ public class SingleFormatMultipleInputsBean extends MultipleInputsBean
     List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
         configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME,  formatOfInputs, true));
-        configurations.add(new StiltsConfiguration (NUMBER_OF_INPUTS_NAME,  numberOfInputs, true));
         return configurations;        
     }
     
     public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
         super.checkConfiguration(configurationGroup);
         configurationGroup.checkClass(INPUT_FORMAT_NAME, StiltsInputFormat.class);
-        configurationGroup.checkPositiveInteger(NUMBER_OF_INPUTS_NAME);       
     }
 
 }

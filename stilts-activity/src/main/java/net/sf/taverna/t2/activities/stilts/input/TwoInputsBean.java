@@ -40,6 +40,10 @@ public class TwoInputsBean extends MultipleFormatsBean
         return 2;
     }
 
+    protected boolean flexibleNumberOfTables(){
+        return false;
+    }
+
     /*
      * Should never be called, but just incase ignores any call with the value 2.
      * 

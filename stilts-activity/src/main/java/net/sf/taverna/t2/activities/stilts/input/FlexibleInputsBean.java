@@ -17,7 +17,6 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 public class FlexibleInputsBean extends MultipleFormatsBean 
         implements Serializable {
     private int numberOfInputs;
-    private final String NUMBER_OF_INPUTS_NAME = "Number of input tables";
 
     /**
      * Serialization constructor
@@ -45,6 +44,10 @@ public class FlexibleInputsBean extends MultipleFormatsBean
         return numberOfInputs;
     }
 
+    protected boolean flexibleNumberOfTables(){
+        return true;
+    }
+    
     /**
      * @param numberOfInputs the numberOfInputs to set
      */

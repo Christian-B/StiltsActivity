@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
+import net.sf.taverna.t2.activities.stilts.configuration.ListConfiguration;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -20,7 +21,8 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
 public abstract class MultipleInputsBean extends StitlsInputsBean implements Serializable {
     
     private List<StiltsInputType> typesOfInputs;
-    private final String INPUT_TYPE_NAME = "Type of input table ";
+    final String INPUT_TYPE_NAME = "Type of input table ";
+    final String NUMBER_OF_INPUTS_NAME = "Number of input tables";
     
     /**
      * Parameterized constructor to help ensure the right information is passed in.
@@ -48,6 +50,8 @@ public abstract class MultipleInputsBean extends StitlsInputsBean implements Ser
      */
     public abstract int retreiveNumberOfInputs();
    
+    protected abstract boolean flexibleNumberOfTables();
+    
     @Override
     public void checkValid() throws ActivityConfigurationException{
         if (getTypesOfInputs() == null){
@@ -87,13 +91,12 @@ public abstract class MultipleInputsBean extends StitlsInputsBean implements Ser
     @Override
     List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
-        for (int table = 0; table < retreiveNumberOfInputs(); table++){
-            configurations.add(new StiltsConfiguration (INPUT_TYPE_NAME + (table + 1),  typesOfInputs.get(table), true));
-        }
-       return configurations;        
+        configurations.add(new ListConfiguration (NUMBER_OF_INPUTS_NAME, INPUT_TYPE_NAME,  (List<Object>)(List<?>) typesOfInputs, flexibleNumberOfTables()));
+        return configurations;        
     }
     
     public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
+        //TODO
         for (int table = 0; table < retreiveNumberOfInputs(); table++){
             configurationGroup.checkClass(INPUT_TYPE_NAME + (table + 1), StiltsInputType.class);
         }
