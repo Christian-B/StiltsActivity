@@ -22,7 +22,7 @@ public abstract class MultipleInputsBean extends StitlsInputsBean implements Ser
     
     private List<StiltsInputType> typesOfInputs;
     final String INPUT_TYPE_NAME = "Type of input table ";
-    final String NUMBER_OF_INPUTS_NAME = "Number of input tables";
+    final String NUMBER_OF_INPUTS_NAME = "Input Table";
     
     /**
      * Parameterized constructor to help ensure the right information is passed in.

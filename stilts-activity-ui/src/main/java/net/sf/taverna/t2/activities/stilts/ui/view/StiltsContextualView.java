@@ -87,7 +87,10 @@ public class StiltsContextualView extends HTMLBasedActivityContextualView<Stilts
             html.append("<tr><td colspan=\"2\" align=center>").append(group.getTitle()).append("</td></tr>");
             for (StiltsConfiguration configuration:group.getConfigurations()){
                 if (configuration instanceof ListConfiguration){
-                    addTableRows(html, (ListConfiguration)configuration);
+                     ListConfiguration listConfiguration = (ListConfiguration)configuration;
+                     for (StiltsConfiguration inner:listConfiguration.getConfigurations()){
+                        addHtmlRow(html, inner.getName(), inner.getItem());
+                     }
                 } else {
                     addHtmlRow(html, configuration.getName(), configuration.getItem());
                 }
@@ -103,20 +106,7 @@ public class StiltsContextualView extends HTMLBasedActivityContextualView<Stilts
         html.append(item);
         html.append("</td></tr>");
     }
-    
-    private void addTableRows(StringBuilder html, ListConfiguration listConfiguration) {
-        for (int listsIndex = 0; listsIndex < listConfiguration.numberOfLists(); listsIndex++){
-            List<Object> list = listConfiguration.getItem(listsIndex);
-            String name = listConfiguration.getName(listsIndex);
-            if (!name.endsWith(" ")){
-                name = name + " ";
-            }
-            for (int i = 0; i < list.size(); i++){
-                addHtmlRow(html, name + (i + 1), list.get(i));
-            }
-        }
-    }
-
+        
     @Override
     public Action getConfigureAction(final Frame owner) {
         return new StiltsConfigureAction(activity, owner);

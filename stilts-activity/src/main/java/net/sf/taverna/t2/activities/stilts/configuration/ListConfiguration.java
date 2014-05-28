@@ -7,7 +7,6 @@
 package net.sf.taverna.t2.activities.stilts.configuration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,35 +14,63 @@ import java.util.List;
  * @author christian
  */
 public class ListConfiguration extends StiltsConfiguration{
-    //super.name holds the countName
-    //super.item holds the ListItem
-    private final List<String> listNames;
+    //super.name holds the Add Remove name
     private final boolean adjustableCount;
+    private final ArrayList<List<StiltsConfiguration>> lists;
+    private final ArrayList<String> listNames;
     
-    public ListConfiguration(String countName, String listName, List<Object> values, boolean adjustableCount){
-        super(countName, new ListItem(values), true);
-        this.listNames = new ArrayList<String>();
-        listNames.add(listName);
+    public ListConfiguration(String countName, String listName, List objects, boolean adjustableCount){
+        super(countName, objects.size(), true);
+        lists = new ArrayList<List<StiltsConfiguration>>();
         this.adjustableCount = adjustableCount;
-    }
+        listNames = new ArrayList<String>();
+        addList(listName, objects);
+     }
 
-    public void addList(String listName, List<Object> list) {
+    public final void addList(String listName, List<Object> objects) {
+        List<StiltsConfiguration> list = new ArrayList<StiltsConfiguration>();
+        for (int i = 0; i < objects.size(); i++){
+            StiltsConfiguration configuration = new StiltsConfiguration(listName + (i +1), objects.get(i), true);
+            list.add(configuration);
+        }
+        lists.add(list);
         listNames.add(listName);
-        ListItem items = (ListItem)getItem();
-        items.addList(list);
     }
     
     public int numberOfLists(){
-        return listNames.size();
+        return lists.size();
     }
     
-    public String getName(int index){
-        return listNames.get(index);
+    public List<StiltsConfiguration> getConfigurations() {
+        List<StiltsConfiguration> allList = new ArrayList<StiltsConfiguration>();
+        for (List<StiltsConfiguration> next:lists){
+            allList.addAll(next);
+        }
+        return allList;
+    }
+
+    public void addToLists(){
+        for (int listNum = 0; listNum < numberOfLists(); listNum++){
+            List<StiltsConfiguration> list = lists.get(listNum);
+            StiltsConfiguration config = new StiltsConfiguration(listNames.get(listNum) + list.size(), lists.get(0), true);
+            list.add(config);
+            this.setItem(list.size());
+        }        
     }
     
-    public List<Object> getItem(int index){
-        ListItem items = (ListItem)getItem();
-        return items.getList(index);
+    public void deleteLastFromLists(){
+        for (int listNum = 0; listNum < numberOfLists(); listNum++){
+            List<StiltsConfiguration> list = lists.get(listNum);
+            if (list.size() <= 1){
+                throw new IllegalStateException ("Illegal call to remove only item from lists");
+            }
+            list.remove(list.size()-1);
+            this.setItem(list.size());
+        }        
     }
-            
-}
+
+    public boolean hasAdjustableCount() {
+        return adjustableCount;
+    }
+         
+ }

@@ -41,7 +41,7 @@ public class ExactMatchActivityTest {
         ExactMatchBean processBean = new ExactMatchBean(1, StiltsFind.ALL, StiltsFixcols.DUPS, StiltsJoin.ONE_AND_TWO, inputBean);
         configBean = new StiltsBean(processBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false);
     }
-    
+   
     @Test
     public void executeAsynch() throws Exception {
         System.out.println("executeAsynch");
@@ -144,4 +144,10 @@ public class ExactMatchActivityTest {
         }
     }
 
+    @Test
+    public void configurations() throws Exception {
+        ExactMatchBean processBean = (ExactMatchBean)configBean.getProcess();
+        activity.configure(configBean);
+        activity.configurations();
+    }
  }

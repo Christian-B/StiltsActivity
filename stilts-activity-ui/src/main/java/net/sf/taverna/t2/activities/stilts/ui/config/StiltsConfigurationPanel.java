@@ -15,6 +15,8 @@ import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.*;
 import net.sf.taverna.t2.activities.stilts.configuration.AllConfigurations;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
+import net.sf.taverna.t2.activities.stilts.configuration.ListConfiguration;
+import net.sf.taverna.t2.activities.stilts.configuration.ListItem;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.*;
 
@@ -49,9 +51,10 @@ public class StiltsConfigurationPanel extends
         ActivityConfigurationPanel<StiltsActivity, StiltsBean> {
 
     private final StiltsActivity activity;
-    private final ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
+    private static final ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
     private AllConfigurations configurations;
     private HashMap<StiltsConfiguration, Component> selectors;
+    private int row;
     
     public StiltsConfigurationPanel(StiltsActivity activity) {
         try {
@@ -103,7 +106,7 @@ public class StiltsConfigurationPanel extends
         //}
     }
     
-    private Component getSelector(Object item) {
+    static Component getSelector(Object item) {
         if (item instanceof Enum){
             Class c = item.getClass();
             JComboBox selector = new JComboBox(c.getEnumConstants());
@@ -130,20 +133,33 @@ public class StiltsConfigurationPanel extends
     }
 
 //new JTextField(C.toString());
-    private void addConfiguration(StiltsConfiguration configuration, int row) {
+    private void addAConfiguration(StiltsConfiguration configuration) {
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = row;
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
         JLabel label = new JLabel(configuration.getName());
         add(label, c);
         c.gridx = 1;
         Component selector = getSelector(configuration.getItem());
         selectors.put(configuration, selector);
         add(selector, c);
+        row++;
+    }
+
+    private void addConfiguration(StiltsConfiguration configuration) {
+        if (configuration instanceof ListConfiguration){
+            ListConfiguration listConfiguration = (ListConfiguration)configuration;
+            for (StiltsConfiguration inner:listConfiguration.getConfigurations()){
+                addAConfiguration(inner);
+            }
+        } else {
+            addAConfiguration(configuration);
+        }
     }
    
-    private void addTitle(String title, int row) {
+    private void addTitle(String title) {
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = row;
@@ -158,13 +174,12 @@ public class StiltsConfigurationPanel extends
         removeAll();
         selectors = new HashMap<StiltsConfiguration, Component>();
         setLayout(new GridBagLayout());
-        int row = 0;
+        row = 0;
         for (ConfigurationGroup group:configurations.getGroups()){
-            addTitle(group.getTitle(), row);
+            addTitle(group.getTitle());
             row++;
             for (StiltsConfiguration configuration:group.getConfigurations()){
-                addConfiguration(configuration, row);
-                row++;
+                addConfiguration(configuration);
             }
         }
     }

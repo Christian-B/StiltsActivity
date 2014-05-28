@@ -24,8 +24,30 @@ public class ListItem {
         allValues.add(list);
     }
 
-    List<Object> getList(int index) {
+    public List<Object> getList(int index) {
         return allValues.get(index);
     }
     
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof ListItem){
+            ListItem otherItem = (ListItem)other;
+            if (count != otherItem.count){
+                return false;
+            }
+            for (int i = 0; i < count; i++){
+                if (!allValues.get(i).equals(otherItem.allValues.get(i))){
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int getCount() {
+        return count;
+    }
+
 }
