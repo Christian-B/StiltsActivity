@@ -38,4 +38,14 @@ public class AllConfigurations {
         }
         return size;
     }
+    
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof AllConfigurations){
+            AllConfigurations allOther = (AllConfigurations)other;
+            return groups.equals(allOther.groups);
+        } else {
+            return false;
+        }
+    }
 }

@@ -87,4 +87,20 @@ public class ConfigurationGroup {
         }
     }
 
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof ConfigurationGroup){
+            ConfigurationGroup otherGroup = (ConfigurationGroup)other;
+            if (!category.equals(otherGroup.category)){
+                return false;
+            }
+            if (!title.equals(otherGroup.title)){
+                return false;
+            }
+            return configurations.equals(otherGroup.configurations);
+        } else {
+            return false;
+        }
+    }
+
 }

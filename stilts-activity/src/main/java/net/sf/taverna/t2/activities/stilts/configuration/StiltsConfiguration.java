@@ -51,4 +51,18 @@ public class StiltsConfiguration {
     public boolean isConfigurable() {
         return configurable;
     }
+    
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof StiltsConfiguration){
+            StiltsConfiguration otherConfig = (StiltsConfiguration)other;
+            if (!getName().equals(otherConfig.getName())) {
+                return false;
+            }
+            return getItem().equals(otherConfig.getItem());
+        } else {
+            return false;
+        }
+    }
+
 }

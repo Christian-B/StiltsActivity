@@ -115,7 +115,7 @@ public class TJoinActivityTest {
     }
 
     @Test
-    public void configurations() throws Exception {
+    public void configurationsAdd() throws Exception {
         activity.configure(configBean);
         AllConfigurations all = activity.configurations();
         ConfigurationGroup group = all.getGroups().get(0);
@@ -130,7 +130,24 @@ public class TJoinActivityTest {
         assertTrue(config.getName().endsWith("3"));
     }
 
+    @Test
+    public void configurationsEquals() throws Exception {
+        activity.configure(configBean);
+        AllConfigurations all1 = activity.configurations();
+        AllConfigurations all2 = activity.configurations();
+        assertTrue(all1.equals(all2));
+        ConfigurationGroup group = all2.getGroups().get(0);
+        ListConfiguration listConfig = (ListConfiguration)group.getConfigurations().get(0);
+        listConfig.deleteLastFromLists();
+        assertTrue(!all1.equals(all2));
+        AllConfigurations all3 = activity.configurations();
+        //ystem.out.println(3);
+        group = all3.getGroups().get(0);
+        listConfig = (ListConfiguration)group.getConfigurations().get(0);
+        listConfig.getConfigurations().get(1).setItem(null);
+        assertTrue(!all1.equals(all3));
+        listConfig.deleteLastFromLists();
+        assertTrue(all2.equals(all3));
+    }
 }
-
-
 

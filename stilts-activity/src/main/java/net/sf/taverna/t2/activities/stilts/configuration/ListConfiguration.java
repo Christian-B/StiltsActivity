@@ -72,5 +72,25 @@ public class ListConfiguration extends StiltsConfiguration{
     public boolean hasAdjustableCount() {
         return adjustableCount;
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof ListConfiguration){
+            ListConfiguration otherList = (ListConfiguration)other;
+            if (!super.equals(other)){
+                return false; //Name or size wrong
+            }
+            if (!lists.equals(otherList.lists)){
+                return false;
+            }
+            if (!listNames.equals(otherList.listNames)){
+                return false;
+            }
+            return this.adjustableCount == otherList.adjustableCount;
+        } else {
+            return false;
+        }
+    }
+
          
  }
