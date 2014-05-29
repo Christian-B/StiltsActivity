@@ -83,7 +83,6 @@ public class FlexibleInputsBean extends MultipleFormatsBean
     @Override
     List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
-        configurations.add(new StiltsConfiguration (NUMBER_OF_INPUTS_NAME,  numberOfInputs, true));
         return configurations;        
     }
     

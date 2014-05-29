@@ -1,23 +1,26 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
-import net.sf.taverna.t2.activities.stilts.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
-import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
 import java.util.ArrayList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
+import net.sf.taverna.t2.activities.stilts.StiltsBean;
+import net.sf.taverna.t2.activities.stilts.configuration.AllConfigurations;
+import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
+import net.sf.taverna.t2.activities.stilts.configuration.ListConfiguration;
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
+import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
-
 import net.sf.taverna.t2.activities.testutils.ActivityInvoker;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -109,6 +112,22 @@ public class TJoinActivityTest {
         assertTrue("Wrong output : Christian line missing. ", result.contains("2,Christian,4567,22,Jack,456,6,Jack,3453"));
         String[] lines = result.split(System.lineSeparator());
         assertTrue("Wrong number of lines. Expected 3 found " + lines.length, lines.length == 3);
+    }
+
+    @Test
+    public void configurations() throws Exception {
+        activity.configure(configBean);
+        AllConfigurations all = activity.configurations();
+        ConfigurationGroup group = all.getGroups().get(0);
+        System.out.println(group.getTitle());    
+        ListConfiguration listConfig = (ListConfiguration)group.getConfigurations().get(0);
+        StiltsConfiguration config = listConfig.getConfigurations().get(1);
+        assertTrue(config.getItem() instanceof StiltsInputType);
+        assertTrue(config.getName().endsWith("2"));
+        listConfig.addToLists();
+        config = listConfig.getConfigurations().get(2);
+        assertTrue(config.getItem() instanceof StiltsInputType);        
+        assertTrue(config.getName().endsWith("3"));
     }
 
 }

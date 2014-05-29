@@ -105,7 +105,6 @@ public class SingleFormatMultipleInputsBean extends MultipleInputsBean
     @Override
     List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
-        configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME,  formatOfInputs, true));
         return configurations;        
     }
     

@@ -52,7 +52,7 @@ public class ListConfiguration extends StiltsConfiguration{
     public void addToLists(){
         for (int listNum = 0; listNum < numberOfLists(); listNum++){
             List<StiltsConfiguration> list = lists.get(listNum);
-            StiltsConfiguration config = new StiltsConfiguration(listNames.get(listNum) + list.size(), lists.get(0), true);
+            StiltsConfiguration config = new StiltsConfiguration(listNames.get(listNum) + (list.size()+1), list.get(0).getItem(), true);
             list.add(config);
             this.setItem(list.size());
         }        
