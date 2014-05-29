@@ -7,10 +7,13 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
@@ -23,6 +26,7 @@ import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.*;
 
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
+import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
  * Main/Root Configuration panel for the Stilts Process.
@@ -91,7 +95,9 @@ public class StiltsConfigurationPanel extends
     @Override
     public boolean isConfigurationChanged() {
         updateLocalConfiguration();
-        return activity.configurations().equals(configurations);
+        boolean changed = activity.configurations().equals(configurations);
+        //JOptionPane.showMessageDialog(this.getRootPane(), "changed = " + changed);
+        return !changed;
 //       for (StiltsConfiguration configuration:selectors.keySet()){
 //           Object newValue = getTheValue(selectors.get(configuration));
 //           if (!configuration.getItem().equals(newValue)){
@@ -243,7 +249,13 @@ public class StiltsConfigurationPanel extends
 
     @Override
     public boolean checkValues() {
-        //TODO
+        updateLocalConfiguration();
+        try {
+            activity.checkConfiguration(configurations);
+        } catch (ActivityConfigurationException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         return true;
     }
 

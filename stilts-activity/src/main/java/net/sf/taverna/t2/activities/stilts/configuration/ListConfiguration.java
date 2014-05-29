@@ -8,6 +8,7 @@ package net.sf.taverna.t2.activities.stilts.configuration;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
  *
@@ -89,6 +90,21 @@ public class ListConfiguration extends StiltsConfiguration{
             return this.adjustableCount == otherList.adjustableCount;
         } else {
             return false;
+        }
+    }
+
+    void checkClasses(String listName, Class aClass) throws ActivityConfigurationException {
+        boolean found = false;
+        for (int i = 0; i< listNames.size(); i++){
+            if (listNames.get(i).equals(listName)){
+                for (StiltsConfiguration config:lists.get(i)){
+                    config.checkClass(aClass);
+                }
+                found = true;
+            }
+        }
+        if (!found){
+            throw new ActivityConfigurationException("ListConfiguration " + getName() + " has no list " + listName);
         }
     }
 

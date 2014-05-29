@@ -1,6 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.configuration;
 
 import java.util.List;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -39,52 +40,47 @@ public class ConfigurationGroup {
     public List<StiltsConfiguration> getConfigurations() {
         return configurations;
     }
-    
-    public Object getItem(String key) throws ActivityConfigurationException{
+
+    private StiltsConfiguration getConfig(String key) throws ActivityConfigurationException{
         for (StiltsConfiguration configuration:configurations){
             if (configuration.getName().equals(key)){
-                if (configuration.getItem() == null){
-                    throw new ActivityConfigurationException("Null configuration for " + key + " found.");
-                }
-                return configuration.getItem();
+                return configuration;
             }
         }
         throw new ActivityConfigurationException("No configuration for " + key + " found.");
     }
+    
+    public Object getItem(String key) throws ActivityConfigurationException{
+        StiltsConfiguration configuration = getConfig(key);
+        if (configuration.getItem() == null){
+            throw new ActivityConfigurationException("Null configuration for " + key + " found.");
+        }
+        return configuration.getItem();
+    }
 
     public void checkClass(String key, Class aClass) throws ActivityConfigurationException {
-        Object item = getItem(key);
-        if (!item.getClass().equals(aClass)){
-            throw new ActivityConfigurationException(key + " expected to be a " + aClass + " but found " + item.getClass());
-        }
+        StiltsConfiguration configuration = getConfig(key);
+        configuration.checkClass(aClass);
     }
     
-    public void checkString(String key) throws ActivityConfigurationException {
-        Object item = getItem(key);
-        if (item instanceof String){
-            if (item.toString().isEmpty()){
-                throw new ActivityConfigurationException(key + " can not be empty");
-            }
-        } else {
-            throw new ActivityConfigurationException(key + " expected to be a String.");
+    public void checkClasses(String countName, String listName, Class aClass) throws ActivityConfigurationException {
+        StiltsConfiguration configuration = getConfig(countName);
+        if (configuration instanceof ListConfiguration){
+            ListConfiguration listConfiguration = (ListConfiguration)configuration;
+            listConfiguration.checkClasses(listName, aClass);
+        } else{
+            throw new ActivityConfigurationException (configuration.getName() + " is not the expected type");
         }
+    }
+
+    public void checkString(String key) throws ActivityConfigurationException {
+        StiltsConfiguration configuration = getConfig(key);
+        configuration.checkString();
     }
 
     public void checkPositiveInteger(String key) throws ActivityConfigurationException {
-        Object item = getItem(key);
-        Integer integer;
-        if (item instanceof Integer){
-            integer = (Integer)item;
-        } else {
-            try {
-                integer = Integer.parseInt(item.toString());
-            } catch (Exception ex){
-                throw new ActivityConfigurationException(key + " expected to be a positive Integer");
-            }
-        }
-        if (integer != 0){
-            throw new ActivityConfigurationException(key + " expected to be greater than zero");
-        }
+        StiltsConfiguration configuration = getConfig(key);
+        configuration.checkPositiveInteger();
     }
 
     @Override

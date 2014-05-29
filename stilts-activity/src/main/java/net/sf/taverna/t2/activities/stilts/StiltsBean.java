@@ -186,15 +186,16 @@ public class StiltsBean implements StiltsInterface, Serializable{
         if (oldConfigurations.size() >  newConfigurations.size()){
             throw new ActivityConfigurationException("Configuration has one or mre surplus elements");
         }
+        process.getInputs().checkConfiguration(newConfigurations.getGroup(INPUTS_CATEGORY));
+        process.checkConfiguration(newConfigurations.getGroup(PROCESS_CATEGORY));
+        if (preprocess != null){
+            preprocess.checkConfiguration(newConfigurations.getGroup(PREPROCESS_CATEGORY));
+        }
         ConfigurationGroup outputGroup = newConfigurations.getGroup(OUTPUT_CATEGORY);
         outputGroup.checkClass(OUTPUT_FORMAT_NAME, StiltsOutputFormat.class);
         outputGroup.checkClass(OUTPUT_TYPE_NAME, StiltsOutputType.class);
         ConfigurationGroup miscellaneousGroup = newConfigurations.getGroup(MISCELLANEOUS_CATEGORY);
         miscellaneousGroup.checkClass(DEBUG_NAME, Boolean.class);
-        process.checkConfiguration(newConfigurations.getGroup(PROCESS_CATEGORY));
-        if (preprocess != null){
-            preprocess.checkConfiguration(newConfigurations.getGroup(PREPROCESS_CATEGORY));
-        }
    }
 }
   

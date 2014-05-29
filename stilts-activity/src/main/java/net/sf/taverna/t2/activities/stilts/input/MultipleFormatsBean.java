@@ -95,10 +95,9 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
     }
     
     public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
-        super.checkConfiguration(configurationGroup);
-        for (int table = 0; table < retreiveNumberOfInputs(); table++){
-            configurationGroup.checkClass(INPUT_FORMAT_NAME + (table + 1), StiltsInputFormat.class);
-        }
+        configurationGroup.checkClasses(NUMBER_OF_INPUTS_NAME, INPUT_TYPE_NAME, StiltsInputType.class);
+        System.out.println("part2");
+        configurationGroup.checkClasses(NUMBER_OF_INPUTS_NAME, INPUT_FORMAT_NAME, StiltsInputFormat.class);
     }
 
  }
