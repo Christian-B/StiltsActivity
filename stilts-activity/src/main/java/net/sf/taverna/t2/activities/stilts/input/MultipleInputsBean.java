@@ -100,4 +100,11 @@ public abstract class MultipleInputsBean extends StitlsInputsBean implements Ser
         configurationGroup.checkClasses(NUMBER_OF_INPUTS_NAME, INPUT_TYPE_NAME, StiltsInputType.class);
     }
 
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        typesOfInputs = new ArrayList<StiltsInputType>();
+        for(StiltsConfiguration config: configurationGroup.getList(NUMBER_OF_INPUTS_NAME, INPUT_TYPE_NAME)){
+            typesOfInputs.add((StiltsInputType)config.getItem());
+        }
+    }
+
 }

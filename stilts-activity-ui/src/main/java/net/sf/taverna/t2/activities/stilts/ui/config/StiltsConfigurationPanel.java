@@ -7,8 +7,6 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -114,8 +112,12 @@ public class StiltsConfigurationPanel extends
 
     @Override
     public void noteConfiguration() {
-        //for (int i = 0; i < configurations.size(); i++){
-        //}
+        updateLocalConfiguration();
+        try {
+            activity.noteConfiguration(configurations);
+        } catch (ActivityConfigurationException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Saving configuration failed", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     static Component getSelector(Object item) {

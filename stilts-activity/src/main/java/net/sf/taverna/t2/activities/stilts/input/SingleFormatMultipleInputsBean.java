@@ -105,12 +105,18 @@ public class SingleFormatMultipleInputsBean extends MultipleInputsBean
     @Override
     List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
+        configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME,  formatOfInputs, true));
         return configurations;        
     }
     
     public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
         super.checkConfiguration(configurationGroup);
         configurationGroup.checkClass(INPUT_FORMAT_NAME, StiltsInputFormat.class);
+    }
+    
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        super.noteConfiguration(configurationGroup);
+        formatOfInputs = (StiltsInputFormat) configurationGroup.getItem(INPUT_FORMAT_NAME);
     }
 
 }

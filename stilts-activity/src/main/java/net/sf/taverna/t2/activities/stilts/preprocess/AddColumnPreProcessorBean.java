@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -158,4 +159,8 @@ public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
         configurationGroup.checkClass(LOCATION_NAME, StiltsLocationType.class);
     }
 
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        locationColumn = (String) configurationGroup.getItem(COLUMN_NAME);
+        newColumnLocation = (StiltsLocationType) configurationGroup.getItem(LOCATION_NAME);
+    }
 }

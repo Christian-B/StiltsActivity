@@ -3,6 +3,7 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -162,6 +163,13 @@ public class AddColumnTwoVariablesPreProcessorBean extends AddColumnPreProcessor
         configurationGroup.checkString(VARIABLE1_NAME);
         configurationGroup.checkString(VARIABLE2_NAME);
         configurationGroup.checkClass(OPERATOR_NAME, StiltsTwoVariableOperator.class);
+    }
+
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        super.noteConfiguration(configurationGroup);
+        variable1 = (String) configurationGroup.getItem(VARIABLE1_NAME);
+        variable2 = (String) configurationGroup.getItem(VARIABLE2_NAME);
+        operator = (StiltsTwoVariableOperator) configurationGroup.getItem(OPERATOR_NAME);
     }
 
 }

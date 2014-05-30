@@ -100,4 +100,12 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
         configurationGroup.checkClasses(NUMBER_OF_INPUTS_NAME, INPUT_FORMAT_NAME, StiltsInputFormat.class);
     }
 
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        super.noteConfiguration(configurationGroup);
+        formatsOfInputs = new ArrayList<StiltsInputFormat>();
+        for(StiltsConfiguration config: configurationGroup.getList(NUMBER_OF_INPUTS_NAME, INPUT_FORMAT_NAME)){
+            formatsOfInputs.add((StiltsInputFormat)config.getItem());
+        }
+    }
+
  }

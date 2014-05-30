@@ -91,4 +91,8 @@ public class UserSpecifiedPreProcessorBean extends StiltsPreProcessBean{
          configurationGroup.checkString(PREPROCESS_COMMAND_NAME);
     }
 
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        preProcessCommand = (String) configurationGroup.getItem(PREPROCESS_COMMAND_NAME);
+    }
+
 }

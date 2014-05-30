@@ -120,5 +120,10 @@ public class SingleInputBean extends StitlsInputsBean implements Serializable {
         configurationGroup.checkClass(INPUT_TYPE_NAME, StiltsInputType.class);
     }
 
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        inputFormatEnum = (StiltsInputFormat) configurationGroup.getItem(INPUT_FORMAT_NAME);
+        inputTypeEnum = (StiltsInputType) configurationGroup.getItem(INPUT_TYPE_NAME);
+    }
+
 }
   

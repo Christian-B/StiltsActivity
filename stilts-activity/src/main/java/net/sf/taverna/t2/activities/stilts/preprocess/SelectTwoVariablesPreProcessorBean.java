@@ -154,4 +154,10 @@ public class SelectTwoVariablesPreProcessorBean extends StiltsPreProcessBean{
         //TODO boolane variables only
     }
 
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        variable1 = (String) configurationGroup.getItem(VARIABLE1_NAME);
+        variable2 = (String) configurationGroup.getItem(VARIABLE2_NAME);
+        operator = (StiltsTwoVariableOperator) configurationGroup.getItem(OPERATOR_NAME);
+    }
+
 }

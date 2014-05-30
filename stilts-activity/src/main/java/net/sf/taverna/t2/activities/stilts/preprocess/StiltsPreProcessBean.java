@@ -51,5 +51,7 @@ public abstract class StiltsPreProcessBean {
     public ConfigurationGroup getConfigurationGroup() {
         return new ConfigurationGroup(StiltsBean.PREPROCESS_CATEGORY, title() + " settings", configurations());
     }
+
+    public abstract void noteConfiguration(ConfigurationGroup group) throws ActivityConfigurationException;
     
 }

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.sf.taverna.t2.activities.stilts.configuration;
 
 import net.sf.taverna.t2.activities.stilts.configuration.*;
@@ -80,7 +74,7 @@ public class StiltsConfiguration {
         }
     }
     
-   public void checkString() throws ActivityConfigurationException {
+    public void checkString() throws ActivityConfigurationException {
         if (item instanceof String){
             if (item.toString().isEmpty()){
                 throw new ActivityConfigurationException(name + " can not be empty");

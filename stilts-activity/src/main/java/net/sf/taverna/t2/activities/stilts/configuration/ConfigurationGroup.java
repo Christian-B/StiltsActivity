@@ -58,6 +58,16 @@ public class ConfigurationGroup {
         return configuration.getItem();
     }
 
+    public List<StiltsConfiguration> getList(String countName, String listName) throws ActivityConfigurationException {
+        StiltsConfiguration configuration = getConfig(countName);
+        if (configuration instanceof ListConfiguration){
+            ListConfiguration listConfiguration = (ListConfiguration)configuration;
+            return listConfiguration.getList(listName);
+        } else{
+            throw new ActivityConfigurationException (configuration.getName() + " is not the expected type");
+        }
+    }
+
     public void checkClass(String key, Class aClass) throws ActivityConfigurationException {
         StiltsConfiguration configuration = getConfig(key);
         configuration.checkClass(aClass);

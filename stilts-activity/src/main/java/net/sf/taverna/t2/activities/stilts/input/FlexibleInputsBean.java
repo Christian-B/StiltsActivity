@@ -2,10 +2,15 @@ package net.sf.taverna.t2.activities.stilts.input;
 
 import java.io.Serializable;
 import java.util.List;
+import static net.sf.taverna.t2.activities.stilts.StiltsBean.INPUTS_CATEGORY;
+import static net.sf.taverna.t2.activities.stilts.StiltsBean.PROCESS_CATEGORY;
+import net.sf.taverna.t2.activities.stilts.configuration.AllConfigurations;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -89,6 +94,11 @@ public class FlexibleInputsBean extends MultipleFormatsBean
     public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
         super.checkConfiguration(configurationGroup);
         configurationGroup.checkPositiveInteger(NUMBER_OF_INPUTS_NAME);
+    }
+
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        super.noteConfiguration(configurationGroup);
+        numberOfInputs = (Integer) configurationGroup.getItem(NUMBER_OF_INPUTS_NAME);
     }
 
 }   

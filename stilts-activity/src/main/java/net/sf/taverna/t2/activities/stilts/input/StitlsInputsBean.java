@@ -36,5 +36,7 @@ public abstract class StitlsInputsBean {
     public ConfigurationGroup getConfigurationGroup() {
         return new ConfigurationGroup(StiltsBean.INPUTS_CATEGORY, "Input Table Settings", configurations());
     }
+
+    public abstract void noteConfiguration(ConfigurationGroup group) throws ActivityConfigurationException ;
     
 }

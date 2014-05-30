@@ -3,6 +3,7 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -114,5 +115,11 @@ public class SortPreProcessorBean extends ColumnListPreProcessorBean{
         configurationGroup.checkClass(NULLS_AT_BEGINING_NAME, Boolean.class);
     }
     
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        super.noteConfiguration(configurationGroup);
+        ascending = (Boolean) configurationGroup.getItem(ASCENDING_NAME);
+        nullsAtBegining = (Boolean) configurationGroup.getItem(NULLS_AT_BEGINING_NAME);
+    }
+
 }
  

@@ -3,6 +3,8 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
+import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -99,6 +101,11 @@ public class AddColumnByCommandPreProcessorBean extends AddColumnPreProcessorBea
     public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
         super.checkConfiguration(configurationGroup);
         configurationGroup.checkString(COMMAND_NAME);
+    }
+
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        super.noteConfiguration(configurationGroup);
+        command = (String) configurationGroup.getItem(COMMAND_NAME);
     }
 
 }

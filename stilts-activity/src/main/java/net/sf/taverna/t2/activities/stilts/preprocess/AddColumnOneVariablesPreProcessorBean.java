@@ -136,5 +136,11 @@ public class AddColumnOneVariablesPreProcessorBean extends AddColumnPreProcessor
         configurationGroup.checkClass(OPERATOR_NAME, StiltsOneVariableOperator.class);
     }
 
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        super.noteConfiguration(configurationGroup);
+        variable = (String) configurationGroup.getItem(VARIABLE_NAME);
+        operator = (StiltsOneVariableOperator) configurationGroup.getItem(OPERATOR_NAME);
+    }
+
 }
  

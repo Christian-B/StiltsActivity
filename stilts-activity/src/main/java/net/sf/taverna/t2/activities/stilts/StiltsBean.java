@@ -197,6 +197,20 @@ public class StiltsBean implements StiltsInterface, Serializable{
         ConfigurationGroup miscellaneousGroup = newConfigurations.getGroup(MISCELLANEOUS_CATEGORY);
         miscellaneousGroup.checkClass(DEBUG_NAME, Boolean.class);
    }
+
+    void noteConfiguration(AllConfigurations newConfigurations) throws ActivityConfigurationException {
+        checkConfiguration(newConfigurations);       
+        process.getInputs().noteConfiguration(newConfigurations.getGroup(INPUTS_CATEGORY));
+        process.noteConfiguration(newConfigurations.getGroup(PROCESS_CATEGORY));
+        if (preprocess != null){
+            preprocess.noteConfiguration(newConfigurations.getGroup(PREPROCESS_CATEGORY));
+        }
+        ConfigurationGroup outputGroup = newConfigurations.getGroup(OUTPUT_CATEGORY);        
+        outputFormat = (StiltsOutputFormat) outputGroup.getItem(OUTPUT_FORMAT_NAME);
+        outputType = (StiltsOutputType)outputGroup.getItem(OUTPUT_TYPE_NAME);
+        ConfigurationGroup miscellaneousGroup = newConfigurations.getGroup(MISCELLANEOUS_CATEGORY);
+        debugMode = (Boolean) miscellaneousGroup.getItem(DEBUG_NAME);
+    }
 }
   
 

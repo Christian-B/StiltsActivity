@@ -77,4 +77,8 @@ public abstract class StiltsProcessBean {
     public ConfigurationGroup getConfigurationGroup() {
         return new ConfigurationGroup(StiltsBean.PROCESS_CATEGORY, title() + " settings", configurations());
     }
+
+    public void noteConfiguration(ConfigurationGroup group) throws ActivityConfigurationException {
+         //nothing to note so ok!
+    }
 }

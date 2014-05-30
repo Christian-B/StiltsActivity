@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
+import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
@@ -91,6 +92,10 @@ public class SelectByCommandPreProcessorBean extends StiltsPreProcessBean{
     
     public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
         configurationGroup.checkString(COMMAND_NAME);
+    }
+
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        command = (String) configurationGroup.getItem(COMMAND_NAME);
     }
 
 }

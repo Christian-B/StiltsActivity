@@ -93,20 +93,19 @@ public class ListConfiguration extends StiltsConfiguration{
         }
     }
 
-    void checkClasses(String listName, Class aClass) throws ActivityConfigurationException {
-        boolean found = false;
+   List<StiltsConfiguration> getList(String listName) throws ActivityConfigurationException {
         for (int i = 0; i< listNames.size(); i++){
             if (listNames.get(i).equals(listName)){
-                for (StiltsConfiguration config:lists.get(i)){
-                    config.checkClass(aClass);
-                }
-                found = true;
+                return lists.get(i);
             }
         }
-        if (!found){
-            throw new ActivityConfigurationException("ListConfiguration " + getName() + " has no list " + listName);
-        }
+        throw new ActivityConfigurationException("ListConfiguration " + getName() + " has no list " + listName);
     }
 
+    void checkClasses(String listName, Class aClass) throws ActivityConfigurationException {
+        for (StiltsConfiguration config:getList(listName)){
+            config.checkClass(aClass);
+        }
+    }
          
  }

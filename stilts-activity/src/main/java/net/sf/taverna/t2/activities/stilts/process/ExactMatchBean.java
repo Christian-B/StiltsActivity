@@ -89,4 +89,10 @@ public class ExactMatchBean extends TMatch2Bean {
         super.checkConfiguration(configurationGroup);
         configurationGroup.checkPositiveInteger(NUMBER_OF_COLUMNS_NAME);
     }
+    
+    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
+        super.noteConfiguration(configurationGroup);
+        numbertOfColumnsToMatch = (Integer) configurationGroup.getItem(NUMBER_OF_COLUMNS_NAME);
+    }
+
 }
