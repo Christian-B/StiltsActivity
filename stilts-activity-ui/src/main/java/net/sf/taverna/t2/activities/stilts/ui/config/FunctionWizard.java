@@ -1,78 +1,62 @@
 package net.sf.taverna.t2.activities.stilts.ui.config;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.ListCellRenderer;
-import javax.swing.text.NumberFormatter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
-import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 /**
  *
  * @author christian
  */
-public class FunctionWizard extends JDialog{
-    
-    private int row = -1;  //So first row becomes 0
-    private int col = 0;
-    private String command = null;
-    private final JLabel commandLabel;
-    private final JButton done;
-    
-    private static final ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
-    private static final String TODO = "Select one of the options above";
-    
-    private FunctionWizard(String title){
-        setTitle(title);
-        setLayout(new GridBagLayout());
-        this.setModal(true);
-        commandLabel = new JLabel(TODO);
+public class FunctionWizard extends BasedWizard{
         
-        JButton byNumber = new JButton("By column number");
-        addNextRow(byNumber);
-        final JFormattedTextField numberField = integerField();
-        addNextCol(numberField);
-        byNumber.addActionListener(new ActionListener() {
+    private final JTextField inputField;
+    private final JButton inputButton;
+    
+    private static final int NOT_FOUND = -1;
+    
+    FunctionWizard(String title){
+        super(title);
+        inputButton = new JButton("Use column name/number");
+        inputButton.setEnabled(false);
+        inputField = textField();
+        inputButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                try {
-                    numberField.commitEdit();
-                    Integer number = (Integer)numberField.getValue();
-                    setCommand("$" + number);
-                } catch (ParseException ex) {
-                    Logger.getLogger(FunctionWizard.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
+                setCommand(getColumn(inputField));
+            }
+        });    
+        DocumentListener checker = columnChecker(inputButton, inputField);
+        inputField.getDocument().addDocumentListener(checker);
+    }
+    
+    void initGui(){
+        addNextRow(inputButton);
+        addNextCol(inputField);
+        /*byNumberButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                setCommand("$" + getNumber());
             }
         });    
 
-        JButton byName = new JButton("By column name");
-        addNextRow(byName);
-        final JTextField name = new JTextField();
-        name.setColumns(10);
-        addNextCol(name);
-        byName.addActionListener(new ActionListener() {
+        addNextRow(byNameButton);
+        byNameButton.setEnabled(false);
+        addNextCol(nameField);
+        byNameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                setCommand(name.getText());
+                setCommand(nameField.getText());
             }
         });    
-
+*/
         JButton byOne = new JButton("Using one value function");
         addNextRow(byOne);
         final JComboBox oneSelector = new JComboBox(StiltsOneVariableOperator.values());
@@ -93,13 +77,13 @@ public class FunctionWizard extends JDialog{
         
         JButton byTwo = new JButton("Using two value function");
         addNextRow(byTwo);
-        JComboBox twoSelector = new JComboBox(StiltsTwoVariableOperator.values());
+        final JComboBox twoSelector = new JComboBox(StiltsTwoVariableOperator.values());
         twoSelector.setRenderer(listCellRenderer);
         addNextCol(twoSelector);
         byTwo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                StiltsTwoVariableOperator operator = (StiltsTwoVariableOperator)oneSelector.getSelectedItem();
+                StiltsTwoVariableOperator operator = (StiltsTwoVariableOperator)twoSelector.getSelectedItem();
                 String inside1 = getCommand("First input for " + operator);
                 if (inside1 == null){
                    clearCommand();
@@ -113,81 +97,68 @@ public class FunctionWizard extends JDialog{
             }
         });    
 
-        addNextRow(commandLabel);
-        done = new JButton("Done");
-        addNextCol(done);
-        done.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                setVisible(false);
-            }
-        });    
-        done.setEnabled(false);
-        addNextCol(done);
-        JButton cancel = new JButton("Cancel");
-        addNextCol(cancel);
-        cancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                command = null;
-                setVisible(false);
-            }
-        });    
-        addNextCol(cancel);
-    }
-   
-    private void addNextRow(JComponent component){
-        GridBagConstraints c = new GridBagConstraints();
-        col = 0;
-        c.gridx = col;
-        row++;
-        c.gridy = row;
-        c.gridwidth = 1;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        add(component,c);
+        super.initGui();
     }
 
-    private void addNextCol(JComponent component){
-        GridBagConstraints c = new GridBagConstraints();
-        col++;
-        c.gridx = col;
-        c.gridy = row;
-        c.gridwidth = 1;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        add(component,c);
-    }
-
-    private JFormattedTextField integerField()
-    {
-        NumberFormat format = NumberFormat.getInstance();
-        NumberFormatter formatter = new NumberFormatter(format);
-        formatter.setValueClass(Integer.class);
-        formatter.setMinimum(1);
-        formatter.setMaximum(Integer.MAX_VALUE);
-        // If you want the value to be committed on each keystroke instead of focus lost
-        formatter.setCommitsOnValidEdit(true);
-        JFormattedTextField field = new JFormattedTextField(formatter);
+    final JTextField textField(){
+        JTextField field = new JTextField();
         field.setColumns(10);
         return field;
     }
     
-    private void setCommand(String newCommand){
-        command = newCommand;
-        commandLabel.setText(command);
-        done.setEnabled(true);
+    String getColumn(JTextField field){
+        String asString = field.getText();
+        System.out.println("get column; " + asString);
+        asString = asString.trim();
+        if (asString.isEmpty()){
+            return null;
+        }        
+        if (asString.startsWith("$")){
+            if (asString.matches("\\$\\d+")){
+                return asString;            
+            } else {
+                return null;
+            }
+        }
+        if (asString.matches("\\d+")){
+            return "$" + asString;    
+        }
+        if (asString.contains(" ")){
+            return null;
+        }        
+        if (asString.contains("-")){
+            return null;
+        }        
+        return asString;
     }
     
-    private void clearCommand(){
-        command = null;
-        commandLabel.setText(TODO);
-        done.setEnabled(false);
+    private void checkColumn(JButton button, JTextField field){
+        if (getColumn(field) == null){
+            button.setEnabled(false);                    
+        } else {
+            button.setEnabled(true);
+        }                        
     }
-
+    
+    private DocumentListener columnChecker(final JButton button, final JTextField field){ 
+        return new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+            }
+            public void removeUpdate(DocumentEvent e) {
+                checkColumn(button, field);
+            }
+            public void insertUpdate(DocumentEvent e) {
+                checkColumn(button, field);
+            }
+        };
+    }
+    
     public static String getCommand(String title) {
         FunctionWizard wizard = new FunctionWizard(title);
+        wizard.initGui();
         wizard.pack();
         wizard.setVisible(true);
-        return wizard.command;
+        return wizard.fullCommand();
     }
 
     /**
