@@ -5,13 +5,13 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
 import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
 import net.sf.taverna.t2.activities.stilts.process.TCatBean;
 import net.sf.taverna.t2.activities.stilts.process.TCatNBean;
 import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
 import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
-import net.sf.taverna.t2.activities.stilts.ui.config.input.StiltsInputConfigurationPanel;
 
 /**
  * Base class of all the Process Configuration Panels
@@ -27,21 +27,11 @@ import net.sf.taverna.t2.activities.stilts.ui.config.input.StiltsInputConfigurat
 public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessBean> extends JPanel{
  
     BoundedBean processBean;
-    StiltsInputConfigurationPanel inputPanel;
-    protected final JPanel processPanel;
 
     StiltsProcessConfigurationPanel(BoundedBean processBean){
         this.processBean = processBean;
         setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        processPanel = new JPanel(new GridLayout(0, 1));
-        processPanel.setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createTitledBorder("Process"),
-                        BorderFactory.createEmptyBorder(5,5,5,5)));
-        add(processPanel, c);        
-     }
+    }
     
      /**
       * Check that user values in UI are valid
@@ -71,9 +61,8 @@ public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessB
       * Prepare a new configuration bean from the UI, to be returned with
       * getConfiguration()
       */
-    public void noteConfiguration() {
-        inputPanel.noteConfiguration();       
-        processBean.setInputs(inputPanel.getConfiguration());
+    public void noteConfiguration(StitlsInputsBean inputBean) {
+        processBean.setInputs(inputBean);
     }
 
     /**
@@ -82,7 +71,6 @@ public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessB
       */
     public void refreshConfiguration(BoundedBean processBean) {
         this.processBean = processBean;
-        inputPanel.refreshConfiguration(processBean.getInputs());        
     }
     
     public static StiltsProcessConfigurationPanel factory(StiltsProcessBean bean){
@@ -100,12 +88,7 @@ public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessB
         } else {
             throw new UnsupportedOperationException(bean.getClass() + " not supported");
         }
-        
-        panel.inputPanel = StiltsInputConfigurationPanel.factory(bean.getInputs());
         return panel;
     }
     
-    public StiltsInputConfigurationPanel getInputPanel(){
-        return inputPanel;
-    }
 }

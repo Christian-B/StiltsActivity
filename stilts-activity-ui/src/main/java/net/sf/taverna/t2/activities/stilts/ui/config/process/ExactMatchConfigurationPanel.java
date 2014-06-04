@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
 import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.input.TwoInputsConfigurationPanel;
 
@@ -30,16 +31,16 @@ public class ExactMatchConfigurationPanel extends TMatch2ConfigurationPanel <Exa
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
-        processPanel.add(new JLabel("Exact Match Tool"), c);
+        add(new JLabel("Exact Match Tool"), c);
         c.gridx = 0;
         c.gridy = 4;
         c.gridwidth = 1;
         JLabel numberOfColumnsToMatchLabel = new JLabel(NUMBER_OF_COLUMNS_TO_MATCH_LABEL);
-        processPanel.add(numberOfColumnsToMatchLabel,c );
+        add(numberOfColumnsToMatchLabel,c );
         c.gridx = 1;
         numberOfColumnsToMatchField = new JTextField(processBean.getNumbertOfColumnsToMatch()+"");
         numberOfColumnsToMatchField.setColumns(3);
-        processPanel.add(numberOfColumnsToMatchField, c);
+        add(numberOfColumnsToMatchField, c);
     }
 
     @Override
@@ -95,9 +96,9 @@ public class ExactMatchConfigurationPanel extends TMatch2ConfigurationPanel <Exa
       * getConfiguration()
       */
      @Override
-     public void noteConfiguration() {
+     public void noteConfiguration(StitlsInputsBean inputBean) {
         processBean = new ExactMatchBean();    	
-        super.noteConfiguration();
+        super.noteConfiguration(inputBean);
         processBean.setNumbertOfColumnsToMatch(Integer.parseInt(numberOfColumnsToMatchField.getText()));
     }
 

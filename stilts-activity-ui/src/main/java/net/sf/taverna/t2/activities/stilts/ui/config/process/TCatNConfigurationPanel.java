@@ -16,7 +16,7 @@ public class TCatNConfigurationPanel extends StiltsProcessConfigurationPanel <TC
      
     public TCatNConfigurationPanel(TCatNBean processBean){
         super(processBean);
-        processPanel.add(new JLabel("Multiple File Catenatiom Tool"));
+        add(new JLabel(processBean.title()));
     }
 
 }

@@ -2,8 +2,6 @@ package net.sf.taverna.t2.activities.stilts.ui.config;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.ListCellRenderer;
 
@@ -62,9 +60,9 @@ public class StiltsConfigurationPanel extends
 				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION,
 				new java.awt.Font("Lucida Grande", 1, 12)));
-        outputPanel = new StiltsOutputConfigurationPanel(activity.getConfiguration());
-        processPanel = StiltsProcessConfigurationPanel.factory(activity.getConfiguration().getProcess());
-        inputPanel = processPanel.getInputPanel();
+        outputPanel = new StiltsOutputConfigurationPanel(bean);
+        processPanel = StiltsProcessConfigurationPanel.factory(bean.getProcess());
+        inputPanel = StiltsInputConfigurationPanel.factory(bean.getProcess().getInputs());
 //        refreshConfiguration();
         addTabbedPane();
     }
@@ -108,7 +106,8 @@ public class StiltsConfigurationPanel extends
 
     @Override
     public void noteConfiguration() {
-        processPanel.noteConfiguration();
+        inputPanel.noteConfiguration();
+        processPanel.noteConfiguration(inputPanel.getConfiguration());
         bean.setProcess(processPanel.getConfiguration());
         outputPanel.noteConfiguration(bean);
     }
@@ -117,6 +116,7 @@ public class StiltsConfigurationPanel extends
     public final void refreshConfiguration() {
         bean = activity.getConfiguration();
         processPanel.refreshConfiguration(bean.getProcess());
+        inputPanel.refreshConfiguration(bean.getProcess().getInputs());
         outputPanel.refreshConfiguration(bean);
     }
     

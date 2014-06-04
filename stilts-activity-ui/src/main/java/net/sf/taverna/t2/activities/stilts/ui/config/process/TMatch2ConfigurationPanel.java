@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.ListCellRenderer;
+import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
 import net.sf.taverna.t2.activities.stilts.process.TMatch2Bean;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
@@ -26,9 +27,9 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsJoin;
 @SuppressWarnings("serial")
 public class TMatch2ConfigurationPanel<BoundedBean extends TMatch2Bean> extends StiltsProcessConfigurationPanel <BoundedBean>{
      
-    private JComboBox<StiltsFind> findSelector;
-    private JComboBox<StiltsJoin> joinSelector;
-    private JComboBox<StiltsFixcols> fixcolsSelector;
+    private final JComboBox<StiltsFind> findSelector;
+    private final JComboBox<StiltsJoin> joinSelector;
+    private final JComboBox<StiltsFixcols> fixcolsSelector;
     
     private static final String FIND_LABEL = "Stils find Value";
     private static final String JOIN_LABEL = "Stils join Value";
@@ -38,39 +39,38 @@ public class TMatch2ConfigurationPanel<BoundedBean extends TMatch2Bean> extends 
     
     TMatch2ConfigurationPanel(BoundedBean processBean){
         super(processBean);
-        processPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = 1;
 
         c.gridx = 0;
         c.gridy = 1;
         JLabel findLabel = new JLabel(FIND_LABEL);
-        processPanel.add(findLabel, c);
+        add(findLabel, c);
         c.gridx = 1;
         findSelector = new JComboBox<StiltsFind>(StiltsFind.values());
         findSelector.setRenderer(listCellRenderer);
         findSelector.setSelectedItem(processBean.getFindValue());
-        processPanel.add(findSelector, c);
+        add(findSelector, c);
 
         c.gridx = 0;
         c.gridy = 2;        
         JLabel joinLabel = new JLabel(JOIN_LABEL);
-        processPanel.add(joinLabel, c);
+        add(joinLabel, c);
         c.gridx = 1;
         joinSelector = new JComboBox<StiltsJoin>(StiltsJoin.values());
         joinSelector.setRenderer(listCellRenderer);
         joinSelector.setSelectedItem(processBean.getJoinValue());
-        processPanel.add(joinSelector, c);
+        add(joinSelector, c);
         
         c.gridx = 0;
         c.gridy = 3;
         JLabel fixcolsLabel = new JLabel(FIXCOLS_LABEL);
-        processPanel.add(fixcolsLabel, c);
+        add(fixcolsLabel, c);
         c.gridx = 1;
         fixcolsSelector = new JComboBox<StiltsFixcols>(StiltsFixcols.values());
         fixcolsSelector.setRenderer(listCellRenderer);
         fixcolsSelector.setSelectedItem(processBean.getFixcolsValue());
-        processPanel.add(fixcolsSelector, c);
+        add(fixcolsSelector, c);
     }
 
     /**
@@ -99,8 +99,8 @@ public class TMatch2ConfigurationPanel<BoundedBean extends TMatch2Bean> extends 
       * getConfiguration()
       */
      @Override
-     public void noteConfiguration() {
-        super.noteConfiguration();
+     public void noteConfiguration(StitlsInputsBean inputBean) {
+        super.noteConfiguration(inputBean);
         processBean.setFindValue((StiltsFind)findSelector.getSelectedItem());
         processBean.setJoinValue((StiltsJoin)joinSelector.getSelectedItem());
         processBean.setFixcolsValue((StiltsFixcols)fixcolsSelector.getSelectedItem());

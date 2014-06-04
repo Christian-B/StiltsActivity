@@ -16,7 +16,7 @@ public class TJoinConfigurationPanel extends StiltsProcessConfigurationPanel <TJ
      
     public TJoinConfigurationPanel(TJoinBean processBean){
         super(processBean);
-        processPanel.add(new JLabel("Multiple File Join Tool"));
+        add(new JLabel(processBean.title()));
     }
 
 }

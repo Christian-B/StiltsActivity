@@ -16,7 +16,7 @@ public class TPipeConfigurationPanel extends StiltsProcessConfigurationPanel <TP
      
     public TPipeConfigurationPanel(TPipeBean processBean){
         super(processBean);
-        processPanel.add(new JLabel("Simple Piping Tool"));
+        add(new JLabel(processBean.title()));
     }
 
 }
