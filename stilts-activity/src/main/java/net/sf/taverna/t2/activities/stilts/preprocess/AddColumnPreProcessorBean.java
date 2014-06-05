@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
-import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
 /**
- * Based Class for all the Add Column PreProcesses.
+ * Full configurable Add Column PreProcessor.
  * <p>
  * Semantic Sugar for {@link UserSpecifiedPreProcessorBean UserSpecifiedPreProcessorBean} 
- * as it helps the user specify the name of the new colum, and where to place it.
+ * as it helps the user specify the name of the new colum, and where to place it. 
+ * and will define what to put in the new column.
  * <p>
- * Super classes will define what to put in the new column.
+ * The rule of what to add is totally configurable and as such the responsibility of the user
+ * 
  * @author Christian Brenninkmeijer
  * @version 1.0
  */
-public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
+public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     
     /**
      * Defines where in comparison to the location Column the new column will be placed.
@@ -40,10 +41,18 @@ public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     private String newColName;
 
     /**
+     * Stilts command to create the new columns.
+     * 
+     * Not including cmd=addcol -after refColun and new columnName
+     */
+    private String command;
+    private String COMMAND_NAME = "Add Column Command";
+
+    /**
      * Serialization constructor
      */
-    AddColumnPreProcessorBean(){  
-        newColumnLocation = StiltsLocationType.END;
+    public AddColumnPreProcessorBean(){  
+        this(null, "newColumn", StiltsLocationType.END, null);
     }
 
     /**
@@ -55,16 +64,15 @@ public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
      * 
      * @param newColName 
      */
-    AddColumnPreProcessorBean(String newColName){  
-        this.newColName = newColName;
-        newColumnLocation = StiltsLocationType.END;
-        locationColumn = null;
+    public AddColumnPreProcessorBean(String command, String newColName){
+        this(command, newColName, StiltsLocationType.END, null);
     }
 
-    AddColumnPreProcessorBean(String newColName, StiltsLocationType newColumnLocation,  String locationColumn){  
+    public AddColumnPreProcessorBean(String command, String newColName, StiltsLocationType newColumnLocation,  String locationColumn){  
         this.newColumnLocation = newColumnLocation;
         this.locationColumn = locationColumn;        
         this.newColName = newColName;
+        this.command = command;
     }
 
     /**
@@ -81,16 +89,30 @@ public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
         this.newColName = newColName;
     }
 
+    /**
+     * @return the command
+     */
+    public String getCommand() {
+        return command;
+    }
+
+    /**
+     * @param command the command to set
+     */
+    public void setCommand(String command) {
+        this.command = command;
+    }
+
     @Override
     public String retrieveStilsCommand(){
-        String command  = "cmd=addcol ";
+        String stiltsCommand  = "cmd=addcol ";
         switch (getNewColumnLocation()){
             case AFTER:
-               return "cmd=addcol -after " + getLocationColumn() + " " + getNewColName() + " ";
+               return "cmd=addcol -after " + getLocationColumn() + " " + getNewColName() + " \"" + command + "\"";
             case BEFORE:
-               return "cmd=addcol -before " + getLocationColumn() + " " + getNewColName() + " ";
+               return "cmd=addcol -before " + getLocationColumn() + " " + getNewColName() + " \"" + command + "\"";
             case END:
-               return "cmd=addcol " + getNewColName() + " ";
+               return "cmd=addcol " + getNewColName() + " \"" + command + "\"";
             default:    
                 throw new UnsupportedOperationException(getNewColumnLocation() + " not supported");
         }
@@ -116,6 +138,17 @@ public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
                 throw new ActivityConfigurationException("New column location is " + newColumnLocation + " But location column name is empty");
             }
         }
+        if (command == null){
+            throw new ActivityConfigurationException("Command not specified");
+        }
+        if (command.trim().isEmpty()){
+            throw new ActivityConfigurationException("Command is empty");
+        }
+    }
+
+    @Override
+    public String title() {
+        return "Add column";
     }
 
     /**
@@ -147,20 +180,24 @@ public abstract class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     }
 
     @Override
-    List<StiltsConfiguration> configurations() {
+    public List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
         configurations.add(new StiltsConfiguration (COLUMN_NAME,  locationColumn, true));
         configurations.add(new StiltsConfiguration (LOCATION_NAME,  newColumnLocation, true));
+        configurations.add(new StiltsConfiguration (COMMAND_NAME,  command, true));
         return configurations;        
     }
+    
     
     public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
         configurationGroup.checkString(COLUMN_NAME);
         configurationGroup.checkClass(LOCATION_NAME, StiltsLocationType.class);
+        configurationGroup.checkString(COMMAND_NAME);
     }
 
     public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
         locationColumn = (String) configurationGroup.getItem(COLUMN_NAME);
         newColumnLocation = (StiltsLocationType) configurationGroup.getItem(LOCATION_NAME);
+        command = (String) configurationGroup.getItem(COMMAND_NAME);
     }
 }

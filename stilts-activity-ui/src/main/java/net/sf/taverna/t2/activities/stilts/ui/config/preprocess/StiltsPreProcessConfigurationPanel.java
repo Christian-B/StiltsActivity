@@ -5,7 +5,7 @@ import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnByCommandPreProcessorBean;
+import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.preprocess.DeleteColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.preprocess.HeadRowsPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.preprocess.KeepColumnPreProcessorBean;
@@ -78,8 +78,8 @@ public abstract class StiltsPreProcessConfigurationPanel <BoundedBean extends St
         if (preprocessBean == null){
             return null;
         }
-        if (preprocessBean instanceof AddColumnByCommandPreProcessorBean){
-            return new AddColumnByCommandPreProcessorConfigurationPanel((AddColumnByCommandPreProcessorBean)preprocessBean);
+        if (preprocessBean instanceof AddColumnPreProcessorBean){
+            return new AddColumnPreProcessConfigurationPanel((AddColumnPreProcessorBean)preprocessBean);
         }
         if (preprocessBean instanceof DeleteColumnPreProcessorBean){
             return new DeleteColumnPreProcessorConfigurationPanel((DeleteColumnPreProcessorBean)preprocessBean);

@@ -20,7 +20,6 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
     private final String SINGLE_FILE_PATH = "Change single file";
     private final String CONCAT_PATH = "Concatenate";
     private final String JOIN_PATH = "Join/merge";
-    private final String ADD_COLUMN_PATH = "Add Column";
     private final String SELECT_ROWS_PATH = "Select rows";
     
     /**
@@ -98,30 +97,14 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 "Keep column(s)",SINGLE_FILE_PATH);
  	results.add(keepColumnPreProcessorDescription);
 
-        AddColumnByCommandPreProcessorBean  addColumnByCommandBean = 
-                new AddColumnByCommandPreProcessorBean("$1 + $3", "newCol", StiltsLocationType.AFTER, "$2");
+        AddColumnPreProcessorBean  addColumnByCommandBean = 
+                new AddColumnPreProcessorBean("$1 + $3", "newCol", StiltsLocationType.AFTER, "$2");
         StiltsServiceDesc addColumnByCommandDescription =
                 new StiltsServiceDesc(addColumnByCommandBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
-                "Add column fully configurable",SINGLE_FILE_PATH, ADD_COLUMN_PATH);
+                "Add column ",SINGLE_FILE_PATH);
  	results.add(addColumnByCommandDescription);
 
-        AddColumnOneVariablesPreProcessorBean  addColumnOneVariableBean = 
-                new AddColumnOneVariablesPreProcessorBean(StiltsOneVariableOperator.ABS, "$3", "Absolute");
-        StiltsServiceDesc addColumnOneVariableDescription =
-                new StiltsServiceDesc(addColumnOneVariableBean, tPipeBean, 
-                StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
-                "Add column using a one variable operator",SINGLE_FILE_PATH, ADD_COLUMN_PATH);
- 	results.add(addColumnOneVariableDescription);
-
-        AddColumnTwoVariablesPreProcessorBean  addColumnTwoVariableBean = 
-                new AddColumnTwoVariablesPreProcessorBean(StiltsTwoVariableOperator.AND, "$1", "$3", "sum");
-        StiltsServiceDesc addColumnTwoVariableDescription =
-                new StiltsServiceDesc(addColumnTwoVariableBean, tPipeBean, 
-                StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
-                "Add column using a two variables operator",SINGLE_FILE_PATH, ADD_COLUMN_PATH);
- 	results.add(addColumnTwoVariableDescription);
-        
         SelectByCommandPreProcessorBean selectByCommandBean = new SelectByCommandPreProcessorBean("$1 <= 1");
         StiltsServiceDesc selectByCommandDescription =
                 new StiltsServiceDesc(selectByCommandBean, tPipeBean, 
