@@ -1,8 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.ui.serviceprovider;
 
 import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
-import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
-import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +18,6 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
     private final String SINGLE_FILE_PATH = "Change single file";
     private final String CONCAT_PATH = "Concatenate";
     private final String JOIN_PATH = "Join/merge";
-    private final String SELECT_ROWS_PATH = "Select rows";
     
     /**
       * Do the actual search for services. Return using the callBack parameter.
@@ -102,24 +99,16 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         StiltsServiceDesc addColumnByCommandDescription =
                 new StiltsServiceDesc(addColumnByCommandBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
-                "Add column ",SINGLE_FILE_PATH);
+                "Add column",SINGLE_FILE_PATH);
  	results.add(addColumnByCommandDescription);
 
         SelectByCommandPreProcessorBean selectByCommandBean = new SelectByCommandPreProcessorBean("$1 <= 1");
         StiltsServiceDesc selectByCommandDescription =
                 new StiltsServiceDesc(selectByCommandBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
-                "Select rows fully configurable",SINGLE_FILE_PATH, SELECT_ROWS_PATH);
+                "Select rows",SINGLE_FILE_PATH);
  	results.add(selectByCommandDescription);
 
-        SelectTwoVariablesPreProcessorBean  selectTwoVariableBean = 
-                new SelectTwoVariablesPreProcessorBean(StiltsTwoVariableOperator.GREATHER_THAN_EQUALS, "$1", "$3");
-        StiltsServiceDesc selectTwoVariableDescription =
-                new StiltsServiceDesc(selectTwoVariableBean, tPipeBean, 
-                StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
-                "Select rows two variables operator",SINGLE_FILE_PATH, SELECT_ROWS_PATH);
- 	results.add(selectTwoVariableDescription);
-        
         HeadRowsPreProcessorBean headRowsPreProcessorBean = new HeadRowsPreProcessorBean(10);
         StiltsServiceDesc headRowsPreProcessorDescription =
                 new StiltsServiceDesc(headRowsPreProcessorBean, tPipeBean, 
