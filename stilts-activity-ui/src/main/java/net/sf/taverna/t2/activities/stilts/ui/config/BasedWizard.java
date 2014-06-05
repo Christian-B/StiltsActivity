@@ -51,7 +51,6 @@ public class BasedWizard extends JDialog{
         addNextRow(commandLabel);
         addNextCol(done);
         JButton cancel = new JButton("Cancel");
-        addNextCol(cancel);
         cancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -85,6 +84,7 @@ public class BasedWizard extends JDialog{
     }
 
     final void addNextCol(JComponent component){
+        System.out.println(""+ col + component);
         GridBagConstraints c = new GridBagConstraints();
         col++;
         c.gridx = col;

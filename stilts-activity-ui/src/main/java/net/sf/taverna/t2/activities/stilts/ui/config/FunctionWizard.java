@@ -1,13 +1,13 @@
 package net.sf.taverna.t2.activities.stilts.ui.config;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import javax.swing.JOptionPane;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 
@@ -17,7 +17,7 @@ import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
  */
 public class FunctionWizard extends BasedWizard{
         
-    private final JTextField inputField;
+    private final ColumnIdLabel inputField;
     private final JButton inputButton;
     
     private static final int NOT_FOUND = -1;
@@ -26,37 +26,20 @@ public class FunctionWizard extends BasedWizard{
         super(title);
         inputButton = new JButton("Use column name/number");
         inputButton.setEnabled(false);
-        inputField = textField();
+        inputField = new ColumnIdLabel("");
         inputButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                setCommand(getColumn(inputField));
+                setCommand(inputField.getColumn());
             }
         });    
-        DocumentListener checker = columnChecker(inputButton, inputField);
-        inputField.getDocument().addDocumentListener(checker);
+        inputField.addButton(inputButton);
     }
     
     void initGui(){
         addNextRow(inputButton);
         addNextCol(inputField);
-        /*byNumberButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                setCommand("$" + getNumber());
-            }
-        });    
-
-        addNextRow(byNameButton);
-        byNameButton.setEnabled(false);
-        addNextCol(nameField);
-        byNameButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                setCommand(nameField.getText());
-            }
-        });    
-*/
+        addNextCol(inputHelpButton());
         JButton byOne = new JButton("Using one value function");
         addNextRow(byOne);
         final JComboBox oneSelector = new JComboBox(StiltsOneVariableOperator.values());
@@ -100,13 +83,32 @@ public class FunctionWizard extends BasedWizard{
         super.initGui();
     }
 
-    final JTextField textField(){
+/*  final JTextField textField(){
         JTextField field = new JTextField();
         field.setColumns(10);
         return field;
     }
-    
-    String getColumn(JTextField field){
+*/
+    private JComponent inputHelpButton() {
+        final JButton help = new JButton("Help");
+        help.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                Frame frame = Frame.getFrames()[0]; 
+                JOptionPane.showMessageDialog(frame,
+                        "This can be the Column Name or Index\n" 
+                        + "The name of the column may be used if it contains no spaces \n"
+                        + "and doesn't start with a minus character ('-'). \n"
+                        + "It is usually matched case insensitively. \n"
+                        + "If multiple columns have the same name, the first one that matches is selected. \n"
+                        + "Column Index is a useful fallback if the column name isn't suitable for some reason.\n"
+                        + "The first column is '$1', the second is '$2' and so on.");
+             }
+        });    
+        return help;
+    }
+
+/*    String getColumn(JTextField field){
         String asString = field.getText();
         System.out.println("get column; " + asString);
         asString = asString.trim();
@@ -152,7 +154,7 @@ public class FunctionWizard extends BasedWizard{
             }
         };
     }
-    
+*/    
     public static String getCommand(String title) {
         FunctionWizard wizard = new FunctionWizard(title);
         wizard.initGui();

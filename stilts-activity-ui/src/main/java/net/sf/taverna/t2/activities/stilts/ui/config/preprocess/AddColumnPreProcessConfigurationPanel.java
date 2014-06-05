@@ -1,6 +1,10 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -8,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
+import net.sf.taverna.t2.activities.stilts.ui.config.FunctionWizard;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 
@@ -26,13 +31,13 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
     private JComboBox<StiltsLocationType> locationTypeSelector;
     private JTextField locationColumnField;
     private JTextField newColumnNameField;
-    private JTextField commandField;
+    private JLabel commandLabel;
     
     private static final String NEW_COLUMN_NAME_LABEL = "Name of new Column";
     private static final String NEW_COLUMN_LOCATION = "Location to add new column";
     private static final String NEW_COLUMN_REFFERENCE = "Reference Column for location" ;       
-    private static final String COMMAND_LABEL = "Stils add command (excluding the \"cmd=addcol\")";
-    private static final String STILS_HELP_PAGE = "http://www.star.bris.ac.uk/~mbt/stilts/sun256/addcol.html";
+    private static final String COMMAND_LABEL = "add command";
+    //private static final String STILS_HELP_PAGE = "http://www.star.bris.ac.uk/~mbt/stilts/sun256/addcol.html";
     
     protected static ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
     
@@ -42,47 +47,72 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
 
     @Override
     void addEditable(AddColumnPreProcessorBean preprocessBean){ 
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        add(new JLabel(NEW_COLUMN_NAME_LABEL), c);
-        c.gridx = 1;
-        newColumnNameField = new JTextField(preprocessBean.getNewColName(),20);
-        add(newColumnNameField, c);
-        c.gridx = 0;
-        c.gridy = 1;
-        add(new JLabel(NEW_COLUMN_LOCATION), c);
-        c.gridx = 1;
+        addNextRow(new JLabel(NEW_COLUMN_NAME_LABEL));
+        newColumnNameField = newTextField(preprocessBean.getNewColName());
+        addNextCol(newColumnNameField);
+        addNextRow(new JLabel(NEW_COLUMN_LOCATION));
         StiltsLocationType locationType = preprocessBean.getNewColumnLocation();
         locationTypeSelector = new JComboBox<StiltsLocationType>(StiltsLocationType.values());
         locationTypeSelector.setSelectedItem(locationType);
         locationTypeSelector.setRenderer(listCellRenderer);
-        add(locationTypeSelector, c);
-        c.gridx = 0;
-        c.gridy = 2;
-        add(new JLabel(NEW_COLUMN_REFFERENCE), c);
-        c.gridx = 1;
+        addNextCol(locationTypeSelector);
+        addNextRow(new JLabel(NEW_COLUMN_REFFERENCE));
         if (preprocessBean.getLocationColumn() != null){
-            locationColumnField = new JTextField(preprocessBean.getLocationColumn(), 20);
+            locationColumnField = newTextField(preprocessBean.getLocationColumn());
         } else {
-            locationColumnField = new JTextField(20);
+            locationColumnField = newTextField();
         }
-        add(locationColumnField, c);
-        c.gridwidth = 2;
-        c.gridx = 0;
-        c.gridy = 3;
-        JLabel seeLabel = new JLabel ("See: " + STILS_HELP_PAGE);
-        add(seeLabel, c);
-        c.gridwidth = 1;
-        c.gridx = 0;
-        c.gridy+=1;
+        addNextCol(locationColumnField);
+        //JLabel seeLabel = new JLabel ("See: " + STILS_HELP_PAGE);
+        //add(seeLabel, c);
         JLabel commandLabel = new JLabel (COMMAND_LABEL);
-        add(commandLabel, c);
-        c.gridx = 1;
-        commandField = new JTextField(preprocessBean.getCommand(), 20);
-        add(commandField, c);
+        addNextRow(commandLabel);
+        this.commandLabel = new JLabel(preprocessBean.getCommand());
+        addNextCol(this.commandLabel);
+        
+        addNextRow (manualButton());
+        addNextCol (wizardButton());
+        
+        //commandField = newTextField(preprocessBean.getCommand());
+        //addNextCol(commandField);
     }
     
+    private JButton manualButton(){
+        JButton manualButton = new JButton("Enter command manually");
+        manualButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                Frame frame = Frame.getFrames()[0]; 
+                String command = (String)JOptionPane.showInputDialog(
+                    frame,
+                    "Please enter a command to compute the value of the new column\n"
+                    +"This must be according to the Stils rules for an expressions\n"
+                    +"See: http://www.star.bris.ac.uk/~mbt/stilts/sun256/jel.html\n"
+                    +"Warning: Entering an incorrect expression could cause the workfow to hang!",
+                    "Add Column Expression",
+                    JOptionPane.PLAIN_MESSAGE);
+                if (command != null && !command.trim().isEmpty()){
+                    commandLabel.setText(command);
+                }
+            }
+        });    
+        return manualButton;
+    }
+    
+    private JButton wizardButton(){
+        JButton wizardButton = new JButton("Enter command manually");
+        wizardButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                String command = FunctionWizard.getCommand("Expression for add column");
+                if (command != null && !command.trim().isEmpty()){
+                    commandLabel.setText(command);
+                }
+            }
+        });    
+        return wizardButton;
+    }
+
     /**
       * Check that user values in UI are valid
      * @return 
@@ -100,7 +130,7 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
                 return false;
             }        
         }
-        if (commandField.getText().trim().isEmpty()){
+        if (commandLabel.getText().trim().isEmpty()){
             String message = COMMAND_LABEL + " can not be empty";
             JOptionPane.showMessageDialog(this, message, "Empty " + COMMAND_LABEL, JOptionPane.ERROR_MESSAGE);
             return false;
@@ -120,7 +150,7 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
                 return true;
             }
         }        
-        if (!commandField.getText().equals(preprocessBean.getCommand())){
+        if (!commandLabel.getText().equals(preprocessBean.getCommand())){
              return true;
         }
         return false;
@@ -139,7 +169,7 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
         } else {
             preprocessBean.setLocationColumn(locationColumnField.getText());
         }
-        preprocessBean.setCommand(commandField.getText());
+        preprocessBean.setCommand(commandLabel.getText());
     }
 
     /**
@@ -148,9 +178,9 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
       */
     public void refreshConfiguration(AddColumnPreProcessorBean preprocessBean) {
         super.refreshConfiguration(preprocessBean);
-        newColumnNameField = new JTextField(preprocessBean.getNewColName());
+        newColumnNameField = newTextField(preprocessBean.getNewColName());
         locationTypeSelector.setSelectedItem(preprocessBean.getNewColumnLocation());
-        locationColumnField = new JTextField(preprocessBean.getNewColName());
-        commandField = new JTextField(preprocessBean.getCommand());
+        locationColumnField = newTextField(preprocessBean.getNewColName());
+        commandLabel.setText(preprocessBean.getCommand());
     }
 }

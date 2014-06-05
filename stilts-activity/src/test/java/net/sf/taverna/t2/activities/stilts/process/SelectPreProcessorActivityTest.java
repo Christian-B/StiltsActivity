@@ -12,7 +12,6 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
-import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 
 import net.sf.taverna.t2.activities.testutils.ActivityInvoker;
 

@@ -5,8 +5,6 @@ import java.util.Map;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
 import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
-import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
-import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
 
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
@@ -15,7 +13,6 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.activities.testutils.ActivityInvoker;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;

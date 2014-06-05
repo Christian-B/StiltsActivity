@@ -2,8 +2,6 @@ package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.preprocess.DeleteColumnPreProcessorBean;
@@ -14,6 +12,7 @@ import net.sf.taverna.t2.activities.stilts.preprocess.SortPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
 import net.sf.taverna.t2.activities.stilts.preprocess.TailRowsPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorBean;
+import net.sf.taverna.t2.activities.stilts.ui.config.BasePanel;
 
 /**
  * Base class of all the PreProcess Configuration Panels
@@ -26,16 +25,12 @@ import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorB
  * @param <BoundedBean> a specific StiltsPreProcessBean
  */
 @SuppressWarnings("serial")
-public abstract class StiltsPreProcessConfigurationPanel <BoundedBean extends StiltsPreProcessBean> extends JPanel{
+public abstract class StiltsPreProcessConfigurationPanel <BoundedBean extends StiltsPreProcessBean> extends BasePanel{
  
     BoundedBean preprocessBean;
 
     StiltsPreProcessConfigurationPanel(BoundedBean preprocessBean){
         this.preprocessBean = preprocessBean;
-        setLayout(new GridBagLayout());
-        setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createTitledBorder("PreProcess"),
-                        BorderFactory.createEmptyBorder(5,5,5,5)));
         addEditable(preprocessBean);
     }
     
