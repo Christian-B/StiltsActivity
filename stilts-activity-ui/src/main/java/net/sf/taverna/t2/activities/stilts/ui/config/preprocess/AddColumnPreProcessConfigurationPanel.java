@@ -46,32 +46,32 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
     }
 
     @Override
-    void addEditable(AddColumnPreProcessorBean preprocessBean){ 
-        addNextRow(new JLabel(NEW_COLUMN_NAME_LABEL));
+    void initGui(AddColumnPreProcessorBean preprocessBean){ 
+        addNextRow(new JLabel(NEW_COLUMN_NAME_LABEL), 1);
         newColumnNameField = newTextField(preprocessBean.getNewColName());
-        addNextCol(newColumnNameField);
-        addNextRow(new JLabel(NEW_COLUMN_LOCATION));
+        addNextCol(newColumnNameField, 1);
+        addNextRow(new JLabel(NEW_COLUMN_LOCATION), 1);
         StiltsLocationType locationType = preprocessBean.getNewColumnLocation();
         locationTypeSelector = new JComboBox<StiltsLocationType>(StiltsLocationType.values());
         locationTypeSelector.setSelectedItem(locationType);
         locationTypeSelector.setRenderer(listCellRenderer);
-        addNextCol(locationTypeSelector);
-        addNextRow(new JLabel(NEW_COLUMN_REFFERENCE));
+        addNextCol(locationTypeSelector, 1);
+        addNextRow(new JLabel(NEW_COLUMN_REFFERENCE), 1);
         if (preprocessBean.getLocationColumn() != null){
             locationColumnField = newTextField(preprocessBean.getLocationColumn());
         } else {
             locationColumnField = newTextField();
         }
-        addNextCol(locationColumnField);
+        addNextCol(locationColumnField, 1);
         //JLabel seeLabel = new JLabel ("See: " + STILS_HELP_PAGE);
         //add(seeLabel, c);
         JLabel commandLabel = new JLabel (COMMAND_LABEL);
-        addNextRow(commandLabel);
+        addNextRow(commandLabel, 1);
         this.commandLabel = new JLabel(preprocessBean.getCommand());
-        addNextCol(this.commandLabel);
+        addNextCol(this.commandLabel, 1);
         
-        addNextRow (manualButton());
-        addNextCol (wizardButton());
+        addNextRow (manualButton(), 1);
+        addNextCol (wizardButton(), 1);
         
         //commandField = newTextField(preprocessBean.getCommand());
         //addNextCol(commandField);

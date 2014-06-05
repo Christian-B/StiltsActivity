@@ -20,35 +20,24 @@ public class BasePanel extends JPanel{
         setLayout(new GridBagLayout());
     }
     
-    protected final void addNextRow(JComponent component){
+    protected final void addNextRow(JComponent component, int gridWidth){
         GridBagConstraints c = new GridBagConstraints();
         col = 0;
         c.gridx = col;
         row++;
         c.gridy = row;
-        c.gridwidth = 1;
+        c.gridwidth = gridWidth;
         c.fill = GridBagConstraints.HORIZONTAL;
         add(component,c);
     }
 
-    protected final void addTitleRow(JComponent component){
-        GridBagConstraints c = new GridBagConstraints();
-        col = 0;
-        c.gridx = col;
-        row++;
-        c.gridy = row;
-        c.gridwidth = 3;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        add(component,c);
-    }
-
-    protected final void addNextCol(JComponent component){
+    protected final void addNextCol(JComponent component, int gridWidth){
         System.out.println(""+ col + component);
         GridBagConstraints c = new GridBagConstraints();
         col++;
         c.gridx = col;
         c.gridy = row;
-        c.gridwidth = 1;
+        c.gridwidth = gridWidth;
         c.fill = GridBagConstraints.HORIZONTAL;
         add(component,c);
     }
@@ -63,4 +52,5 @@ public class BasePanel extends JPanel{
         JTextField textField = new JTextField(fieldWidth);
         return textField;
     }
+
 }

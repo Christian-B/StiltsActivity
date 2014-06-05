@@ -1,6 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 
-import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -27,21 +26,13 @@ public class SelectByCommandPreProcessorConfigurationPanel extends StiltsPreProc
     }
     
     @Override
-    void addEditable(SelectByCommandPreProcessorBean preprocessBean){ 
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridwidth = 2;
-        c.gridx = 0;
-        c.gridy = 0;
+    void initGui(SelectByCommandPreProcessorBean preprocessBean){ 
         JLabel seeLabel = new JLabel ("See: " + STILS_HELP_PAGE);
-        add(seeLabel, c);
-        c.gridwidth = 1;
-        c.gridx = 0;
-        c.gridy+=1;
+        addNextRow(seeLabel, 2);
         JLabel commandLabel = new JLabel (COMMAND_LABEL);
-        add(commandLabel, c);
-        c.gridx = 1;
-        commandField = new JTextField(preprocessBean.getCommand(), 20);
-        add(commandField, c);
+        addNextRow(commandLabel, 1);
+        commandField = newTextField(preprocessBean.getCommand());
+        addNextCol(commandField, 1);
     }
    
     /**

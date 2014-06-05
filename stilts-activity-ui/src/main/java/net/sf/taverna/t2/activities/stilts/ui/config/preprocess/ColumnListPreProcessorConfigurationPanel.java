@@ -25,33 +25,23 @@ public abstract class ColumnListPreProcessorConfigurationPanel<BoundedBean exten
     }
     
     @Override
-    void addEditable(BoundedBean preprocessBean){ 
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 2;
+    void initGui(BoundedBean preprocessBean){ 
         JLabel label1 = new JLabel ("Please specify the Column(s) to " + getAction() + ".");
-        add(label1, c);
+        addNextRow(label1, 2);
             
-        c.gridy = 1;
         JLabel label2 = new JLabel ("Can be the column name as specified in the file.");
-        add(label2, c);
+        addNextRow(label2, 2);
 
-        c.gridy = 2;
         JLabel label3 = new JLabel ("Can be the column number (starting at 1)(No $).");
-        add(label3, c);
+        addNextRow(label3, 2);
 
-        c.gridy = 3;
         JLabel label4 = new JLabel ("Multiple columns can be specified. Seperaated by a space.");
-        add(label4, c);
+        addNextRow(label4, 2);
 
-        c.gridy = 4;            
-        c.gridwidth = 1;
         JLabel commandLabel = new JLabel ("Column(s) to " + getAction() + ": ");
-        add(commandLabel, c);
-        c.gridx = 1;
+        addNextRow(commandLabel, 1);
         columnsListField = new JTextField(preprocessBean.getColumnList(), 20);
-        add(columnsListField, c);
+        addNextCol(columnsListField, 1);
     }
    
     final int nextY(){

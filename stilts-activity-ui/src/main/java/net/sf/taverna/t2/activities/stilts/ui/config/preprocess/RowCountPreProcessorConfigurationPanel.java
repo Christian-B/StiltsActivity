@@ -1,6 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 
-import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -25,21 +24,14 @@ public abstract class RowCountPreProcessorConfigurationPanel<BoundedBean extends
     }
     
     @Override
-    void addEditable(RowCountPreProcessorBean preprocessBean){ 
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 2;
+    void initGui(RowCountPreProcessorBean preprocessBean){ 
         JLabel label1 = new JLabel ("Please specify the Rows(s) to " + getAction() + ".");
-        add(label1, c);
+        addNextRow(label1, 2);
             
-        c.gridy++;            
-        c.gridwidth = 1;
         JLabel commandLabel = new JLabel ("Column(s) to " + getAction() + ": ");
-        add(commandLabel, c);
-        c.gridx = 1;
-        rowCountField = new JTextField(preprocessBean.getNumberOfRows() + "", 20);
-        add(rowCountField, c);
+        addNextRow(commandLabel, 1);
+        rowCountField = newTextField(preprocessBean.getNumberOfRows()+"");
+        addNextCol(rowCountField, 1);
     }
    
     /**

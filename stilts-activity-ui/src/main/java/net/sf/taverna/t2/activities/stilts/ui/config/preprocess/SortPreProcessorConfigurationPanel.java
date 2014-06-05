@@ -25,24 +25,13 @@ public class SortPreProcessorConfigurationPanel extends ColumnListPreProcessorCo
     }
 
     @Override
-    void addEditable(SortPreProcessorBean preprocessBean){ 
-        super.addEditable(preprocessBean);
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = nextY();
-        c.gridwidth = 1;
-        JLabel label1 = new JLabel ("Sort Data Ascending");
-        add(label1, c);
-        c.gridx = 1;
-        ascendingCheckBox = new JCheckBox();
-        ascendingCheckBox.setSelected(preprocessBean.isAscending());
-        add(ascendingCheckBox,c);
+    void initGui(SortPreProcessorBean preprocessBean){ 
+        super.initGui(preprocessBean);
+        ascendingCheckBox = new JCheckBox("Sort Data Ascending", preprocessBean.isAscending());
+        addNextRow(ascendingCheckBox, 2);
         
-        c.gridx = 0;
-        c.gridy++;
-        c.gridwidth = 2;
-        nullsAtBeginingCheckBox = new JCheckBox("Place nuls at beginging", preprocessBean.isNullsAtBegining());
-        add(nullsAtBeginingCheckBox, c);
+        nullsAtBeginingCheckBox = new JCheckBox("Place nulls at beginging", preprocessBean.isNullsAtBegining());
+        addNextRow(nullsAtBeginingCheckBox, 2);
     }
     
     //Not required as a checkbox always has a valid value

@@ -27,20 +27,13 @@ public class UserSpecifiedPreProcessorConfigurationPanel extends StiltsPreProces
     }
     
     @Override
-    void addEditable(UserSpecifiedPreProcessorBean preprocessBean){
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridwidth = 2;
-        c.gridx = 0;
-        c.gridy = 0;
+    void initGui(UserSpecifiedPreProcessorBean preprocessBean){
         JLabel seeLabel = new JLabel ("See: " + STILS_HELP_PAGE);
-        add(seeLabel, c);
-        c.gridwidth = 1;
-        c.gridy = 1;
+        addNextRow(seeLabel, 2);
         JLabel commandLabel = new JLabel (COMMAND_LABEL);
-        add(commandLabel, c);
-        c.gridx = 1;
-        preProcessCommandField = new JTextField(preprocessBean.getPreProcessCommand(), 20);
-        add(preProcessCommandField, c);
+        addNextRow(commandLabel, 1);
+        preProcessCommandField = newTextField(preprocessBean.getPreProcessCommand());
+        addNextCol(preProcessCommandField, 1);
     }
    
     /**
