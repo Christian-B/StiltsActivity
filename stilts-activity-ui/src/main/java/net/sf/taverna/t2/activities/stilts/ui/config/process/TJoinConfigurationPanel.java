@@ -21,4 +21,9 @@ public class TJoinConfigurationPanel extends StiltsProcessConfigurationPanel <TJ
                 + "It is suitable if you want to amalgamate two or more tables whose row orderings correspond exactly to each other."));
     }
 
+    @Override
+    public boolean isConfigurable() {
+        return false;
+    }
+
 }

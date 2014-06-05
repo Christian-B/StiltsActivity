@@ -3,6 +3,7 @@ package net.sf.taverna.t2.activities.stilts.ui.config.process;
 import net.sf.taverna.t2.activities.stilts.ui.config.input.SingleInputConfigurationPanel;
 import javax.swing.JLabel;
 import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
+import net.sf.taverna.t2.activities.stilts.ui.config.preprocess.StiltsPreProcessConfigurationPanel;
 
 /**
  * TPipe Process Configuration Panels
@@ -16,7 +17,11 @@ public class TPipeConfigurationPanel extends StiltsProcessConfigurationPanel <TP
      
     public TPipeConfigurationPanel(TPipeBean processBean){
         super(processBean);
-        add(new JLabel(processBean.title()));
+    }
+
+    @Override
+    public boolean isConfigurable() {
+        return false;
     }
 
 }

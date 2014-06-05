@@ -8,6 +8,7 @@ import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.*;
 import net.sf.taverna.t2.activities.stilts.ui.config.input.StiltsInputConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.output.StiltsOutputConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.config.preprocess.StiltsPreProcessConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.process.StiltsProcessConfigurationPanel;
 
 import net.sf.taverna.t2.activities.stilts.utils.*;
@@ -49,6 +50,7 @@ public class StiltsConfigurationPanel extends
     final StiltsInputConfigurationPanel inputPanel;
     final StiltsOutputConfigurationPanel outputPanel;
     final StiltsProcessConfigurationPanel processPanel;
+    final StiltsPreProcessConfigurationPanel preprocessPanel;
     
     static final Logger logger = Logger.getLogger(StiltsConfigurationPanel.class);
     
@@ -62,6 +64,7 @@ public class StiltsConfigurationPanel extends
 				new java.awt.Font("Lucida Grande", 1, 12)));
         outputPanel = new StiltsOutputConfigurationPanel(bean);
         processPanel = StiltsProcessConfigurationPanel.factory(bean.getProcess());
+        preprocessPanel = StiltsPreProcessConfigurationPanel.factory(bean.getPreprocess());
         inputPanel = StiltsInputConfigurationPanel.factory(bean.getProcess().getInputs());
 //        refreshConfiguration();
         addTabbedPane();
@@ -70,13 +73,17 @@ public class StiltsConfigurationPanel extends
     private void addTabbedPane(){
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Inputs", inputPanel);
-        tabbedPane.addTab("Process", processPanel);
-        
+        if (processPanel.isConfigurable()){
+            tabbedPane.addTab("Process", processPanel);
+        }
+        if (preprocessPanel != null){
+            tabbedPane.addTab("Reconfiguration", preprocessPanel);
+        }
         tabbedPane.addTab("Outputs", outputPanel);     
         tabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
         GridBagConstraints outerConstraint = new GridBagConstraints();
         outerConstraint.anchor = GridBagConstraints.FIRST_LINE_START;
-        outerConstraint.gridx = 0;
+        outerConstraint.gridx = 0;  
         outerConstraint.gridy = 0;
 
         outerConstraint.fill = GridBagConstraints.BOTH;

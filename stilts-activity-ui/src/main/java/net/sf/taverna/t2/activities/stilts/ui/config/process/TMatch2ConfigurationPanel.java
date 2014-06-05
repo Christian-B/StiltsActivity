@@ -118,4 +118,9 @@ public class TMatch2ConfigurationPanel<BoundedBean extends TMatch2Bean> extends 
         fixcolsSelector.setSelectedItem(processBean.getFixcolsValue());
     }
     
+    @Override
+    public boolean isConfigurable() {
+        return true;
+    }
+
 }

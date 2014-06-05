@@ -24,4 +24,9 @@ public class TCatNConfigurationPanel extends StiltsProcessConfigurationPanel <TC
                 + "they must have compatible types and, presumably, meanings. \n"));
     }
 
+    @Override
+    public boolean isConfigurable() {
+        return false;
+    }
+
 }

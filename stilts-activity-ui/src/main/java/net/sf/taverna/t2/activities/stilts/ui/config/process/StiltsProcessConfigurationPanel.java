@@ -24,7 +24,7 @@ import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
  * @param <BoundedBean> a specific StiltsProcessBean
  */
 @SuppressWarnings("serial")
-public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessBean> extends JPanel{
+public abstract class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessBean> extends JPanel{
  
     BoundedBean processBean;
 
@@ -33,6 +33,7 @@ public class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessB
         setLayout(new GridBagLayout());
     }
     
+    public abstract boolean isConfigurable();
      /**
       * Check that user values in UI are valid
       */
