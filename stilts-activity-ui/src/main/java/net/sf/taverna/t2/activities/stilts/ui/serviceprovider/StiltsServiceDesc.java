@@ -13,6 +13,7 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import net.sf.taverna.t2.servicedescriptions.ServiceDescription;
 import net.sf.taverna.t2.workflowmodel.processor.activity.Activity;
+import org.apache.log4j.Logger;
 
 /**
  * Single Stilts implementation of the ServiceDescription.
@@ -34,6 +35,8 @@ public class StiltsServiceDesc extends ServiceDescription<StiltsBean>
     private String name;
     private String[] paths;
     
+    static final Logger logger = Logger.getLogger(StiltsServiceDesc.class);
+    
     public StiltsServiceDesc(StiltsPreProcessBean prepocessBean, StiltsProcessBean process, StiltsOutputFormat outputFormatEnum, 
             StiltsOutputType outputTypeEnum, boolean debugMode, String name, String... paths){
        this.process =  process;
@@ -48,6 +51,12 @@ public class StiltsServiceDesc extends ServiceDescription<StiltsBean>
     public StiltsServiceDesc(StiltsProcessBean process, StiltsOutputFormat outputFormatEnum, 
             StiltsOutputType outputTypeEnum, boolean debugMode, String name, String... path){
         this(null, process, outputFormatEnum, outputTypeEnum, debugMode, name, path);
+    }
+    
+    @Override
+    public boolean isTemplateService(){
+        logger.info("isTemplateService called");
+        return true;
     }
     
     @Override
