@@ -1,5 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.ui.config;
 
+import net.sf.taverna.t2.activities.stilts.ui.textfield.DoubleTextField;
+import net.sf.taverna.t2.activities.stilts.ui.textfield.ColumnIdTextField;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,16 +19,30 @@ import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
  */
 public class FunctionWizard extends BasedWizard{
         
-    private final ColumnIdLabel inputField;
+    private final DoubleTextField numberField;
+    private final JButton numberButton;
+    private final ColumnIdTextField inputField;
     private final JButton inputButton;
     
     private static final int NOT_FOUND = -1;
+    private static final boolean ANY_VALUE = false;
+    private static final boolean BOOLEAN_ONLY = true;
     
-    FunctionWizard(String title){
+    private FunctionWizard(String title, boolean forceBoolean){
         super(title);
+        numberButton = new JButton("Use a number");
+        numberButton.setEnabled(false);
+        numberField = new DoubleTextField();
+        numberButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                setCommand(numberField.getColumn().toString());
+            }
+        });    
+        numberField.addButton(numberButton);
         inputButton = new JButton("Use column name/number");
         inputButton.setEnabled(false);
-        inputField = new ColumnIdLabel("");
+        inputField = new ColumnIdTextField("");
         inputButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -37,6 +53,8 @@ public class FunctionWizard extends BasedWizard{
     }
     
     void initGui(){
+        addNextRow(numberButton);
+        addNextCol(numberField);
         addNextRow(inputButton);
         addNextCol(inputField);
         addNextCol(inputHelpButton());
@@ -108,61 +126,22 @@ public class FunctionWizard extends BasedWizard{
         return help;
     }
 
-/*    String getColumn(JTextField field){
-        String asString = field.getText();
-        System.out.println("get column; " + asString);
-        asString = asString.trim();
-        if (asString.isEmpty()){
-            return null;
-        }        
-        if (asString.startsWith("$")){
-            if (asString.matches("\\$\\d+")){
-                return asString;            
-            } else {
-                return null;
-            }
-        }
-        if (asString.matches("\\d+")){
-            return "$" + asString;    
-        }
-        if (asString.contains(" ")){
-            return null;
-        }        
-        if (asString.contains("-")){
-            return null;
-        }        
-        return asString;
+    private String obtainCommand(){
+        initGui();
+        pack();
+        setVisible(true);
+        return command;
     }
     
-    private void checkColumn(JButton button, JTextField field){
-        if (getColumn(field) == null){
-            button.setEnabled(false);                    
-        } else {
-            button.setEnabled(true);
-        }                        
-    }
-    
-    private DocumentListener columnChecker(final JButton button, final JTextField field){ 
-        return new DocumentListener() {
-            public void changedUpdate(DocumentEvent e) {
-            }
-            public void removeUpdate(DocumentEvent e) {
-                checkColumn(button, field);
-            }
-            public void insertUpdate(DocumentEvent e) {
-                checkColumn(button, field);
-            }
-        };
-    }
-*/    
     public static String getCommand(String title) {
-        FunctionWizard wizard = new FunctionWizard(title);
-        wizard.initGui();
-        wizard.pack();
-        wizard.setVisible(true);
-        return wizard.fullCommand();
+        FunctionWizard wizard = new FunctionWizard(title, ANY_VALUE);
+        return wizard.obtainCommand();
     }
 
+    public static String getBoolean(String title) {
+        FunctionWizard wizard = new FunctionWizard(title, BOOLEAN_ONLY);
+        return wizard.obtainCommand();
+    }
     /**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the

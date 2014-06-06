@@ -25,7 +25,7 @@ public class BasedWizard extends JDialog{
     
     private int row = -1;  //So first row becomes 0
     private int col = 0;
-    private String command = null;
+    String command = null;
     private final JLabel commandLabel;
     private final JButton done;
     
@@ -125,16 +125,8 @@ public class BasedWizard extends JDialog{
         };
     }
     
-    String fullCommand(){
-        return command;
-    }
-    
-    final String getSimpleCommand(){
-        return command;
-    }
-
     final void updateCommandLabel(){        
-        commandLabel.setText(fullCommand());
+        commandLabel.setText(command);
         done.setEnabled(checkValid());
     }
     

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package net.sf.taverna.t2.activities.stilts.ui.config;
+package net.sf.taverna.t2.activities.stilts.ui.textfield;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -18,11 +18,13 @@ import javax.swing.event.DocumentListener;
  *
  * @author christian
  */
-public class ColumnIdLabel extends JTextField{
+public abstract class CheckerTextField extends JTextField{
     
     private final List<AbstractButton> buttons = new ArrayList<AbstractButton>(); 
     
-    public ColumnIdLabel(String originalValue){
+    public abstract Object getColumn();
+    
+    public CheckerTextField(String originalValue){
         super(originalValue);
         DocumentListener checker = columnChecker();
         getDocument().addDocumentListener(checker);
@@ -41,7 +43,7 @@ public class ColumnIdLabel extends JTextField{
             }
         };
     }
-    
+ 
     private void checkColumn(){
         if (getColumn() == null){
             setButtonsEnabled(false);
@@ -51,32 +53,7 @@ public class ColumnIdLabel extends JTextField{
             this.setBackground(Color.WHITE);
         }                        
     }
-    
-    public String getColumn(){
-        String asString = getText();
-        asString = asString.trim();
-        if (asString.isEmpty()){
-            return null;
-        }        
-        if (asString.startsWith("$")){
-            if (asString.matches("\\$\\d+")){
-                return asString;            
-            } else {
-                return null;
-            }
-        }
-        if (asString.matches("\\d+")){
-            return "$" + asString;    
-        }
-        if (asString.contains(" ")){
-            return null;
-        }        
-        if (asString.contains("-")){
-            return null;
-        }        
-        return asString;
-    }
-    
+
     private void setButtonsEnabled(boolean setting){
         for (AbstractButton button:buttons){
             button.setEnabled(setting);
@@ -86,4 +63,5 @@ public class ColumnIdLabel extends JTextField{
     public void addButton(AbstractButton button){
         buttons.add(button);
     }
+
 }
