@@ -20,14 +20,20 @@ import javax.swing.event.DocumentListener;
  */
 public abstract class CheckerTextField extends JTextField{
     
-    private final List<AbstractButton> buttons = new ArrayList<AbstractButton>(); 
+    private final List<AbstractButton> buttons; 
     
     public abstract Object getColumn();
     
-    public CheckerTextField(String originalValue){
-        super(originalValue);
+    public CheckerTextField(){
+        super();
+        buttons = new ArrayList<AbstractButton>();
         DocumentListener checker = columnChecker();
         getDocument().addDocumentListener(checker);
+    }
+    
+    @Override
+    public void setText(String text){
+        super.setText(text);
         checkColumn();
     }
     

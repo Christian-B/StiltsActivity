@@ -73,7 +73,7 @@ public class FunctionWizard extends JDialog{
     
     private void addColumnRow(){
         JButton columnButton = new JButton("Use column name/number");
-        final ColumnIdTextField columnField = new ColumnIdTextField("");
+        final ColumnIdTextField columnField = new ColumnIdTextField("",ColumnIdTextField.ALLOW_ID);
         columnButton.setEnabled(false);
         columnButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)

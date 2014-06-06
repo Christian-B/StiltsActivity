@@ -7,7 +7,7 @@ package net.sf.taverna.t2.activities.stilts.ui.textfield;
 public class DoubleTextField extends CheckerTextField{
            
     public DoubleTextField(){
-        super("");
+        super();
     }
     
     @Override

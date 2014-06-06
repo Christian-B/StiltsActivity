@@ -1,7 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 
 import java.awt.Frame;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -13,31 +12,22 @@ import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import net.sf.taverna.t2.activities.stilts.ui.config.FunctionWizard;
+import net.sf.taverna.t2.activities.stilts.ui.textfield.ColumnIdTextField;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 
-/**
- * Base class of all the All add Column PreProcess Configuration Panels
- * <p>
- * Handles the details shared by all AddColumn PreProcessors such as name and location of the new column.
- * 
- * @author Christian Brenninkmeijer
- * @version 1.0
- * @param <BoundedBean> a specific AddColumnPreProcessorBean
- */
 @SuppressWarnings("serial")
 public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfigurationPanel<AddColumnPreProcessorBean>{
  
     private JComboBox<StiltsLocationType> locationTypeSelector;
-    private JTextField locationColumnField;
-    private JTextField newColumnNameField;
+    private ColumnIdTextField locationColumnField;
+    private ColumnIdTextField newColumnNameField;
     private JLabel commandLabel;
     
     private static final String NEW_COLUMN_NAME_LABEL = "Name of new Column";
     private static final String NEW_COLUMN_LOCATION = "Location to add new column";
     private static final String NEW_COLUMN_REFFERENCE = "Reference Column for location" ;       
     private static final String COMMAND_LABEL = "add command";
-    //private static final String STILS_HELP_PAGE = "http://www.star.bris.ac.uk/~mbt/stilts/sun256/addcol.html";
     
     protected static ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
     
@@ -48,7 +38,7 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
     @Override
     void initGui(AddColumnPreProcessorBean preprocessBean){ 
         addNextRow(new JLabel(NEW_COLUMN_NAME_LABEL), 1);
-        newColumnNameField = newTextField(preprocessBean.getNewColName());
+        newColumnNameField = new ColumnIdTextField(preprocessBean.getNewColName(), ColumnIdTextField.NAME_ONLY);
         addNextCol(newColumnNameField, 1);
         addNextRow(new JLabel(NEW_COLUMN_LOCATION), 1);
         StiltsLocationType locationType = preprocessBean.getNewColumnLocation();
@@ -58,9 +48,9 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
         addNextCol(locationTypeSelector, 1);
         addNextRow(new JLabel(NEW_COLUMN_REFFERENCE), 1);
         if (preprocessBean.getLocationColumn() != null){
-            locationColumnField = newTextField(preprocessBean.getLocationColumn());
+            locationColumnField = new ColumnIdTextField(preprocessBean.getLocationColumn(), ColumnIdTextField.ALLOW_ID);
         } else {
-            locationColumnField = newTextField();
+            locationColumnField = new ColumnIdTextField("", ColumnIdTextField.ALLOW_ID);
         }
         addNextCol(locationColumnField, 1);
         //JLabel seeLabel = new JLabel ("See: " + STILS_HELP_PAGE);
@@ -100,7 +90,7 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
     }
     
     private JButton wizardButton(){
-        JButton wizardButton = new JButton("Enter command manually");
+        JButton wizardButton = new JButton("Use command wizard");
         wizardButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -178,9 +168,9 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
       */
     public void refreshConfiguration(AddColumnPreProcessorBean preprocessBean) {
         super.refreshConfiguration(preprocessBean);
-        newColumnNameField = newTextField(preprocessBean.getNewColName());
+        newColumnNameField.setText(preprocessBean.getNewColName());
         locationTypeSelector.setSelectedItem(preprocessBean.getNewColumnLocation());
-        locationColumnField = newTextField(preprocessBean.getNewColName());
+        locationColumnField.setText(preprocessBean.getNewColName());
         commandLabel.setText(preprocessBean.getCommand());
     }
 }
