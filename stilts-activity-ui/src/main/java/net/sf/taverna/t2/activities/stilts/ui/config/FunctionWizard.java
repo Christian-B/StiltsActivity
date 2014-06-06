@@ -3,82 +3,122 @@ package net.sf.taverna.t2.activities.stilts.ui.config;
 import net.sf.taverna.t2.activities.stilts.ui.textfield.DoubleTextField;
 import net.sf.taverna.t2.activities.stilts.ui.textfield.ColumnIdTextField;
 import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
+import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 /**
  *
  * @author christian
  */
-public class FunctionWizard extends BasedWizard{
-        
-    private final DoubleTextField numberField;
-    private final JButton numberButton;
-    private final ColumnIdTextField inputField;
-    private final JButton inputButton;
+public class FunctionWizard extends JDialog{
+    
+    private int row = -1;  //So first row becomes 0
+    private int col = 0;
+    String command = null;
+    private final JLabel commandLabel = new JLabel(TODO);
+    private final JButton done = new JButton("Done");
+    
+    static final ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
+    private static final String TODO = "Select one of the options above";
+    
+    private final boolean anyValue;
     
     private static final int NOT_FOUND = -1;
-    private static final boolean ANY_VALUE = false;
-    private static final boolean BOOLEAN_ONLY = true;
+    private static final boolean ANY_VALUE = true;
+    private static final boolean BOOLEAN_ONLY = false;
     
-    private FunctionWizard(String title, boolean forceBoolean){
-        super(title);
-        numberButton = new JButton("Use a number");
-        numberButton.setEnabled(false);
-        numberField = new DoubleTextField();
-        numberButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                setCommand(numberField.getColumn().toString());
-            }
-        });    
-        numberField.addButton(numberButton);
-        inputButton = new JButton("Use column name/number");
-        inputButton.setEnabled(false);
-        inputField = new ColumnIdTextField("");
-        inputButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                setCommand(inputField.getColumn());
-            }
-        });    
-        inputField.addButton(inputButton);
+    private FunctionWizard(String title, boolean anyValue){
+        setTitle(title);
+        setLayout(new GridBagLayout());
+        this.setModal(true);
+        this.anyValue = anyValue;
+        addNumberRow();
+        addColumnRow();
+        addOneVariableOperatorRow();
+        addTwoVariableOperatorRow();
+        addCommandDoneRow();
+        pack();
+        setVisible(true);
     }
     
-    void initGui(){
-        addNextRow(numberButton);
-        addNextCol(numberField);
-        addNextRow(inputButton);
-        addNextCol(inputField);
-        addNextCol(inputHelpButton());
-        JButton byOne = new JButton("Using one value function");
-        addNextRow(byOne);
-        final JComboBox oneSelector = new JComboBox(StiltsOneVariableOperator.values());
-        oneSelector.setRenderer(listCellRenderer);
-        addNextCol(oneSelector);
-        byOne.addActionListener(new ActionListener() {
+    private void addNumberRow(){
+        if (anyValue){
+            JButton numberButton = new JButton("Use a number");
+            final DoubleTextField numberField = new DoubleTextField();
+            numberButton.setEnabled(false);
+            numberButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e)
+                {
+                    setCommand(numberField.getColumn().toString());
+                }
+            });    
+            numberField.addButton(numberButton);
+            addNextRow(numberButton);
+            addNextCol(numberField);
+        }
+    }
+    
+    private void addColumnRow(){
+        JButton columnButton = new JButton("Use column name/number");
+        final ColumnIdTextField columnField = new ColumnIdTextField("");
+        columnButton.setEnabled(false);
+        columnButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                StiltsOneVariableOperator operator = (StiltsOneVariableOperator)oneSelector.getSelectedItem();
-                String inside = getCommand("Input for " + operator);
-                if (inside == null){
-                   clearCommand();
-                } else {
-                    setCommand(operator.retrieveStilsCommand(inside));
-                }
+                setCommand(columnField.getColumn());
             }
         });    
-        
+        columnField.addButton(columnButton);
+        addNextRow(columnButton);
+        addNextCol(columnField);
+        addNextCol(columnHelpButton());
+    }    
+    
+    private void addOneVariableOperatorRow(){
+        if (anyValue){
+            JButton byOne = new JButton("Using one value function");
+            final JComboBox oneSelector = new JComboBox(StiltsOneVariableOperator.values());
+            oneSelector.setRenderer(listCellRenderer);
+            byOne.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e)
+                {
+                    StiltsOneVariableOperator operator = (StiltsOneVariableOperator)oneSelector.getSelectedItem();
+                    String inside = getCommand("Input for " + operator);
+                    if (inside == null){
+                        clearCommand();
+                    } else {
+                        setCommand(operator.retrieveStilsCommand(inside));
+                    }
+                }
+            }); 
+            addNextRow(byOne);
+            addNextCol(oneSelector);
+        }
+    }
+    
+    private void addTwoVariableOperatorRow(){
         JButton byTwo = new JButton("Using two value function");
         addNextRow(byTwo);
-        final JComboBox twoSelector = new JComboBox(StiltsTwoVariableOperator.values());
+        StiltsTwoVariableOperator[] values;
+        if (anyValue){
+            values = StiltsTwoVariableOperator.values();
+        } else {
+            values = StiltsTwoVariableOperator.booleanValues();
+        }
+        final JComboBox twoSelector = new JComboBox(values);
         twoSelector.setRenderer(listCellRenderer);
         addNextCol(twoSelector);
         byTwo.addActionListener(new ActionListener() {
@@ -97,8 +137,27 @@ public class FunctionWizard extends BasedWizard{
                 }
             }
         });    
-
-        super.initGui();
+    }
+    
+    private void addCommandDoneRow(){
+        done.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                setVisible(false);
+            }
+        });    
+        done.setEnabled(false);
+        addNextRow(commandLabel);
+        addNextCol(done);
+        JButton cancel = new JButton("Cancel");
+        cancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                command = null;
+                setVisible(false);
+            }
+        });    
+        addNextCol(cancel);        
     }
 
 /*  final JTextField textField(){
@@ -107,7 +166,28 @@ public class FunctionWizard extends BasedWizard{
         return field;
     }
 */
-    private JComponent inputHelpButton() {
+    final void addNextRow(JComponent component){
+        GridBagConstraints c = new GridBagConstraints();
+        col = 0;
+        c.gridx = col;
+        row++;
+        c.gridy = row;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        add(component,c);
+    }
+
+    final void addNextCol(JComponent component){
+        GridBagConstraints c = new GridBagConstraints();
+        col++;
+        c.gridx = col;
+        c.gridy = row;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        add(component,c);
+    }
+
+    private JComponent columnHelpButton() {
         final JButton help = new JButton("Help");
         help.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
@@ -127,10 +207,19 @@ public class FunctionWizard extends BasedWizard{
     }
 
     private String obtainCommand(){
-        initGui();
-        pack();
-        setVisible(true);
         return command;
+    }
+    
+    private void setCommand(String newCommand){
+        command = newCommand;
+        commandLabel.setText(command);
+        done.setEnabled(true);
+    }
+    
+    private void clearCommand(){
+        command = null;
+        commandLabel.setText(TODO);
+        done.setEnabled(false);
     }
     
     public static String getCommand(String title) {
@@ -157,7 +246,7 @@ public class FunctionWizard extends BasedWizard{
         test.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                String newCommand = FunctionWizard.getCommand("Test Wizard");
+                String newCommand = FunctionWizard.getBoolean("Test Wizard");
                 System.out.println("Return " + newCommand);
                 test.setText(newCommand);
             }
