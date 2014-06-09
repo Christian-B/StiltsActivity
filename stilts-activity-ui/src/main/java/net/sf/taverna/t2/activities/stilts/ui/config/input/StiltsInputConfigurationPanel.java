@@ -7,6 +7,7 @@ import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
 import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
 import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
+import net.sf.taverna.t2.activities.stilts.ui.config.BasePanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
@@ -18,7 +19,7 @@ import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
  * @param <BoundedBean> Any type of StitlsInputsBean
  */
 @SuppressWarnings("serial")
-public abstract class StiltsInputConfigurationPanel<BoundedBean extends StitlsInputsBean> extends JPanel{
+public abstract class StiltsInputConfigurationPanel<BoundedBean extends StitlsInputsBean> extends BasePanel{
 
     BoundedBean inputBean;
     

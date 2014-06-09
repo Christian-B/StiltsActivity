@@ -1,10 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.process;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
 import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
 import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
@@ -12,6 +7,7 @@ import net.sf.taverna.t2.activities.stilts.process.TCatBean;
 import net.sf.taverna.t2.activities.stilts.process.TCatNBean;
 import net.sf.taverna.t2.activities.stilts.process.TJoinBean;
 import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
+import net.sf.taverna.t2.activities.stilts.ui.config.BasePanel;
 
 /**
  * Base class of all the Process Configuration Panels
@@ -24,13 +20,12 @@ import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
  * @param <BoundedBean> a specific StiltsProcessBean
  */
 @SuppressWarnings("serial")
-public abstract class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessBean> extends JPanel{
+public abstract class StiltsProcessConfigurationPanel <BoundedBean extends StiltsProcessBean> extends BasePanel{
  
     BoundedBean processBean;
 
     StiltsProcessConfigurationPanel(BoundedBean processBean){
         this.processBean = processBean;
-        setLayout(new GridBagLayout());
     }
     
     public abstract boolean isConfigurable();

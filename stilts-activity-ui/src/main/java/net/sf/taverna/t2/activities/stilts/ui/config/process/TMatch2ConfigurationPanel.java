@@ -1,9 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.process;
 
-import net.sf.taverna.t2.activities.stilts.ui.config.input.TwoInputsConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.ListCellRenderer;
@@ -39,38 +36,23 @@ public class TMatch2ConfigurationPanel<BoundedBean extends TMatch2Bean> extends 
     
     TMatch2ConfigurationPanel(BoundedBean processBean){
         super(processBean);
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridwidth = 1;
-
-        c.gridx = 0;
-        c.gridy = 1;
-        JLabel findLabel = new JLabel(FIND_LABEL);
-        add(findLabel, c);
-        c.gridx = 1;
+        addNextRow(new JLabel(FIND_LABEL), 1);
         findSelector = new JComboBox<StiltsFind>(StiltsFind.values());
         findSelector.setRenderer(listCellRenderer);
         findSelector.setSelectedItem(processBean.getFindValue());
-        add(findSelector, c);
+        addNextCol(findSelector, 1);
 
-        c.gridx = 0;
-        c.gridy = 2;        
-        JLabel joinLabel = new JLabel(JOIN_LABEL);
-        add(joinLabel, c);
-        c.gridx = 1;
+        addNextRow(new JLabel(JOIN_LABEL), 1);
         joinSelector = new JComboBox<StiltsJoin>(StiltsJoin.values());
         joinSelector.setRenderer(listCellRenderer);
         joinSelector.setSelectedItem(processBean.getJoinValue());
-        add(joinSelector, c);
+        addNextCol(joinSelector, 1);
         
-        c.gridx = 0;
-        c.gridy = 3;
-        JLabel fixcolsLabel = new JLabel(FIXCOLS_LABEL);
-        add(fixcolsLabel, c);
-        c.gridx = 1;
+        addNextRow(new JLabel(FIXCOLS_LABEL), 1);
         fixcolsSelector = new JComboBox<StiltsFixcols>(StiltsFixcols.values());
         fixcolsSelector.setRenderer(listCellRenderer);
         fixcolsSelector.setSelectedItem(processBean.getFixcolsValue());
-        add(fixcolsSelector, c);
+        addNextCol(fixcolsSelector, 1);
     }
 
     /**

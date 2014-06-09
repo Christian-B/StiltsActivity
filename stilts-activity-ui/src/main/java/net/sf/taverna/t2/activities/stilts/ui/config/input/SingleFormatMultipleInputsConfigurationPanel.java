@@ -1,6 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.input;
 
-import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean;
@@ -22,23 +21,19 @@ public class SingleFormatMultipleInputsConfigurationPanel<BoundedBean extends Si
         super(inputBean, ADJUSTABLE_NUMBER_OF_INPUT_TABLES);
     }
     
+   @Override
+    void addAllRow() {
+        addNextRow(new JLabel(TYPE_LABEL),1);
+        inputsFormatSelector = new JComboBox<StiltsInputFormat>(StiltsInputFormat.values());
+        StiltsInputFormat format = inputBean.getFormatOfInputs();
+        inputsFormatSelector.setSelectedItem(format);
+        inputsFormatSelector.setRenderer(listCellRenderer);
+        addNextCol(inputsFormatSelector, 1);
+    }
+
     @Override
     void initGui() {
         super.initGui();
-        GridBagConstraints c = new GridBagConstraints();
-
-        //Format Type Table Header
-        c.gridx = 0;
-        c.gridy = headerRows + 2;
-        JLabel label = new JLabel(TYPE_LABEL);
-        add(label, c);
-        StiltsInputFormat format = inputBean.getFormatOfInputs();
-        c.gridx = 1;
-        c.gridwidth = this.getNumberOfInputs();
-        inputsFormatSelector = new JComboBox<StiltsInputFormat>(StiltsInputFormat.values());
-        inputsFormatSelector.setSelectedItem(format);
-        inputsFormatSelector.setRenderer(listCellRenderer);
-        add(inputsFormatSelector, c);
     }
 
     @Override
@@ -79,7 +74,7 @@ public class SingleFormatMultipleInputsConfigurationPanel<BoundedBean extends Si
     @Override
     public void refreshConfiguration(BoundedBean inputBean){
         super.refreshConfiguration(inputBean);
-        inputsFormatSelector.setSelectedItem(inputBean.getFormatOfInputs());
     }
 
+ 
 }

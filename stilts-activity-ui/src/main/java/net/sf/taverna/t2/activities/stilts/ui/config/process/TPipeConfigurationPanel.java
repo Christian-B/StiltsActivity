@@ -1,9 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.process;
 
-import net.sf.taverna.t2.activities.stilts.ui.config.input.SingleInputConfigurationPanel;
-import javax.swing.JLabel;
 import net.sf.taverna.t2.activities.stilts.process.TPipeBean;
-import net.sf.taverna.t2.activities.stilts.ui.config.preprocess.StiltsPreProcessConfigurationPanel;
 
 /**
  * TPipe Process Configuration Panels

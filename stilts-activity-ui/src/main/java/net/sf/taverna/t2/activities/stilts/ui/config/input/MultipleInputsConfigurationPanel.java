@@ -1,18 +1,15 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.input;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.sf.taverna.t2.activities.stilts.input.MultipleInputsBean;
+import net.sf.taverna.t2.activities.stilts.ui.textfield.IntegerTextField;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
 
 /**
@@ -32,7 +29,7 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
     final int headerRows;
 
     private final String NUMBER_OF_INPUTS_LABEL = "Number of Input Tables";
-    private JTextField numberOfInputsField; 
+    private IntegerTextField numberOfInputsField; 
     private final boolean adjustableNumberOfInputs;
     static final boolean ADJUSTABLE_NUMBER_OF_INPUT_TABLES = true;        
     static final boolean FIXED_NUMBER_OF_INPUT_TABLES = false;        
@@ -51,53 +48,45 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
     
    void initGui() {
         removeAll();
-        setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-
+        resetSelectors();
+        
         if (adjustableNumberOfInputs){
-            c.gridx = 0;
-            c.gridy = 0;
-            c.gridwidth = getNumberOfInputs() + 1;
-            JPanel numberOfInputsPanel = new JPanel();
-            JLabel numberOfInputsLabel = new JLabel(NUMBER_OF_INPUTS_LABEL);
-            numberOfInputsPanel.add(numberOfInputsLabel);
-            numberOfInputsField = new JTextField(getNumberOfInputs()+"");
-            numberOfInputsField.setColumns(3);
+            addNextRow(new JLabel(NUMBER_OF_INPUTS_LABEL),1);
+            numberOfInputsField = new IntegerTextField();
             numberOfInputsField.getDocument().addDocumentListener(this);
-            numberOfInputsPanel.add(numberOfInputsField);
-            JLabel warningLabel = new JLabel("Warning: Set this first!");  
-            numberOfInputsPanel.add(warningLabel);        
-            add(numberOfInputsPanel, c);
-            c.gridwidth = 1;
+            addNextCol(numberOfInputsField, 1);
+            numberOfInputsField.setValue(this.inputBean.retreiveNumberOfInputs());
+            addNextRow(new JLabel("Warning: Set number of input tables first!"),1);  
         }
         
-        //Format Type Table Header
-        c.gridx = 0;
-        c.gridy = headerRows;
-        JLabel label = new JLabel("");
-        add(label, c);
+        addAllRow();
+        addHeaderRow();
         for (int i = 0; i < getNumberOfInputs(); i++){
-            label = new JLabel("Table " + (i+1));
-            c.gridx = i + 1;
-            add(label, c);
-        }
-        
-        c.gridx = 0;
-        c.gridy = headerRows + 1;
-        label = new JLabel(TYPE_LABEL);
-        add(label, c);
-        List<StiltsInputType> types = inputBean.getTypesOfInputs();
-        inputsTypesSelectors = new ArrayList<JComboBox<StiltsInputType>>();
-        for (int i = 0; i < getNumberOfInputs(); i++){
-            JComboBox<StiltsInputType> box = new JComboBox<StiltsInputType>(StiltsInputType.values());
-            box.setSelectedItem(types.get(i));
-            box.setRenderer(listCellRenderer);
-            c.gridx = i + 1;
-            add(box, c);
-            inputsTypesSelectors.add(box);
+            addTableRow(i);
         }
     }
+    
+    void resetSelectors() {
+        inputsTypesSelectors = new ArrayList<JComboBox<StiltsInputType>>();
+    }
 
+    abstract void addAllRow();
+
+    void addHeaderRow(){
+        addNextRow(new JLabel(""),1);
+        addNextCol(new JLabel("Input Type"),1);
+    }
+    
+    void addTableRow(int i){
+        addNextRow(new JLabel("Input Table " + (i+1)),1);
+        JComboBox<StiltsInputType> box = new JComboBox<StiltsInputType>(StiltsInputType.values());
+        List<StiltsInputType> types = inputBean.getTypesOfInputs();
+        box.setSelectedItem(types.get(i));
+        box.setRenderer(listCellRenderer);
+        addNextCol(box, 1);
+        inputsTypesSelectors.add(box);
+    }
+       
     /**
       * Check that user values in UI are valid
       * @return true if and only if no errors found
@@ -177,13 +166,7 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
      @Override
      public void refreshConfiguration(BoundedBean inputBean){
         super.refreshConfiguration(inputBean);
-        if (adjustableNumberOfInputs){
-            numberOfInputsField = new JTextField(getNumberOfInputs()+"");
-        }
-        List<StiltsInputType> types = inputBean.getTypesOfInputs();
-        for (int i = 0; i < getNumberOfInputs(); i++){
-            inputsTypesSelectors.get(i).setSelectedItem(types.get(i));
-        }
+        initGui();
     }
 
     abstract int getNumberOfInputs();
@@ -216,6 +199,5 @@ public abstract class MultipleInputsConfigurationPanel<BoundedBean extends Multi
     public void removeUpdate(DocumentEvent de) {
         checkNumberOfInputsChanged();
     }
-    
 
 }

@@ -34,6 +34,7 @@ public abstract class CheckerTextField extends JTextField{
         buttons = new ArrayList<AbstractButton>();
         DocumentListener checker = columnChecker();
         getDocument().addDocumentListener(checker);
+        checkColumn();
     }
     
     @Override
