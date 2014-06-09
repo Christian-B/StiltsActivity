@@ -17,7 +17,7 @@ import net.sf.taverna.t2.activities.stilts.ui.textfield.IntegerTextField;
 @SuppressWarnings("serial")
 public abstract class RowCountPreProcessorConfigurationPanel<BoundedBean extends RowCountPreProcessorBean>  extends StiltsPreProcessConfigurationPanel<BoundedBean>{
  
-    private IntegerTextField rowCountField;
+    private final IntegerTextField rowCountField;
         
     public RowCountPreProcessorConfigurationPanel(BoundedBean preprocessBean){
         super(preprocessBean);

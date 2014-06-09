@@ -1,10 +1,9 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 
-import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorBean;
+import net.sf.taverna.t2.activities.stilts.ui.textfield.NoneEmptyTextField;
 
 /**
  * By Command PreProcess Configuration Panel
@@ -17,7 +16,7 @@ import net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorB
 @SuppressWarnings("serial")
 public class UserSpecifiedPreProcessorConfigurationPanel extends StiltsPreProcessConfigurationPanel<UserSpecifiedPreProcessorBean>{
  
-    private JTextField preProcessCommandField;
+    private NoneEmptyTextField preProcessCommandField;
     
     private static final String COMMAND_LABEL = "Stils filter command (excluding the \"cmd=\")";
     private static final String STILS_HELP_PAGE = "http://www.star.bristol.ac.uk/~mbt/stilts/sun256/filterSteps.html";
@@ -27,9 +26,10 @@ public class UserSpecifiedPreProcessorConfigurationPanel extends StiltsPreProces
         JLabel seeLabel = new JLabel ("See: " + STILS_HELP_PAGE);
         addNextRow(seeLabel, 2);
         JLabel commandLabel = new JLabel (COMMAND_LABEL);
-        addNextRow(commandLabel, 1);
-        preProcessCommandField = newTextField(preprocessBean.getPreProcessCommand());
-        addNextCol(preProcessCommandField, 1);
+        addNextRow(commandLabel, 2);
+        preProcessCommandField = new NoneEmptyTextField();
+        addNextRow(preProcessCommandField, 2);
+        refreshConfiguration(preprocessBean);
     }
    
     /**

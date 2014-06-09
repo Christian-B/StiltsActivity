@@ -60,15 +60,4 @@ public class BasePanel extends JPanel{
         addNextCol(helpButton, 1);     
     }
     
-    protected final JTextField  newTextField(String text){
-        JTextField textField = newTextField();
-        textField.setText(text);
-        return textField;
-    }
-
-    protected final JTextField newTextField(){
-        JTextField textField = new JTextField(fieldWidth);
-        return textField;
-    }
-
 }
