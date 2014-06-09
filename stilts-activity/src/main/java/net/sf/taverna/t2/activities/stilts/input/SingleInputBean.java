@@ -16,9 +16,9 @@ import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationE
  */
 public class SingleInputBean extends StitlsInputsBean implements Serializable {
     private StiltsInputFormat inputFormatEnum;
-    private final static String INPUT_FORMAT_NAME = "Format of Input Table";
+    private final static String INPUT_FORMAT_NAME = "Format of input table";
     private StiltsInputType inputTypeEnum;
-    private final static String INPUT_TYPE_NAME = "Type of Input Table";
+    private final static String INPUT_TYPE_NAME = "Type of input table";
       
     /**
      * Serialization constructor

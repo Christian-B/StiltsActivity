@@ -87,8 +87,8 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
     public List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
         for (int i = 0; i < retreiveNumberOfInputs(); i++){
-            configurations.add(new StiltsConfiguration("Table " + (i+1) + " type", this.getTypesOfInputs().get(i)));
-            configurations.add(new StiltsConfiguration("Table " + (i+1) + " format", formatsOfInputs.get(i)));
+            configurations.add(new StiltsConfiguration("Input table " + (i+1) + " type", this.getTypesOfInputs().get(i)));
+            configurations.add(new StiltsConfiguration("Input table " + (i+1) + " format", formatsOfInputs.get(i)));
         }
         return configurations;
     }

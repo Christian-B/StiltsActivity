@@ -24,7 +24,7 @@ public class StiltsBean implements StiltsInterface, Serializable{
     private final String OUTPUT_TYPE_NAME = "Output table type";
     private StiltsProcessBean process;
     private boolean debugMode = true;
-    private final String DEBUG_NAME = "DEBUG MODE";
+    private final String DEBUG_NAME = "Debug mode";
 
     private static final String OUTPUT_CATEGORY = "outputs";
     private static final String OUTPUT_TITLE = "Settings for Output Table";
