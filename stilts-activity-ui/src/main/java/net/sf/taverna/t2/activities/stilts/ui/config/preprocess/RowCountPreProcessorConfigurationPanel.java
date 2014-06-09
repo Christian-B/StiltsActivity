@@ -21,10 +21,6 @@ public abstract class RowCountPreProcessorConfigurationPanel<BoundedBean extends
         
     public RowCountPreProcessorConfigurationPanel(BoundedBean preprocessBean){
         super(preprocessBean);
-    }
-    
-    @Override
-    void initGui(RowCountPreProcessorBean preprocessBean){ 
         JLabel label1 = new JLabel ("Please specify the Rows(s) to " + getAction() + ".");
         addNextRow(label1, 2);
             

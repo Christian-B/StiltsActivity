@@ -24,10 +24,6 @@ public class UserSpecifiedPreProcessorConfigurationPanel extends StiltsPreProces
     
     public UserSpecifiedPreProcessorConfigurationPanel(UserSpecifiedPreProcessorBean preprocessBean){
         super(preprocessBean);
-    }
-    
-    @Override
-    void initGui(UserSpecifiedPreProcessorBean preprocessBean){
         JLabel seeLabel = new JLabel ("See: " + STILS_HELP_PAGE);
         addNextRow(seeLabel, 2);
         JLabel commandLabel = new JLabel (COMMAND_LABEL);
@@ -77,6 +73,6 @@ public class UserSpecifiedPreProcessorConfigurationPanel extends StiltsPreProces
     @Override
     public void refreshConfiguration(UserSpecifiedPreProcessorBean preprocessBean) {
         super.refreshConfiguration(preprocessBean);
-        preProcessCommandField = new JTextField(preprocessBean.getPreProcessCommand());
+        preProcessCommandField.setText(preprocessBean.getPreProcessCommand());
     }
 }

@@ -19,52 +19,57 @@ import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 @SuppressWarnings("serial")
 public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfigurationPanel<AddColumnPreProcessorBean>{
  
-    private JComboBox<StiltsLocationType> locationTypeSelector;
-    private ColumnIdTextField locationColumnField;
-    private ColumnIdTextField newColumnNameField;
-    private JLabel commandLabel;
+    private final JComboBox<StiltsLocationType> locationTypeSelector;
+    private final JLabel locationColumnLabel;
+    private final ColumnIdTextField locationColumnField;
+    private final ColumnIdTextField newColumnNameField;
+    private final JLabel commandLabel;
+    
     
     private static final String NEW_COLUMN_NAME_LABEL = "Name of new Column";
     private static final String NEW_COLUMN_LOCATION = "Location to add new column";
-    private static final String NEW_COLUMN_REFFERENCE = "Reference Column for location" ;       
+    private static final String AFTER_COLUMN_REFFERENCE = "Column to place new column after" ;       
+    private static final String BEFORE_COLUMN_REFFERENCE = "Column to place new column before" ;       
+    private static final String END_COLUMN_REFFERENCE = "New column will be placed at the end" ;       
     private static final String COMMAND_LABEL = "add command";
     
     protected static ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
     
     AddColumnPreProcessConfigurationPanel(AddColumnPreProcessorBean preprocessBean){
         super(preprocessBean);
-    }
 
-    @Override
-    void initGui(AddColumnPreProcessorBean preprocessBean){ 
         addNextRow(new JLabel(NEW_COLUMN_NAME_LABEL), 1);
         newColumnNameField = new ColumnIdTextField(preprocessBean.getNewColName(), ColumnIdTextField.NAME_ONLY);
         addNextCol(newColumnNameField, 1);
+
         addNextRow(new JLabel(NEW_COLUMN_LOCATION), 1);
-        StiltsLocationType locationType = preprocessBean.getNewColumnLocation();
         locationTypeSelector = new JComboBox<StiltsLocationType>(StiltsLocationType.values());
-        locationTypeSelector.setSelectedItem(locationType);
         locationTypeSelector.setRenderer(listCellRenderer);
         addNextCol(locationTypeSelector, 1);
-        addNextRow(new JLabel(NEW_COLUMN_REFFERENCE), 1);
+
+        locationColumnLabel = new JLabel();
+        addNextRow(locationColumnLabel, 1);
         if (preprocessBean.getLocationColumn() != null){
             locationColumnField = new ColumnIdTextField(preprocessBean.getLocationColumn(), ColumnIdTextField.ALLOW_ID);
         } else {
             locationColumnField = new ColumnIdTextField("", ColumnIdTextField.ALLOW_ID);
         }
         addNextCol(locationColumnField, 1);
-        //JLabel seeLabel = new JLabel ("See: " + STILS_HELP_PAGE);
-        //add(seeLabel, c);
-        JLabel commandLabel = new JLabel (COMMAND_LABEL);
-        addNextRow(commandLabel, 1);
+        locationTypeSelector.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateOnLocationTypeSelector();
+            }
+        });
+        
+        JLabel commandMessage = new JLabel (COMMAND_LABEL);
+        addNextRow(commandMessage, 1);
         this.commandLabel = new JLabel(preprocessBean.getCommand());
         addNextCol(this.commandLabel, 1);
         
         addNextRow (manualButton(), 1);
         addNextCol (wizardButton(), 1);
         
-        //commandField = newTextField(preprocessBean.getCommand());
-        //addNextCol(commandField);
+        refreshConfiguration(preprocessBean);    
     }
     
     private JButton manualButton(){
@@ -115,8 +120,8 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
         }
         if (!locationTypeSelector.getSelectedItem().equals(StiltsLocationType.END)){
             if (locationColumnField.getText().trim().isEmpty()){
-                String message = NEW_COLUMN_REFFERENCE + " can not be empty when " + NEW_COLUMN_LOCATION + " set to " + locationTypeSelector.getSelectedItem(); 
-                JOptionPane.showMessageDialog(this, message, "Empty " + NEW_COLUMN_REFFERENCE, JOptionPane.ERROR_MESSAGE);
+                String message = locationColumnLabel.getText() + " can not be empty when " + NEW_COLUMN_LOCATION + " set to " + locationTypeSelector.getSelectedItem(); 
+                JOptionPane.showMessageDialog(this, message, "Empty " + locationColumnLabel.getText(), JOptionPane.ERROR_MESSAGE);
                 return false;
             }        
         }
@@ -162,6 +167,25 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
         preprocessBean.setCommand(commandLabel.getText());
     }
 
+    private void updateOnLocationTypeSelector(){
+        StiltsLocationType type = (StiltsLocationType)locationTypeSelector.getSelectedItem();
+        switch (type){
+            case AFTER:
+                locationColumnLabel.setText(AFTER_COLUMN_REFFERENCE );
+                locationColumnField.setVisible(true);
+                break;
+            case BEFORE:
+                locationColumnLabel.setText(BEFORE_COLUMN_REFFERENCE );
+                locationColumnField.setVisible(true);
+                break;
+            case END:
+                locationColumnLabel.setText(END_COLUMN_REFFERENCE );
+                locationColumnField.setVisible(false);
+                break;
+            default:
+                throw new UnsupportedOperationException(type + " not supported");
+        }
+    }
     /**
       * Update GUI from a changed configuration bean (perhaps by undo/redo).
       * 
@@ -170,7 +194,8 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
         super.refreshConfiguration(preprocessBean);
         newColumnNameField.setText(preprocessBean.getNewColName());
         locationTypeSelector.setSelectedItem(preprocessBean.getNewColumnLocation());
-        locationColumnField.setText(preprocessBean.getNewColName());
+        updateOnLocationTypeSelector();
+        locationColumnField.setText(preprocessBean.getLocationColumn());
         commandLabel.setText(preprocessBean.getCommand());
     }
 }

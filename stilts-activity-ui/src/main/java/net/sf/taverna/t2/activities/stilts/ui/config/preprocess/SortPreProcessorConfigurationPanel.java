@@ -22,11 +22,6 @@ public class SortPreProcessorConfigurationPanel extends ColumnListPreProcessorCo
 
     public SortPreProcessorConfigurationPanel(SortPreProcessorBean preprocessBean){
         super(preprocessBean);
-    }
-
-    @Override
-    void initGui(SortPreProcessorBean preprocessBean){ 
-        super.initGui(preprocessBean);
         ascendingCheckBox = new JCheckBox("Sort Data Ascending", preprocessBean.isAscending());
         addNextRow(ascendingCheckBox, 2);
         

@@ -31,11 +31,8 @@ public abstract class StiltsPreProcessConfigurationPanel <BoundedBean extends St
 
     StiltsPreProcessConfigurationPanel(BoundedBean preprocessBean){
         this.preprocessBean = preprocessBean;
-        initGui(preprocessBean);
     }
     
-    abstract void initGui(BoundedBean preprocessBean);
-
     /**
       * Check that user values in UI are valid
       */

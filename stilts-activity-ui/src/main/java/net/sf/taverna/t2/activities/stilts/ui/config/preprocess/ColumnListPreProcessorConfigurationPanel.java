@@ -22,10 +22,6 @@ public abstract class ColumnListPreProcessorConfigurationPanel<BoundedBean exten
         
     public ColumnListPreProcessorConfigurationPanel(BoundedBean preprocessBean){
         super(preprocessBean);
-    }
-    
-    @Override
-    void initGui(BoundedBean preprocessBean){ 
         JLabel label1 = new JLabel ("Please specify the Column(s) to " + getAction() + ".");
         addNextRow(label1, 2);
             
@@ -88,7 +84,7 @@ public abstract class ColumnListPreProcessorConfigurationPanel<BoundedBean exten
     @Override
     public void refreshConfiguration(BoundedBean preprocessBean) {
         super.refreshConfiguration(preprocessBean);
-        columnsListField = new JTextField(preprocessBean.getColumnList());
+        columnsListField.setText(preprocessBean.getColumnList());
     }
 
     abstract String getAction();
