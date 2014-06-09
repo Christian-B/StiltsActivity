@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.preprocess.AddColumnPreProcessorBean;
 import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
@@ -28,9 +27,9 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
     
     private static final String NEW_COLUMN_NAME_LABEL = "Name of new Column";
     private static final String NEW_COLUMN_LOCATION = "Location to add new column";
-    private static final String AFTER_COLUMN_REFFERENCE = "Column to place new column after" ;       
-    private static final String BEFORE_COLUMN_REFFERENCE = "Column to place new column before" ;       
-    private static final String END_COLUMN_REFFERENCE = "New column will be placed at the end" ;       
+    private static final String AFTER_COLUMN_REFFERENCE =  "Column to place new column after    " ;       
+    private static final String BEFORE_COLUMN_REFFERENCE = "Column to place new column before   " ;       
+    private static final String END_COLUMN_REFFERENCE =    "New column will be placed at the end" ;       
     private static final String COMMAND_LABEL = "add command";
     
     protected static ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
@@ -41,6 +40,7 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
         addNextRow(new JLabel(NEW_COLUMN_NAME_LABEL), 1);
         newColumnNameField = new ColumnIdTextField(preprocessBean.getNewColName(), ColumnIdTextField.NAME_ONLY);
         addNextCol(newColumnNameField, 1);
+        addHelpButton(newColumnNameField);
 
         addNextRow(new JLabel(NEW_COLUMN_LOCATION), 1);
         locationTypeSelector = new JComboBox<StiltsLocationType>(StiltsLocationType.values());
@@ -55,6 +55,7 @@ public class AddColumnPreProcessConfigurationPanel extends StiltsPreProcessConfi
             locationColumnField = new ColumnIdTextField("", ColumnIdTextField.ALLOW_ID);
         }
         addNextCol(locationColumnField, 1);
+        addHelpButton(locationColumnField);
         locationTypeSelector.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateOnLocationTypeSelector();

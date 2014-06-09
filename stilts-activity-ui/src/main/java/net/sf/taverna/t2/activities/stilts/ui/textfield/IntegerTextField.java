@@ -11,7 +11,7 @@ public class IntegerTextField extends CheckerTextField{
     }
     
     @Override
-    public Integer getColumn(){
+    public Integer getValue(){
         String asString = getText();
         asString = asString.trim();
         if (asString.isEmpty()){
@@ -27,5 +27,17 @@ public class IntegerTextField extends CheckerTextField{
             return null;    
         }    
     }
+
+    @Override
+    public String helpText() {
+        return "This can be any positive integer.\n"
+                + "So it can only be the digit 0 to 9\n"
+                + "With an optional + in the front.";
+    }
     
+    public void setValue(int value){
+        if (value > 0){
+            setText(value+"");
+        }
+    }
 }

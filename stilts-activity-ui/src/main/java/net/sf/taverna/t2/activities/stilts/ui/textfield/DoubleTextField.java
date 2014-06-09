@@ -11,7 +11,7 @@ public class DoubleTextField extends CheckerTextField{
     }
     
     @Override
-    public Double getColumn(){
+    public Double getValue(){
         String asString = getText();
         asString = asString.trim();
         if (asString.isEmpty()){
@@ -25,4 +25,11 @@ public class DoubleTextField extends CheckerTextField{
         }    
     }
     
+    @Override
+    public String helpText() {
+        return "Any String that Java can convert to a number.\n"
+                + "Decimal values are allowed\n"
+                + "This can start with a - or +\n"
+                + "Even Scientific notation eg 4.56E5 is supported.";
+    }
 }

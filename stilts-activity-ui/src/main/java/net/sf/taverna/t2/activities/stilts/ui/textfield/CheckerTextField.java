@@ -22,10 +22,15 @@ public abstract class CheckerTextField extends JTextField{
     
     private final List<AbstractButton> buttons; 
     
-    public abstract Object getColumn();
+    public abstract Object getValue();
     
+    public abstract String helpText();
+    
+    private static int SIZE = 30; 
+            
     public CheckerTextField(){
         super();
+        this.setColumns(SIZE);
         buttons = new ArrayList<AbstractButton>();
         DocumentListener checker = columnChecker();
         getDocument().addDocumentListener(checker);
@@ -51,7 +56,7 @@ public abstract class CheckerTextField extends JTextField{
     }
  
     private void checkColumn(){
-        if (getColumn() == null){
+        if (getValue() == null){
             setButtonsEnabled(false);
             this.setBackground(Color.RED);
         } else {

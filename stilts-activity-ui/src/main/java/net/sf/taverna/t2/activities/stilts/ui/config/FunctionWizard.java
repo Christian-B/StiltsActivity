@@ -62,12 +62,21 @@ public class FunctionWizard extends JDialog{
             numberButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e)
                 {
-                    setCommand(numberField.getColumn().toString());
+                    setCommand(numberField.getValue().toString());
                 }
             });    
             numberField.addButton(numberButton);
             addNextRow(numberButton);
             addNextCol(numberField);
+            JButton helpButton = new JButton("Help");
+            helpButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e)
+                {
+                    Frame frame = Frame.getFrames()[0]; 
+                    JOptionPane.showMessageDialog(frame,numberField.helpText());
+                }
+            });    
+        addNextCol(helpButton);
         }
     }
     
@@ -78,13 +87,21 @@ public class FunctionWizard extends JDialog{
         columnButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                setCommand(columnField.getColumn());
+                setCommand(columnField.getValue());
             }
         });    
         columnField.addButton(columnButton);
         addNextRow(columnButton);
         addNextCol(columnField);
-        addNextCol(columnHelpButton());
+        JButton helpButton = new JButton("Help");
+        helpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                Frame frame = Frame.getFrames()[0]; 
+                JOptionPane.showMessageDialog(frame,columnField.helpText());
+             }
+        });    
+        addNextCol(helpButton);
     }    
     
     private void addOneVariableOperatorRow(){
@@ -185,25 +202,6 @@ public class FunctionWizard extends JDialog{
         c.gridwidth = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
         add(component,c);
-    }
-
-    private JComponent columnHelpButton() {
-        final JButton help = new JButton("Help");
-        help.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                Frame frame = Frame.getFrames()[0]; 
-                JOptionPane.showMessageDialog(frame,
-                        "This can be the Column Name or Index\n" 
-                        + "The name of the column may be used if it contains no spaces \n"
-                        + "and doesn't start with a minus character ('-'). \n"
-                        + "It is usually matched case insensitively. \n"
-                        + "If multiple columns have the same name, the first one that matches is selected. \n"
-                        + "Column Index is a useful fallback if the column name isn't suitable for some reason.\n"
-                        + "The first column is '$1', the second is '$2' and so on.");
-             }
-        });    
-        return help;
     }
 
     private String obtainCommand(){

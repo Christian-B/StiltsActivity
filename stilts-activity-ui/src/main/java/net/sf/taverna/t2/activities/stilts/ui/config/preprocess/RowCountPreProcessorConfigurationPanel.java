@@ -2,8 +2,8 @@ package net.sf.taverna.t2.activities.stilts.ui.config.preprocess;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import net.sf.taverna.t2.activities.stilts.preprocess.RowCountPreProcessorBean;
+import net.sf.taverna.t2.activities.stilts.ui.textfield.IntegerTextField;
 
 /**
  * Base class of all the All PreProcess using a row count Configuration Panels
@@ -17,7 +17,7 @@ import net.sf.taverna.t2.activities.stilts.preprocess.RowCountPreProcessorBean;
 @SuppressWarnings("serial")
 public abstract class RowCountPreProcessorConfigurationPanel<BoundedBean extends RowCountPreProcessorBean>  extends StiltsPreProcessConfigurationPanel<BoundedBean>{
  
-    private JTextField rowCountField;
+    private IntegerTextField rowCountField;
         
     public RowCountPreProcessorConfigurationPanel(BoundedBean preprocessBean){
         super(preprocessBean);
@@ -26,8 +26,9 @@ public abstract class RowCountPreProcessorConfigurationPanel<BoundedBean extends
             
         JLabel commandLabel = new JLabel ("Column(s) to " + getAction() + ": ");
         addNextRow(commandLabel, 1);
-        rowCountField = newTextField(preprocessBean.getNumberOfRows()+"");
+        rowCountField = new IntegerTextField();
         addNextCol(rowCountField, 1);
+        this.addHelpButton(rowCountField);
     }
    
     /**
@@ -85,7 +86,7 @@ public abstract class RowCountPreProcessorConfigurationPanel<BoundedBean extends
     public void refreshConfiguration(BoundedBean preprocessBean) {
         super.refreshConfiguration(preprocessBean);
         System.out.println("refreshConfigurationn " + preprocessBean.getNumberOfRows());        
-        rowCountField.setText(preprocessBean.getNumberOfRows()+"");
+        rowCountField.setValue(preprocessBean.getNumberOfRows());
     }
 
     abstract String getAction();
