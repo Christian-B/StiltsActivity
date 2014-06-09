@@ -9,11 +9,11 @@
 	<name>Stilts Activity Bundle</name>
 
 	<properties>
-		<t2.core.version>1.5</t2.core.version>
-		<t2.activities.version>1.5</t2.activities.version>
-		<t2.ui.api.version>1.5</t2.ui.api.version>
-		<t2.workbench.version>2.5.0</t2.workbench.version>
-                <t2.ui.impl.version>1.5</t2.ui.impl.version>
+		<t2.core.version>1.6-SNAPSHOT</t2.core.version>
+		<t2.activities.version>1.6-SNAPSHOT</t2.activities.version>
+		<t2.ui.api.version>1.6-SNAPSHOT</t2.ui.api.version>
+		<t2.workbench.version>2.6-SNAPSHOT</t2.workbench.version>
+                <t2.ui.impl.version>1.6-SNAPSHOT</t2.ui.impl.version>
 	</properties>
 
 	<build>
