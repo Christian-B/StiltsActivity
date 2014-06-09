@@ -3,7 +3,6 @@ package net.sf.taverna.t2.activities.stilts.input;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
@@ -108,21 +107,11 @@ public class SingleInputBean extends StitlsInputsBean implements Serializable {
     }
     
     @Override
-    List<StiltsConfiguration> configurations() {
+    public List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
-        configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME,  inputFormatEnum, true));
-        configurations.add(new StiltsConfiguration (INPUT_TYPE_NAME,  inputTypeEnum, true));
+        configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME,  inputFormatEnum));
+        configurations.add(new StiltsConfiguration (INPUT_TYPE_NAME,  inputTypeEnum));
         return configurations;        
-    }
-
-    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
-        configurationGroup.checkClass(INPUT_FORMAT_NAME, StiltsInputFormat.class);
-        configurationGroup.checkClass(INPUT_TYPE_NAME, StiltsInputType.class);
-    }
-
-    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
-        inputFormatEnum = (StiltsInputFormat) configurationGroup.getItem(INPUT_FORMAT_NAME);
-        inputTypeEnum = (StiltsInputType) configurationGroup.getItem(INPUT_TYPE_NAME);
     }
 
 }

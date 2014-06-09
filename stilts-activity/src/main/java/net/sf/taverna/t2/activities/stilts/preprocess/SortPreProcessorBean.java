@@ -1,7 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -100,25 +99,13 @@ public class SortPreProcessorBean extends ColumnListPreProcessorBean{
         return "Sortt rows";
     }
  
-   @Override
-    List<StiltsConfiguration> configurations() {
+    @Override
+    public List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
-        configurations.add(new StiltsConfiguration (ASCENDING_NAME,  ascending, true));
-        configurations.add(new StiltsConfiguration (NULLS_AT_BEGINING_NAME,  nullsAtBegining, true));
+        configurations.add(new StiltsConfiguration (ASCENDING_NAME,  ascending));
+        configurations.add(new StiltsConfiguration (NULLS_AT_BEGINING_NAME,  nullsAtBegining));
         return configurations;        
     }
     
-    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
-        super.checkConfiguration(configurationGroup);
-        configurationGroup.checkClass(ASCENDING_NAME, Boolean.class);
-        configurationGroup.checkClass(NULLS_AT_BEGINING_NAME, Boolean.class);
-    }
-    
-    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
-        super.noteConfiguration(configurationGroup);
-        ascending = (Boolean) configurationGroup.getItem(ASCENDING_NAME);
-        nullsAtBegining = (Boolean) configurationGroup.getItem(NULLS_AT_BEGINING_NAME);
-    }
-
 }
  

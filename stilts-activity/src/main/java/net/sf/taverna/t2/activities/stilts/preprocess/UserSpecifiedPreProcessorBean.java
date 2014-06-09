@@ -2,7 +2,6 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -81,18 +80,10 @@ public class UserSpecifiedPreProcessorBean extends StiltsPreProcessBean{
     }
 
     @Override
-    List<StiltsConfiguration> configurations() {
+    public List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
-        configurations.add(new StiltsConfiguration (PREPROCESS_COMMAND_NAME,  preProcessCommand, true));
+        configurations.add(new StiltsConfiguration (PREPROCESS_COMMAND_NAME,  preProcessCommand));
         return configurations;        
     }
 
-    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
-         configurationGroup.checkString(PREPROCESS_COMMAND_NAME);
-    }
-
-    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
-        preProcessCommand = (String) configurationGroup.getItem(PREPROCESS_COMMAND_NAME);
-    }
-
-}
+ }

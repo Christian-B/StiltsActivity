@@ -1,8 +1,8 @@
 package net.sf.taverna.t2.activities.stilts.input;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
@@ -103,21 +103,13 @@ public class SingleFormatMultipleInputsBean extends MultipleInputsBean
     }     
 
     @Override
-    List<StiltsConfiguration> configurations() {
-        List<StiltsConfiguration> configurations = super.configurations();
-        configurations.add(new StiltsConfiguration (INPUT_FORMAT_NAME,  formatOfInputs, true));
-        return configurations;        
+    public  List<StiltsConfiguration> configurations() {
+        ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
+        configurations.add(new StiltsConfiguration("All table format", formatOfInputs));
+        for (int i = 0; i < retreiveNumberOfInputs(); i++){
+            configurations.add(new StiltsConfiguration("Table " + (i+1) + " type", this.getTypesOfInputs().get(i)));
+        }
+        return configurations;
     }
-    
-    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
-        super.checkConfiguration(configurationGroup);
-        configurationGroup.checkClass(INPUT_FORMAT_NAME, StiltsInputFormat.class);
-    }
-    
-    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
-        super.noteConfiguration(configurationGroup);
-        formatOfInputs = (StiltsInputFormat) configurationGroup.getItem(INPUT_FORMAT_NAME);
-    }
-
 }
  

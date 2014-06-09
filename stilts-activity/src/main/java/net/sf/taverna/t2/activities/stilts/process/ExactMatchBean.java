@@ -1,7 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
@@ -79,20 +78,10 @@ public class ExactMatchBean extends TMatch2Bean {
     }
 
     @Override
-    List<StiltsConfiguration> configurations() {
+    public List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
-        configurations.add(new StiltsConfiguration (NUMBER_OF_COLUMNS_NAME,  numbertOfColumnsToMatch, true));
+        configurations.add(new StiltsConfiguration (NUMBER_OF_COLUMNS_NAME,  numbertOfColumnsToMatch));
         return configurations;        
-    }
-
-    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
-        super.checkConfiguration(configurationGroup);
-        configurationGroup.checkPositiveInteger(NUMBER_OF_COLUMNS_NAME);
-    }
-    
-    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
-        super.noteConfiguration(configurationGroup);
-        numbertOfColumnsToMatch = (Integer) configurationGroup.getItem(NUMBER_OF_COLUMNS_NAME);
     }
 
 }

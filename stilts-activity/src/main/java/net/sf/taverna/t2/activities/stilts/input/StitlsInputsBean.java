@@ -2,7 +2,6 @@ package net.sf.taverna.t2.activities.stilts.input;
 
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -29,14 +28,6 @@ public abstract class StitlsInputsBean {
      */
     public abstract void checkValid() throws ActivityConfigurationException;
 
-    abstract List<StiltsConfiguration> configurations();
+    public abstract List<StiltsConfiguration> configurations();
 
-    public abstract void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException;
-
-    public ConfigurationGroup getConfigurationGroup() {
-        return new ConfigurationGroup(StiltsBean.INPUTS_CATEGORY, "Input Table Settings", configurations());
-    }
-
-    public abstract void noteConfiguration(ConfigurationGroup group) throws ActivityConfigurationException ;
-    
 }

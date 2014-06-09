@@ -3,8 +3,6 @@ package net.sf.taverna.t2.activities.stilts.input;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
-import net.sf.taverna.t2.activities.stilts.configuration.ListConfiguration;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsInputType;
@@ -86,26 +84,13 @@ public abstract class MultipleFormatsBean extends MultipleInputsBean
     }
 
     @Override
-    List<StiltsConfiguration> configurations() {
+    public List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
-        ListConfiguration lists = new ListConfiguration (NUMBER_OF_INPUTS_NAME, INPUT_TYPE_NAME,  (List<Object>)(List<?>) getTypesOfInputs(), flexibleNumberOfTables());
-        lists.addList(INPUT_FORMAT_NAME,  (List<Object>)(List<?>)formatsOfInputs);
-        configurations.add(lists);
-        return configurations;        
+        for (int i = 0; i < retreiveNumberOfInputs(); i++){
+            configurations.add(new StiltsConfiguration("Table " + (i+1) + " type", this.getTypesOfInputs().get(i)));
+            configurations.add(new StiltsConfiguration("Table " + (i+1) + " format", formatsOfInputs.get(i)));
+        }
+        return configurations;
     }
     
-    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
-        configurationGroup.checkClasses(NUMBER_OF_INPUTS_NAME, INPUT_TYPE_NAME, StiltsInputType.class);
-        System.out.println("part2");
-        configurationGroup.checkClasses(NUMBER_OF_INPUTS_NAME, INPUT_FORMAT_NAME, StiltsInputFormat.class);
-    }
-
-    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
-        super.noteConfiguration(configurationGroup);
-        formatsOfInputs = new ArrayList<StiltsInputFormat>();
-        for(StiltsConfiguration config: configurationGroup.getList(NUMBER_OF_INPUTS_NAME, INPUT_FORMAT_NAME)){
-            formatsOfInputs.add((StiltsInputFormat)config.getItem());
-        }
-    }
-
  }

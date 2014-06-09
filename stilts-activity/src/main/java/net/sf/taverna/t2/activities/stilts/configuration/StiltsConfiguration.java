@@ -11,12 +11,10 @@ public class StiltsConfiguration {
     
     private final String name;
     private Object item;
-    private final boolean configurable;
     
-    public StiltsConfiguration(String name, Object item, boolean configurable){
+    public StiltsConfiguration(String name, Object item){
         this.name = name;
         this.item = item;
-        this.configurable = configurable;
     }
 
     /**
@@ -40,13 +38,6 @@ public class StiltsConfiguration {
         this.item = item;
     }
 
-    /**
-     * @return the configurable
-     */
-    public boolean isConfigurable() {
-        return configurable;
-    }
-    
     @Override
     public boolean equals(Object other){
         if (other instanceof StiltsConfiguration){

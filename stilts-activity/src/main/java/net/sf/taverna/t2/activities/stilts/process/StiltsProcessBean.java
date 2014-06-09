@@ -3,7 +3,6 @@ package net.sf.taverna.t2.activities.stilts.process;
 import java.util.ArrayList;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.StitlsInputsBean;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -66,19 +65,8 @@ public abstract class StiltsProcessBean {
 
     public abstract String title();
 
-    List<StiltsConfiguration> configurations(){
+    public List<StiltsConfiguration> configurations(){
         return new ArrayList<StiltsConfiguration>();
     }
 
-    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{
-        //nothing to check so ok!
-    }
-
-    public ConfigurationGroup getConfigurationGroup() {
-        return new ConfigurationGroup(StiltsBean.PROCESS_CATEGORY, title() + " settings", configurations());
-    }
-
-    public void noteConfiguration(ConfigurationGroup group) throws ActivityConfigurationException {
-         //nothing to note so ok!
-    }
-}
+ }

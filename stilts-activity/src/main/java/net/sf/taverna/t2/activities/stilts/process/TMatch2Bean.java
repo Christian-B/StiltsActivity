@@ -1,7 +1,6 @@
 package net.sf.taverna.t2.activities.stilts.process;
 
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.TwoInputsBean;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsFind;
@@ -127,19 +126,13 @@ public abstract class TMatch2Bean extends StiltsProcessBean {
     }
 
     @Override
-    List<StiltsConfiguration> configurations() {
+    public List<StiltsConfiguration> configurations() {
         List<StiltsConfiguration> configurations = super.configurations();
-        configurations.add(new StiltsConfiguration (FIND_NAME,  findValue, true));
-        configurations.add(new StiltsConfiguration (JOIN_NAME,  joinValue, true));
-        configurations.add(new StiltsConfiguration (FIX_COLS_NAME,  fixcolsValue, true));
+        configurations.add(new StiltsConfiguration (FIND_NAME,  findValue));
+        configurations.add(new StiltsConfiguration (JOIN_NAME,  joinValue));
+        configurations.add(new StiltsConfiguration (FIX_COLS_NAME,  fixcolsValue));
         return configurations;        
     }
 
-    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
-        super.checkConfiguration(configurationGroup);
-        configurationGroup.checkClass(FIND_NAME, StiltsFind.class);    
-        configurationGroup.checkClass(JOIN_NAME, StiltsJoin.class);
-        configurationGroup.checkClass(FIX_COLS_NAME, StiltsFixcols.class);
-    }    
 }
    

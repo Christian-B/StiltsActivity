@@ -3,8 +3,6 @@ package net.sf.taverna.t2.activities.stilts;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.configuration.AllConfigurations;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.preprocess.StiltsPreProcessBean;
 import net.sf.taverna.t2.activities.stilts.process.StiltsProcessBean;
@@ -159,58 +157,19 @@ public class StiltsBean implements StiltsInterface, Serializable{
         }
      }
 
-    public AllConfigurations configurations(){
-        AllConfigurations configurations = new AllConfigurations();
-        configurations.addGroup(process.getInputs().getConfigurationGroup());
-        configurations.addGroup(process.getConfigurationGroup());
+    public List<StiltsConfiguration> configurations(){
+        List<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
+        configurations.addAll(process.getInputs().configurations());
+        configurations.addAll(process.configurations());
         if (preprocess != null){
-            configurations.addGroup(preprocess.getConfigurationGroup());
+            configurations.addAll(preprocess.configurations());
         }
-        List<StiltsConfiguration> outputConfigurations = new ArrayList<StiltsConfiguration>();
-        outputConfigurations.add(new StiltsConfiguration (OUTPUT_FORMAT_NAME,  outputFormat, true));
-        outputConfigurations.add(new StiltsConfiguration (OUTPUT_TYPE_NAME,  outputType, true));
-        ConfigurationGroup outputGroup = new ConfigurationGroup(OUTPUT_CATEGORY, OUTPUT_TITLE, outputConfigurations);
-        configurations.addGroup(outputGroup);
-        List<StiltsConfiguration> miscellaneousConfigurations = new ArrayList<StiltsConfiguration>();
-        miscellaneousConfigurations.add(new StiltsConfiguration (DEBUG_NAME,  debugMode, true));
-        ConfigurationGroup miscellaneousGroup = new ConfigurationGroup(MISCELLANEOUS_CATEGORY, MISCELLANEOUS_TITLE, miscellaneousConfigurations);
-        configurations.addGroup(miscellaneousGroup);
+        configurations.add(new StiltsConfiguration (OUTPUT_FORMAT_NAME,  outputFormat));
+        configurations.add(new StiltsConfiguration (OUTPUT_TYPE_NAME,  outputType));
+        configurations.add(new StiltsConfiguration (DEBUG_NAME,  debugMode));
         return configurations;
     }
 
-    public void checkConfiguration(AllConfigurations newConfigurations) throws ActivityConfigurationException {
-        AllConfigurations oldConfigurations = configurations();
-        if (oldConfigurations.size() <  newConfigurations.size()){
-            throw new ActivityConfigurationException("Configuration is missing one or mre elements");
-        }
-        if (oldConfigurations.size() >  newConfigurations.size()){
-            throw new ActivityConfigurationException("Configuration has one or mre surplus elements");
-        }
-        process.getInputs().checkConfiguration(newConfigurations.getGroup(INPUTS_CATEGORY));
-        process.checkConfiguration(newConfigurations.getGroup(PROCESS_CATEGORY));
-        if (preprocess != null){
-            preprocess.checkConfiguration(newConfigurations.getGroup(PREPROCESS_CATEGORY));
-        }
-        ConfigurationGroup outputGroup = newConfigurations.getGroup(OUTPUT_CATEGORY);
-        outputGroup.checkClass(OUTPUT_FORMAT_NAME, StiltsOutputFormat.class);
-        outputGroup.checkClass(OUTPUT_TYPE_NAME, StiltsOutputType.class);
-        ConfigurationGroup miscellaneousGroup = newConfigurations.getGroup(MISCELLANEOUS_CATEGORY);
-        miscellaneousGroup.checkClass(DEBUG_NAME, Boolean.class);
-   }
-
-    void noteConfiguration(AllConfigurations newConfigurations) throws ActivityConfigurationException {
-        checkConfiguration(newConfigurations);       
-        process.getInputs().noteConfiguration(newConfigurations.getGroup(INPUTS_CATEGORY));
-        process.noteConfiguration(newConfigurations.getGroup(PROCESS_CATEGORY));
-        if (preprocess != null){
-            preprocess.noteConfiguration(newConfigurations.getGroup(PREPROCESS_CATEGORY));
-        }
-        ConfigurationGroup outputGroup = newConfigurations.getGroup(OUTPUT_CATEGORY);        
-        outputFormat = (StiltsOutputFormat) outputGroup.getItem(OUTPUT_FORMAT_NAME);
-        outputType = (StiltsOutputType)outputGroup.getItem(OUTPUT_TYPE_NAME);
-        ConfigurationGroup miscellaneousGroup = newConfigurations.getGroup(MISCELLANEOUS_CATEGORY);
-        debugMode = (Boolean) miscellaneousGroup.getItem(DEBUG_NAME);
-    }
 }
   
 

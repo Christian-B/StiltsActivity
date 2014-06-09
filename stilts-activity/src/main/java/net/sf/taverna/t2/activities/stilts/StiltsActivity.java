@@ -18,10 +18,7 @@
  */
 package net.sf.taverna.t2.activities.stilts;
 
-import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
-import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
 import java.io.BufferedReader;
-import net.sf.taverna.t2.activities.stilts.utils.MyUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -32,12 +29,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import net.sf.taverna.t2.activities.stilts.configuration.AllConfigurations;
+import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.*;
 import net.sf.taverna.t2.activities.stilts.preprocess.*;
 import net.sf.taverna.t2.activities.stilts.process.*;
+import net.sf.taverna.t2.activities.stilts.process.ExactMatchBean;
 import net.sf.taverna.t2.activities.stilts.utils.*;
 
+import net.sf.taverna.t2.activities.stilts.utils.MyUtils;
 import net.sf.taverna.t2.invocation.InvocationContext;
 import net.sf.taverna.t2.reference.ReferenceService;
 import net.sf.taverna.t2.reference.T2Reference;
@@ -776,15 +775,8 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         }
     }
     
-    public AllConfigurations configurations() {
+    public List<StiltsConfiguration> configurations() {
         return configBean.configurations();
     }
 
-    public void checkConfiguration(AllConfigurations newConfiguration) throws ActivityConfigurationException{ 
-        configBean.checkConfiguration(newConfiguration);
-    }
-
-    public void noteConfiguration(AllConfigurations newConfigurations) throws ActivityConfigurationException {
-        configBean.noteConfiguration(newConfigurations);        
-    }
-}
+ }

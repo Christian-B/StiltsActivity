@@ -2,7 +2,6 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsLocationType;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
@@ -182,22 +181,10 @@ public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     @Override
     public List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
-        configurations.add(new StiltsConfiguration (COLUMN_NAME,  locationColumn, true));
-        configurations.add(new StiltsConfiguration (LOCATION_NAME,  newColumnLocation, true));
-        configurations.add(new StiltsConfiguration (COMMAND_NAME,  command, true));
+        configurations.add(new StiltsConfiguration (COLUMN_NAME,  locationColumn));
+        configurations.add(new StiltsConfiguration (LOCATION_NAME,  newColumnLocation));
+        configurations.add(new StiltsConfiguration (COMMAND_NAME,  command));
         return configurations;        
     }
     
-    
-    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
-        configurationGroup.checkString(COLUMN_NAME);
-        configurationGroup.checkClass(LOCATION_NAME, StiltsLocationType.class);
-        configurationGroup.checkString(COMMAND_NAME);
-    }
-
-    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
-        locationColumn = (String) configurationGroup.getItem(COLUMN_NAME);
-        newColumnLocation = (StiltsLocationType) configurationGroup.getItem(LOCATION_NAME);
-        command = (String) configurationGroup.getItem(COMMAND_NAME);
-    }
 }

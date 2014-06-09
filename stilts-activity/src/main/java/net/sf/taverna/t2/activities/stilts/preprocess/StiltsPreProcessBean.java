@@ -1,9 +1,7 @@
 package net.sf.taverna.t2.activities.stilts.preprocess;
 
-import java.util.Collection;
 import java.util.List;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -44,14 +42,6 @@ public abstract class StiltsPreProcessBean {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    abstract List<StiltsConfiguration> configurations(); 
-
-    public abstract void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException;
-
-    public ConfigurationGroup getConfigurationGroup() {
-        return new ConfigurationGroup(StiltsBean.PREPROCESS_CATEGORY, title() + " settings", configurations());
-    }
-
-    public abstract void noteConfiguration(ConfigurationGroup group) throws ActivityConfigurationException;
+    public abstract List<StiltsConfiguration> configurations(); 
     
 }

@@ -6,8 +6,6 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
-import net.sf.taverna.t2.activities.stilts.configuration.ListConfiguration;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigureAction;
@@ -83,18 +81,8 @@ public class StiltsContextualView extends HTMLBasedActivityContextualView<Stilts
             return "null";
         }
         StringBuilder html = new StringBuilder();
-        for (ConfigurationGroup group:activity.configurations().getGroups()){
-            html.append("<tr><td colspan=\"2\" align=center>").append(group.getTitle()).append("</td></tr>");
-            for (StiltsConfiguration configuration:group.getConfigurations()){
-                if (configuration instanceof ListConfiguration){
-                     ListConfiguration listConfiguration = (ListConfiguration)configuration;
-                     for (StiltsConfiguration inner:listConfiguration.getConfigurations()){
-                        addHtmlRow(html, inner.getName(), inner.getItem());
-                     }
-                } else {
-                    addHtmlRow(html, configuration.getName(), configuration.getItem());
-                }
-            }
+        for (StiltsConfiguration configuration:activity.configurations()){
+            addHtmlRow(html, configuration.getName(), configuration.getItem());
         }
         return html.toString();
     }

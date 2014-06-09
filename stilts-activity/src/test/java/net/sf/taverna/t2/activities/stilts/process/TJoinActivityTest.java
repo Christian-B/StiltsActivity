@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Map;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.configuration.AllConfigurations;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
-import net.sf.taverna.t2.activities.stilts.configuration.ListConfiguration;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean;
 import net.sf.taverna.t2.activities.stilts.input.MultipleFormatsBean;
@@ -116,69 +113,11 @@ public class TJoinActivityTest {
         assertTrue("Wrong number of lines. Expected 3 found " + lines.length, lines.length == 3);
     }
 
-@Ignore
     @Test
-    public void configurationsAdd() throws Exception {
+    public void configurations() throws Exception {
         activity.configure(configBean);
-        AllConfigurations all = activity.configurations();
-        ConfigurationGroup group = all.getGroups().get(0);
-        System.out.println(group.getTitle());    
-        ListConfiguration listConfig = (ListConfiguration)group.getConfigurations().get(0);
-        StiltsConfiguration config = listConfig.getConfigurations().get(1);
-        assertTrue(config.getItem() instanceof StiltsInputType);
-        assertTrue(config.getName().endsWith("2"));
-        listConfig.addToLists();
-        config = listConfig.getConfigurations().get(2);
-        assertTrue(config.getItem() instanceof StiltsInputType);        
-        assertTrue(config.getName().endsWith("3"));
-    }
-@Ignore
-
-    @Test
-    public void configurationsEquals() throws Exception {
-        activity.configure(configBean);
-        AllConfigurations all1 = activity.configurations();
-        AllConfigurations all2 = activity.configurations();
-        assertTrue(all1.equals(all2));
-        ConfigurationGroup group = all2.getGroups().get(0);
-        ListConfiguration listConfig = (ListConfiguration)group.getConfigurations().get(0);
-        listConfig.deleteLastFromLists();
-        assertTrue(!all1.equals(all2));
-        AllConfigurations all3 = activity.configurations();
-        //ystem.out.println(3);
-        group = all3.getGroups().get(0);
-        listConfig = (ListConfiguration)group.getConfigurations().get(0);
-        listConfig.getConfigurations().get(1).setItem(null);
-        assertTrue(!all1.equals(all3));
-        listConfig.deleteLastFromLists();
-        assertTrue(all2.equals(all3));
+        List<StiltsConfiguration> all = activity.configurations();
     }
 
-    @Test
-    public void configurationsCheck() throws Exception {
-        activity.configure(configBean);
-        AllConfigurations all1 = activity.configurations();
-        activity.checkConfiguration(all1);
-    }
-
-    @Test (expected = ActivityConfigurationException.class)
-    public void configurationsCheckNull() throws Exception {
-        activity.configure(configBean);
-        AllConfigurations all1 = activity.configurations();
-        ConfigurationGroup group = all1.getGroups().get(0);
-        ListConfiguration listConfig = (ListConfiguration)group.getConfigurations().get(0);
-        listConfig.getConfigurations().get(1).setItem(null);
-        activity.checkConfiguration(all1);
-    }
-
-    @Test (expected = ActivityConfigurationException.class)
-    public void configurationsCheckBad() throws Exception {
-        activity.configure(configBean);
-        AllConfigurations all1 = activity.configurations();
-        ConfigurationGroup group = all1.getGroups().get(0);
-        ListConfiguration listConfig = (ListConfiguration)group.getConfigurations().get(0);
-        listConfig.getConfigurations().get(1).setItem(StiltsInputFormat.IPAC);
-        activity.checkConfiguration(all1);
-    }
 }
 

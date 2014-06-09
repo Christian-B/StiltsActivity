@@ -2,7 +2,6 @@ package net.sf.taverna.t2.activities.stilts.preprocess;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.sf.taverna.t2.activities.stilts.configuration.ConfigurationGroup;
 import net.sf.taverna.t2.activities.stilts.configuration.StiltsConfiguration;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 
@@ -73,18 +72,10 @@ public abstract class ColumnListPreProcessorBean extends StiltsPreProcessBean{
     }
       
     @Override
-    List<StiltsConfiguration> configurations() {
+    public List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
-        configurations.add(new StiltsConfiguration (COLUMNS_NAME,  columnList, true));
+        configurations.add(new StiltsConfiguration (COLUMNS_NAME,  columnList));
         return configurations;        
-    }
-
-    public void checkConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException{ 
-        configurationGroup.checkString(COLUMNS_NAME);
-    }
-
-    public void noteConfiguration(ConfigurationGroup configurationGroup) throws ActivityConfigurationException {
-        columnList = (String) configurationGroup.getItem(COLUMNS_NAME);
     }
 
 }
