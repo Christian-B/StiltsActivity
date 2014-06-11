@@ -40,19 +40,17 @@ public class SelectByCommandPreProcessorConfigurationPanel extends StiltsPreProc
     }
     
     private JButton manualButton(){
-        JButton manualButton = new JButton("Enter command manually");
+        final JButton manualButton = new JButton("Enter command manually");
         manualButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                Frame frame = Frame.getFrames()[0]; 
                 String command = (String)JOptionPane.showInputDialog(
-                    frame,
+                    manualButton,
                     "Please enter a boolean command to compute the value of the new column\n"
                     +"This must be according to the Stils rules for an expressions\n"
                     +"See: http://www.star.bris.ac.uk/~mbt/stilts/sun256/jel.html\n"
                     +"Warning: Entering an incorrect expression could cause the workfow to hang!",
-                    "Select test expression",
-                    JOptionPane.PLAIN_MESSAGE);
+                    commandLabel.getText());
                 if (command != null && !command.trim().isEmpty()){
                     commandLabel.setText(command);
                 }
