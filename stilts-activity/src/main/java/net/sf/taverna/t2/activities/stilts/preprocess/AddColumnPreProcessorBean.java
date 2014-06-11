@@ -181,9 +181,12 @@ public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
     @Override
     public List<StiltsConfiguration> configurations() {
         ArrayList<StiltsConfiguration> configurations = new ArrayList<StiltsConfiguration>();
-        configurations.add(new StiltsConfiguration (COLUMN_NAME,  locationColumn));
+        configurations.add(new StiltsConfiguration (newColName, "New Column Name"));
         configurations.add(new StiltsConfiguration (LOCATION_NAME,  newColumnLocation));
-        configurations.add(new StiltsConfiguration (COMMAND_NAME,  command));
+        if (newColumnLocation != StiltsLocationType.END){
+            configurations.add(new StiltsConfiguration (COLUMN_NAME,  locationColumn));
+        }
+        configurations.add(new StiltsConfiguration (COMMAND_NAME,  "\"" + command + "\""));
         return configurations;        
     }
     
