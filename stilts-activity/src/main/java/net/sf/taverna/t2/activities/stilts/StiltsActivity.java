@@ -401,7 +401,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
         if (inputPath == null){
             return FAILED;
         }
-        parameters.add("ifmt="+ inputBean.getFormatOfInput());
+        parameters.add("ifmt="+ inputBean.getFormatOfInput().getStiltsName());
         parameters.add("in=" + inputPath);
         
         return OK;
@@ -428,7 +428,7 @@ public class StiltsActivity extends AbstractAsynchronousActivity<StiltsBean> {
             }
             parameters.add("in=" + inputPath);
         }
-        parameters.add("ifmt="+ inputBean.getFormatOfInputs());      
+        parameters.add("ifmt="+ inputBean.getFormatOfInputs().getStiltsName());      
         return OK;
     }
          

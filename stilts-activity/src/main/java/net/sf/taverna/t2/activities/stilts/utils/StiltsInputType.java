@@ -38,13 +38,18 @@ public enum StiltsInputType  implements DescribableInterface {
         return description;
     }
     
-    public static StiltsInputType byUserName(String userName){
+    /*public static StiltsInputType byUserName(String userName){
         for (StiltsInputType format:StiltsInputType.values()){
             if (format.userName.equals(userName)){
                 return format;
             }
         }
         throw new UnsupportedOperationException("No StiltsInputType known for " + userName);
+    }*/
+
+    @Override
+    public String toString(){
+        return userName;
     }
 
 }

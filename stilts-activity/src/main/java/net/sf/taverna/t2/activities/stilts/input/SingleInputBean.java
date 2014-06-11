@@ -43,18 +43,14 @@ public class SingleInputBean extends StitlsInputsBean implements Serializable {
     /**
      * @return the formatOfInput
      */
-    public String getFormatOfInput() {
-        return inputFormatEnum.getStiltsName();
+    public StiltsInputFormat getFormatOfInput() {
+        return inputFormatEnum;
     }
 
     /**
      * @param formatOfInput the formatOfInput to set
      */
-    public void setFormatOfInput(String formatOfInput) {
-        this.inputFormatEnum = StiltsInputFormat.byStiltsName(formatOfInput);
-    }
-
-    public void resetFormatOfInput(StiltsInputFormat formatOfInput) {
+    public void setFormatOfInput(StiltsInputFormat formatOfInput) {
         this.inputFormatEnum = formatOfInput;
     }
 
@@ -88,11 +84,7 @@ public class SingleInputBean extends StitlsInputsBean implements Serializable {
     /**
      * @param typeOfInput the typeOfInput to set
      */
-    public void setTypeOfInput(String typeOfInput) {
-        this.inputTypeEnum = StiltsInputType.byUserName(typeOfInput);
-    }
-    
-    public void resetTypeOfInput(StiltsInputType typeOfInput) {
+    public void setTypeOfInput(StiltsInputType typeOfInput) {
         this.inputTypeEnum = typeOfInput;
     }
     

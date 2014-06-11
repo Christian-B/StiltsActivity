@@ -6,20 +6,23 @@ package net.sf.taverna.t2.activities.stilts.utils;
  * @author christian
  */
 public enum StiltsInputFormat  implements DescribableInterface {
-     FITS("fits", "FITS format - FITS binary or ASCII tables can be read. "
+     FITS("fits", "FITS format",
+             "FITS format - FITS binary or ASCII tables can be read. "
              + "For commands which take a single input table, by default the first table HDU in the file will used, "
              + "but this can be altered for multi-extension FITS files by supplying an identifier after a '#' sign. "
              + "The identifier can be either an HDU index or the extension name (EXTNAME header, "
              + "possibly followed by \"-\" and the EXTVER header), so \"table.fits#3\" means the third HDU extension, "
              + "and \"table.fits#UV_DATA\" means the HDU with the value \"UV_DATA\" for its EXTNAME header card."),
-     COLFITS("colfits", "Column-oriented FITS format. "
+     COLFITS("colfits", "Column-oriented FITS format. ",
+             "Column-oriented FITS format. "
              + "This is where a table is stored as a BINTABLE extension which contains a single row, "
              + "each cell of the row containing a whole column of the table it represents. "
              + "This has different performance characteristics from normal FITS tables; "
              + "in particular it may be considerably more efficient for very large, "
              + "and especially very wide tables where not all of the columns are required at any one time. "
              + "Only available for uncompressed files on disk."),
-     VOTABLE("votable", "VOTable format - any legal version 1.0, 1.1 or 1.2 format VOTable documents, "
+     VOTABLE("votable", "VOTable format",
+             "VOTable format - any legal version 1.0, 1.1 or 1.2 format VOTable documents, "
              + "and many illegal ones, can be read. For commands which take a single input table, "
              + "by default the first TABLE element in the document is used, "
              + "but this can be altered by supplying the 0-based index after a '#' sign, "
@@ -32,17 +35,23 @@ public enum StiltsInputFormat  implements DescribableInterface {
      //        + "so \"table.xml#4\" means the fifth TABLE element in the document. "),
      //Ony added in 2.5.1
      //CDF("cdf", "NASA Common Data Format. CDF is described at http://cdf.gsfc.nasa.gov/."),
-     ASCII("ascii", "Plain text file with one row per column in which columns are separated by whitespace."),
-     CSV("csv", "Comma-Separated Values format, using approximately the conventions used by MS Excel."),
-     TST("tst", "Tab-Separated Table format, as used by Starlink's GAIA and ESO's SkyCat amongst other tools."),
-     IPAC("ipac", "IPAC Table Format."),
-     WDC("wdc", "World Datacentre Format (experimental). ");
+     ASCII("ascii", "Whitespace seperated plain text", 
+             "Plain text file with one row per column in which columns are separated by whitespace."),
+     CSV("csv", "Comma-Separated Values format", 
+             "Comma-Separated Values format, using approximately the conventions used by MS Excel."),
+     TST("tst", "Tab-Separated Table format",
+             "Tab-Separated Table format, as used by Starlink's GAIA and ESO's SkyCat amongst other tools."),
+     IPAC("ipac", "IPAC Table Format.", "IPAC Table Format."),
+     WDC("wdc", "World Datacentre Format", "World Datacentre Format (experimental). ");
 
     private final String stiltsName;
+    private final String userName;
     private final String description;
 
-    StiltsInputFormat(String stiltsName, String description){
+    
+    StiltsInputFormat(String stiltsName, String userName, String description){
         this.stiltsName = stiltsName;  
+        this.userName = userName;
         this.description = description;
     }
 
@@ -60,12 +69,17 @@ public enum StiltsInputFormat  implements DescribableInterface {
         return description;
     }
     
-    public static StiltsInputFormat byStiltsName(String stiltsName){
+    /*public static StiltsInputFormat byStiltsName(String stiltsName){
         for (StiltsInputFormat format:StiltsInputFormat.values()){
             if (format.stiltsName.equals(stiltsName)){
                 return format;
             }
         }
         throw new UnsupportedOperationException("No StiltsInputFormat known for " + stiltsName);
+    }*/
+
+    @Override
+    public String toString(){
+        return userName;
     }
 }

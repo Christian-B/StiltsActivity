@@ -73,8 +73,8 @@ public class SingleInputConfigurationPanel extends StiltsInputConfigurationPanel
     @Override
     public void noteConfiguration(){
         inputBean = new SingleInputBean();
-        inputBean.resetFormatOfInput((StiltsInputFormat)inputFormatSelector.getSelectedItem());
-        inputBean.resetTypeOfInput((StiltsInputType)inputTypeSelector.getSelectedItem());
+        inputBean.setFormatOfInput((StiltsInputFormat)inputFormatSelector.getSelectedItem());
+        inputBean.setTypeOfInput((StiltsInputType)inputTypeSelector.getSelectedItem());
     }
 
     /**

@@ -33,13 +33,18 @@ public enum StiltsOutputType implements DescribableInterface{
         return description;
     }
     
-    public static StiltsOutputType byUserName(String userName){
+    /*public static StiltsOutputType byUserName(String userName){
         for (StiltsOutputType format:StiltsOutputType.values()){
             if (format.userName.equals(userName)){
                 return format;
             }
         }
         throw new UnsupportedOperationException("No StiltsOutputType known for " + userName);
+    }*/
+
+    @Override
+    public String toString(){
+        return userName;
     }
 
 }
