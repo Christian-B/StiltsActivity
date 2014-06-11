@@ -23,7 +23,7 @@ public class SingleFormatMultipleInputsConfigurationPanel<BoundedBean extends Si
     
    @Override
     void addAllRow() {
-        addNextRow(new JLabel(TYPE_LABEL),1);
+        addNextRow(new JLabel("All input Table format"),1);
         inputsFormatSelector = new JComboBox<StiltsInputFormat>(StiltsInputFormat.values());
         StiltsInputFormat format = inputBean.getFormatOfInputs();
         inputsFormatSelector.setSelectedItem(format);

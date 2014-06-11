@@ -3,24 +3,22 @@ package net.sf.taverna.t2.activities.stilts.ui.config.output;
 import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
-import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
+import net.sf.taverna.t2.activities.stilts.ui.config.BasePanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.DescriptionRenderer;
-import net.sf.taverna.t2.activities.stilts.ui.config.StiltsConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputFormat;
 import net.sf.taverna.t2.activities.stilts.utils.StiltsOutputType;
 import org.apache.log4j.Logger;
 
 @SuppressWarnings("serial")
-public class StiltsOutputConfigurationPanel extends JPanel{
+public class StiltsOutputConfigurationPanel extends BasePanel{
 
     StiltsBean outputBean;
     
-    private JComboBox<StiltsOutputType> outputTypeSelector;
-    private JComboBox<StiltsOutputFormat> outputFormatSelector;
+    private final JComboBox<StiltsOutputType> outputTypeSelector;
+    private final JComboBox<StiltsOutputFormat> outputFormatSelector;
     public final String FORMAT_LABEL = "Format";
     public final String TYPE_LABEL = "Type";
     protected final ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
@@ -29,24 +27,16 @@ public class StiltsOutputConfigurationPanel extends JPanel{
 
     public StiltsOutputConfigurationPanel(StiltsBean outputBean){
         this.outputBean = outputBean;
-        initGui();
-    }
-    
-    void initGui() {
-        removeAll();
-        this.setLayout(new GridLayout(0, 2));
-        JLabel typeLabel = new JLabel(TYPE_LABEL);
-        add(typeLabel);
-        outputTypeSelector = new JComboBox<StiltsOutputType>(StiltsOutputType.values());
-        outputTypeSelector.setSelectedItem(outputBean.getOutputType());
-        outputTypeSelector.setRenderer(listCellRenderer);
-        add(outputTypeSelector);
-        JLabel formatLabel = new JLabel(FORMAT_LABEL);
-        add(formatLabel);
+        addNextRow(new JLabel(FORMAT_LABEL),1);
         outputFormatSelector = new JComboBox<StiltsOutputFormat>(StiltsOutputFormat.values());
         outputFormatSelector.setSelectedItem(outputBean.getOutputFormat());
         outputFormatSelector.setRenderer(listCellRenderer);
-        add(outputFormatSelector);
+        addNextCol(outputFormatSelector, 1);
+        addNextRow(new JLabel(TYPE_LABEL),1);
+        outputTypeSelector = new JComboBox<StiltsOutputType>(StiltsOutputType.values());
+        outputTypeSelector.setSelectedItem(outputBean.getOutputType());
+        outputTypeSelector.setRenderer(listCellRenderer);
+        addNextCol(outputTypeSelector, 1);
     }
 
     /**
@@ -78,7 +68,7 @@ public class StiltsOutputConfigurationPanel extends JPanel{
       * getConfiguration()
       */
     public void noteConfiguration(StiltsBean outputBean){
-        outputBean.setOutputFormat((StiltsOutputFormat)outputTypeSelector.getSelectedItem());
+        outputBean.setOutputFormat((StiltsOutputFormat)outputFormatSelector.getSelectedItem());
         outputBean.setOutputType((StiltsOutputType)outputTypeSelector.getSelectedItem());
     }
 

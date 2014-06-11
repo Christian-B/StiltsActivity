@@ -1,6 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.ui.config.input;
 
-import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import net.sf.taverna.t2.activities.stilts.input.SingleInputBean;
@@ -26,19 +25,17 @@ public class SingleInputConfigurationPanel extends StiltsInputConfigurationPanel
     
     void initGui() {
         removeAll();
-        this.setLayout(new GridLayout(0, 2));
-        JLabel typeLabel = new JLabel(TYPE_LABEL);
-        add(typeLabel);
+        addNextRow( new JLabel(TYPE_LABEL),1);
         inputTypeSelector = new JComboBox<StiltsInputType>(StiltsInputType.values());
         inputTypeSelector.setSelectedItem(inputBean.retreiveStiltsInputType());
         inputTypeSelector.setRenderer(listCellRenderer);
-        add(inputTypeSelector);
+        addNextCol(inputTypeSelector,1);
         JLabel formatLabel = new JLabel(FORMAT_LABEL);
-        add(formatLabel);
+        addNextRow(formatLabel,1);
         inputFormatSelector = new JComboBox<StiltsInputFormat>(StiltsInputFormat.values());
         inputFormatSelector.setSelectedItem(inputBean.retreiveStiltsInputFormat());
         inputFormatSelector.setRenderer(listCellRenderer);
-        add(inputFormatSelector);
+        addNextCol(inputFormatSelector,1);
     }
 
     /**
