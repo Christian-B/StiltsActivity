@@ -8,15 +8,19 @@ package net.sf.taverna.t2.activities.stilts.utils;
  */
 public enum StiltsFixcols implements DescribableInterface{
 
-    NONE("none","columns are not renamed"),
-    DUPS("dups","columns which would otherwise have duplicate names in the output will be renamed to indicate which table they came from"),
-    ALL("all","all columns will be renamed to indicate which table they came from");
+    NONE("none","columns are never renamed","columns are not renamed"),
+    DUPS("dups","rename duplicates only",
+            "columns which would otherwise have duplicate names in the output will be renamed to indicate which table they came from"),
+    ALL("all","rename all columns",
+            "all columns will be renamed to indicate which table they came from");
 
     private final String stiltsName;
+    private final String userName;
     private final String description;
 
-    StiltsFixcols(String stiltsName, String description){
+    StiltsFixcols(String stiltsName, String userName, String description){
         this.stiltsName = stiltsName;  
+        this.userName = userName;
         this.description = description;
     }
 
@@ -42,4 +46,9 @@ public enum StiltsFixcols implements DescribableInterface{
         }
         throw new UnsupportedOperationException("No StiltsInputFormat known for " + stiltsName);
     }
+    
+    @Override
+    public String toString(){
+        return userName;
+    }    
 }

@@ -28,9 +28,9 @@ public class TMatch2ConfigurationPanel<BoundedBean extends TMatch2Bean> extends 
     private final JComboBox<StiltsJoin> joinSelector;
     private final JComboBox<StiltsFixcols> fixcolsSelector;
     
-    private static final String FIND_LABEL = "Stils find Value";
-    private static final String JOIN_LABEL = "Stils join Value";
-    private static final String FIXCOLS_LABEL = "Stils fixcols Value";
+    private static final String FIND_LABEL = "Use rows more than once: ";
+    private static final String JOIN_LABEL = "Include which rows:";
+    private static final String FIXCOLS_LABEL = "New column names";
     
     protected final ListCellRenderer<DescribableInterface> listCellRenderer = new DescriptionRenderer();
     
