@@ -36,6 +36,8 @@ public abstract class ColumnListPreProcessorConfigurationPanel<BoundedBean exten
         JLabel commandLabel = new JLabel ("Column(s) to " + getAction() + ": ");
         addNextRow(commandLabel, 1);
         columnsListField = new ColumnListTextField(preprocessBean.getColumnList());
+        columnsListField.setText(preprocessBean.getColumnList());
+                
         addNextCol(columnsListField, 1);
         addHelpButton(columnsListField);
     }

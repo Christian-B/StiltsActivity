@@ -70,7 +70,7 @@ public class TMatch2ConfigurationPanel<BoundedBean extends TMatch2Bean> extends 
             return true;
         }
        
-        if (processBean.getFixcolsValue().equals(fixcolsSelector.getSelectedItem())){
+        if (!processBean.getFixcolsValue().equals(fixcolsSelector.getSelectedItem())){
             return true;
         }
         return false;

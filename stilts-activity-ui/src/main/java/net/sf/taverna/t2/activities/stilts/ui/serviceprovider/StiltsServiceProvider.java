@@ -18,7 +18,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
     private final String SINGLE_FILE_PATH = "Change single file";
     private final String CONCAT_PATH = "Concatenate";
     private final String JOIN_PATH = "Join/merge";
-    
+
     /**
       * Do the actual search for services. Return using the callBack parameter.
  * @author Christian Brenninkmeijer
@@ -30,15 +30,15 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         // callBack.status("Resolving example services");
 
         List<StiltsInputType> typesOfInputsEnums = new ArrayList<StiltsInputType>();
-        typesOfInputsEnums.add(StiltsInputType.FILE);
+        typesOfInputsEnums.add(StiltsInputType.STRING);
         typesOfInputsEnums.add(StiltsInputType.STRING);
         List<StiltsInputFormat> formatsOfInputsEnums = new ArrayList<StiltsInputFormat>();
-        formatsOfInputsEnums.add(StiltsInputFormat.TST);
+        formatsOfInputsEnums.add(StiltsInputFormat.CSV);
         formatsOfInputsEnums.add(StiltsInputFormat.CSV);
 
         List<ServiceDescription> results = new ArrayList<ServiceDescription>();
 
-        SingleInputBean singleInputBean = new SingleInputBean(StiltsInputFormat.TST, StiltsInputType.FILE);
+        SingleInputBean singleInputBean = new SingleInputBean(StiltsInputFormat.CSV, StiltsInputType.STRING);
         TPipeBean tPipeBean = new TPipeBean(singleInputBean);
         StiltsServiceDesc tPipeDescription = new StiltsServiceDesc(tPipeBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "reformat", SINGLE_FILE_PATH);
@@ -80,14 +80,14 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 "Generic convertor", SINGLE_FILE_PATH);
  	results.add(userSpecifiedPreProcessorDescription);
 
-        DeleteColumnPreProcessorBean deleteColumnPreProcessorBean = new DeleteColumnPreProcessorBean("1");
+        DeleteColumnPreProcessorBean deleteColumnPreProcessorBean = new DeleteColumnPreProcessorBean("$1");
         StiltsServiceDesc deleteColumnPreProcessorDescription =
                 new StiltsServiceDesc(deleteColumnPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Delete column(s)", SINGLE_FILE_PATH);
  	results.add(deleteColumnPreProcessorDescription);
 
-        KeepColumnPreProcessorBean keepColumnPreProcessorBean = new KeepColumnPreProcessorBean("1");
+        KeepColumnPreProcessorBean keepColumnPreProcessorBean = new KeepColumnPreProcessorBean("$1");
         StiltsServiceDesc keepColumnPreProcessorDescription =
                 new StiltsServiceDesc(keepColumnPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
@@ -95,35 +95,35 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
  	results.add(keepColumnPreProcessorDescription);
 
         AddColumnPreProcessorBean  addColumnByCommandBean = 
-                new AddColumnPreProcessorBean("$1 + $3", "newCol", StiltsLocationType.AFTER, "$2");
+                new AddColumnPreProcessorBean("$1", "newCol", StiltsLocationType.END, null);
         StiltsServiceDesc addColumnByCommandDescription =
                 new StiltsServiceDesc(addColumnByCommandBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Add column",SINGLE_FILE_PATH);
  	results.add(addColumnByCommandDescription);
 
-        SelectByCommandPreProcessorBean selectByCommandBean = new SelectByCommandPreProcessorBean("$1 <= 1");
+        SelectByCommandPreProcessorBean selectByCommandBean = new SelectByCommandPreProcessorBean("true");
         StiltsServiceDesc selectByCommandDescription =
                 new StiltsServiceDesc(selectByCommandBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Select rows",SINGLE_FILE_PATH);
  	results.add(selectByCommandDescription);
 
-        HeadRowsPreProcessorBean headRowsPreProcessorBean = new HeadRowsPreProcessorBean(10);
+        HeadRowsPreProcessorBean headRowsPreProcessorBean = new HeadRowsPreProcessorBean(1);
         StiltsServiceDesc headRowsPreProcessorDescription =
                 new StiltsServiceDesc(headRowsPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Keep first X rows(s)",SINGLE_FILE_PATH);
  	results.add(headRowsPreProcessorDescription);
 
-        TailRowsPreProcessorBean tailRowsPreProcessorBean = new TailRowsPreProcessorBean(10);
+        TailRowsPreProcessorBean tailRowsPreProcessorBean = new TailRowsPreProcessorBean(1);
         StiltsServiceDesc tailRowsPreProcessorDescription =
                 new StiltsServiceDesc(tailRowsPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Keeap last X rows(s)",SINGLE_FILE_PATH);
  	results.add(tailRowsPreProcessorDescription);
 
-        SortPreProcessorBean sortPreProcessorBean = new SortPreProcessorBean("1", false, false);
+        SortPreProcessorBean sortPreProcessorBean = new SortPreProcessorBean("$1", false, false);
         StiltsServiceDesc sortPreProcessorDescription =
                 new StiltsServiceDesc(sortPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 

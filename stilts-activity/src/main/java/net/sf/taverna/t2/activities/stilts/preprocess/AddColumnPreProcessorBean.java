@@ -126,14 +126,12 @@ public class AddColumnPreProcessorBean extends StiltsPreProcessBean{
             throw new ActivityConfigurationException("New column name is empty");
         }
         if (newColumnLocation == StiltsLocationType.END){
-            if (locationColumn != null){
-                throw new ActivityConfigurationException("Location Column specified but location for new column is " + newColumnLocation); 
-            }    
+            //can safely ignore any 
         } else {
-           if (getNewColName() == null){
+           if (locationColumn == null){
                 throw new ActivityConfigurationException("New column location is " + newColumnLocation + " But no location column specified");
             }
-            if (getNewColName().trim().isEmpty()){
+            if (locationColumn.trim().isEmpty()){
                 throw new ActivityConfigurationException("New column location is " + newColumnLocation + " But location column name is empty");
             }
         }

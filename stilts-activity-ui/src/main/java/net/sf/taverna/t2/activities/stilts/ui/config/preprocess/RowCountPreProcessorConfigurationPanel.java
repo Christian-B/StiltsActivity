@@ -27,6 +27,7 @@ public abstract class RowCountPreProcessorConfigurationPanel<BoundedBean extends
         JLabel commandLabel = new JLabel ("Column(s) to " + getAction() + ": ");
         addNextRow(commandLabel, 1);
         rowCountField = new IntegerTextField();
+        rowCountField.setValue(preprocessBean.getNumberOfRows());
         addNextCol(rowCountField, 1);
         this.addHelpButton(rowCountField);
     }

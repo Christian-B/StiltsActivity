@@ -71,7 +71,7 @@ public abstract class MultipleFormatsConfigurationPanel<BoundedBean extends Mult
         }
         List<StiltsInputFormat> formats = inputBean.getFormatsOfInputs();
         for (int i = 0; i < getNumberOfInputs(); i++){
-            if (inputsFormatsSelectors.get(i).getSelectedItem().equals(formats.get(i))){
+            if (!inputsFormatsSelectors.get(i).getSelectedItem().equals(formats.get(i))){
                 return true;
             }
         }

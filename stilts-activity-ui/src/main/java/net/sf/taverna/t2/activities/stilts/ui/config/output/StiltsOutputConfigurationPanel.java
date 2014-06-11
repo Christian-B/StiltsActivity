@@ -27,16 +27,18 @@ public class StiltsOutputConfigurationPanel extends BasePanel{
 
     public StiltsOutputConfigurationPanel(StiltsBean outputBean){
         this.outputBean = outputBean;
-        addNextRow(new JLabel(FORMAT_LABEL),1);
-        outputFormatSelector = new JComboBox<StiltsOutputFormat>(StiltsOutputFormat.values());
-        outputFormatSelector.setSelectedItem(outputBean.getOutputFormat());
-        outputFormatSelector.setRenderer(listCellRenderer);
-        addNextCol(outputFormatSelector, 1);
+        
         addNextRow(new JLabel(TYPE_LABEL),1);
         outputTypeSelector = new JComboBox<StiltsOutputType>(StiltsOutputType.values());
         outputTypeSelector.setSelectedItem(outputBean.getOutputType());
         outputTypeSelector.setRenderer(listCellRenderer);
         addNextCol(outputTypeSelector, 1);
+
+        addNextRow(new JLabel(FORMAT_LABEL),1);
+        outputFormatSelector = new JComboBox<StiltsOutputFormat>(StiltsOutputFormat.values());
+        outputFormatSelector.setSelectedItem(outputBean.getOutputFormat());
+        outputFormatSelector.setRenderer(listCellRenderer);
+        addNextCol(outputFormatSelector, 1);
     }
 
     /**
