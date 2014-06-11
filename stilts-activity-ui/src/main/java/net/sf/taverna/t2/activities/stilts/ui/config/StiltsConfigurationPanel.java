@@ -116,6 +116,10 @@ public class StiltsConfigurationPanel extends
         inputPanel.noteConfiguration();
         processPanel.noteConfiguration(inputPanel.getConfiguration());
         bean.setProcess(processPanel.getConfiguration());
+        if (preprocessPanel != null){
+            preprocessPanel.noteConfiguration();
+            bean.setPreprocess(preprocessPanel.getConfiguration());
+        }
         outputPanel.noteConfiguration(bean);
     }
     
