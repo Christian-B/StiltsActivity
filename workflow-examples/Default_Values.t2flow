@@ -1,0 +1,458 @@
+<workflow xmlns="http://taverna.sf.net/2008/xml/t2flow" version="1" producedBy="taverna-2.5-SNAPSHOT-dev"><dataflow id="82d82337-e17a-44b1-b3b8-a2d7e7ead545" role="top"><name>Workflow1</name><inputPorts><port><name>Table1</name><depth>0</depth><granularDepth>0</granularDepth><annotations><annotation_chain encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.FreeTextDescription">
+        <text>CSV Table in String format</text>
+      </annotationBean>
+      <date>2014-06-11 13:12:30.452 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain><annotation_chain encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.ExampleValue">
+        <text>Id, Name, Title, Salary
+1, John, Boss, 10000
+2, Alison, Secretry, 2000
+3, Mary, Programmer, 5000
+4, Peter, Tester, 3000 </text>
+      </annotationBean>
+      <date>2014-06-11 13:13:43.300 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain></annotations></port><port><name>Table2</name><depth>0</depth><granularDepth>0</granularDepth><annotations><annotation_chain encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.ExampleValue">
+        <text>Id, Last, Fancy, Value
+1, Smith, Boss, 1000
+3, Williams, Code Monkey, 15000
+5, Peter, Trouble, 5000 </text>
+      </annotationBean>
+      <date>2014-06-11 13:25:21.227 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain></annotations></port><port><name>name1</name><depth>0</depth><granularDepth>0</granularDepth><annotations><annotation_chain encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.ExampleValue">
+        <text>id</text>
+      </annotationBean>
+      <date>2014-06-11 13:28:25.26 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain></annotations></port><port><name>name2</name><depth>0</depth><granularDepth>0</granularDepth><annotations><annotation_chain encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.ExampleValue">
+        <text>id</text>
+      </annotationBean>
+      <date>2014-06-11 13:28:42.440 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain></annotations></port></inputPorts><outputPorts><port><name>Keep_First</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port><port><name>Reformat</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port><port><name>Add_Column</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port><port><name>Delete_Column</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port><port><name>Generic</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port><port><name>Select_rows</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port><port><name>Sorted</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port><port><name>Cat_Multiple</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port><port><name>cat_similar</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port><port><name>row_join</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port><port><name>match_join</name><lastPredictedDepth>0</lastPredictedDepth><annotations /></port></outputPorts><processors><processor><name>Keep_first_X_rows_s_</name><inputPorts><port><name>Input Table</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table" to="Input Table" /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <preprocess class="net.sf.taverna.t2.activities.stilts.preprocess.HeadRowsPreProcessorBean">
+    <numberOfRows>1</numberOfRows>
+    <NUMBER__OF__ROWS__NAME>Number of rows</NUMBER__OF__ROWS__NAME>
+  </preprocess>
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.TPipeBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.SingleInputBean">
+      <inputFormatEnum>CSV</inputFormatEnum>
+      <inputTypeEnum>STRING</inputTypeEnum>
+    </inputs>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor><processor><name>reformat</name><inputPorts><port><name>Input Table</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table" to="Input Table" /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.TPipeBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.SingleInputBean">
+      <inputFormatEnum>CSV</inputFormatEnum>
+      <inputTypeEnum>STRING</inputTypeEnum>
+    </inputs>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor><processor><name>Add_column</name><inputPorts><port><name>Input Table</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table" to="Input Table" /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <preprocess class="net.sf.taverna.t2.activities.stilts.preprocess.AddColumnPreProcessorBean">
+    <newColumnLocation>END</newColumnLocation>
+    <LOCATION__NAME>How to place new column</LOCATION__NAME>
+    <COLUMN__NAME>Where to place new column</COLUMN__NAME>
+    <newColName>newCol</newColName>
+    <command>$1</command>
+    <COMMAND__NAME>Add Column Command</COMMAND__NAME>
+  </preprocess>
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.TPipeBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.SingleInputBean">
+      <inputFormatEnum>CSV</inputFormatEnum>
+      <inputTypeEnum>STRING</inputTypeEnum>
+    </inputs>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor><processor><name>Delete_column_s_</name><inputPorts><port><name>Input Table</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table" to="Input Table" /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <preprocess class="net.sf.taverna.t2.activities.stilts.preprocess.DeleteColumnPreProcessorBean">
+    <columnList>$1</columnList>
+    <COLUMNS__NAME>Columns</COLUMNS__NAME>
+  </preprocess>
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.TPipeBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.SingleInputBean">
+      <inputFormatEnum>CSV</inputFormatEnum>
+      <inputTypeEnum>STRING</inputTypeEnum>
+    </inputs>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor><processor><name>Generic_convertor</name><inputPorts><port><name>Input Table</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table" to="Input Table" /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <preprocess class="net.sf.taverna.t2.activities.stilts.preprocess.UserSpecifiedPreProcessorBean">
+    <preProcessCommand>delcols 1</preProcessCommand>
+    <PREPROCESS__COMMAND__NAME>Stils Preprocess Command</PREPROCESS__COMMAND__NAME>
+  </preprocess>
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.TPipeBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.SingleInputBean">
+      <inputFormatEnum>CSV</inputFormatEnum>
+      <inputTypeEnum>STRING</inputTypeEnum>
+    </inputs>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor><processor><name>Select_rows</name><inputPorts><port><name>Input Table</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table" to="Input Table" /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <preprocess class="net.sf.taverna.t2.activities.stilts.preprocess.SelectByCommandPreProcessorBean">
+    <command>true</command>
+    <COMMAND__NAME>Add Column Command</COMMAND__NAME>
+  </preprocess>
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.TPipeBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.SingleInputBean">
+      <inputFormatEnum>CSV</inputFormatEnum>
+      <inputTypeEnum>STRING</inputTypeEnum>
+    </inputs>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor><processor><name>Sort_rows</name><inputPorts><port><name>Input Table</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table" to="Input Table" /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <preprocess class="net.sf.taverna.t2.activities.stilts.preprocess.SortPreProcessorBean">
+    <columnList>$1</columnList>
+    <COLUMNS__NAME>Columns</COLUMNS__NAME>
+    <ascending>false</ascending>
+    <ASCENDING__NAME>Sort Ascending</ASCENDING__NAME>
+    <nullsAtBegining>false</nullsAtBegining>
+    <NULLS__AT__BEGINING__NAME>Sort Nulls at the beginning</NULLS__AT__BEGINING__NAME>
+  </preprocess>
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.TPipeBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.SingleInputBean">
+      <inputFormatEnum>CSV</inputFormatEnum>
+      <inputTypeEnum>STRING</inputTypeEnum>
+    </inputs>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor><processor><name>Concatenate_multiple_formats</name><inputPorts><port><name>Input Table 1</name><depth>0</depth></port><port><name>Input Table 2</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table 1" to="Input Table 1" /><map from="Input Table 2" to="Input Table 2" /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.TCatNBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean">
+      <typesOfInputs>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>STRING</net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>STRING</net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>
+      </typesOfInputs>
+      <INPUT__TYPE__NAME>Type of input table </INPUT__TYPE__NAME>
+      <NUMBER__OF__INPUTS__NAME>Input Table</NUMBER__OF__INPUTS__NAME>
+      <formatsOfInputs>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>CSV</net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>CSV</net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>
+      </formatsOfInputs>
+      <INPUT__FORMAT__NAME>Format of input table </INPUT__FORMAT__NAME>
+      <numberOfInputs>2</numberOfInputs>
+    </inputs>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table 1" depth="0" /><port name="Input Table 2" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor><processor><name>Concatenate_similar_Files</name><inputPorts><port><name>Input Table 1</name><depth>0</depth></port><port><name>Input Table 2</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table 1" to="Input Table 1" /><map from="Input Table 2" to="Input Table 2" /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.TCatBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.SingleFormatMultipleInputsBean">
+      <typesOfInputs>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>STRING</net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>STRING</net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>
+      </typesOfInputs>
+      <INPUT__TYPE__NAME>Type of input table </INPUT__TYPE__NAME>
+      <NUMBER__OF__INPUTS__NAME>Input Table</NUMBER__OF__INPUTS__NAME>
+      <formatOfInputs>CSV</formatOfInputs>
+      <INPUT__FORMAT__NAME>Format of input tables</INPUT__FORMAT__NAME>
+      <numberOfInputs>2</numberOfInputs>
+    </inputs>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table 1" depth="0" /><port name="Input Table 2" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor><processor><name>Join_based_on_macthing_values</name><inputPorts><port><name>Input Table 1</name><depth>0</depth></port><port><name>Input Table 2</name><depth>0</depth></port><port><name>Name of 1st column to match in 2nd Table </name><depth>0</depth></port><port><name>Name of 1st column to match in 1st Table </name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table 1" to="Input Table 1" /><map from="Input Table 2" to="Input Table 2" /><map from="Name of 1st column to match in 1st Table " to="Name of 1st column to match in 1st Table " /><map from="Name of 1st column to match in 2nd Table " to="Name of 1st column to match in 2nd Table " /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.ExactMatchBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.TwoInputsBean">
+      <typesOfInputs>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>STRING</net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>STRING</net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>
+      </typesOfInputs>
+      <INPUT__TYPE__NAME>Type of input table </INPUT__TYPE__NAME>
+      <NUMBER__OF__INPUTS__NAME>Input Table</NUMBER__OF__INPUTS__NAME>
+      <formatsOfInputs>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>CSV</net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>CSV</net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>
+      </formatsOfInputs>
+      <INPUT__FORMAT__NAME>Format of input table </INPUT__FORMAT__NAME>
+    </inputs>
+    <findValue>ALL</findValue>
+    <FIND__NAME>How to handle multiple matches</FIND__NAME>
+    <joinValue>ONE_AND_TWO</joinValue>
+    <JOIN__NAME>Which rows to include</JOIN__NAME>
+    <fixcolsValue>DUPS</fixcolsValue>
+    <FIX__COLS__NAME>How to rename columns</FIX__COLS__NAME>
+    <numbertOfColumnsToMatch>1</numbertOfColumnsToMatch>
+    <NUMBER__OF__COLUMNS__NAME>Numbert of Columns to Match</NUMBER__OF__COLUMNS__NAME>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table 1" depth="0" /><port name="Input Table 2" depth="0" /><port name="Name of 1st column to match in 2nd Table " depth="0" /><port name="Name of 1st column to match in 1st Table " depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor><processor><name>Join_based_on_row_number</name><inputPorts><port><name>Input Table 1</name><depth>0</depth></port><port><name>Input Table 2</name><depth>0</depth></port></inputPorts><outputPorts><port><name>Output Table</name><depth>0</depth><granularDepth>0</granularDepth></port></outputPorts><annotations /><activities><activity><class>net.sf.taverna.t2.activities.stilts.StiltsActivity</class><inputMap><map from="Input Table 1" to="Input Table 1" /><map from="Input Table 2" to="Input Table 2" /></inputMap><outputMap><map from="Output Table" to="Output Table" /></outputMap><configBean encoding="xstream"><net.sf.taverna.t2.activities.stilts.StiltsBean xmlns="">
+  <outputFormat>CSV</outputFormat>
+  <OUTPUT__FORMAT__NAME>Output table format</OUTPUT__FORMAT__NAME>
+  <outputType>STRING</outputType>
+  <OUTPUT__TYPE__NAME>Output table type</OUTPUT__TYPE__NAME>
+  <process class="net.sf.taverna.t2.activities.stilts.process.TJoinBean">
+    <inputs class="net.sf.taverna.t2.activities.stilts.input.FlexibleInputsBean">
+      <typesOfInputs>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>STRING</net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>STRING</net.sf.taverna.t2.activities.stilts.utils.StiltsInputType>
+      </typesOfInputs>
+      <INPUT__TYPE__NAME>Type of input table </INPUT__TYPE__NAME>
+      <NUMBER__OF__INPUTS__NAME>Input Table</NUMBER__OF__INPUTS__NAME>
+      <formatsOfInputs>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>CSV</net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>
+        <net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>CSV</net.sf.taverna.t2.activities.stilts.utils.StiltsInputFormat>
+      </formatsOfInputs>
+      <INPUT__FORMAT__NAME>Format of input table </INPUT__FORMAT__NAME>
+      <numberOfInputs>2</numberOfInputs>
+    </inputs>
+  </process>
+  <debugMode>false</debugMode>
+  <DEBUG__NAME>Debug mode</DEBUG__NAME>
+</net.sf.taverna.t2.activities.stilts.StiltsBean></configBean><annotations /></activity></activities><dispatchStack><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Parallelize</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig xmlns="">
+  <maxJobs>1</maxJobs>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ParallelizeConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.ErrorBounce</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Failover</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Retry</class><configBean encoding="xstream"><net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig xmlns="">
+  <backoffFactor>1.0</backoffFactor>
+  <initialDelay>1000</initialDelay>
+  <maxDelay>5000</maxDelay>
+  <maxRetries>0</maxRetries>
+</net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.RetryConfig></configBean></dispatchLayer><dispatchLayer><class>net.sf.taverna.t2.workflowmodel.processor.dispatch.layers.Invoke</class><configBean encoding="xstream"><null xmlns="" /></configBean></dispatchLayer></dispatchStack><iterationStrategyStack><iteration><strategy><cross><port name="Input Table 1" depth="0" /><port name="Input Table 2" depth="0" /></cross></strategy></iteration></iterationStrategyStack></processor></processors><conditions /><datalinks><datalink><sink type="processor"><processor>Keep_first_X_rows_s_</processor><port>Input Table</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>reformat</processor><port>Input Table</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>Add_column</processor><port>Input Table</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>Delete_column_s_</processor><port>Input Table</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>Generic_convertor</processor><port>Input Table</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>Select_rows</processor><port>Input Table</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>Sort_rows</processor><port>Input Table</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>Concatenate_multiple_formats</processor><port>Input Table 1</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>Concatenate_multiple_formats</processor><port>Input Table 2</port></sink><source type="dataflow"><port>Table2</port></source></datalink><datalink><sink type="processor"><processor>Concatenate_similar_Files</processor><port>Input Table 1</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>Concatenate_similar_Files</processor><port>Input Table 2</port></sink><source type="dataflow"><port>Table2</port></source></datalink><datalink><sink type="processor"><processor>Join_based_on_macthing_values</processor><port>Input Table 1</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>Join_based_on_macthing_values</processor><port>Input Table 2</port></sink><source type="dataflow"><port>Table2</port></source></datalink><datalink><sink type="processor"><processor>Join_based_on_macthing_values</processor><port>Name of 1st column to match in 2nd Table </port></sink><source type="dataflow"><port>name2</port></source></datalink><datalink><sink type="processor"><processor>Join_based_on_macthing_values</processor><port>Name of 1st column to match in 1st Table </port></sink><source type="dataflow"><port>name1</port></source></datalink><datalink><sink type="processor"><processor>Join_based_on_row_number</processor><port>Input Table 1</port></sink><source type="dataflow"><port>Table1</port></source></datalink><datalink><sink type="processor"><processor>Join_based_on_row_number</processor><port>Input Table 2</port></sink><source type="dataflow"><port>Table2</port></source></datalink><datalink><sink type="dataflow"><port>Keep_First</port></sink><source type="processor"><processor>Keep_first_X_rows_s_</processor><port>Output Table</port></source></datalink><datalink><sink type="dataflow"><port>Reformat</port></sink><source type="processor"><processor>reformat</processor><port>Output Table</port></source></datalink><datalink><sink type="dataflow"><port>Add_Column</port></sink><source type="processor"><processor>Add_column</processor><port>Output Table</port></source></datalink><datalink><sink type="dataflow"><port>Delete_Column</port></sink><source type="processor"><processor>Delete_column_s_</processor><port>Output Table</port></source></datalink><datalink><sink type="dataflow"><port>Generic</port></sink><source type="processor"><processor>Generic_convertor</processor><port>Output Table</port></source></datalink><datalink><sink type="dataflow"><port>Select_rows</port></sink><source type="processor"><processor>Select_rows</processor><port>Output Table</port></source></datalink><datalink><sink type="dataflow"><port>Sorted</port></sink><source type="processor"><processor>Sort_rows</processor><port>Output Table</port></source></datalink><datalink><sink type="dataflow"><port>Cat_Multiple</port></sink><source type="processor"><processor>Concatenate_multiple_formats</processor><port>Output Table</port></source></datalink><datalink><sink type="dataflow"><port>cat_similar</port></sink><source type="processor"><processor>Concatenate_similar_Files</processor><port>Output Table</port></source></datalink><datalink><sink type="dataflow"><port>row_join</port></sink><source type="processor"><processor>Join_based_on_row_number</processor><port>Output Table</port></source></datalink><datalink><sink type="dataflow"><port>match_join</port></sink><source type="processor"><processor>Join_based_on_macthing_values</processor><port>Output Table</port></source></datalink></datalinks><annotations><annotation_chain_2_2 encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.IdentificationAssertion">
+        <identification>82d82337-e17a-44b1-b3b8-a2d7e7ead545</identification>
+      </annotationBean>
+      <date>2014-06-11 13:34:48.157 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain_2_2><annotation_chain_2_2 encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.IdentificationAssertion">
+        <identification>90958049-3912-49a5-a568-4f739de76788</identification>
+      </annotationBean>
+      <date>2014-06-11 13:15:24.623 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain_2_2><annotation_chain_2_2 encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.IdentificationAssertion">
+        <identification>a3d43c7b-ad63-48e8-95e7-5a0e5181e79a</identification>
+      </annotationBean>
+      <date>2014-06-11 13:16:02.276 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain_2_2><annotation_chain_2_2 encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.IdentificationAssertion">
+        <identification>7a99fb97-4f9b-4279-845f-67b7978f6768</identification>
+      </annotationBean>
+      <date>2014-06-11 13:14:44.594 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain_2_2><annotation_chain_2_2 encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.IdentificationAssertion">
+        <identification>61026f68-5cb7-4097-95e2-1382651d311c</identification>
+      </annotationBean>
+      <date>2014-06-11 13:31:55.30 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain_2_2><annotation_chain_2_2 encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.IdentificationAssertion">
+        <identification>c1c0432e-2984-45b4-aa90-08d53e247c95</identification>
+      </annotationBean>
+      <date>2014-06-11 13:13:49.987 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain_2_2><annotation_chain_2_2 encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.IdentificationAssertion">
+        <identification>257685e8-c293-4837-9ac8-f0df04ca00d9</identification>
+      </annotationBean>
+      <date>2014-06-11 13:34:14.876 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain_2_2><annotation_chain_2_2 encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.IdentificationAssertion">
+        <identification>6c4539b2-7c05-4be0-adfe-f31e6072dfd0</identification>
+      </annotationBean>
+      <date>2014-06-11 13:19:07.133 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain_2_2><annotation_chain_2_2 encoding="xstream"><net.sf.taverna.t2.annotation.AnnotationChainImpl xmlns="">
+  <annotationAssertions>
+    <net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+      <annotationBean class="net.sf.taverna.t2.annotation.annotationbeans.IdentificationAssertion">
+        <identification>3a970419-2d5e-490d-a6d9-5d50f2b45fb4</identification>
+      </annotationBean>
+      <date>2014-06-11 13:18:21.140 UTC</date>
+      <creators />
+      <curationEventList />
+    </net.sf.taverna.t2.annotation.AnnotationAssertionImpl>
+  </annotationAssertions>
+</net.sf.taverna.t2.annotation.AnnotationChainImpl></annotation_chain_2_2></annotations></dataflow></workflow>
