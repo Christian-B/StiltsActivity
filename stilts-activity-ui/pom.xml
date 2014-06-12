@@ -5,7 +5,7 @@
         <parent>
             <groupId>net.sf.taverna.t2.activities.stilts</groupId>
             <artifactId>stilts-bundle</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0-2.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>stilts-activity-ui</artifactId>
 	<name>Stilts Activity UI bindings</name>
