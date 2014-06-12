@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugins:plugin xmlns:plugins="http://taverna.sf.net/2008/xml/plugins" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://taverna.sf.net/2008/xml/plugins http://taverna.sourceforge.net/2008/xml/plugins/plugins-2008-10-16.xsd ">
+        <provider>taverna.sf.net</provider>
+        <identifier>net.sf.taverna.t2.stilts-activity</identifier>
+        <version>1.0-2.6-SNAPSHOT</version>
+        <name>Stitls Table Toolse</name>
+        <description>Christian's table tools base on Stilts</description>
+        <enabled>true</enabled>
+        <repositories>
+            <repository>http://www.mygrid.org.uk/maven/repository/</repository>
+            <repository>http://www.mygrid.org.uk/maven/snapshot-repository/</repository>
+             <repository>http://uk.maven.org/maven2/</repository>
+            <repository>http://download.java.net/maven/2/</repository>
+            <repository>http://www.soapui.org/repository/maven2/</repository>
+            <repository>http://wf4ever.github.com/astrotaverna/</repository>
+            <repository>http://ondex2.cs.man.ac.uk/repository/</repository>
+        </repositories>
+        <profile>
+                <dependency>
+                        <groupId>net.sf.taverna.t2.activities.stilts</groupId>
+                        <artifactId>stilts-activity</artifactId>
+                        <version>1.0-2.6-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                        <groupId>net.sf.taverna.t2.activities.stilts</groupId>
+                        <artifactId>stilts-activity-ui</artifactId>
+                        <version>1.0-2.6-SNAPSHOT</version>
+                </dependency>
+		<dependency>
+			<groupId>uk.ac.starlink</groupId>
+			<artifactId>stiltsAPI</artifactId>
+			<version>2.4</version>
+		</dependency>
+        </profile>
+        <compatibility>
+            <application>
+                <version>2.6-SNAPSHOT</version>
+            </application>
+        </compatibility>
+</plugins:plugin>
