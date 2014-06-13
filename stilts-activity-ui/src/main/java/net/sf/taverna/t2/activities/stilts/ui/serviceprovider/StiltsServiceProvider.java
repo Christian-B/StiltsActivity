@@ -65,12 +65,14 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
         TJoinBean tJoinBean = new TJoinBean(flexibleInputBean);
         StiltsServiceDesc tJoinDescription = new StiltsServiceDesc(tJoinBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Join based on row number", JOIN_PATH);
+        tJoinDescription.setDescription("Join Tables side by side without considering the values.");
         results.add(tJoinDescription);
         
         TwoInputsBean twoInputBean = new TwoInputsBean(typesOfInputsEnums, formatsOfInputsEnums);
         ExactMatchBean exactMatchBean = new ExactMatchBean(1, StiltsFind.ALL, StiltsFixcols.DUPS, StiltsJoin.ONE_AND_TWO, twoInputBean);
         StiltsServiceDesc exactMatchDescription = new StiltsServiceDesc(exactMatchBean, StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Join based on macthing values", JOIN_PATH);
+        exactMatchDescription.setDescription("Traditional join taking into consideration values of join columns.");
         results.add(exactMatchDescription);
 
         UserSpecifiedPreProcessorBean userSpecifiedPreProcessorBean = new UserSpecifiedPreProcessorBean("delcols 1");
@@ -78,6 +80,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(userSpecifiedPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Generic convertor", SINGLE_FILE_PATH);
+        userSpecifiedPreProcessorDescription.setDescription("Advanced prepocessing tool based on Stilts comannd format.");
  	results.add(userSpecifiedPreProcessorDescription);
 
         DeleteColumnPreProcessorBean deleteColumnPreProcessorBean = new DeleteColumnPreProcessorBean("$1");
@@ -85,6 +88,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(deleteColumnPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Delete column(s)", SINGLE_FILE_PATH);
+        deleteColumnPreProcessorDescription.setDescription("Delete one or more column based on name or index");
  	results.add(deleteColumnPreProcessorDescription);
 
         KeepColumnPreProcessorBean keepColumnPreProcessorBean = new KeepColumnPreProcessorBean("$1");
@@ -92,6 +96,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(keepColumnPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Keep column(s)",SINGLE_FILE_PATH);
+        keepColumnPreProcessorDescription.setDescription("Delete all but the named/indexed columns");
  	results.add(keepColumnPreProcessorDescription);
 
         AddColumnPreProcessorBean  addColumnByCommandBean = 
@@ -100,6 +105,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(addColumnByCommandBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Add column",SINGLE_FILE_PATH);
+        addColumnByCommandDescription.setDescription("Add a new column based on an equation over other columns");
  	results.add(addColumnByCommandDescription);
 
         SelectByCommandPreProcessorBean selectByCommandBean = new SelectByCommandPreProcessorBean("true");
@@ -107,6 +113,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(selectByCommandBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Select rows",SINGLE_FILE_PATH);
+        selectByCommandDescription.setDescription("Select rows based on an equation over that rows columns");
  	results.add(selectByCommandDescription);
 
         HeadRowsPreProcessorBean headRowsPreProcessorBean = new HeadRowsPreProcessorBean(1);
@@ -114,6 +121,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(headRowsPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Keep first X rows(s)",SINGLE_FILE_PATH);
+        headRowsPreProcessorDescription.setDescription("Delete all but the header and first X rows.");
  	results.add(headRowsPreProcessorDescription);
 
         TailRowsPreProcessorBean tailRowsPreProcessorBean = new TailRowsPreProcessorBean(1);
@@ -121,6 +129,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(tailRowsPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Keeap last X rows(s)",SINGLE_FILE_PATH);
+        tailRowsPreProcessorDescription.setDescription("Delete all but the header and last X rows.");
  	results.add(tailRowsPreProcessorDescription);
 
         SortPreProcessorBean sortPreProcessorBean = new SortPreProcessorBean("$1", false, false);
@@ -128,6 +137,7 @@ public class StiltsServiceProvider implements ServiceDescriptionProvider {
                 new StiltsServiceDesc(sortPreProcessorBean, tPipeBean, 
                 StiltsOutputFormat.CSV, StiltsOutputType.STRING, false, 
                 "Sort rows", SINGLE_FILE_PATH);
+        sortPreProcessorDescription.setDescription("Sort the data based on the value of the defined column.");
  	results.add(sortPreProcessorDescription);
 
         // partialResults() can also be called several times from inside
