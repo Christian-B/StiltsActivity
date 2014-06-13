@@ -1,9 +1,14 @@
 package net.sf.taverna.t2.activities.stilts.ui.serviceprovider;
 
+import java.awt.Image;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import net.sf.taverna.t2.activities.stilts.StiltsActivity;
 import net.sf.taverna.t2.activities.stilts.StiltsBean;
 import net.sf.taverna.t2.activities.stilts.StiltsInterface;
@@ -35,7 +40,8 @@ public class StiltsServiceDesc extends ServiceDescription<StiltsBean>
     private String name;
     private String[] paths;
     
-    static final Logger logger = Logger.getLogger(StiltsServiceDesc.class);
+    private static final Logger logger = Logger.getLogger(StiltsServiceDesc.class);
+    private static ImageIcon stiltsIcon = null;
     
     public StiltsServiceDesc(StiltsPreProcessBean prepocessBean, StiltsProcessBean process, StiltsOutputFormat outputFormatEnum, 
             StiltsOutputType outputTypeEnum, boolean debugMode, String name, String... paths){
@@ -93,11 +99,25 @@ public class StiltsServiceDesc extends ServiceDescription<StiltsBean>
     public StiltsBean getActivityConfiguration() {
         return new StiltsBean(this);
     }
+    
+    public static ImageIcon stiltsIcon(){
+        if (stiltsIcon == null){
+            String path = "http://www.star.bristol.ac.uk/~mbt/stilts/sun256/ttools2.gif";
+            try {
+                URL imgURL = new URL(path);
+                ImageIcon fullSized = new ImageIcon(imgURL);
+                Image image = fullSized.getImage().getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH);
+                stiltsIcon = new ImageIcon(image);
+            } catch (MalformedURLException ex) {
+                logger.error ("Error reading " + path, ex);
+            }
+        }
+        return stiltsIcon;
+    }
 
     @Override
     public Icon getIcon() {
-       // TODO Auto-generated method stub
-        return null;
+        return stiltsIcon();
     }
 
     @Override

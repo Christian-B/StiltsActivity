@@ -1,7 +1,5 @@
 package net.sf.taverna.t2.activities.stilts.ui.config;
 
-import net.sf.taverna.t2.activities.stilts.ui.textfield.DoubleTextField;
-import net.sf.taverna.t2.activities.stilts.ui.textfield.ColumnIdTextField;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,6 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsOneVariableOperator;
 import net.sf.taverna.t2.activities.stilts.operator.StiltsTwoVariableOperator;
+import net.sf.taverna.t2.activities.stilts.ui.serviceprovider.StiltsServiceDesc;
+import net.sf.taverna.t2.activities.stilts.ui.textfield.ColumnIdTextField;
+import net.sf.taverna.t2.activities.stilts.ui.textfield.DoubleTextField;
 import net.sf.taverna.t2.activities.stilts.utils.DescribableInterface;
 
 /**
@@ -42,6 +43,7 @@ public class FunctionWizard extends JDialog{
     
     private FunctionWizard(String title, boolean anyValue){
         setTitle(title);
+        this.setIconImage(StiltsServiceDesc.stiltsIcon().getImage());
         setLayout(new GridBagLayout());
         this.setModal(true);
         this.anyValue = anyValue;

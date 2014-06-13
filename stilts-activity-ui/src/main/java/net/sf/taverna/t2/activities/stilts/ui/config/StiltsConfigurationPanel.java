@@ -2,14 +2,17 @@ package net.sf.taverna.t2.activities.stilts.ui.config;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.ListCellRenderer;
+import javax.swing.SwingUtilities;
 
 import net.sf.taverna.t2.activities.stilts.*;
 import net.sf.taverna.t2.activities.stilts.ui.config.input.StiltsInputConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.output.StiltsOutputConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.preprocess.StiltsPreProcessConfigurationPanel;
 import net.sf.taverna.t2.activities.stilts.ui.config.process.StiltsProcessConfigurationPanel;
+import net.sf.taverna.t2.activities.stilts.ui.serviceprovider.StiltsServiceDesc;
 
 import net.sf.taverna.t2.activities.stilts.utils.*;
 import net.sf.taverna.t2.workbench.ui.views.contextualviews.activity.ActivityConfigurationPanel;
@@ -68,7 +71,7 @@ public class StiltsConfigurationPanel extends
         inputPanel = StiltsInputConfigurationPanel.factory(bean.getProcess().getInputs());
 //        refreshConfiguration();
         addTabbedPane();
-    }
+   }
     
     private void addTabbedPane(){
         JTabbedPane tabbedPane = new JTabbedPane();
