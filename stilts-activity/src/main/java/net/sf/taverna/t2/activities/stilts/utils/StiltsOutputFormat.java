@@ -7,44 +7,48 @@ package net.sf.taverna.t2.activities.stilts.utils;
  */
 public enum StiltsOutputFormat implements DescribableInterface {
 
-    FITS_PLUS("fits-plus","FITS plus format",
-            "FITS file; primary HDU contains a VOTable representation of the metadata, "
-            + "subsequent extensions contain one or more FITS binary tables (behaves the same as fits-basic for most purposes)"),
+    CSV("csv","Comma-Separated Value format",
+            "Comma-Separated Value format. The first line is a header which contains the column names."),
+    CSV_NOHEADER("csv-noheader","Comma-Separated Value (Headerless ) format","Comma-Separated Value format with no header line."),
+    HTML("html","Html Table (Standalone)","Standalone HTML document containing a TABLE element"),
+    HTMK_ELEMENT("html-element","Html Table (element)","HTML TABLE element"),
+    TST("tst","Tab-Separated Table format","Tab-Separated Table format."),
+    LATEX("latex","LaTeX table (element)","LaTeX tabular environment"),
+    LATEX_DOCUMENT("latex-document","LaTex table (standalone)",
+            "LaTeX standalone document containing a tabular environment"),
+    TEXT("text","Plain text (human-readable)",
+            "Human-readable plain text (with headers and column boundaries marked out"),
+    ASCII("ascii","Whitespace Separated Value format","Simple space-separated ASCII file format"),
+
     FITS_BASIC("fits-basic","FITS basic format",
             "FITS file; primary HDU is data-less, subsequent extensions contain a FITS binary table"),
-    COLFITS_PLUS("colfits-plus", "Column-oriented FITS plus",
-            "FITS file containing a BINTABLE with a single row; "
-            + "each cell of the row contains a whole column's worth of data. "
-            + "The primary HDU also contains a VOTable representation of the metadata."),
-    COLFITS_BASIC("colfits-basic", "Column-oriented FITS basic",
-            "FITS file containing a BINTABLE with a single row; "
-            + "each cell of the row contains a whole column's worth of data. The primary HDU contains nothing."),  
+    COLFITS_BASIC("colfits-basic", "FITS basic (Column-oriented)",
+            "FITS file containing a BINTABLE with a single row;\n"
+            + "each cell of the row contains a whole column's worth of data.\n"
+            + " The primary HDU contains nothing."),  
+    FITS_PLUS("fits-plus","FITS plus format",
+            "FITS file; primary HDU contains a VOTable representation of the metadata,\n"
+            + "subsequent extensions contain one or more FITS binary tables (behaves the same as fits-basic for most purposes)"),
+    COLFITS_PLUS("colfits-plus", "FITS plus (Column-oriented)",
+            "FITS file containing a BINTABLE with a single row;\n"
+            + "each cell of the row contains a whole column's worth of data.\n"
+            + "The primary HDU also contains a VOTable representation of the metadata.\n"),
+    IPAC("ipac","IPAC Table Format","IPAC Table Format."),
+    MIRAGE("mirage","Mirage input format","Mirage input format"),
     VOTABLE_TABLEDATA("votable-tabledata","VOTable document with TABLEDATA"
             ,"VOTable document with TABLEDATA (pure XML) encoding"),
     VOTABLE_BINARY_INLINE("votable-binary-inline","VOTable including BINARY-encoded data"
-            ,"VOTable document with BINARY-encoded data inline within a STREAM element. "
-            + "If VOTable 1.3 output is in force (see votable.version system property), votable-binary2-inline is provided instead."),
+            ,"VOTable document with BINARY-encoded data inline within a STREAM element.\n"
+            + "If VOTable 1.3 output is in force (see votable.version system property),\n"
+            + "votable-binary2-inline is provided instead."),
     VOTABLE_BINARY_HREF("votable-binary-href","VOTable with separate BINARY-encoded data",
-            "VOTable document with BINARY-encoded data in a separate file (only if not writing to a stream). "
-            + "If VOTable 1.3 output is in force (see votable.version system property), votable-binary2-href is provided instead."),
+            "VOTable document with BINARY-encoded data in a separate file (only if not writing to a stream).\n"
+            + "If VOTable 1.3 output is in force (see votable.version system property),\n"
+            + "votable-binary2-href is provided instead."),
     VOTABLE_FITS_HREF("votable-fits-href","VOTable with separate FITS-encoded data",
             "VOTable document with FITS-encoded data in a separate file (only if not writing to a stream)"),
     VOTABLE_FITS_INLINE("votable-fits-inline","VOTable with including FITS-encoded data",
-            "VOTable document with FITS-encoded data inline within a STREAM element"),
-    ASCII("ascii","Whitespace Separated Value format","Simple space-separated ASCII file format"),
-    TEXT("text","Human-readable plain text",
-            "Human-readable plain text (with headers and column boundaries marked out"),
-    CSV("csv","Comma-Separated Value format",
-            "Comma-Separated Value format. The first line is a header which contains the column names."),
-    CSV_NOHEADER("csv-noheader","Headerless Comma-Separated Value format","Comma-Separated Value format with no header line."),
-    IPAC("ipac","IPAC Table Format","IPAC Table Format."),
-    TST("tst","Tab-Separated Table format","Tab-Separated Table format."),
-    HTML("html","Standalone HTML TABLE","Standalone HTML document containing a TABLE element"),
-    HTMK_ELEMENT("html-element","HTML TABLE element","HTML TABLE element"),
-    LATEX("latex","LaTeX tabular environment","LaTeX tabular environment"),
-    LATEX_DOCUMENT("latex-document","Standalone latex-document",
-            "LaTeX standalone document containing a tabular environment"),
-    MIRAGE("mirage","Mirage input format","Mirage input format"); 
+            "VOTable document with FITS-encoded data inline within a STREAM element");
     
     private final String stiltsName;
     private final String userName;
