@@ -32,16 +32,24 @@ public enum StiltsTwoVariableOperator implements DescribableInterface {
     //PLUS and STRING_CONATENATION share the same 
     STRING_CONATENATION("+","string concatenation",StiltsOperatorType.OPERATOR, false),
     MAX("max",
-            "Returns the greater of two numerical values. If the arguments have the same value, the result is that same value..",
+            "Returns the greater of two numerical values.\n"
+                    + " If the arguments have the same value, the result is that same value..",
             StiltsOperatorType.FUNCTION, false),
     MAXREAL("maxReal",
-            "Returns the greater of two floating point values, ignoring blanks. If the arguments have the same value, the result is that same value. If one argument is blank, the result is the other one. If both arguments are blank, the result is blank.",
+            "Returns the greater of two floating point values, ignoring blanks.\n"
+            + "If the arguments have the same value, the result is that same value.\n"
+            + " If one argument is blank, the result is the other one.\n"
+            + " If both arguments are blank, the result is blank.",
             StiltsOperatorType.FUNCTION, false),
     MIN("min",
-            "Returns the smaller of two integer values. If the arguments have the same value, the result is that same value.",
+            "Returns the smaller of two integer values.\n"
+            + "If the arguments have the same value, the result is that same value.",
             StiltsOperatorType.FUNCTION, false),
     MINREAL("minReal",
-            "Returns the smaller of two floating point values, ignoring blanks. If the arguments have the same value, the result is that same value. If one argument is blank, the result is the other one. If both arguments are blank, the result is blank.",
+            "Returns the smaller of two floating point values, ignoring blanks.\n"
+            + "If the arguments have the same value, the result is that same value.\n"
+            + "If one argument is blank, the result is the other one.\n"
+            + "If both arguments are blank, the result is blank.",
             StiltsOperatorType.FUNCTION, false);
 
    /**

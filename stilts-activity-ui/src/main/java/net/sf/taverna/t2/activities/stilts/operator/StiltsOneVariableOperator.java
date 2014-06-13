@@ -22,16 +22,23 @@ public enum StiltsOneVariableOperator implements DescribableInterface {
     FLOAT("float","Convert a numerical column to a float", StiltsOperatorType.CONVERSION),
     DOUBLE("double","Convert a numerical column to a double", StiltsOperatorType.CONVERSION),
     ROUNDUP("roundUp",
-            "Rounds a value up to an integer value. Formally, returns the smallest (closest to negative infinity) integer value that is not less than the argument.",
+            "Rounds a value up to an integer value.\n"
+            + "Formally, returns the smallest (closest to negative infinity) integer value that is not less than the argument.",
            StiltsOperatorType.FUNCTION),
     ROUNDDOWN("roundDown",
-            "Rounds a value down to an integer value. Formally, returns the largest (closest to positive infinity) integer value that is not greater than the argument.",
+            "Rounds a value down to an integer value.\n"
+            + " Formally, returns the largest (closest to positive infinity)\n"
+            + " integer value that is not greater than the argument.",
             StiltsOperatorType.FUNCTION),
     ROUND("round",
-            "Rounds a value to the nearest integer. Formally, returns the integer that is closest in value to the argument. If two integers are equally close, the result is the even one.",
+            "Rounds a value to the nearest integer. Formally,\n"
+            + "returns the integer that is closest in value to the argument.\n"
+            + "If two integers are equally close, the result is the even one.",
             StiltsOperatorType.FUNCTION),
     ABS("abs",
-            "Returns the absolute value of a numerical value. If the argument is not negative, the argument is returned. If the argument is negative, the negation of the argument is returned.",
+            "Returns the absolute value of a numerical value.\n"
+            + " If the argument is not negative, the argument is returned.\n"
+            + " If the argument is negative, the negation of the argument is returned.",
             StiltsOperatorType.FUNCTION),
     BITWISE_AND("&",
             "Bitwise and",
