@@ -10,6 +10,9 @@
 	<artifactId>stilts-activity-ui</artifactId>
 	<name>Stilts Activity UI bindings</name>
 
+	<properties>
+		<t2.taverna.workbench.version>2.5.0</t2.taverna.workbench.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
