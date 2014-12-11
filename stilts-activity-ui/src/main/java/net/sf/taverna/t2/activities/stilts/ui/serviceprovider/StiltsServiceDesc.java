@@ -65,27 +65,22 @@ public class StiltsServiceDesc extends ServiceDescription<StiltsBean>
         return true;
     }
     
-    @Override
     public StiltsProcessBean getProcess() {
         return process;
     }
 
-    @Override
     public StiltsPreProcessBean getPreprocess() {
         return preprocess;
     }
 
-    @Override
     public StiltsOutputFormat getOutputFormat() {
         return outputFormatEnum;
     }
 
-    @Override
     public StiltsOutputType getOutputType() {
         return outputTypeEnum;
     }
 
-    @Override
     public boolean isDebugMode() {
        return debugMode;
     }

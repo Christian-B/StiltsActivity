@@ -16,7 +16,6 @@ public class StiltsRunner implements Runnable
         parameters = stiltsParameters;
     }
         
-    @Override
     public void run() {
         System.setProperty("votable.strict", "false");
         SecurityManager securityBackup = System.getSecurityManager();
