@@ -6,11 +6,11 @@
                 <artifactId>taverna-parent</artifactId>
                 <version>2.6-SNAPSHOT</version>
 	</parent>
-	<groupId>net.sf.taverna.t2.activities.stilts</groupId>
-	<artifactId>stilts-bundle</artifactId>
-	<version>1.0-2.6-SNAPSHOT</version>
+	<groupId>net.sf.taverna.t2.activities</groupId>
+	<artifactId>table-bundle</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Stilts Activity Bundle</name>
+	<name>Table Activity Bundle</name>
 
 	<build>
 		<plugins>
@@ -104,7 +104,7 @@
         </scm>
         
 	<modules>
-		<module>stilts-activity</module>
-		<module>stilts-activity-ui</module>
+		<module>table-activity</module>
+		<module>table-activity-ui</module>
 	</modules>
 </project>
